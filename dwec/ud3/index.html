@@ -1,0 +1,1749 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ud2/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 3: Control de Flujo, Bucles y Arrays (RA2) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-3-control-de-flujo-bucles-y-arrays-ra2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 3: Control de Flujo, Bucles y Arrays (RA2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion-al-control-de-flujo-y-modelo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción al Control de Flujo y Modelo de Ejecución 🛤️
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-evaluacion-logica-y-conversion-de-tipos-truthy-falsy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Evaluación Lógica y Conversión de Tipos (Truthy &amp; Falsy) ⚖️
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Evaluación Lógica y Conversión de Tipos (Truthy &amp; Falsy) ⚖️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-8-valores-falsy-nativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los 8 Valores Falsy Nativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-regla-de-los-valores-truthy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La Regla de los Valores Truthy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estructuras-condicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructuras Condicionales 🚦
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Estructuras Condicionales 🚦">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-sentencias-if-else-if-y-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Sentencias if, else if y else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-operador-ternario-cortocircuitos-y-operadores-modernos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Operador Ternario, Cortocircuitos y Operadores Modernos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Operador Ternario, Cortocircuitos y Operadores Modernos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario-condicion-expr1-expr2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador Ternario (condicion ? expr1 : expr2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cortocircuitos-logicos-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cortocircuitos Lógicos (&amp;&amp; y ||)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-de-fusion-nula-y-encadenamiento-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador de Fusión Nula (??) y Encadenamiento Opcional (?.)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-sentencia-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Sentencia switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-estructuras-repetitivas-bucles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estructuras Repetitivas (Bucles) 🔄
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Estructuras Repetitivas (Bucles) 🔄">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-bucles-condicionales-while-y-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Bucles Condicionales: while y do...while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-bucle-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Bucle for Tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-iteracion-moderna-forof-frente-a-forin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Iteración Moderna: for...of frente a for...in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-control-de-saltos-break-y-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Control de Saltos: break y continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-arrays-en-javascript-manipulacion-y-mutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Arrays en JavaScript: Manipulación y Mutabilidad 📦
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Arrays en JavaScript: Manipulación y Mutabilidad 📦">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mutabilidad-metodos-mutadores-vs-inmutables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutabilidad: Métodos Mutadores vs Inmutables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mutabilidad: Métodos Mutadores vs Inmutables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodos-mutadores-principales-alteran-el-array-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos Mutadores Principales (Alteran el Array Original)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-e-implicaciones-inmutables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos e Implicaciones Inmutables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-peligro-del-metodo-sort-predeterminado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Peligro del Método .sort() Predeterminado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-metodos-iterativos-de-alto-nivel-programacion-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-recorrido-con-efectos-secundarios-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Recorrido con Efectos Secundarios: forEach()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-transformacion-1-a-1-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. Transformación 1 a 1: map()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-filtrado-y-seleccion-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Filtrado y Selección: filter()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-acumulacion-y-agregacion-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Acumulación y Agregación: reduce()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-busqueda-y-validacion-find-findindex-some-every-includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Búsqueda y Validación: find(), findIndex(), some(), every(), includes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-tabla-comparativa-definitiva-de-metodos-de-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Tabla Comparativa Definitiva de Métodos de Arrays 📊
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion-al-control-de-flujo-y-modelo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción al Control de Flujo y Modelo de Ejecución 🛤️
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-evaluacion-logica-y-conversion-de-tipos-truthy-falsy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Evaluación Lógica y Conversión de Tipos (Truthy &amp; Falsy) ⚖️
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Evaluación Lógica y Conversión de Tipos (Truthy &amp; Falsy) ⚖️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-8-valores-falsy-nativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los 8 Valores Falsy Nativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-regla-de-los-valores-truthy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La Regla de los Valores Truthy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estructuras-condicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructuras Condicionales 🚦
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Estructuras Condicionales 🚦">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-sentencias-if-else-if-y-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Sentencias if, else if y else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-operador-ternario-cortocircuitos-y-operadores-modernos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Operador Ternario, Cortocircuitos y Operadores Modernos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Operador Ternario, Cortocircuitos y Operadores Modernos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario-condicion-expr1-expr2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador Ternario (condicion ? expr1 : expr2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cortocircuitos-logicos-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cortocircuitos Lógicos (&amp;&amp; y ||)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-de-fusion-nula-y-encadenamiento-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador de Fusión Nula (??) y Encadenamiento Opcional (?.)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-sentencia-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Sentencia switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-estructuras-repetitivas-bucles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estructuras Repetitivas (Bucles) 🔄
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Estructuras Repetitivas (Bucles) 🔄">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-bucles-condicionales-while-y-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Bucles Condicionales: while y do...while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-bucle-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Bucle for Tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-iteracion-moderna-forof-frente-a-forin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Iteración Moderna: for...of frente a for...in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-control-de-saltos-break-y-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Control de Saltos: break y continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-arrays-en-javascript-manipulacion-y-mutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Arrays en JavaScript: Manipulación y Mutabilidad 📦
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Arrays en JavaScript: Manipulación y Mutabilidad 📦">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mutabilidad-metodos-mutadores-vs-inmutables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutabilidad: Métodos Mutadores vs Inmutables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mutabilidad: Métodos Mutadores vs Inmutables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodos-mutadores-principales-alteran-el-array-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos Mutadores Principales (Alteran el Array Original)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-e-implicaciones-inmutables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos e Implicaciones Inmutables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-peligro-del-metodo-sort-predeterminado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Peligro del Método .sort() Predeterminado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-metodos-iterativos-de-alto-nivel-programacion-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-recorrido-con-efectos-secundarios-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Recorrido con Efectos Secundarios: forEach()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-transformacion-1-a-1-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. Transformación 1 a 1: map()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-filtrado-y-seleccion-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Filtrado y Selección: filter()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-acumulacion-y-agregacion-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Acumulación y Agregación: reduce()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-busqueda-y-validacion-find-findindex-some-every-includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Búsqueda y Validación: find(), findIndex(), some(), every(), includes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-tabla-comparativa-definitiva-de-metodos-de-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Tabla Comparativa Definitiva de Métodos de Arrays 📊
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-3-control-de-flujo-bucles-y-arrays-ra2">UD 3: Control de Flujo, Bucles y Arrays (RA2)</h1>
+<h2 id="1-introduccion-al-control-de-flujo-y-modelo-de-ejecucion">1. Introducción al Control de Flujo y Modelo de Ejecución 🛤️</h2>
+<p>Por defecto, el motor de JavaScript (como V8 o SpiderMonkey) interpreta y ejecuta las instrucciones de forma <strong>síncrona y secuencial</strong>, siguiendo el orden estricto de las líneas en la pila de llamadas (<em>Call Stack</em>).</p>
+<p>Sin embargo, el desarrollo frontend exige que las aplicaciones web reaccionen dinámicamente: responder a las acciones del usuario, validar respuestas de servidores, procesar colecciones de datos y renderizar interfaces condicionalmente.</p>
+<p>Las <strong>estructuras de control de flujo</strong> rompen la linealidad pura de la ejecución. Se categorizan en tres bloques principales:</p>
+<ol>
+<li><strong>Estructuras Condicionales (Bifurcaciones):</strong> Evalúan condiciones lógicas para seleccionar qué camino de ejecución seguir.</li>
+<li><strong>Estructuras Repetitivas (Bucles e Iteraciones):</strong> Ejecutan de forma cíclica un conjunto de instrucciones mientras se cumpla un criterio de permanencia.</li>
+<li><strong>Estructuras de Manejo de Datos (Arrays y Métodos Iterativos):</strong> Abstraen los bucles tradicionales aplicando lógica funcional sobre listas ordenadas.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    A["Inicio de Ejecución Síncrona"] --&gt; B{"¿Se requiere tomar una decisión?"}
+    B -- Sí --&gt; C["Bifurcación Condicional (if / switch / ternario)"]
+    B -- No --&gt; D{"¿Se requiere iterar o procesar colecciones?"}
+    D -- Bucle Tradicional --&gt; E["Estructura Repetitiva (while / for / for...of)"]
+    D -- Colección de Datos --&gt; F["Métodos Iterativos de Array (map / filter / reduce)"]
+    D -- No --&gt; G["Ejecución Secuencial Estándar"]
+    C --&gt; H["Continuar Flujo de Programa"]
+    E --&gt; H
+    F --&gt; H
+    G --&gt; H
+</code></pre>
+<hr />
+<h2 id="2-evaluacion-logica-y-conversion-de-tipos-truthy-falsy">2. Evaluación Lógica y Conversión de Tipos (Truthy &amp; Falsy) ⚖️</h2>
+<p>Cualquier condición en JavaScript se evalúa internamente en un contexto booleano (<code>true</code> o <code>false</code>). Cuando se proporciona un valor no booleano a una condición, el motor aplica una <strong>coerción implícita de tipo</strong> (<em>Type Coercion</em>).</p>
+<h3 id="los-8-valores-falsy-nativos">Los 8 Valores Falsy Nativos</h3>
+<p>Existen exactamente <strong>8 valores</strong> en todo el lenguaje que se convierten a <code>false</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Valor Falsy</th>
+<th>Tipo de Dato</th>
+<th>Comportamiento / Nota Técnica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>Boolean</code></td>
+<td>Falso booleano explícito.</td>
+</tr>
+<tr>
+<td><code>0</code>, <code>-0</code></td>
+<td><code>Number</code></td>
+<td>Cero numérico (positivo y negativo).</td>
+</tr>
+<tr>
+<td><code>0n</code></td>
+<td><code>BigInt</code></td>
+<td>Cero en precisión arbitraria.</td>
+</tr>
+<tr>
+<td><code>""</code>, <code>''</code>, <code>\`` |</code>String`</td>
+<td>Cadena de texto vacía (longitud 0).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>Null</code></td>
+<td>Ausencia intencionada de valor/referencia.</td>
+</tr>
+<tr>
+<td><code>undefined</code></td>
+<td><code>Undefined</code></td>
+<td>Variable declarada sin inicialización.</td>
+</tr>
+<tr>
+<td><code>NaN</code></td>
+<td><code>Number</code></td>
+<td><em>Not-a-Number</em> (operación matemática no válida).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-regla-de-los-valores-truthy">La Regla de los Valores Truthy</h3>
+<p>**Cualquier valor que no esté en la lista anterior es evaluado como <code>true**</code>, independientemente de su apariencia.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Ejemplos de valores TRUTHY habituales que suelen confundir a los estudiantes:</span>
+<span class="k">if</span><span class="w"> </span><span class="p">([])</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Un array vacío es TRUTHY&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">({})</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Un objeto vacío es TRUTHY&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;false&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;El string &#39;false&#39; NO está vacío, por lo que es TRUTHY&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Cualquier número distinto de 0 (incluso negativo) es TRUTHY&quot;</span><span class="p">);</span>
+
+<span class="c1">// Conversión explícita a Booleano usando la función Boolean() o la doble negación (!!)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Elena&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">esNombreValido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tieneContenido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!!</span><span class="nx">nombre</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="c1">// true (longitud 5 -&gt; true)</span>
+</code></pre></div>
+<hr />
+<h2 id="3-estructuras-condicionales">3. Estructuras Condicionales 🚦</h2>
+<h3 id="31-sentencias-if-else-if-y-else">3.1. Sentencias <code>if</code>, <code>else if</code> y <code>else</code></h3>
+<p>Permiten la bifurcación lógica evaluando expresiones de arriba a abajo. Tan pronto como una condición se cumple, se ejecuta su bloque de código y el motor salta el resto de la estructura.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Evaluación Condicional"] --&gt; B{"¿Condición 1 es Truthy?"}
+    B -- Sí --&gt; C["Ejecutar Bloque IF"]
+    B -- No --&gt; D{"¿Condición 2 es Truthy?"}
+    D -- Sí --&gt; E["Ejecutar Bloque ELSE IF"]
+    D -- No --&gt; F["Ejecutar Bloque ELSE"]
+    C --&gt; G["Salir de la Estructura"]
+    E --&gt; G
+    F --&gt; G
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Manejo de respuesta de API con validación en cascada</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">respuestaHTTP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">codigoEstado</span><span class="o">:</span><span class="w"> </span><span class="mf">403</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">tokenValido</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">};</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">codigoEstado</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">datos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Cargar interfaz principal con los datos recibidos.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">codigoEstado</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">403</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">&quot;Acceso denegado: No dispone de permisos para este recurso.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">codigoEstado</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">401</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">tokenValido</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">&quot;Sesión caducada. Redirigiendo a pantalla de Login.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Error no controlado en el servidor. Código:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">respuestaHTTP</span><span class="p">.</span><span class="nx">codigoEstado</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="32-operador-ternario-cortocircuitos-y-operadores-modernos">3.2. Operador Ternario, Cortocircuitos y Operadores Modernos</h3>
+<p>En el frontend moderno se prefieren expresiones sintácticas compactas e inmutables frente a bloques <code>if...else</code> extensos.</p>
+<h4 id="operador-ternario-condicion-expr1-expr2">Operador Ternario (<code>condicion ? expr1 : expr2</code>)</h4>
+<p>Evalúa una expresión y retorna <code>expr1</code> si es <em>truthy</em> o <code>expr2</code> si es <em>falsy</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">edadCliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tipoEntrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">edadCliente</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">18</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Adulto&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Infantil&quot;</span><span class="p">;</span>
+
+<span class="c1">// Anidamiento de ternarios (se debe usar con precaución para mantener la legibilidad)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nivelAcceso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">edadCliente</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">65</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Senior&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">edadCliente</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">18</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Estándar&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Restringido&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="cortocircuitos-logicos-y">Cortocircuitos Lógicos (<code>&amp;&amp;</code> y <code>||</code>)</h4>
+<p>Aprovechan la evaluación perezosa del motor de JavaScript para ejecutar código o asignar valores por defecto:</p>
+<ul>
+<li><strong>AND (<code>&amp;&amp;</code>):</strong> Evalúa de izquierda a derecha. Retorna el primer valor <em>falsy</em> que encuentra. Si todos son <em>truthy</em>, retorna el último valor.</li>
+<li><strong>OR (<code>||</code>):</strong> Evalúa de izquierda a derecha. Retorna el primer valor <em>truthy</em> que encuentra.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Cortocircuito &amp;&amp; para ejecución condicional</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuarioAutenticado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="nx">usuarioAutenticado</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">renderizarPanelUsuario</span><span class="p">();</span><span class="w"> </span><span class="c1">// Solo ejecuta la función si es true</span>
+
+<span class="c1">// Cortocircuito || para valores por defecto</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombreEntrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombreMostrar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombreEntrada</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;Usuario Anónimo&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Asigna &quot;Usuario Anónimo&quot;</span>
+</code></pre></div>
+<h4 id="operador-de-fusion-nula-y-encadenamiento-opcional">Operador de Fusión Nula (<code>??</code>) y Encadenamiento Opcional (<code>?.</code>)</h4>
+<p>El operador <code>||</code> presenta un problema cuando el valor legítimo de una variable es <code>0</code>, <code>false</code> o <code>""</code>. Para resolverlo, ES2020 introdujo <code>??</code>.</p>
+<ul>
+<li><strong><code>??</code> (Nullish Coalescing):</strong> Evalúa el lado derecho <strong>únicamente</strong> si el lado izquierdo es <code>null</code> o <code>undefined</code>.</li>
+<li><strong><code>?.</code> (Optional Chaining):</strong> Permite acceder a propiedades anidadas de un objeto sin lanzar un <code>TypeError</code> si una referencia intermedia es <code>null</code> o <code>undefined</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Diferencia entre || y ??</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">configuracionUsuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">volumenNotificaciones</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// Cero es un valor válido elegido por el usuario</span>
+<span class="w">  </span><span class="nx">temaOscuro</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">volumenConOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configuracionUsuario</span><span class="p">.</span><span class="nx">volumenNotificaciones</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">80</span><span class="p">;</span><span class="w">  </span><span class="c1">// 80 (ERRÓNEO: 0 es falsy)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">volumenConNullish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configuracionUsuario</span><span class="p">.</span><span class="nx">volumenNotificaciones</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mf">80</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0 (CORRECTO: preserva el 0)</span>
+
+<span class="c1">// Encadenamiento Opcional combinado con Nullish Coalescing</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ciudadEnvio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">usuarioAutenticado</span><span class="o">?</span><span class="p">.</span><span class="nx">perfil</span><span class="o">?</span><span class="p">.</span><span class="nx">direccion</span><span class="o">?</span><span class="p">.</span><span class="nx">ciudad</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;Ciudad no especificada&quot;</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="33-sentencia-switch">3.3. Sentencia <code>switch</code></h3>
+<p>Es una estructura de selección múltiple que evalúa una expresión contra diferentes cláusulas <code>case</code>. Utiliza <strong>estrictamente la comparación de tipo y valor (<code>===</code>)</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">metodoPago</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;STRIPE&quot;</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">metodoPago</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;PAYPAL&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Procesando pago mediante API de PayPal...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;STRIPE&quot;</span><span class="o">:</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;TARJETA&quot;</span><span class="o">:</span><span class="w"> </span><span class="c1">// Fall-through intencional para agrupar casos</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Procesando pago mediante Pasarela de Tarjeta (Stripe)...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;TRANSFERENCIA&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Generando IBAN y orden de pago diferido...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Método de pago no contemplado:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">metodoPago</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Atención:</strong> Omitir la sentencia <code>break</code> provoca un comportamiento denominado <em>fall-through</em>, donde el código continúa ejecutando los casos siguientes independientemente de si coinciden o no.</p>
+</blockquote>
+<hr />
+<h2 id="4-estructuras-repetitivas-bucles">4. Estructuras Repetitivas (Bucles) 🔄</h2>
+<h3 id="41-bucles-condicionales-while-y-dowhile">4.1. Bucles Condicionales: <code>while</code> y <code>do...while</code></h3>
+<ul>
+<li><strong><code>while</code> (Pre-prueba):</strong> Comprueba la condición antes de ejecutar el bloque. Si es <code>false</code> al inicio, el bloque nunca se ejecuta.</li>
+<li><strong><code>do...while</code> (Post-prueba):</strong> Ejecuta el bloque al menos una vez antes de verificar la condición.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Bucle WHILE</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">intentosConexion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">maxIntentos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">intentosConexion</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">maxIntentos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">intentosConexion</span><span class="o">++</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Intentando conectar con el servidor... Intento </span><span class="si">${</span><span class="nx">intentosConexion</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Bucle DO...WHILE</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">respuestaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Validando formulario de entrada...&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Garantiza al menos una comprobación inicial</span>
+<span class="w">  </span><span class="nx">respuestaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">respuestaValida</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h3 id="42-bucle-for-tradicional">4.2. Bucle <code>for</code> Tradicional</h3>
+<p>Estructura de iteración con contador explícito formado por tres partes: <code>inicialización; condición; incremento</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">productos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Monitor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Ratón&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Altavoces&quot;</span><span class="p">];</span>
+
+<span class="c1">// Recorrido clásico indexado</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">productos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Posición </span><span class="si">${</span><span class="nx">i</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">productos</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="43-iteracion-moderna-forof-frente-a-forin">4.3. Iteración Moderna: <code>for...of</code> frente a <code>for...in</code></h3>
+<p>Comprender la diferencia entre estas dos estructuras de ES6+ es fundamental en JavaScript:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Iteración sobre Estructuras"] --&gt; B["for...of"]
+    A --&gt; C["for...in"]
+    B --&gt; D["Recorre VALORES de estructuras iterables&lt;br&gt;(Arrays, Strings, Maps, Sets)"]
+    C --&gt; E["Recorre CLAVES / PROPIEDADES enumerables&lt;br&gt;(Objetos Literales)"]
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">listaMarcos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;React&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Vue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Angular&quot;</span><span class="p">];</span>
+<span class="nx">listaMarcos</span><span class="p">.</span><span class="nx">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;18.0&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Propiedad añadida al objeto Array</span>
+
+<span class="c1">// 1. for...of sobre Array (Recorre los VALORES de las posiciones indexadas)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">marco</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">listaMarcos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">marco</span><span class="p">);</span><span class="w"> </span><span class="c1">// Imprime: &quot;React&quot;, &quot;Vue&quot;, &quot;Angular&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. for...in sobre Objeto Literal (Recorre las CLAVES / PROPIEDADES)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">configuracionServidor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">puerto</span><span class="o">:</span><span class="w"> </span><span class="mf">8080</span><span class="p">,</span><span class="w"> </span><span class="nx">ssl</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">};</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">clave</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">configuracionServidor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Clave: </span><span class="si">${</span><span class="nx">clave</span><span class="si">}</span><span class="sb"> | Valor: </span><span class="si">${</span><span class="nx">configuracionServidor</span><span class="p">[</span><span class="nx">clave</span><span class="p">]</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Buenas Prácticas:</strong> Nunca utilices <code>for...in</code> para iterar Arrays. Además de ser significativamente más lento, iterará sobre propiedades personalizadas agregadas al prototipo del Array y no garantiza el orden numérico de los índices.</p>
+</blockquote>
+<hr />
+<h3 id="44-control-de-saltos-break-y-continue">4.4. Control de Saltos: <code>break</code> y <code>continue</code></h3>
+<ul>
+<li><strong><code>break</code>:</strong> Interrumpe y finaliza inmediatamente la ejecución del bucle o <code>switch</code>.</li>
+<li><strong><code>continue</code>:</strong> Omite el resto de las instrucciones de la iteración actual y salta directamente a la evaluación de la siguiente iteración.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">serieNumerica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span><span class="w"> </span><span class="mf">7</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">];</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">numero</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">serieNumerica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">numero</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="c1">// Salta los números pares</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">numero</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="c1">// Cancela el bucle por completo al superar el 7</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Número impar procesado: </span><span class="si">${</span><span class="nx">numero</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span><span class="w"> </span><span class="c1">// Imprime: 1, 3, 5, 7</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="5-arrays-en-javascript-manipulacion-y-mutabilidad">5. Arrays en JavaScript: Manipulación y Mutabilidad 📦</h2>
+<p>Un <strong>Array</strong> en JavaScript es una estructura de datos ordenada y de tipo objeto especializada en almacenar colecciones de valores indexados numéricamente desde el índice <code>0</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Declaración usando sintaxis literal (recomendada)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">lenguajes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;JavaScript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TypeScript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Python&quot;</span><span class="p">];</span>
+
+<span class="c1">// Los arrays en JS son dinámicos y pueden contener tipos mixtos</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">datosHeterogeneos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">42</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Texto&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">]];</span>
+</code></pre></div>
+<h3 id="mutabilidad-metodos-mutadores-vs-inmutables">Mutabilidad: Métodos Mutadores vs Inmutables</h3>
+<p>En el desarrollo de aplicaciones web con librerías reactivas como React, la distinción entre <strong>modificar un array existente (mutación)</strong> y <strong>crear una nueva copia modificada (inmutabilidad)</strong> es vital.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Operaciones sobre Arrays"] --&gt; B["Métodos Mutadores (Alteran el Array Original)"]
+    A --&gt; C["Métodos Inmutables (Retornan un Nuevo Array)"]
+    B --&gt; D["push(), pop(), shift(), unshift(), splice(), sort(), reverse()"]
+    C --&gt; E["concat(), slice(), map(), filter(), reduce(), operador Spread [...]"]
+</code></pre>
+<h4 id="metodos-mutadores-principales-alteran-el-array-original">Métodos Mutadores Principales (Alteran el Array Original)</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">frutas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Manzana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Plátano&quot;</span><span class="p">];</span>
+
+<span class="c1">// push / pop: Manipulación al FINAL del array</span>
+<span class="nx">frutas</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Naranja&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// [&quot;Manzana&quot;, &quot;Plátano&quot;, &quot;Naranja&quot;] -&gt; Añade al final</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ultima</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frutas</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span><span class="w"> </span><span class="c1">// Devuelve &quot;Naranja&quot;, queda [&quot;Manzana&quot;, &quot;Plátano&quot;]</span>
+
+<span class="c1">// unshift / shift: Manipulación al INICIO del array (Operación O(n), menos eficiente)</span>
+<span class="nx">frutas</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s2">&quot;Fresa&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// [&quot;Fresa&quot;, &quot;Manzana&quot;, &quot;Plátano&quot;] -&gt; Añade al inicio</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">primera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frutas</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span><span class="w"> </span><span class="c1">// Devuelve &quot;Fresa&quot;, queda [&quot;Manzana&quot;, &quot;Plátano&quot;]</span>
+
+<span class="c1">// splice(indiceInicio, elementosABorrar, ...elementosAInsertar)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">herramientas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Git&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Docker&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Vite&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Webpack&quot;</span><span class="p">];</span>
+<span class="c1">// Elimina 2 elementos desde el índice 1 e inserta &quot;Rollup&quot;</span>
+<span class="nx">herramientas</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Rollup&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">herramientas</span><span class="p">);</span><span class="w"> </span><span class="c1">// [&quot;Git&quot;, &quot;Rollup&quot;, &quot;Webpack&quot;]</span>
+</code></pre></div>
+<h4 id="metodos-e-implicaciones-inmutables">Métodos e Implicaciones Inmutables</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">baseDatos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;MySQL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PostgreSQL&quot;</span><span class="p">];</span>
+
+<span class="c1">// Copia inmutable mediante Operador Spread (...)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nuevaBaseDatos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">baseDatos</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MongoDB&quot;</span><span class="p">];</span><span class="w"> </span><span class="c1">// Crea un nuevo array sin modificar baseDatos</span>
+
+<span class="c1">// slice(inicio, fin): Extrae una porción sin modificar el original</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">lenguajesWeb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;HTML&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CSS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;JS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PHP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Ruby&quot;</span><span class="p">];</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">frontendPuro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lenguajesWeb</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// [&quot;HTML&quot;, &quot;CSS&quot;, &quot;JS&quot;]</span>
+</code></pre></div>
+<h4 id="el-peligro-del-metodo-sort-predeterminado">El Peligro del Método <code>.sort()</code> Predeterminado</h4>
+<p>El método <code>.sort()</code> <strong>muta el array original</strong> y ordena los elementos convirtiéndolos a cadenas UTF-16 si no se le proporciona una función de comparación.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">numerosDesordenados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">40</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">];</span>
+<span class="nx">numerosDesordenados</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span><span class="w"> </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numerosDesordenados</span><span class="p">);</span><span class="w"> </span><span class="c1">// [10, 100, 25, 40, 5] (¡ORDENAMIENTO ALFABÉTICO INCORRECTO!)</span>
+
+<span class="c1">// Corrección: Proporcionar función comparadora sintáctica (a, b) =&gt; a - b</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">numerosOrdenados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">numerosDesordenados</span><span class="p">].</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numerosOrdenados</span><span class="p">);</span><span class="w"> </span><span class="c1">// [5, 10, 25, 40, 100] (ORDEN NUMÉRICO CORRECTO)</span>
+</code></pre></div>
+<hr />
+<h2 id="6-metodos-iterativos-de-alto-nivel-programacion-funcional">6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀</h2>
+<p>Los métodos iterativos ejecutan una función <em>callback</em> proporcionada sobre cada elemento de la colección.</p>
+<h3 id="61-recorrido-con-efectos-secundarios-foreach">6.1. Recorrido con Efectos Secundarios: <code>forEach()</code></h3>
+<p>Ejecuta la función enviada una vez por cada elemento. <strong>No retorna nada (<code>undefined</code>)</strong> y no debe utilizarse para transformar datos.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuariosNotificar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beatriz&quot;</span><span class="p">];</span>
+
+<span class="nx">usuariosNotificar</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="nx">indice</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Enviando notificación </span><span class="si">${</span><span class="nx">indice</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="si">}</span><span class="sb"> a </span><span class="si">${</span><span class="nx">usuario</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<hr />
+<h3 id="62-transformacion-1-a-1-map">6.2. Transformación 1 a 1: <code>map()</code></h3>
+<p>Crea un <strong>nuevo array</strong> de exactamente la misma longitud que el original, donde cada elemento es el resultado de transformar el elemento correspondiente.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">preciosEuros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">];</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">TASA_CAMBIO_DOLAR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.08</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">preciosDolares</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">preciosEuros</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">TASA_CAMBIO_DOLAR</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">preciosDolares</span><span class="p">);</span><span class="w"> </span><span class="c1">// [10.8, 21.6, 32.4]</span>
+
+<span class="c1">// Transformación de objetos en proyectos React</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuariosServidor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombreCompleto</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Juan Pérez&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">28</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">nombreCompleto</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sara Gómez&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">34</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombresParaDropdown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">usuariosServidor</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">u</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">nombreCompleto</span>
+<span class="p">}));</span>
+</code></pre></div>
+<hr />
+<h3 id="63-filtrado-y-seleccion-filter">6.3. Filtrado y Selección: <code>filter()</code></h3>
+<p>Crea un <strong>nuevo array</strong> que contiene únicamente aquellos elementos que devuelven un valor <em>truthy</em> al aplicar el test booleano.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">inventarioServidores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;srv-01&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">ramGb</span><span class="o">:</span><span class="w"> </span><span class="mf">16</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;srv-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">ramGb</span><span class="o">:</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;srv-03&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">ramGb</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">servidoresDisponibles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inventarioServidores</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span>
+<span class="w">  </span><span class="p">(</span><span class="nx">servidor</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">servidor</span><span class="p">.</span><span class="nx">activo</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">servidor</span><span class="p">.</span><span class="nx">ramGb</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">16</span>
+<span class="p">);</span>
+<span class="c1">// Resultado: Contiene srv-01 y srv-03</span>
+</code></pre></div>
+<hr />
+<h3 id="64-acumulacion-y-agregacion-reduce">6.4. Acumulación y Agregación: <code>reduce()</code></h3>
+<p>Aplica una función reductora sobre cada elemento, pasando como argumento el retorno de la iteración previa. Reduce todo el array a <strong>un único valor</strong> (un número, una cadena, un objeto o un nuevo array).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Sintaxis: array.reduce((acumulador, elementoActual, indice, array) =&gt; { ... }, valorInicial)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">lineasFactura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">concepto</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Licencia Software&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">150</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">concepto</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Soporte Técnico&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">80</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">concepto</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Mantenimiento Cloud&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// 1. Acumulación numérica simple</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">totalFactura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lineasFactura</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acumulador</span><span class="p">,</span><span class="w"> </span><span class="nx">linea</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">acumulador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">linea</span><span class="p">.</span><span class="nx">importe</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">linea</span><span class="p">.</span><span class="nx">unidades</span><span class="p">;</span>
+<span class="p">},</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0 es el valorInicial del acumulador</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Total Factura:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">totalFactura</span><span class="p">);</span><span class="w"> </span><span class="c1">// 300 + 80 + 600 = 980</span>
+
+<span class="c1">// 2. Agrupación avanzada de objetos por propiedad usando reduce</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">personas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Laura&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">departamento</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;IT&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Pedro&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">departamento</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;RRHH&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Marta&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">departamento</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;IT&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">agrupadosPorDepartamento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">personas</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">persona</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">depto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">persona</span><span class="p">.</span><span class="nx">departamento</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">acc</span><span class="p">[</span><span class="nx">depto</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">acc</span><span class="p">[</span><span class="nx">depto</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">acc</span><span class="p">[</span><span class="nx">depto</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">persona</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">acc</span><span class="p">;</span>
+<span class="p">},</span><span class="w"> </span><span class="p">{});</span><span class="w"> </span><span class="c1">// Objeto vacío como valorInicial</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agrupadosPorDepartamento</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">{</span>
+<span class="cm">  IT: [{ nombre: &quot;Laura&quot;... }, { nombre: &quot;Marta&quot;... }],</span>
+<span class="cm">  RRHH: [{ nombre: &quot;Pedro&quot;... }]</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+</code></pre></div>
+<hr />
+<h3 id="65-busqueda-y-validacion-find-findindex-some-every-includes">6.5. Búsqueda y Validación: <code>find()</code>, <code>findIndex()</code>, <code>some()</code>, <code>every()</code>, <code>includes()</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">tareas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">101</span><span class="p">,</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Configurar Linter&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">completada</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">102</span><span class="p">,</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Crear Componente Header&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">completada</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">103</span><span class="p">,</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Escribir Tests Unitarios&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">completada</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// find(): Retorna el PRIMER elemento que cumple el criterio (o undefined)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tareaPendiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tareas</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">completada</span><span class="p">);</span>
+<span class="c1">// { id: 102, titulo: &quot;Crear Componente Header&quot;, completada: false }</span>
+
+<span class="c1">// findIndex(): Retorna el ÍNDICE de la primera coincidencia (o -1)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">indiceTarea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tareas</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">103</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2</span>
+
+<span class="c1">// some(): Retorna true si AL MENOS UN elemento cumple la condición</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">hayTareasPendientes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tareas</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">completada</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+
+<span class="c1">// every(): Retorna true si TODOS los elementos cumplen la condición</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">todasCompletadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tareas</span><span class="p">.</span><span class="nx">every</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">completada</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
+
+<span class="c1">// includes(): Verifica la presencia de un elemento primitivo en un array</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">rolesAsignados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EDITOR&quot;</span><span class="p">];</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">esSuperusuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rolesAsignados</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;SUPERADMIN&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
+</code></pre></div>
+<hr />
+<h2 id="7-tabla-comparativa-definitiva-de-metodos-de-arrays">7. Tabla Comparativa Definitiva de Métodos de Arrays 📊</h2>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Propósito Principal</th>
+<th>Retorno</th>
+<th>¿Muta el Array Original?</th>
+<th>Complejidad Temporal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forEach()</code></td>
+<td>Ejecutar efectos secundarios por cada elemento.</td>
+<td><code>undefined</code></td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>map()</code></td>
+<td>Transformar cada elemento de la lista.</td>
+<td>Nuevo Array (igual longitud)</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>filter()</code></td>
+<td>Filtrar elementos por condición booleana.</td>
+<td>Nuevo Array (longitud $\le n$)</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>reduce()</code></td>
+<td>Acumular el array en un único resultado.</td>
+<td>Cualquier valor/estructura</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>find()</code></td>
+<td>Obtener el primer elemento coincidente.</td>
+<td>Elemento coincidente o <code>undefined</code></td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>findIndex()</code></td>
+<td>Obtener el índice de la primera coincidencia.</td>
+<td>Entero (índice o <code>-1</code>)</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>some()</code></td>
+<td>Evaluar si existe al menos una coincidencia.</td>
+<td>Booleano (<code>true</code>/<code>false</code>)</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>every()</code></td>
+<td>Evaluar si la totalidad cumple la condición.</td>
+<td>Booleano (<code>true</code>/<code>false</code>)</td>
+<td>No</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>slice()</code></td>
+<td>Extraer una subsección del array.</td>
+<td>Nuevo Array</td>
+<td>No</td>
+<td>$O(k)$</td>
+</tr>
+<tr>
+<td><code>splice()</code></td>
+<td>Insertar, reemplazar o eliminar elementos.</td>
+<td>Array con elementos borrados</td>
+<td><strong>Sí</strong></td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><code>sort()</code></td>
+<td>Ordenar elementos según un criterio.</td>
+<td>Array original ordenado</td>
+<td><strong>Sí</strong></td>
+<td>$O(n \log n)$</td>
+</tr>
+<tr>
+<td><code>push()</code> / <code>pop()</code></td>
+<td>Insertar o eliminar al final.</td>
+<td>Nueva longitud / Elemento</td>
+<td><strong>Sí</strong></td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td><code>unshift()</code> / <code>shift()</code></td>
+<td>Insertar o eliminar al principio.</td>
+<td>Nueva longitud / Elemento</td>
+<td><strong>Sí</strong></td>
+<td>$O(n)$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,809 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 5: DOM Nativo y Gestión de Eventos (RA3) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-5-dom-nativo-y-gestion-de-eventos-ra3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 5: DOM Nativo y Gestión de Eventos (RA3)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-modelo-de-objetos-del-documento-dom-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El Modelo de Objetos del Documento (DOM Nativo) 🌳
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. El Modelo de Objetos del Documento (DOM Nativo) 🌳">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-nodos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Nodos Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seleccion-de-elementos-en-el-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selección de Elementos en el DOM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recorrido-del-arbol-dom-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recorrido del Árbol DOM (Traversal)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-modificacion-y-eliminacion-de-nodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación, Modificación y Eliminación de Nodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación, Modificación y Eliminación de Nodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificacion-de-contenido-y-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificación de Contenido y Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestor-de-clases-css-classlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestor de Clases CSS (classList)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insercion-y-eliminacion-dinamica-con-alto-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inserción y Eliminación Dinámica con Alto Rendimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gestion-de-eventos-y-manejo-de-la-interaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gestión de Eventos y Manejo de la Interacción ⚡
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Gestión de Eventos y Manejo de la Interacción ⚡">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escuchadores-de-eventos-addeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escuchadores de Eventos (addEventListener)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fases-de-propagacion-de-eventos-captura-y-burbujeo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fases de Propagación de Eventos (Captura y Burbujeo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patron-clave-delegacion-de-eventos-event-delegation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patron Clave: Delegación de Eventos (Event Delegation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-5-dom-nativo-y-gestion-de-eventos-ra3">UD 5: DOM Nativo y Gestión de Eventos (RA3)</h1>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 3 (RA3) — Manipula el árbol de contenidos de un documento Web mediante el modelo de objetos del documento (DOM), analizando su estructura y aplicando técnicas de manipulación dinámica y gestión de eventos.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 4 y 5 (RA4/RA5) — Desarrolla aplicaciones web dinámicas manipulando el árbol DOM, gestionando la interacción mediante el modelo de eventos, integrando comunicación asíncrona mediante Promises/Fetch API y gestionando la persistencia en el cliente con Web Storage.</p>
+</blockquote>
+<hr />
+<h2 id="1-el-modelo-de-objetos-del-documento-dom-nativo">1. El Modelo de Objetos del Documento (DOM Nativo) 🌳</h2>
+<p>El <strong>DOM (Document Object Model)</strong> es una interfaz de programación (<code>API</code>) que representa los documentos HTML como una estructura jerárquica de árbol. Cada elemento, atributo y fragmento de texto en el HTML se transforma en un <strong>nodo</strong> que JavaScript puede inspeccionar, crear, modificar o eliminar en tiempo de ejecución.</p>
+<pre class="mermaid"><code>flowchart TD
+    Window["window (Objeto Global)"] --&gt; Document["document (Objeto Principal)"]
+    Document --&gt; Root["Elemento Raíz: &lt;html&gt;"]
+    Root --&gt; Head["&lt;head&gt;"]
+    Root --&gt; Body["&lt;body&gt;"]
+    Head --&gt; Title["&lt;title&gt; -&gt; Texto"]
+    Body --&gt; Header["&lt;header&gt;"]
+    Body --&gt; Main["&lt;main&gt;"]
+    Main --&gt; Section["&lt;section&gt;"]
+    Section --&gt; H1["&lt;h1&gt; -&gt; Texto"]
+    Section --&gt; P["&lt;p&gt; -&gt; Texto"]
+</code></pre>
+<h3 id="tipos-de-nodos-principales">Tipos de Nodos Principales</h3>
+<ul>
+<li><code>Document</code>: Nodo raíz de todo el documento HTML.</li>
+<li><code>Element</code>: Cada una de las etiquetas HTML (<code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;button&gt;</code>).</li>
+<li><code>Text</code>: El contenido textual dentro de un elemento.</li>
+<li><code>Comment</code>: Comentarios escritos dentro del HTML.</li>
+</ul>
+<hr />
+<h3 id="seleccion-de-elementos-en-el-dom">Selección de Elementos en el DOM</h3>
+<p>Para interactuar con la interfaz, primero es necesario seleccionar los nodos correspondientes. Se prioriza el uso de métodos modernos basados en selectores CSS.</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Retorna</th>
+<th>Actualización</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document.getElementById('id')</code></td>
+<td><code>Element</code> o <code>null</code></td>
+<td>N/A</td>
+<td>Muy rápido, busca por ID único.</td>
+</tr>
+<tr>
+<td><code>document.querySelector('selector')</code></td>
+<td><code>Element</code> o <code>null</code></td>
+<td>N/A</td>
+<td>Retorna la <strong>primera</strong> coincidencia CSS.</td>
+</tr>
+<tr>
+<td><code>document.querySelectorAll('selector')</code></td>
+<td><code>NodeList</code></td>
+<td><strong>Estática</strong></td>
+<td>Retorna <strong>todas</strong> las coincidencias. Permite <code>forEach</code>.</td>
+</tr>
+<tr>
+<td><code>document.getElementsByClassName('clase')</code></td>
+<td><code>HTMLCollection</code></td>
+<td><strong>Viva</strong></td>
+<td>No tiene métodos funcionales como <code>forEach</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1">// Selección moderna por selectores CSS</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">botonEnviar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#btn-submit&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tarjetas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;.card.active&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// NodeList</span>
+
+<span class="c1">// Conversión de HTMLCollection / NodeList a Array real para usar map/filter</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tarjetasArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">tarjetas</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h3 id="recorrido-del-arbol-dom-traversal">Recorrido del Árbol DOM (<em>Traversal</em>)</h3>
+<p>Permite navegar entre nodos directamente utilizando las relaciones jerárquicas sin necesidad de re-consultar el documento.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">elementoActual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.tarjeta-activa&quot;</span><span class="p">);</span>
+
+<span class="c1">// Navegación entre Elementos (Omite nodos de texto y comentarios)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">padre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">elementoActual</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span><span class="w">             </span><span class="c1">// Contenedor padre</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">hermanosSiguientes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">elementoActual</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span><span class="w"> </span><span class="c1">// Siguiente hermano</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">hermanoAnterior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">elementoActual</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span><span class="c1">// Hermano anterior</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">primerHijo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">elementoActual</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span><span class="w">     </span><span class="c1">// Primer hijo elemento</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">todosHijos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">elementoActual</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span><span class="w">             </span><span class="c1">// HTMLCollection de hijos</span>
+</code></pre></div>
+<hr />
+<h3 id="creacion-modificacion-y-eliminacion-de-nodos">Creación, Modificación y Eliminación de Nodos</h3>
+<h4 id="modificacion-de-contenido-y-atributos">Modificación de Contenido y Atributos</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#titulo-principal&quot;</span><span class="p">);</span>
+
+<span class="c1">// textContent vs innerHTML</span>
+<span class="nx">titulo</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nuevo Título Seguro&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// SEGURO: Previene ataques XSS (interpreta todo como texto)</span>
+<span class="c1">// titulo.innerHTML = &quot;&lt;span&gt;Título&lt;/span&gt;&quot;; // ATENCIÓN: Renders HTML, vulnerable si se pasa input del usuario</span>
+
+<span class="c1">// Manipulación de Atributos</span>
+<span class="nx">titulo</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;data-categoria&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ofertas&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">titulo</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;data-categoria&quot;</span><span class="p">);</span>
+<span class="nx">titulo</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">);</span>
+
+<span class="c1">// Dataset (Atributos data-*)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">titulo</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">categoria</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;ofertas&quot;</span>
+</code></pre></div>
+<h4 id="gestor-de-clases-css-classlist">Gestor de Clases CSS (<code>classList</code>)</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">tarjeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.card&quot;</span><span class="p">);</span>
+
+<span class="nx">tarjeta</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;destacada&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sombra&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Añade clases</span>
+<span class="nx">tarjeta</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s2">&quot;oculta&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Elimina clase</span>
+<span class="nx">tarjeta</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;activa&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Alterna clase (añade si no existe, borra si existe)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tieneSombra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarjeta</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s2">&quot;sombra&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+<h4 id="insercion-y-eliminacion-dinamica-con-alto-rendimiento">Inserción y Eliminación Dinámica con Alto Rendimiento</h4>
+<p>Modificar el DOM genera operaciones costosas denominadas <strong>Reflow</strong> (recalculo de maquetación) y <strong>Repaint</strong> (redibujado gráfico). Para insertar múltiples elementos de forma eficiente se utiliza <code>DocumentFragment</code> o <code>insertAdjacentHTML</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#lista-usuarios&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuarios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beatriz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Elena&quot;</span><span class="p">];</span>
+
+<span class="c1">// OPCIÓN 1: DocumentFragment (Mantiene los cambios en memoria antes de inyectar)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fragmento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createDocumentFragment</span><span class="p">();</span>
+
+<span class="nx">usuarios</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;LI&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;item-usuario&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">fragmento</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span><span class="w"> </span><span class="c1">// No impacta en el DOM real todavía</span>
+<span class="p">});</span>
+
+<span class="nx">lista</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">fragmento</span><span class="p">);</span><span class="w"> </span><span class="c1">// UN SOLO Reflow al insertar todo el conjunto</span>
+
+<span class="c1">// OPCIÓN 2: insertAdjacentHTML (Inyección limpia de cadenas HTML)</span>
+<span class="c1">// Posiciones: &#39;beforebegin&#39;, &#39;afterbegin&#39;, &#39;beforeend&#39;, &#39;afterend&#39;</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">insertAdjacentHTML</span><span class="p">(</span><span class="s2">&quot;beforeend&quot;</span><span class="p">,</span><span class="w"> </span><span class="sb">`&lt;li class=&quot;item-usuario&quot;&gt;Nuevo Usuario&lt;/li&gt;`</span><span class="p">);</span>
+
+<span class="c1">// Eliminación de Nodos</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nodoAELiminar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#elemento-obsoleto&quot;</span><span class="p">);</span>
+<span class="nx">nodoAELiminar</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span><span class="w"> </span><span class="c1">// Eliminación directa</span>
+</code></pre></div>
+<hr />
+<h2 id="2-gestion-de-eventos-y-manejo-de-la-interaccion">2. Gestión de Eventos y Manejo de la Interacción ⚡</h2>
+<p>Un <strong>Evento</strong> es una señal emitida por el navegador que indica que se ha producido una acción (click, movimiento del ratón, carga del documento, pulsación de tecla).</p>
+<h3 id="escuchadores-de-eventos-addeventlistener">Escuchadores de Eventos (<code>addEventListener</code>)</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#btn-comprar&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">manejarClick</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w"> </span><span class="c1">// Cancela la acción por defecto (ej: submit de un formulario o link)</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Elemento clickeado:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span><span class="w"> </span><span class="c1">// Elemento que disparó el evento</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Elemento con listener:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span><span class="w"> </span><span class="c1">// Elemento que escucha el evento</span>
+<span class="p">}</span>
+
+<span class="c1">// Registro</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">manejarClick</span><span class="p">);</span>
+
+<span class="c1">// Eliminación (Requiere la referencia a una función nombrada, no anónima)</span>
+<span class="c1">// boton.removeEventListener(&quot;click&quot;, manejarClick);</span>
+</code></pre></div>
+<hr />
+<h3 id="fases-de-propagacion-de-eventos-captura-y-burbujeo">Fases de Propagación de Eventos (Captura y Burbujeo)</h3>
+<p>Cuando ocurre un evento en un elemento anidado, la señal recorre el árbol DOM en tres fases:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Fase 1: Captura (Capture Phase)
+    Window1["window"] --&gt; Doc1["document"] --&gt; Body1["&lt;body&gt;"] --&gt; Div1["&lt;div id='padre'&gt;"]
+    end
+
+    subgraph Fase 2: Objetivo (Target Phase)
+    Div1 --&gt; Target["&lt;button id='hijo'&gt; (Elemento Objetivo)"]
+    end
+
+    subgraph Fase 3: Burbujeo (Bubbling Phase)
+    Target --&gt; Div2["&lt;div id='padre'&gt;"] --&gt; Body2["&lt;body&gt;"] --&gt; Doc2["document"] --&gt; Window2["window"]
+    end
+</code></pre>
+<ol>
+<li><strong>Fase de Captura (<em>Capturing Phase</em>):</strong> El evento desciende desde <code>window</code> hasta el elemento objetivo.</li>
+<li><strong>Fase de Objetivo (<em>Target Phase</em>):</strong> El evento alcanza el nodo exacto que originó la acción.</li>
+<li><strong>Fase de Burbujeo (<em>Bubbling Phase</em>):</strong> El evento asciende desde el elemento objetivo hasta la raíz <code>window</code>. Por defecto, los listeners se ejecutan en esta fase.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Detener la propagación</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">detenerBurbujeo</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span><span class="w"> </span><span class="c1">// Evita que el evento continúe ascendiendo a los elementos padres</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="patron-clave-delegacion-de-eventos-event-delegation">Patron Clave: Delegación de Eventos (<em>Event Delegation</em>)</h3>
+<p>En lugar de adjuntar un escucha de eventos a cada elemento hijo (lo cual consume excesiva memoria y falla al añadir elementos dinámicos), se coloca <strong>un único escucha en el elemento padre</strong> aprovechando la fase de burbujeo.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// HTML: &lt;ul id=&quot;lista-tareas&quot;&gt;&lt;li&gt;Tarea 1&lt;/li&gt;&lt;li&gt;Tarea 2&lt;/li&gt;&lt;/ul&gt;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">listaTareas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#lista-tareas&quot;</span><span class="p">);</span>
+
+<span class="nx">listaTareas</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// e.target es el elemento exacto donde se hizo click</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;completada&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Tarea modificada: </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">textContent</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

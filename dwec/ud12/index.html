@@ -1,0 +1,936 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 12: Context API y Estado Global (RA6) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-12-context-api-y-estado-global-ra6" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 12: Context API y Estado Global (RA6)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-problema-prop-drilling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El Problema: Prop Drilling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-context-api-createcontext-y-usecontext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Context API: createContext y useContext
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Context API: createContext y useContext">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-creacion-del-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Creación del contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-consumo-del-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Consumo del contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-patron-recomendado-custom-hook-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Patrón recomendado: Custom Hook + validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-multiples-contextos-y-composicion-de-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Múltiples Contextos y Composición de Providers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-problema-de-rendimiento-re-renderizados-en-cascada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. El Problema de Rendimiento: Re-renderizados en Cascada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El Problema de Rendimiento: Re-renderizados en Cascada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-mitigaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Mitigaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-context-api-vs-librerias-de-estado-global-zustand-redux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Context API vs. Librerías de Estado Global (Zustand / Redux)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Context API vs. Librerías de Estado Global (Zustand / Redux)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-ejemplo-equivalente-en-zustand-para-contraste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Ejemplo equivalente en Zustand (para contraste)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-caso-practico-integrado-carrito-de-compra-con-context-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Caso Práctico Integrado: Carrito de Compra con Context API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-resumen-de-conceptos-clave-de-la-ud-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Resumen de Conceptos Clave de la UD 12
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-12-context-api-y-estado-global-ra6">UD 12: Context API y Estado Global (RA6)</h1>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 6 (RA6) — Optimiza el rendimiento de aplicaciones web en el entorno cliente gestionando el estado de la aplicación mediante mecanismos que evitan el acoplamiento excesivo entre componentes y el paso manual de datos a través de múltiples niveles del árbol de componentes.</p>
+</blockquote>
+<hr />
+<h2 id="1-el-problema-prop-drilling">1. El Problema: <em>Prop Drilling</em></h2>
+<p>A medida que una aplicación React crece en profundidad de componentes, es habitual necesitar un mismo dato (el usuario autenticado, el tema visual, el idioma) en componentes muy alejados del componente que originalmente lo obtiene.</p>
+<p>La solución "ingenua" consiste en pasar ese dato como <em>prop</em> de padre a hijo en cada nivel, aunque los componentes intermedios no lo necesiten para nada propio. Este antipatrón se conoce como <strong><em>Prop Drilling</em></strong> (perforación de props).</p>
+<pre class="mermaid"><code>flowchart TD
+    App["App (tiene el usuario)"] --&gt;|prop: usuario| Layout
+    Layout --&gt;|prop: usuario| Sidebar
+    Sidebar --&gt;|prop: usuario| Menu
+    Menu --&gt;|prop: usuario| Avatar["Avatar (el único que realmente lo usa)"]
+</code></pre>
+<ul>
+<li><strong>Consecuencias:</strong> componentes intermedios acoplados a datos que no usan, refactorizaciones costosas (cambiar el nombre de una prop obliga a tocar toda la cadena) y una API de componentes cada vez más ruidosa.</li>
+<li><strong>Cuándo NO es un problema:</strong> si el dato solo baja 1 o 2 niveles, pasar la prop directamente sigue siendo la solución más simple y explícita. Context API no sustituye el paso de props locales; resuelve específicamente la comunicación <strong>entre partes distantes</strong> del árbol.</li>
+</ul>
+<hr />
+<h2 id="2-context-api-createcontext-y-usecontext">2. Context API: <code>createContext</code> y <code>useContext</code></h2>
+<p>React ofrece un mecanismo nativo para crear un "canal" de datos que cualquier componente descendiente puede leer directamente, sin que los intermedios tengan que reenviarlo.</p>
+<pre class="mermaid"><code>flowchart TD
+    Provider["ThemeContext.Provider (value={tema})"] --&gt; A[Layout]
+    A --&gt; B[Sidebar]
+    A --&gt; C[Contenido]
+    C --&gt; D["Boton (usa useContext directamente)"]
+    Provider -.-&gt;|"lectura directa, sin pasar por A, B o C"| D
+</code></pre>
+<h3 id="21-creacion-del-contexto">2.1. Creación del contexto</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// contexts/ThemeContext.js</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createContext</span><span class="p">,</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useContext</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="c1">// 1. Se crea el &quot;canal&quot;. El valor por defecto solo se usa si no hay Provider por encima.</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ThemeContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="c1">// 2. Componente Provider: envuelve la parte del árbol que necesita acceso al dato</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">ThemeProvider</span><span class="p">({</span><span class="w"> </span><span class="nx">children</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">tema</span><span class="p">,</span><span class="w"> </span><span class="nx">setTema</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;claro&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">alternarTema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setTema</span><span class="p">(</span><span class="nx">actual</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">actual</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;claro&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;oscuro&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;claro&#39;</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// El &quot;value&quot; es lo que estará disponible para cualquier descendiente</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tema</span><span class="p">,</span><span class="w"> </span><span class="nx">alternarTema</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">ThemeContext</span><span class="p">.</span><span class="na">Provider</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">valor</span><span class="p">}&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">ThemeContext</span><span class="p">.</span><span class="na">Provider</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 3. Custom Hook de conveniencia (patrón recomendado, ver apartado 2.3)</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useTheme</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">contexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useContext</span><span class="p">(</span><span class="nx">ThemeContext</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">contexto</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;useTheme debe usarse dentro de un ThemeProvider&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">contexto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="22-consumo-del-contexto">2.2. Consumo del contexto</h3>
+<p>Cualquier componente, sin importar su profundidad, puede leer el valor con <code>useContext</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// components/Boton.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useTheme</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../contexts/ThemeContext&#39;</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">Boton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tema</span><span class="p">,</span><span class="w"> </span><span class="nx">alternarTema</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useTheme</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">button</span>
+<span class="w">      </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">alternarTema</span><span class="p">}</span>
+<span class="w">      </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">tema</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;oscuro&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;btn-dark&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;btn-light&#39;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">&gt;</span>
+<span class="w">      </span><span class="nx">Tema</span><span class="w"> </span><span class="nx">actual</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">tema</span><span class="p">}</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// App.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ThemeProvider</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./contexts/ThemeContext&#39;</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">ThemeProvider</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">Layout</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">ThemeProvider</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="23-patron-recomendado-custom-hook-validacion">2.3. Patrón recomendado: <em>Custom Hook</em> + validación</h3>
+<p>Consumir el contexto siempre a través de un <em>hook</em> propio (<code>useTheme</code>, <code>useAuth</code>, <code>useCarrito</code>...) en lugar de llamar a <code>useContext(ThemeContext)</code> directamente en cada componente aporta dos ventajas:</p>
+<ul>
+<li><strong>Encapsulación:</strong> si el día de mañana cambia la implementación interna (por ejemplo, se sustituye por Zustand), solo hay que tocar el hook, no cada componente consumidor.</li>
+<li><strong>Seguridad:</strong> lanzar un error explícito si el hook se usa fuera de su <code>Provider</code> evita bugs silenciosos (recibir <code>null</code> y no saber por qué).</li>
+</ul>
+<hr />
+<h2 id="3-multiples-contextos-y-composicion-de-providers">3. Múltiples Contextos y Composición de Providers</h2>
+<p>Es habitual que una aplicación necesite varios contextos independientes (autenticación, tema, carrito de compra). Cada uno se declara y se compone por separado, anidando los <code>Provider</code> en la raíz:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">AuthProvider</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">ThemeProvider</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">CarritoProvider</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">Layout</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">CarritoProvider</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">ThemeProvider</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">AuthProvider</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Buena práctica:</strong> mantener cada contexto centrado en una única responsabilidad (<em>Single Responsibility</em>). Un contexto "todo en uno" con usuario, tema, carrito y notificaciones mezcladas es difícil de mantener y, como se ve en el apartado 4, provoca renderizados innecesarios.</p>
+</blockquote>
+<hr />
+<h2 id="4-el-problema-de-rendimiento-re-renderizados-en-cascada">4. El Problema de Rendimiento: Re-renderizados en Cascada</h2>
+<p>Context API <strong>no está optimizada para valores que cambian con mucha frecuencia</strong>. Cuando el <code>value</code> de un <code>Provider</code> cambia, <strong>todos</strong> los componentes que consumen ese contexto con <code>useContext</code> se vuelven a renderizar, independientemente de si usan la parte del valor que cambió.</p>
+<pre class="mermaid"><code>flowchart TD
+    Provider["Provider value cambia"] --&gt; C1["Componente A (usa 'usuario')"]
+    Provider --&gt; C2["Componente B (usa 'tema')"]
+    Provider --&gt; C3["Componente C (usa 'notificaciones')"]
+
+    note1["Si 'notificaciones' cambia,&lt;br/&gt;A y B también se re-renderizan&lt;br/&gt;aunque no usen ese dato"]
+</code></pre>
+<h3 id="41-mitigaciones">4.1. Mitigaciones</h3>
+<ul>
+<li><strong>Dividir contextos por dominio y por frecuencia de cambio:</strong> separar un valor que cambia constantemente (por ejemplo, la posición del ratón) de otro estable (el usuario autenticado) en contextos distintos.</li>
+<li><strong>Memorizar el <code>value</code> del Provider</strong> con <code>useMemo</code> para evitar crear un objeto nuevo en cada render del componente Provider:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">CarritoProvider</span><span class="p">({</span><span class="w"> </span><span class="nx">children</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">setItems</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([]);</span>
+
+<span class="w">  </span><span class="c1">// Sin useMemo, cada render de CarritoProvider crea un objeto &quot;valor&quot; nuevo,</span>
+<span class="w">  </span><span class="c1">// lo que fuerza el re-render de TODOS los consumidores aunque items no cambie.</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMemo</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">setItems</span><span class="w"> </span><span class="p">}),</span><span class="w"> </span><span class="p">[</span><span class="nx">items</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">CarritoContext</span><span class="p">.</span><span class="na">Provider</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">valor</span><span class="p">}&gt;{</span><span class="nx">children</span><span class="p">}&lt;/</span><span class="nt">CarritoContext</span><span class="p">.</span><span class="na">Provider</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>Separar estado y acciones en dos contextos</strong> cuando el patrón lo justifique: un contexto para los datos (que cambia) y otro para las funciones que los modifican (que no cambian nunca su referencia si se envuelven en <code>useCallback</code>), de modo que los componentes que solo disparan acciones no se re-rendericen cuando cambian los datos.</li>
+</ul>
+<hr />
+<h2 id="5-context-api-vs-librerias-de-estado-global-zustand-redux">5. Context API vs. Librerías de Estado Global (Zustand / Redux)</h2>
+<p>Context API es la solución <strong>nativa</strong> de React, pero no es la única ni siempre la más adecuada. Es fundamental saber razonar cuándo conviene cada opción.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Context API (nativo)</th>
+<th>Zustand / Redux (librería externa)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Instalación</strong></td>
+<td>Ninguna, viene con React</td>
+<td>Requiere añadir una dependencia (<code>npm install zustand</code>)</td>
+</tr>
+<tr>
+<td><strong>Rendimiento con cambios frecuentes</strong></td>
+<td>Deficiente sin optimización manual (re-renderiza todos los consumidores)</td>
+<td>Optimizado por defecto: los componentes solo se suscriben a la porción de estado que usan</td>
+</tr>
+<tr>
+<td><strong>Curva de aprendizaje</strong></td>
+<td>Muy baja (2 funciones: <code>createContext</code>, <code>useContext</code>)</td>
+<td>Baja (Zustand) a media (Redux, con <em>actions</em>, <em>reducers</em>, <em>middleware</em>)</td>
+</tr>
+<tr>
+<td><strong>Herramientas de depuración</strong></td>
+<td>Ninguna específica</td>
+<td>DevTools dedicadas (historial de acciones, <em>time-travel debugging</em> en Redux)</td>
+</tr>
+<tr>
+<td><strong>Caso de uso ideal</strong></td>
+<td>Estado que cambia poco: tema visual, idioma, datos de sesión del usuario, preferencias</td>
+<td>Estado complejo y muy dinámico: carritos con muchas operaciones, filtros de listados grandes, estado compartido entre módulos independientes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="51-ejemplo-equivalente-en-zustand-para-contraste">5.1. Ejemplo equivalente en Zustand (para contraste)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// store/useCarritoStore.js</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;zustand&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useCarritoStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">create</span><span class="p">((</span><span class="nx">set</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">  </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nx">añadir</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">producto</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">    </span><span class="nx">set</span><span class="p">((</span><span class="nx">estado</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">producto</span><span class="p">]</span><span class="w"> </span><span class="p">})),</span>
+<span class="w">  </span><span class="nx">vaciar</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">set</span><span class="p">({</span><span class="w"> </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">}),</span>
+<span class="p">}));</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Cualquier componente, SIN Provider envolviendo la aplicación</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">ContadorCarrito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Solo se re-renderiza si &quot;items&quot; cambia, no si cambia cualquier otra</span>
+<span class="w">  </span><span class="c1">// parte del store que pueda existir en el futuro</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">totalItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCarritoStore</span><span class="p">((</span><span class="nx">estado</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;{</span><span class="nx">totalItems</span><span class="p">}</span><span class="w"> </span><span class="nx">artículos</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La diferencia clave es la <strong>suscripción selectiva</strong>: en Zustand, cada componente elige exactamente qué "trozo" del estado le interesa mediante una función <em>selector</em>, y solo se re-renderiza si ese trozo concreto cambia. Context API, sin trabajo adicional, no ofrece esa granularidad.</p>
+<blockquote>
+<p>💡 <strong>Criterio práctico para el aula:</strong> para el estado típico de las prácticas de este módulo (usuario autenticado, tema, idioma) Context API es más que suficiente y evita una dependencia externa. Zustand se reserva para cuando el estado global gana en volumen y frecuencia de cambio (por ejemplo, un dashboard con múltiples widgets sincronizados).</p>
+</blockquote>
+<hr />
+<h2 id="6-caso-practico-integrado-carrito-de-compra-con-context-api">6. Caso Práctico Integrado: Carrito de Compra con Context API</h2>
+<p>Ejemplo completo que combina <code>createContext</code>, <code>useContext</code>, <code>useReducer</code> (para centralizar la lógica de actualización) y el patrón de <em>custom hook</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// contexts/CarritoContext.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createContext</span><span class="p">,</span><span class="w"> </span><span class="nx">useContext</span><span class="p">,</span><span class="w"> </span><span class="nx">useReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">CarritoContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">carritoReducer</span><span class="p">(</span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">accion</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;AÑADIR&#39;</span><span class="o">:</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">accion</span><span class="p">.</span><span class="nx">payload</span><span class="p">]</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;ELIMINAR&#39;</span><span class="o">:</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span><span class="nx">estado</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">accion</span><span class="p">.</span><span class="nx">payload</span><span class="p">),</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;VACIAR&#39;</span><span class="o">:</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">estado</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">CarritoProvider</span><span class="p">({</span><span class="w"> </span><span class="nx">children</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useReducer</span><span class="p">(</span><span class="nx">carritoReducer</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">total</span><span class="o">:</span><span class="w"> </span><span class="nx">estado</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">precio</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">añadir</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">producto</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AÑADIR&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="o">:</span><span class="w"> </span><span class="nx">producto</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">eliminar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ELIMINAR&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="o">:</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">vaciar</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;VACIAR&#39;</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">CarritoContext</span><span class="p">.</span><span class="na">Provider</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">valor</span><span class="p">}&gt;{</span><span class="nx">children</span><span class="p">}&lt;/</span><span class="nt">CarritoContext</span><span class="p">.</span><span class="na">Provider</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useCarrito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">contexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useContext</span><span class="p">(</span><span class="nx">CarritoContext</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">contexto</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;useCarrito debe usarse dentro de CarritoProvider&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">contexto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// components/ResumenCarrito.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useCarrito</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../contexts/CarritoContext&#39;</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">ResumenCarrito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">eliminar</span><span class="p">,</span><span class="w"> </span><span class="nx">vaciar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCarrito</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="nx">Carrito</span><span class="w"> </span><span class="p">({</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">})&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">li</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">nombre</span><span class="p">}</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">precio</span><span class="p">}</span><span class="w"> </span><span class="err">€</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">eliminar</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">)}&gt;</span><span class="nx">Quitar</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Total</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">total</span><span class="p">}</span><span class="w"> </span><span class="err">€</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">vaciar</span><span class="p">}&gt;</span><span class="nx">Vaciar</span><span class="w"> </span><span class="nx">carrito</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Combinar <code>useReducer</code> con Context API es un patrón muy habitual: el <code>Provider</code> centraliza tanto el dato como la lógica que lo modifica, y los componentes consumidores solo invocan acciones (<code>añadir</code>, <code>eliminar</code>, <code>vaciar</code>) sin conocer los detalles internos de cómo se actualiza el estado.</p>
+<hr />
+<h2 id="7-resumen-de-conceptos-clave-de-la-ud-12">7. Resumen de Conceptos Clave de la UD 12</h2>
+<table>
+<thead>
+<tr>
+<th>Término / Concepto</th>
+<th>Descripción Técnica</th>
+<th>Función Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prop Drilling</strong></td>
+<td>Paso manual de una prop a través de múltiples niveles de componentes que no la necesitan.</td>
+<td>Problema que Context API busca resolver.</td>
+</tr>
+<tr>
+<td><strong><code>createContext</code></strong></td>
+<td>Crea un objeto "canal" de datos compartido.</td>
+<td>Define el contexto y su valor por defecto.</td>
+</tr>
+<tr>
+<td><strong><code>Provider</code></strong></td>
+<td>Componente que envuelve una parte del árbol y expone un <code>value</code>.</td>
+<td>Hace disponible el dato a todos sus descendientes.</td>
+</tr>
+<tr>
+<td><strong><code>useContext</code></strong></td>
+<td>Hook que lee el valor del contexto más cercano en el árbol.</td>
+<td>Consumo del dato sin pasar por props intermedias.</td>
+</tr>
+<tr>
+<td><strong>Custom Hook de contexto</strong></td>
+<td>Función (<code>useTheme</code>, <code>useAuth</code>...) que envuelve <code>useContext</code> y valida su uso.</td>
+<td>Encapsula y protege el acceso al contexto.</td>
+</tr>
+<tr>
+<td><strong>Re-render en cascada</strong></td>
+<td>Todo consumidor de un contexto se re-renderiza cuando cambia su <code>value</code>, sin distinción de qué parte usa.</td>
+<td>Principal limitación de rendimiento de Context API.</td>
+</tr>
+<tr>
+<td><strong>Zustand / Redux</strong></td>
+<td>Librerías externas de gestión de estado global con suscripción selectiva.</td>
+<td>Alternativa recomendada para estado complejo y muy dinámico.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

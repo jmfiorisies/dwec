@@ -1,0 +1,969 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 4: Objetos y Programación Orientada a Objetos (RA3) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-4-objetos-y-programacion-orientada-a-objetos-ra3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 4: Objetos y Programación Orientada a Objetos (RA3)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetos-literales-y-estructura-clave-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Objetos Literales y Estructura Clave-Valor 🔑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Objetos Literales y Estructura Clave-Valor 🔑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceso-y-manipulacion-de-propiedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceso y Manipulación de Propiedades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-avanzadas-desestructuracion-y-spread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operaciones Avanzadas: Desestructuración y Spread
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-estaticos-de-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos Estáticos de Object
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-modelo-de-prototipos-de-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Modelo de Prototipos de JavaScript 🧬
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El Modelo de Prototipos de JavaScript 🧬">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-cadena-de-prototipos-prototype-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La Cadena de Prototipos (Prototype Chain)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herencia-basada-en-prototipos-mecanismo-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herencia Basada en Prototipos (Mecanismo Tradicional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-clases-en-es6-sintaxis-y-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Clases en ES6+: Sintaxis y Métodos 🏛️
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Clases en ES6+: Sintaxis y Métodos 🏛️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-de-una-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de una Clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-herencia-y-polimorfismo-con-extends-y-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Herencia y Polimorfismo con extends y super 🌳
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Herencia y Polimorfismo con extends y super 🌳">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extension-de-clases-y-sobrescritura-de-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extensión de Clases y Sobrescritura de Métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-encapsulamiento-y-campos-privados-es2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Encapsulamiento y Campos Privados (ES2022) 🔒
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Encapsulamiento y Campos Privados (ES2022) 🔒">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-metodos-y-accesores-privados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedades, Métodos y Accesores Privados #
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-comparativa-de-paradigma-y-metodos-de-creacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Comparativa de Paradigma y Métodos de Creación 📊
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-4-objetos-y-programacion-orientada-a-objetos-ra3">UD 4: Objetos y Programación Orientada a Objetos (RA3)</h1>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 3 (RA3) — Desarrolla aplicaciones web utilizando el modelo de objetos de JavaScript, integrando estructuras clave-valor, la cadena de prototipos nativa, clases ES6+, herencia y mecanismos modernos de encapsulamiento.</p>
+</blockquote>
+<hr />
+<h2 id="1-objetos-literales-y-estructura-clave-valor">1. Objetos Literales y Estructura Clave-Valor 🔑</h2>
+<p>En JavaScript, casi todo es un objeto o se comporta como tal. Un <strong>Objeto</strong> es una colección dinámica de propiedades, donde cada propiedad está formada por un par <strong>clave-valor</strong> (<em>key-value</em>). Las claves son cadenas de texto o <code>Symbol</code>, y los valores pueden ser primitivos, arrays, otros objetos o funciones (métodos).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Creación de objeto literal con sintaxis moderna</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">101</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana Gómez&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ana@ejemplo.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;rol-usuario&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Administrador&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Clave con guion requiere comillas</span>
+<span class="w">  </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">// Método condensado (ES6)</span>
+<span class="w">  </span><span class="nx">obtenerPerfil</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="k">this</span><span class="p">[</span><span class="s2">&quot;rol-usuario&quot;</span><span class="p">]</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="acceso-y-manipulacion-de-propiedades">Acceso y Manipulación de Propiedades</h3>
+<p>Existen dos formas de acceder a las propiedades de un objeto:</p>
+<ol>
+<li><strong>Notación por punto (<code>.</code>)</strong>: Es la sintaxis preferida por su legibilidad, pero requiere que la clave sea un identificador válido.</li>
+<li><strong>Notación por corchetes (<code>[]</code>)</strong>: Indispensable cuando la clave está almacenada en una variable, contiene caracteres especiales (guiones, espacios) o se calcula dinámicamente.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// Acceso por punto</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;Ana Gómez&quot;</span>
+
+<span class="c1">// Acceso por corchetes</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">propiedadDinamica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">[</span><span class="nx">propiedadDinamica</span><span class="p">]);</span><span class="w"> </span><span class="c1">// &quot;ana@ejemplo.com&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">[</span><span class="s2">&quot;rol-usuario&quot;</span><span class="p">]);</span><span class="w">     </span><span class="c1">// &quot;Administrador&quot;</span>
+
+<span class="c1">// Añadir, modificar y eliminar propiedades</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">telefono</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;+34 600000000&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Añade propiedad</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">activo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">             </span><span class="c1">// Modifica propiedad</span>
+<span class="ow">delete</span><span class="w"> </span><span class="nx">usuario</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span><span class="w">               </span><span class="c1">// Elimina propiedad</span>
+</code></pre></div>
+<h3 id="operaciones-avanzadas-desestructuracion-y-spread">Operaciones Avanzadas: Desestructuración y Spread</h3>
+<p>ES6 introdujo mecanismos para extraer valores y clonar objetos de forma inmutable.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;P01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Teclado Mecánico&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">85</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Periféricos&quot;</span>
+<span class="p">};</span>
+
+<span class="c1">// Desestructuración con valores por defecto y alias</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="nx">precioEUR</span><span class="p">,</span><span class="w"> </span><span class="nx">enStock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">producto</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precioEUR</span><span class="p">,</span><span class="w"> </span><span class="nx">enStock</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;Teclado Mecánico&quot;, 85, true</span>
+
+<span class="c1">// Operador Spread (...) para clonación superficial (Shallow Copy) y fusión</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">detallesEnvio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">pesoKg</span><span class="o">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="nx">dimensiones</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;40x15cm&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">productoCompleto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span><span class="nx">producto</span><span class="p">,</span>
+<span class="w">  </span><span class="p">...</span><span class="nx">detallesEnvio</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">90</span><span class="w"> </span><span class="c1">// Sobrescribe el precio anterior</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="metodos-estaticos-de-object">Métodos Estáticos de <code>Object</code></h3>
+<p>El objeto global <code>Object</code> proporciona utilidades para inspeccionar y manipular objetos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">configuracion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">servidor</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">puerto</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="nx">ssl</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Inspección de claves, valores y entradas</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">configuracion</span><span class="p">));</span><span class="w">   </span><span class="c1">// [&quot;servidor&quot;, &quot;puerto&quot;, &quot;ssl&quot;]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">configuracion</span><span class="p">));</span><span class="w"> </span><span class="c1">// [&quot;localhost&quot;, 3000, true]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">configuracion</span><span class="p">));</span><span class="w"> </span>
+<span class="c1">// [[&quot;servidor&quot;, &quot;localhost&quot;], [&quot;puerto&quot;, 3000], [&quot;ssl&quot;, true]]</span>
+
+<span class="c1">// Control de Mutabilidad</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">constantes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">PI</span><span class="o">:</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">,</span><span class="w"> </span><span class="nx">GRAVEDAD</span><span class="o">:</span><span class="w"> </span><span class="mf">9.8</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">(</span><span class="nx">constantes</span><span class="p">);</span><span class="w"> </span><span class="c1">// Impide añadir, borrar o modificar propiedades</span>
+<span class="c1">// constantes.PI = 3;      // Error en strict mode / Ignorado en modo normal</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">sesion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">usuario</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Carlos&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">seal</span><span class="p">(</span><span class="nx">sesion</span><span class="p">);</span><span class="w">       </span><span class="c1">// Permite modificar valores existentes, pero IMPIDE añadir/borrar</span>
+<span class="nx">sesion</span><span class="p">.</span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Carlos A.&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// VÁLIDO</span>
+<span class="ow">delete</span><span class="w"> </span><span class="nx">sesion</span><span class="p">.</span><span class="nx">usuario</span><span class="p">;</span><span class="w">        </span><span class="c1">// INVALIDO</span>
+</code></pre></div>
+<hr />
+<h2 id="2-el-modelo-de-prototipos-de-javascript">2. El Modelo de Prototipos de JavaScript 🧬</h2>
+<p>A diferencia de lenguajes orientados a objetos tradicionales como Java o C++, JavaScript implementa <strong>herencia basada en prototipos</strong> (<em>Prototypal Inheritance</em>). Cada objeto tiene una referencia interna hacia otro objeto llamado su <strong>prototipo</strong> (<code>[[Prototype]]</code>).</p>
+<h3 id="la-cadena-de-prototipos-prototype-chain">La Cadena de Prototipos (<em>Prototype Chain</em>)</h3>
+<p>Cuando se intenta acceder a una propiedad o método de un objeto:</p>
+<ol>
+<li>El motor busca la propiedad en el propio objeto (<em>propiedad propia</em>).</li>
+<li>Si no la encuentra, busca en el prototipo asignado a ese objeto.</li>
+<li>El proceso se repite ascendiendo por la <strong>cadena de prototipos</strong> hasta llegar a <code>Object.prototype</code>.</li>
+<li>Si alcanza el final de la cadena (<code>null</code>) sin encontrarla, retorna <code>undefined</code>.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    SubObjeto["Objeto Instancia (ej: miArray)"] --&gt;|__proto__| ProtoPadre["Array.prototype"]
+    ProtoPadre --&gt;|__proto__| ProtoBase["Object.prototype"]
+    ProtoBase --&gt;|__proto__| ProtoNull["null"]
+
+    SubObjeto -. "Tiene push(), map()?" .-&gt; ProtoPadre
+    ProtoPadre -. "Tiene toString(), valueOf()?" .-&gt; ProtoBase
+</code></pre>
+<h3 id="herencia-basada-en-prototipos-mecanismo-tradicional">Herencia Basada en Prototipos (Mecanismo Tradicional)</h3>
+<p>Antes de ES6, la herencia se configuraba asociando objetos manualmente mediante <code>Object.create()</code> o modificando la propiedad <code>prototype</code> de las funciones constructoras.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Función Constructora (Convención: Primera letra en mayúscula)</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">edad</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Métodos compartidos adjuntos al prototipo (Ahorra memoria)</span>
+<span class="nx">Persona</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">saludar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> y tengo </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">edad</span><span class="si">}</span><span class="sb"> años.`</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">persona1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">&quot;David&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">persona1</span><span class="p">.</span><span class="nx">saludar</span><span class="p">());</span><span class="w"> </span><span class="c1">// &quot;Hola, soy David y tengo 30 años.&quot;</span>
+
+<span class="c1">// Verificación de propiedades</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">persona1</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">&quot;nombre&quot;</span><span class="p">));</span><span class="w">  </span><span class="c1">// true (propiedad propia)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">persona1</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">&quot;saludar&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// false (propiedad del prototipo)</span>
+</code></pre></div>
+<hr />
+<h2 id="3-clases-en-es6-sintaxis-y-metodos">3. Clases en ES6+: Sintaxis y Métodos 🏛️</h2>
+<p>La palabra clave <code>class</code> introducida en ES6 es una <strong>azúcar sintáctica</strong> (<em>Syntactic Sugar</em>) sobre el modelo de prototipos subyacente. No añade un nuevo paradigma de objetos a JavaScript, pero proporciona una sintaxis más limpia, legible y similar a otros lenguajes.</p>
+<h3 id="estructura-de-una-clase">Estructura de una Clase</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Vehiculo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Constructor: Método especial que se ejecuta al instanciar con &#39;new&#39;</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">marca</span><span class="p">,</span><span class="w"> </span><span class="nx">modelo</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">marca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">marca</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">modelo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modelo</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">precio</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Método de Instancia (se asigna automáticamente al prototipo de la clase)</span>
+<span class="w">  </span><span class="nx">obtenerDetalles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">marca</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">modelo</span><span class="si">}</span><span class="sb"> - $</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Getters y Setters: Interceptan el acceso y modificación de propiedades</span>
+<span class="w">  </span><span class="nx">get</span><span class="w"> </span><span class="nx">descripcion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">marca</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="sb"> - </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">modelo</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">set</span><span class="w"> </span><span class="nx">actualizarPrecio</span><span class="p">(</span><span class="nx">nuevoPrecio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nuevoPrecio</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;El precio debe ser un valor positivo.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nuevoPrecio</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Método Estático: Se invoca sobre la Clase, NO sobre las instancias</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="nx">esVehiculoValido</span><span class="p">(</span><span class="nx">objeto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">objeto</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Vehiculo</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Instanciación</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">miCoche</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Vehiculo</span><span class="p">(</span><span class="s2">&quot;Toyota&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Corolla&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">22000</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miCoche</span><span class="p">.</span><span class="nx">obtenerDetalles</span><span class="p">());</span><span class="w"> </span><span class="c1">// &quot;Toyota Corolla - $22000&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miCoche</span><span class="p">.</span><span class="nx">descripcion</span><span class="p">);</span><span class="w">      </span><span class="c1">// &quot;TOYOTA - Corolla&quot; (Uso del Getter)</span>
+
+<span class="nx">miCoche</span><span class="p">.</span><span class="nx">actualizarPrecio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">21000</span><span class="p">;</span><span class="w">       </span><span class="c1">// Uso del Setter</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Vehiculo</span><span class="p">.</span><span class="nx">esVehiculoValido</span><span class="p">(</span><span class="nx">miCoche</span><span class="p">));</span><span class="w"> </span><span class="c1">// true (Invocación estática)</span>
+</code></pre></div>
+<hr />
+<h2 id="4-herencia-y-polimorfismo-con-extends-y-super">4. Herencia y Polimorfismo con <code>extends</code> y <code>super</code> 🌳</h2>
+<p>La herencia permite crear clases derivadas que heredan y extienden el comportamiento de una clase base.</p>
+<pre class="mermaid"><code>classDiagram
+    class Empleado {
+        +String nombre
+        +Number salario
+        +obtenerFicha() String
+    }
+    class Desarrollador {
+        +String lenguajePrincipal
+        +obtenerFicha() String
+    }
+    Empleado &lt;|-- Desarrollador : Extiende
+</code></pre>
+<h3 id="extension-de-clases-y-sobrescritura-de-metodos">Extensión de Clases y Sobrescritura de Métodos</h3>
+<ul>
+<li><strong><code>extends</code></strong>: Establece el enlace jerárquico de prototipos entre clases.</li>
+<li><strong><code>super()</code></strong>: En el constructor derivado, ejecuta el constructor de la clase base. Debe invocarse <strong>antes</strong> de usar <code>this</code>.</li>
+<li><strong>Polimorfismo</strong>: La clase derivada puede reimplementar un método heredado (sobrescritura) para adaptar su comportamiento.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Clase Base</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">Empleado</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">salario</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">salario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">salario</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">obtenerFicha</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Empleado: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> | Salario: $</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">salario</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Clase Derivada</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">Desarrollador</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Empleado</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">salario</span><span class="p">,</span><span class="w"> </span><span class="nx">lenguajePrincipal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Llamada obligatoria al constructor de la clase base</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">salario</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">lenguajePrincipal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lenguajePrincipal</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Sobrescritura de Método (Polimorfismo)</span>
+<span class="w">  </span><span class="nx">obtenerFicha</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Reutiliza la lógica del método heredado con super.metodo()</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">fichaBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="nx">obtenerFicha</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">fichaBase</span><span class="si">}</span><span class="sb"> | Lenguaje: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">lenguajePrincipal</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">programar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> está escribiendo código en </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">lenguajePrincipal</span><span class="si">}</span><span class="sb">...`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Desarrollador</span><span class="p">(</span><span class="s2">&quot;Lucía&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45000</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;JavaScript&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dev</span><span class="p">.</span><span class="nx">obtenerFicha</span><span class="p">());</span><span class="w"> </span><span class="c1">// &quot;Empleado: Lucía | Salario: $45000 | Lenguaje: JavaScript&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dev</span><span class="p">.</span><span class="nx">programar</span><span class="p">());</span><span class="w">    </span><span class="c1">// &quot;Lucía está escribiendo código en JavaScript...&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="5-encapsulamiento-y-campos-privados-es2022">5. Encapsulamiento y Campos Privados (ES2022) 🔒</h2>
+<p>Históricamente, JavaScript no tenía soporte nativo para visibilidad de propiedades (privadas/públicas). Los desarrolladores utilizaban la convención de prefijar con guion bajo <code>_</code> (<code>_propiedad</code>) para indicar privacidad sintáctica, aunque la propiedad seguía siendo accesible públicamente.</p>
+<p>Desde ES2022, JavaScript incluye <strong>campos privados reales</strong> indicados mediante el prefijo <code>#</code>.</p>
+<h3 id="propiedades-metodos-y-accesores-privados">Propiedades, Métodos y Accesores Privados <code>#</code></h3>
+<p>Cualquier propiedad o método declarado con <code>#</code> es completamente inaccesible e invisible fuera del cuerpo de la propia clase. Intentar acceder directamente provoca un error de sintaxis (<code>SyntaxError</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Declara campos privados (ES2022)</span>
+<span class="w">  </span><span class="err">#</span><span class="nx">saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="err">#</span><span class="nx">pin</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">titular</span><span class="p">,</span><span class="w"> </span><span class="nx">pinInicial</span><span class="p">,</span><span class="w"> </span><span class="nx">depositoInicial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">titular</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">titular</span><span class="p">;</span><span class="w"> </span><span class="c1">// Propiedad pública</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pinInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">depositoInicial</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Método público que interactúa con el estado privado de forma segura</span>
+<span class="w">  </span><span class="nx">ingresar</span><span class="p">(</span><span class="nx">monto</span><span class="p">,</span><span class="w"> </span><span class="nx">pinIngresado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">validarPin</span><span class="p">(</span><span class="nx">pinIngresado</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;PIN Incorrecto. Operación cancelada.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">monto</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;Monto inválido.&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">saldo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">monto</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">registrarTransaccion</span><span class="p">(</span><span class="s2">&quot;Ingreso&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">monto</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Ingreso exitoso. Nuevo saldo: $</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">saldo</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Método Privado (Inaccessible desde fuera)</span>
+<span class="w">  </span><span class="err">#</span><span class="nx">validarPin</span><span class="p">(</span><span class="nx">pin</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">pin</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">pin</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="err">#</span><span class="nx">registrarTransaccion</span><span class="p">(</span><span class="nx">tipo</span><span class="p">,</span><span class="w"> </span><span class="nx">monto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`LOG: Transacción [</span><span class="si">${</span><span class="nx">tipo</span><span class="si">}</span><span class="sb">] por $</span><span class="si">${</span><span class="nx">monto</span><span class="si">}</span><span class="sb"> registrada.`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Getter explícito para lectura controlada</span>
+<span class="w">  </span><span class="nx">obtenerSaldo</span><span class="p">(</span><span class="nx">pinIngresado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">validarPin</span><span class="p">(</span><span class="nx">pinIngresado</span><span class="p">)</span><span class="w"> </span>
+<span class="w">      </span><span class="o">?</span><span class="w"> </span><span class="sb">`Saldo actual: $</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">saldo</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Acceso denegado.&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">miCuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="p">(</span><span class="s2">&quot;Marcos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1234</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miCuenta</span><span class="p">.</span><span class="nx">titular</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;Marcos&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miCuenta</span><span class="p">.</span><span class="nx">ingresar</span><span class="p">(</span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="mf">1234</span><span class="p">));</span><span class="w"> </span><span class="c1">// &quot;Ingreso exitoso. Nuevo saldo: $700&quot;</span>
+
+<span class="c1">// Intentos de acceso ilegal:</span>
+<span class="c1">// console.log(miCuenta.#saldo);         // SyntaxError: Private field &#39;#saldo&#39; must be declared in an enclosing class</span>
+<span class="c1">// miCuenta.#validarPin(1234);           // SyntaxError: Private field &#39;#validarPin&#39; must be declared in an enclosing class</span>
+</code></pre></div>
+<hr />
+<h2 id="6-comparativa-de-paradigma-y-metodos-de-creacion">6. Comparativa de Paradigma y Métodos de Creación 📊</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Objetos Literales</th>
+<th>Funciones Constructoras</th>
+<th>Clases ES6+ (<code>class</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Caso de Uso Principal</strong></td>
+<td>Estructuras sencillas de datos clave-valor.</td>
+<td>Código legado previa estandarización ES6.</td>
+<td>Desarrollo moderno de OOP, entidades con lógica.</td>
+</tr>
+<tr>
+<td><strong>Instanciación Múltiple</strong></td>
+<td>Manual (requiere duplicar código o funciones factoría).</td>
+<td>Mediante operador <code>new</code>.</td>
+<td>Mediante operador <code>new</code>.</td>
+</tr>
+<tr>
+<td><strong>Herencia</strong></td>
+<td>Vía <code>Object.setPrototypeOf()</code> o <code>Object.create()</code>.</td>
+<td>Vía manipulaciones en <code>Prototype</code>.</td>
+<td>Nativa con sintaxis limpia <code>extends</code> y <code>super</code>.</td>
+</tr>
+<tr>
+<td><strong>Encapsulamiento</strong></td>
+<td>Mediante <em>Closures</em> en funciones factoría.</td>
+<td>Mediante <em>Closures</em> locales.</td>
+<td>Nativo con campos y métodos privados <code>#</code>.</td>
+</tr>
+<tr>
+<td><strong>Rendimiento Memoria</strong></td>
+<td>$O(n)$ si duplica métodos por cada objeto.</td>
+<td>$O(1)$ adjuntando métodos a <code>.prototype</code>.</td>
+<td>$O(1)$ asignando métodos al prototipo implícito.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

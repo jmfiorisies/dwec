@@ -1,0 +1,746 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#desarrollo-web-en-entorno-cliente-dwec" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🚀 Desarrollo Web en Entorno Cliente (DWEC)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dwec/ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dwec/ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dwec/ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bienvenida-al-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🖐️ Bienvenida al Curso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapa-visual-de-navegacion-del-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗺️ Mapa Visual de Navegación del Aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-detallada-del-plan-de-estudios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Estructura Detallada del Plan de Estudios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Estructura Detallada del Plan de Estudios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-evaluacion-vanilla-javascript-44-horas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 1.ª Evaluación: Vanilla JavaScript (44 horas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2a-evaluacion-react-40-horas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 2.ª Evaluación: React (40 horas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="desarrollo-web-en-entorno-cliente-dwec">🚀 Desarrollo Web en Entorno Cliente (DWEC)</h1>
+<blockquote>
+<p><strong>De los Fundamentos de JavaScript a la Arquitectura de Aplicaciones con React</strong></p>
+</blockquote>
+<hr />
+<h2 id="bienvenida-al-curso">🖐️ Bienvenida al Curso</h2>
+<p>¡Te damos la bienvenida al módulo profesional de <strong>Desarrollo Web en Entorno Cliente (DWEC)</strong>!</p>
+<p>El desarrollo frontend moderno ha dejado de ser la simple manipulación de etiquetas HTML para convertirse en una disciplina de <strong>ingeniería de software completa</strong>. En este curso realizarás un viaje transformador: partirás de los cimientos del lenguaje JavaScript hasta dominar la arquitectura de <strong>Single Page Applications (SPA)</strong> con <strong>React</strong>, aplicando técnicas de optimización de rendimiento y gestión de estado propias de un entorno profesional.</p>
+<hr />
+<h2 id="mapa-visual-de-navegacion-del-aprendizaje">🗺️ Mapa Visual de Navegación del Aprendizaje</h2>
+<p>El itinerario está diseñado de forma incremental. Cada unidad construye la base de la siguiente:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph T1 ["1.ª Evaluación: Vanilla JS"]
+        UD1["UD1: Arquitecturas Web y Herramientas"] --&gt; UD2["UD2: Sintaxis, Tipos y Funciones"]
+        UD2 --&gt; UD3["UD3: Control de Flujo y Arrays"]
+        UD3 --&gt; UD4["UD4: Objetos y POO"]
+        UD4 --&gt; UD5["UD5: DOM y Eventos"]
+        UD5 --&gt; UD6["UD6: Asincronía y Almacenamiento"]
+    end
+
+    subgraph T2 ["2.ª Evaluación: React"]
+        UD7["UD7: React Core y JSX"] --&gt; UD8["UD8: Eventos y useState"]
+        UD8 --&gt; UD9["UD9: Formularios y Validaciones"]
+        UD9 --&gt; UD10["UD10: useRef, Rendimiento y Fiber"]
+        UD10 --&gt; UD11["UD11: useEffect, BOM y Router"]
+        UD11 --&gt; UD12["UD12: Context API y Estado Global"]
+    end
+
+    T1 ==&gt; T2</code></pre>
+<hr />
+<h2 id="estructura-detallada-del-plan-de-estudios">📚 Estructura Detallada del Plan de Estudios</h2>
+<h3 id="1a-evaluacion-vanilla-javascript-44-horas">🟢 1.ª Evaluación: Vanilla JavaScript (44 horas)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Unidad Didáctica</th>
+<th style="text-align: left;">Subunidades y Bloques Temáticos</th>
+<th style="text-align: left;">Competencia Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)</strong></td>
+<td style="text-align: left;">Entornos de ejecución (Navegador vs. Node.js), arquitecturas cliente/servidor, editores, linter y control de versiones</td>
+<td style="text-align: left;">Configurar el entorno de desarrollo y comprender la arquitectura cliente/servidor</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UD 2: Sintaxis, Tipos y Funciones (RA2)</strong></td>
+<td style="text-align: left;">Gestión de memoria (<code>let</code>, <code>const</code>), tipos de datos, funciones de primera clase, <em>closures</em> y <em>scope</em></td>
+<td style="text-align: left;">Dominar la sintaxis básica, la tipografía de datos y la programación funcional inicial</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UD 3: Control de Flujo, Bucles y Arrays (RA2)</strong></td>
+<td style="text-align: left;">Estructuras condicionales, iterativas y métodos funcionales de array (<code>map</code>, <code>filter</code>, <code>reduce</code>)</td>
+<td style="text-align: left;">Implementar la lógica de control del programa y la manipulación avanzada de colecciones</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UD 4: Objetos y Programación Orientada a Objetos (RA3)</strong></td>
+<td style="text-align: left;">Objetos literales, clases, prototipos, herencia y encapsulamiento</td>
+<td style="text-align: left;">Diseñar modelos de datos y estructuras de código reutilizables mediante POO</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UD 5: DOM Nativo y Gestión de Eventos (RA3)</strong></td>
+<td style="text-align: left;">Árbol DOM, manipulación dinámica, ciclo de eventos (<em>bubbling</em>, <em>capturing</em>) y delegación</td>
+<td style="text-align: left;">Manipular el árbol del documento y gestionar la interactividad con el usuario</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UD 6: Asincronía y Almacenamiento — Storage/Vite (RA3)</strong></td>
+<td style="text-align: left;">Event Loop, Promesas, <code>async/await</code>, API Fetch, <code>localStorage</code>/<code>sessionStorage</code> y herramientas de construcción como Vite</td>
+<td style="text-align: left;">Integrar peticiones a APIs externas, persistencia en cliente y compilación del proyecto</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2a-evaluacion-react-40-horas">🟡 2.ª Evaluación: React (40 horas)</h3>
+<table>
+<thead>
+<tr>
+<th>Unidad Didáctica</th>
+<th>Subunidades y Bloques Temáticos</th>
+<th>Competencia Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UD 7: React Core, JSX y Arquitectura Frontend (RA4)</strong></td>
+<td>Evolución de las arquitecturas web, Virtual DOM y Fiber, JSX, Props y Composición</td>
+<td>Diseñar la arquitectura base de una SPA con React</td>
+</tr>
+<tr>
+<td><strong>UD 8: Eventos y Estado con <code>useState</code> (RA5)</strong></td>
+<td>Eventos sintéticos, estado local y <em>custom hooks</em></td>
+<td>Gestionar la interactividad y el estado de un componente</td>
+</tr>
+<tr>
+<td><strong>UD 9: Formularios y Validaciones (RA5)</strong></td>
+<td>Formularios controlados/no controlados, React Hook Form y Zod</td>
+<td>Capturar y validar datos de usuario</td>
+</tr>
+<tr>
+<td><strong>UD 10: <code>useRef</code>, Rendimiento y React Fiber (RA6)</strong></td>
+<td>Acceso al DOM con <code>useRef</code>, <code>useMemo</code>, <code>useCallback</code>, <code>React.memo</code> y <code>Suspense</code></td>
+<td>Optimizar el rendimiento de renderizado</td>
+</tr>
+<tr>
+<td><strong>UD 11: <code>useEffect</code>, BOM y React Router (RA6)</strong></td>
+<td>Ciclo de vida, efectos secundarios y enrutamiento SPA</td>
+<td>Sincronizar componentes con sistemas externos y rutas</td>
+</tr>
+<tr>
+<td><strong>UD 12: Context API y Estado Global (RA6)</strong></td>
+<td><code>createContext</code>, <code>useContext</code>, <em>Prop Drilling</em> y comparativa con Zustand/Redux</td>
+<td>Gestionar el estado global sin acoplamiento excesivo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!--
+## 🗓️ Cronograma Temporal (12 UD — 84 Horas)
+
+<pre class="mermaid"><code>%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'cScale0': '#4A5568',
+    'cScaleLabel0': '#FFFFFF',
+    'cScale1': '#2B6CB0',
+    'cScaleLabel1': '#FFFFFF',
+    'cScale2': '#D69E2E',
+    'cScaleLabel2': '#1A202C',
+    'cScale3': '#319795',
+    'cScaleLabel3': '#FFFFFF',
+    'timelineColor': '#E2E8F0',
+    'sectionBkgColor': '#2D3748',
+    'sectionBkgColor2': '#1A202C'
+  }
+}}%%
+timeline
+    title Cronograma de Aprendizaje 2026/2027
+    section 🍂 1.ª Evaluación (44h)
+        15 Sep - 15 Oct : UD1 a UD3 : Fundamentos JS y Control de Flujo
+        16 Oct - 27 Oct : Práctica 1 : Examen Parcial 1
+        28 Oct - 27 Nov : UD4 a UD6 : POO, DOM/Eventos y Asincronía
+        28 Nov - 30 Nov : Examen Final 1.er Trimestre
+    section ❄️ 2.ª Evaluación (40h)
+        01 Dic - 18 Dic : UD7 y UD8 : React Core y useState
+        21 Dic - 13 Ene : Práctica 4 : Examen Parcial 2 (tras Navidad)
+        14 Ene - 05 Feb : UD9 a UD12 : Formularios, Rendimiento, useEffect y Context API
+        08 Feb - 12 Feb : Práctica 5 : Examen Final Ordinario</code></pre>
+
+| Sem. | Fechas | Horas | Contenido / Hito |
+| --- | --- | --- | --- |
+| — | 15 Sep – 25 Sep | 6h | **UD1:** Arquitecturas Web y Herramientas de Desarrollo |
+| — | 28 Sep – 06 Oct | 5h | **UD2:** Sintaxis, Tipos y Funciones |
+| — | 07 Oct – 15 Oct | 5h | **UD3:** Control de Flujo, Bucles y Arrays |
+| — | 16 Oct – 22 Oct | 2h | 📋 **Práctica 1:** Fundamentos JS y Control de Flujo |
+| — | 23 Oct – 27 Oct | 2h | 📝 **Examen Parcial 1** (UD1 → UD3) |
+| — | 28 Oct – 05 Nov | 6h | **UD4:** Objetos y Programación Orientada a Objetos |
+| — | 06 Nov – 13 Nov | 6h | **UD5:** DOM Nativo y Gestión de Eventos |
+| — | 16 Nov – 18 Nov | 2h | 📋 **Práctica 2:** POO y Manipulación del DOM |
+| — | 19 Nov – 24 Nov | 6h | **UD6:** Asincronía y Almacenamiento (Storage/Vite) |
+| — | 25 Nov – 27 Nov | 2h | 📋 **Práctica 3:** Asincronía y Persistencia Local |
+| — | 28 Nov – 30 Nov | 2h | 📝 **Examen Final 1.er Trimestre** (UD1 → UD6) |
+| — | 01 Dic – 11 Dic | 5h | **UD7:** React Core, JSX y Arquitectura Frontend |
+| — | 14 Dic – 18 Dic | 5h | **UD8:** Eventos y Estado con `useState` |
+| — | 21 Dic – 22 Dic | 2h | 📋 **Práctica 4:** Componentes React y Estado |
+| 🎄 | 23 Dic – 08 Ene | — | Vacaciones de Navidad |
+| — | 11 Ene – 13 Ene | 2h | 📝 **Examen Parcial 2** (UD7 → UD8) |
+| — | 14 Ene – 20 Ene | 5h | **UD9:** Formularios y Validaciones |
+| — | 21 Ene – 27 Ene | 5h | **UD10:** `useRef`, Rendimiento y React Fiber |
+| — | 28 Ene – 02 Feb | 5h | **UD11:** `useEffect`, BOM y React Router |
+| — | 03 Feb – 05 Feb | 5h | **UD12:** Context API y Estado Global |
+| — | 08 Feb – 09 Feb | 2h | 📋 **Práctica 5:** Formularios, Rendimiento y Estado Global |
+| — | 10 Feb – 12 Feb | 4h | 📝 **Examen Final Ordinario** (UD1 → UD12) |
+
+---
+
+## 🎯 Resultado de Aprendizaje Destacado (RA6)
+
+> 💡 **Resultado de Aprendizaje 6 (RA6):**
+> *"Optimiza el rendimiento de aplicaciones web en el entorno cliente controlando el ciclo de vida del dibujado, aplicando técnicas de reconciliación del Virtual DOM y gestionando accesos imperativos al DOM de forma segura."*
+
+---
+
+# 🔒 SECCIÓN PRIVADA — PLANIFICACIÓN Y EVALUACIÓN (DOCENTE)
+
+> ⛔ **Uso exclusivo personal:** Esta sección no debe incluirse en la versión pública para el alumnado.
+
+---
+
+## 📋 Ficha Técnica del Módulo
+
+| Parámetro | Detalle |
+| --- | --- |
+| **Módulo Profesional** | Desarrollo Web en Entorno Cliente (DWEC) |
+| **Ciclo Formativo** | 2.º CFGS Desarrollo de Aplicaciones Web (DAW) / Multiplataforma (DAM) |
+| **Carga Horaria** | 84 horas (12 Unidades Didácticas) |
+| **Inicio de Clases** | 15 de septiembre de 2026 |
+| **Examen Final Ordinario** | 12 de febrero de 2027 |
+
+---
+
+## 📊 Criterios de Calificación y Evaluación
+
+> ⚖️ **Cálculo de la Nota Trimestral:**
+> * 💻 **50% Prácticas y Defensas:** Evaluación del código en GitHub, arquitectura aplicada y prueba presencial de modificación de código en vivo (para garantizar la autoría frente al uso de IA).
+> * ✍️ **50% Exámenes Teórico-Prácticos:** Pruebas individuales de desarrollo de código en ordenador sin conexión a internet.
+> * 📌 **Requisito Mínimo:** Es obligatorio obtener una calificación mínima de **4.0 sobre 10** en cada uno de los dos bloques para hacer media.
+
+> 🏢 **Nota:** la planificación de la fase de FCT / FP Dual (3.ª Evaluación) y el material adicional de la UD13 se gestionan aparte de estas 84 horas y están pendientes de revisión — no se han modificado en esta actualización.
+-->
+<style>
+  .mermaid {
+    text-align: center;
+    width: 100%;
+    margin: 2rem 0;
+  }
+  .mermaid svg {
+    max-width: 100% !important;
+    height: auto !important;
+    font-size: 16px !important;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

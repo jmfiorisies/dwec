@@ -1,0 +1,851 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 8: Eventos y Estado con useState (RA5) — Visión General y Mapa Curricular - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-8-eventos-y-estado-con-usestate-ra5-vision-general-y-mapa-curricular" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 8: Eventos y Estado con useState (RA5) — Visión General y Mapa Curricular
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-presentacion-y-contextualizacion-curricular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Presentación y Contextualización Curricular
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-resultado-de-aprendizaje-y-criterios-de-evaluacion-ra5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Resultado de Aprendizaje y Criterios de Evaluación (RA5)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Resultado de Aprendizaje y Criterios de Evaluación (RA5)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desglose-detallado-de-criterios-de-evaluacion-ce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desglose Detallado de Criterios de Evaluación (CE):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estructura-de-la-unidad-y-hojas-de-ruta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura de la Unidad y Hojas de Ruta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Estructura de la Unidad y Hojas de Ruta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen-de-secciones-y-contenidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla Resumen de Secciones y Contenidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mapa-conceptual-y-arquitectura-del-flujo-de-interaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mapa Conceptual y Arquitectura del Flujo de Interacción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-justificacion-pedagogica-y-cambio-de-paradigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Justificación Pedagógica y Cambio de Paradigma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Justificación Pedagógica y Cambio de Paradigma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-de-la-manipulacion-imperativa-del-dom-a-la-declaratividad-reactiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. De la Manipulación Imperativa del DOM a la Declaratividad Reactiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-los-cinco-pilares-de-la-interactividad-en-la-ud-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Los Cinco Pilares de la Interactividad en la UD 8
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Los Cinco Pilares de la Interactividad en la UD 8">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-abstraccion-syntheticevent-y-delegacion-cero-coste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Abstracción SyntheticEvent y Delegación Cero-Coste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inmutabilidad-como-motor-del-re-renderizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inmutabilidad como Motor del Re-renderizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-actualizaciones-funcionales-y-batching-asincrono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Actualizaciones Funcionales y Batching Asíncrono
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-elevacion-del-estado-lifting-state-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Elevación del Estado (Lifting State Up)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-custom-hooks-reutilizacion-de-logica-reactiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Custom Hooks: Reutilización de Lógica Reactiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cuadro-comparativo-de-paradigmas-interaccion-y-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cuadro Comparativo de Paradigmas: Interacción y Estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-8-eventos-y-estado-con-usestate-ra5-vision-general-y-mapa-curricular">UD 8: Eventos y Estado con useState (RA5) — Visión General y Mapa Curricular</h1>
+<hr />
+<h2 id="1-presentacion-y-contextualizacion-curricular">1. Presentación y Contextualización Curricular</h2>
+<p>La <strong>Unidad Didáctica 8</strong> representa el punto de inflexión donde las interfaces estáticas y compuestas desarrolladas en la UD 7 se transforman en <strong>aplicaciones web dinámicas, reactivas e interactivas</strong>.</p>
+<p>En las unidades anteriores se estableció la sintaxis JSX, el tipado con TypeScript y la arquitectura de componentes basada en propiedades (<code>props</code>) e inmutabilidad. Sin embargo, una interfaz de usuario cliente real debe responder en tiempo real a las acciones del usuario (clics, pulsaciones de teclas, desplazamientos, envío de formularios) y mantener una memoria interna de su situación actual.</p>
+<p>En esta unidad se aborda cómo React revoluciona el manejo de la interacción cliente mediante dos pilares fundamentales:</p>
+<ol>
+<li><strong>Eventos Sintéticos (<code>SyntheticEvent</code>):</strong> Una capa de abstracción sobre el sistema de eventos nativo del navegador que garantiza un comportamiento homogéneo multiplataforma y una delegación de eventos altamente eficiente.</li>
+<li><strong>Estado Local (<code>useState</code>) y Custom Hooks:</strong> El mecanismo declarativo para almacenar y mutar la memoria de un componente, desencadenando ciclos de renderizado (<em>Re-renders</em>) automáticos y permitiendo encapsular la lógica de negocio reactiva en funciones reutilizables.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Transition ["Evolución del Paradigma"]
+        direction TB
+        DOM_Vanilla["JS Vanilla (Imperativo)&lt;br&gt;• addEventListener manual&lt;br&gt;• Mutación directa del DOM&lt;br&gt;• Variables globales o estado disperso"]
+        React_Declarativo["React (Declarativo)&lt;br&gt;• Manejadores JSX integrados&lt;br&gt;• Estado reactivo (useState)&lt;br&gt;• UI = f(Estado)"]
+        DOM_Vanilla ==&gt;|Sustitución por Declaratividad| React_Declarativo
+    end
+
+    subgraph Core_UD8 ["Unidad Didáctica 8: Interacción y Estado"]
+        direction TB
+        subgraph Sub_91 ["9.1 Eventos Sintéticos y Manejo de Interacciones"]
+            SE["SyntheticEvent Wrapper"] --&gt; EventDelegation["Delegación en Nodo Raíz"]
+            EventDelegation --&gt; Handlers["Manejadores en JSX (onClick, onChange)"]
+            Handlers --&gt; Propagation["Control de Flujo (preventDefault / stopPropagation)"]
+        end
+
+        subgraph Sub_92 ["9.2 Estado Local con useState y Custom Hooks"]
+            StateDecl["Declaración [state, setState]"] --&gt; Immutability["Principio de Inmutabilidad"]
+            Immutability --&gt; Batching["Batching &amp; Actualizaciones Funcionales"]
+            Batching --&gt; Lifting["Elevación del Estado (Lifting State Up)"]
+            Lifting --&gt; CustomHooks["Encapsulación en Custom Hooks"]
+        end
+    end
+
+    React_Declarativo ==&gt; Core_UD8
+
+</code></pre>
+<hr />
+<h2 id="2-resultado-de-aprendizaje-y-criterios-de-evaluacion-ra5">2. Resultado de Aprendizaje y Criterios de Evaluación (RA5)</h2>
+<p>Esta unidad didáctica desarrolla de forma directa los contenidos y competencias asignados al <strong>Resultado de Aprendizaje 5 (RA5)</strong> del currículo oficial de Desarrollo Web en Entorno Cliente (DWEC):</p>
+<blockquote>
+<p><strong>RA5:</strong> Desarrolla aplicaciones web dinámicas integrando la gestión de eventos de usuario, la persistencia y actualización del estado local, y la reutilización de lógica mediante componentes y hooks personalizados.</p>
+</blockquote>
+<h3 id="desglose-detallado-de-criterios-de-evaluacion-ce">Desglose Detallado de Criterios de Evaluación (CE):</h3>
+<ul>
+<li><strong>CE5.a:</strong> Se han identificado las diferencias entre el sistema de eventos nativo del DOM del navegador y la envolvente sintética (<code>SyntheticEvent</code>) de React.</li>
+<li><strong>CE5.b:</strong> Se han asociado manejadores de eventos (<em>event handlers</em>) a elementos JSX para capturar interacciones de usuario (clic, cambios en formularios, pulsaciones de teclado, ratón) pasando argumentos de forma segura.</li>
+<li><strong>CE5.c:</strong> Se ha declarado e inicializado el estado local de componentes funcionales mediante el hook <code>useState</code>, aplicando tipos estrictos con TypeScript.</li>
+<li><strong>CE5.d:</strong> Se ha garantizado la inmutabilidad del estado en operaciones de actualización de primitivos, objetos y arrays, evitando la mutación directa.</li>
+<li><strong>CE5.e:</strong> Se han ejecutado actualizaciones de estado asíncronas y acumulativas utilizando funciones actualizadoras (<em>functional state updates</em>).</li>
+<li><strong>CE5.f:</strong> Se ha aplicado el patrón de elevación del estado (<em>Lifting State Up</em>) para compartir información entre componentes hermanos a través de callbacks pasados por <code>props</code>.</li>
+<li><strong>CE5.g:</strong> Se ha abstraído la lógica reactiva y la gestión de eventos en <strong>Hooks Personalizados (<em>Custom Hooks</em>)</strong> reutilizables que respetan estrictamente las Reglas de los Hooks.</li>
+</ul>
+<hr />
+<h2 id="3-estructura-de-la-unidad-y-hojas-de-ruta">3. Estructura de la Unidad y Hojas de Ruta</h2>
+<p>Para garantizar una progresión pedagógica óptima y una estructura limpia compatible con motores de documentación (como MkDocs o LMS), los materiales de la <strong>UD 8</strong> se dividen en los siguientes documentos:</p>
+<div class="highlight"><pre><span></span><code>dwec/
+├── ud8.md                      &lt;-- Visión General, Mapa Curricular y RA5 (Documento Actual)
+├── ud8-1-eventos.md            &lt;-- Subunidad 9.1: Eventos Sintéticos y Manejo de Interacciones
+└── ud8-2-usestate-hooks.md     &lt;-- Subunidad 9.2: Estado Local con useState y Custom Hooks
+</code></pre></div>
+<h3 id="tabla-resumen-de-secciones-y-contenidos">Tabla Resumen de Secciones y Contenidos</h3>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Subunidad</th>
+<th>Contenidos Fundamentales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ud8-1-eventos.md</code></td>
+<td><strong>9.1 Eventos Sintéticos e Interacciones</strong></td>
+<td>• Abstracción <code>SyntheticEvent</code> y compatibilidad multiplataforma<br></td>
+</tr>
+</tbody>
+</table>
+<p><br>• Arquitectura de Delegación de Eventos en el contenedor raíz<br></p>
+<p><br>• Sintaxis de manejadores en JSX (<code>onClick</code>, <code>onChange</code>, <code>onSubmit</code>)<br></p>
+<p><br>• Paso de parámetros a callbacks y prevención de ejecuciones automáticas<br></p>
+<p><br>• Control de propagación (<code>e.preventDefault()</code> y <code>e.stopPropagation()</code>) |
+| <code>ud8-2-usestate-hooks.md</code> | <strong>9.2 Estado Local y Custom Hooks</strong> | • Anatomía de <code>useState</code> y persistencia entre renderizados<br></p>
+<p><br>• Reglas de Inmutabilidad en objetos y arrays (copia por extensión / spread)<br></p>
+<p><br>• Actualizaciones de estado funcionales (<code>setCount(prev =&gt; prev + 1)</code>)<br></p>
+<p><br>• Elevación del estado (<em>Lifting State Up</em>) y flujo unidireccional<br></p>
+<p><br>• Creación y extracción de lógica en <strong>Custom Hooks</strong> |</p>
+<hr />
+<h2 id="4-mapa-conceptual-y-arquitectura-del-flujo-de-interaccion">4. Mapa Conceptual y Arquitectura del Flujo de Interacción</h2>
+<p>El siguiente diagrama detalla la arquitectura completa de un ciclo de interacción en React, desde que el usuario realiza una acción física hasta que la pantalla refleja el nuevo estado:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Usuario as Usuario (Navegador)
+    participant DOM as DOM Nativo
+    participant Root as Contenedor Raíz (React Root)
+    participant Handler as Manejador de Eventos (JSX)
+    participant State as Estado (useState)
+    participant Reconciliation as Motor de Reconciliación (Virtual DOM)
+
+    Usuario-&gt;&gt;DOM: Realiza una acción (ej. Clic en un &lt;button&gt;)
+    DOM-&gt;&gt;Root: El evento se propaga hasta el contenedor raíz (Delegación)
+    Root-&gt;&gt;Handler: React envuelve el evento nativo en un SyntheticEvent y llama al Handler
+    Handler-&gt;&gt;State: Invoca a la función actualizadora (ej. setCount(nuevoValor))
+    Note over State: React encola la actualización del estado&lt;br&gt;(Automatic Batching)
+    State-&gt;&gt;Reconciliation: Desencadena un re-renderizado del componente: UI = f(NuevoEstado)
+    Reconciliation-&gt;&gt;DOM: Calcula diferencias (Diffing) y aplica parches mínimos en el DOM Real
+    DOM--&gt;&gt;Usuario: La interfaz muestra los datos actualizados dinámicamente
+</code></pre>
+<hr />
+<h2 id="5-justificacion-pedagogica-y-cambio-de-paradigma">5. Justificación Pedagógica y Cambio de Paradigma</h2>
+<h3 id="51-de-la-manipulacion-imperativa-del-dom-a-la-declaratividad-reactiva">5.1. De la Manipulación Imperativa del DOM a la Declaratividad Reactiva</h3>
+<p>En el desarrollo tradicional con JavaScript Vanilla, la actualización de la interfaz requería un procedimiento imperativo de tres pasos:</p>
+<ol>
+<li>Buscar el nodo en el DOM (<code>document.querySelector</code>).</li>
+<li>Escuchar el evento mediante <code>addEventListener</code>.</li>
+<li>Modificar manualmente el nodo (<code>element.textContent = nuevoValor</code> o <code>element.classList.add()</code>).</li>
+</ol>
+<p>Este enfoque imperativo se vuelve frágil a medida que la aplicación crece, ya que el estado real de la aplicación queda disperso en el propio DOM, generando incoherencias visuales.</p>
+<p>En React, <strong>el DOM es una consecuencia, no una fuente de verdad</strong>. La interfaz de usuario es una función pura del estado:</p>
+<p>$$\text{UI} = f(\text{Estado})$$</p>
+<p>Cuando el estado cambia mediante <code>useState</code>, React vuelve a ejecutar la función del componente, calcula las diferencias en el DOM Virtual y actualiza la pantalla automáticamente.</p>
+<hr />
+<h3 id="52-los-cinco-pilares-de-la-interactividad-en-la-ud-8">5.2. Los Cinco Pilares de la Interactividad en la UD 8</h3>
+<h4 id="1-abstraccion-syntheticevent-y-delegacion-cero-coste">1. Abstracción <code>SyntheticEvent</code> y Delegación Cero-Coste</h4>
+<p>React no adjunta escuchadores de eventos (<code>addEventListener</code>) a cada elemento individual del DOM. En su lugar, utiliza un único escuchador global en el contenedor raíz de la aplicación (<em>Event Delegation</em>). Cuando ocurre una interacción, React envuelve el evento nativo del navegador en un objeto <code>SyntheticEvent</code>, garantizando que propiedades como <code>e.target</code> o <code>e.preventDefault()</code> funcionen exactamente igual en cualquier navegador o dispositivo.</p>
+<h4 id="2-inmutabilidad-como-motor-del-re-renderizado">2. Inmutabilidad como Motor del Re-renderizado</h4>
+<p>En JavaScript, los objetos y arrays se comparan por referencia en memoria, no por valor. Para que React detecte que el estado ha cambiado y deba volver a renderizar la interfaz, <strong>el estado nunca se debe mutar directamente</strong> (ej. <code>lista.push(item)</code> o <code>usuario.nombre = 'Ana'</code>). En su lugar, se deben crear copias totalmente nuevas con las modificaciones aplicadas (ej. <code>setLista([...lista, nuevoItem])</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ INCORRECTO: Mutación directa (React NO detecta el cambio ni re-renderiza)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">agregarIncorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Nuevo Elemento&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setItems</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span><span class="w"> </span><span class="c1">// La referencia en memoria es la misma</span>
+<span class="p">};</span>
+
+<span class="c1">// ✅ CORRECTO: Inmutabilidad mediante operador Spread</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">agregarCorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">setItems</span><span class="p">([...</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Nuevo Elemento&#39;</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Nueva referencia en memoria</span>
+<span class="p">};</span>
+</code></pre></div>
+<h4 id="3-actualizaciones-funcionales-y-batching-asincrono">3. Actualizaciones Funcionales y <em>Batching</em> Asíncrono</h4>
+<p>React agrupa múltiples llamadas de actualización de estado que ocurren dentro del mismo evento para ejecutarlas en un único ciclo de renderizado (<em>Automatic Batching</em>). Por ello, si una actualización depende del valor inmediatamente anterior del estado, debe utilizarse la <strong>forma funcional</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Si llamamos a esto 3 veces seguidas en el mismo evento, solo sumará 1 debido al batching:</span>
+<span class="c1">// setCount(count + 1);</span>
+
+<span class="c1">// Forma funcional correcta: garantiza la lectura del estado acumulado</span>
+<span class="nx">setCount</span><span class="p">((</span><span class="nx">prevCount</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prevCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="4-elevacion-del-estado-lifting-state-up">4. Elevación del Estado (<em>Lifting State Up</em>)</h4>
+<p>Cuando dos o más componentes hermanos necesitan compartir información o reaccionar a la misma interacción, el estado no debe duplicarse. El patrón correcto consiste en <strong>elevar el estado</strong> al ancestro común más cercano y pasar el valor hacia los hijos mediante <code>props</code>, acompañado de una función callback para permitir que los hijos soliciten cambios.</p>
+<h4 id="5-custom-hooks-reutilizacion-de-logica-reactiva">5. Custom Hooks: Reutilización de Lógica Reactiva</h4>
+<p>Los <strong>Hooks Personalizados</strong> son funciones de JavaScript cuyo nombre comienza por <code>use</code> y que pueden llamar a otros hooks de React (<code>useState</code>, <code>useEffect</code>, etc.). Permiten extraer la lógica de estado y los manejadores de eventos fuera de los componentes visuales, promoviendo el principio de responsabilidad única (SoC) y la reutilización de código limpia.</p>
+<hr />
+<h2 id="6-cuadro-comparativo-de-paradigmas-interaccion-y-estado">6. Cuadro Comparativo de Paradigmas: Interacción y Estado</h2>
+<p>El siguiente cuadro sintetiza los cambios conceptuales entre el desarrollo imperativo en JavaScript Vanilla y la arquitectura declarativa de React que se dominará en esta unidad:</p>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>JS Vanilla (Imperativo / DOM Directo)</th>
+<th>React (Declarativo / SyntheticEvents &amp; useState)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Escuchadores de Eventos</strong></td>
+<td><code>element.addEventListener('click', fn)</code> en cada nodo</td>
+<td>Atributos camelCase en JSX (<code>onClick={fn}</code>) con delegación raíz</td>
+</tr>
+<tr>
+<td><strong>Objeto de Evento</strong></td>
+<td>Evento nativo del navegador (<code>MouseEvent</code>, <code>KeyboardEvent</code>)</td>
+<td>Instancia normalizada de <strong><code>SyntheticEvent</code></strong></td>
+</tr>
+<tr>
+<td><strong>Fuente de Verdad de Datos</strong></td>
+<td>El propio DOM (<code>input.value</code>) o variables globales</td>
+<td><strong>Estado local reactivo</strong> (<code>useState</code>)</td>
+</tr>
+<tr>
+<td><strong>Actualización de la UI</strong></td>
+<td>Manual: <code>element.innerHTML</code> / <code>element.textContent</code></td>
+<td><strong>Automática</strong>: React re-renderiza al detectar un nuevo estado</td>
+</tr>
+<tr>
+<td><strong>Modificación de Datos</strong></td>
+<td>Mutación directa de variables/objetos</td>
+<td><strong>Inmutabilidad estricta</strong>: Creación de nuevas referencias</td>
+</tr>
+<tr>
+<td><strong>Comunicación entre Módulos</strong></td>
+<td>Eventos personalizados (<code>CustomEvent</code>) o buses globales</td>
+<td><strong>Flujo unidireccional</strong> y <strong>Elevación del Estado</strong> (<em>Lifting State Up</em>)</td>
+</tr>
+<tr>
+<td><strong>Reutilización de Lógica</strong></td>
+<td>Funciones auxiliares que manipulan el DOM</td>
+<td><strong>Custom Hooks</strong> (<code>useContador</code>, <code>useFormulario</code>)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1206 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Subunidad 9.2: Estado Local con useState y Custom Hooks en React - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#subunidad-92-estado-local-con-usestate-y-custom-hooks-en-react" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Subunidad 9.2: Estado Local con useState y Custom Hooks en React
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-anatomia-y-mecanica-interna-del-hook-usestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Anatomía y Mecánica Interna del Hook useState
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Anatomía y Mecánica Interna del Hook useState">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-declaracion-desestructuracion-y-tipado-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Declaración, Desestructuración y Tipado con TypeScript
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Declaración, Desestructuración y Tipado con TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inferencia-de-tipos-vs-genericos-explicitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inferencia de Tipos vs. Genéricos Explícitos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-inicializacion-perezosa-lazy-initial-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Inicialización Perezosa (Lazy Initial State)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-principio-de-inmutabilidad-en-la-gestion-del-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El Principio de Inmutabilidad en la Gestión del Estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El Principio de Inmutabilidad en la Gestión del Estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-manipulacion-inmutable-de-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Manipulación Inmutable de Objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-manipulacion-inmutable-de-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Manipulación Inmutable de Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-actualizaciones-funcionales-y-automatic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Actualizaciones Funcionales y Automatic Batching
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Actualizaciones Funcionales y Automatic Batching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-el-problema-del-estado-desactualizado-stale-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. El Problema del Estado Desactualizado (Stale State)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-actualizaciones-de-estado-funcionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Actualizaciones de Estado Funcionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-agrupamiento-automatico-automatic-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Agrupamiento Automático (Automatic Batching)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-elevacion-del-estado-lifting-state-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Elevación del Estado (Lifting State Up)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Elevación del Estado (Lifting State Up)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-elevacion-del-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de Elevación del Estado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-extraccion-y-encapsulacion-en-custom-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Extracción y Encapsulación en Custom Hooks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Extracción y Encapsulación en Custom Hooks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-reglas-estrictas-de-los-hooks-rules-of-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Reglas Estrictas de los Hooks (Rules of Hooks)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ejemplo-de-custom-hook-usecontador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Ejemplo de Custom Hook: useContador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Ejemplo de Custom Hook: useContador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consumo-del-custom-hook-en-un-componente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consumo del Custom Hook en un Componente:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-demostracion-practica-completa-aplicacion-de-carrito-de-compras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Demostración Práctica Completa: Aplicación de Carrito de Compras
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="subunidad-92-estado-local-con-usestate-y-custom-hooks-en-react">Subunidad 9.2: Estado Local con useState y Custom Hooks en React</h1>
+<hr />
+<h2 id="1-anatomia-y-mecanica-interna-del-hook-usestate">1. Anatomía y Mecánica Interna del Hook <code>useState</code></h2>
+<p>El estado de un componente es la memoria interna que almacena datos dinámicos a lo largo del tiempo. Mientras que las <code>props</code> son inmutables y provienen del componente padre, el <strong>estado local</strong> es creado, gestionado y modificado de forma privada por el propio componente.</p>
+<p>En React, los componentes funcionales utilizan el hook <code>useState</code> para declarar variables de estado que persisten entre los ciclos de renderizado.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Componente ["Componente Funcional (Renderizado N)"]
+        useStateCall["const [valor, setValor] = useState(inicial)"]
+        RenderJSX["Retorna JSX con 'valor'"]
+    end
+
+    subgraph MemoriaReact ["Celda de Estado en React (Fiber Node)"]
+        StateCell["Memoria Persistente&lt;br&gt;[Estado Actual]"]
+    end
+
+    useStateCall &lt;--&gt;|"1. Lee estado actual / 2. Encola actualización"| StateCell
+    StateCell --&gt;|"3. Cambio de estado desencadena"| ReRender["Nuevo Renderizado (Render N+1)"]
+
+</code></pre>
+<hr />
+<h3 id="11-declaracion-desestructuracion-y-tipado-con-typescript">1.1. Declaración, Desestructuración y Tipado con TypeScript</h3>
+<p>La llamada a <code>useState</code> devuelve un par en forma de array de dos elementos (usando la sintaxis de desestructuración de ES6):</p>
+<ol>
+<li><strong>La variable de estado:</strong> Contiene el valor actual persistido por React.</li>
+<li><strong>La función actualizadora (<em>dispatcher</em>):</strong> Permite programar un cambio de estado e indicar a React que debe volver a renderizar el componente.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="c1">// Tipado explícito con TypeScript mediante genéricos</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">Contador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// useState&lt;number&gt; especifica que el estado solo aceptará valores numéricos</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">setContador</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">number</span><span class="p">&gt;(</span><span class="mf">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Contador</span><span class="w"> </span><span class="nx">actual</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">contador</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">)}&gt;</span><span class="nx">Incrementar</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="inferencia-de-tipos-vs-genericos-explicitos">Inferencia de Tipos vs. Genéricos Explícitos:</h4>
+<ul>
+<li><strong>Inferencia automática:</strong> Si el valor inicial es un primitivo (<code>useState(0)</code>, <code>useState('Hola')</code>, <code>useState(true)</code>), TypeScript infiere el tipo automáticamente.</li>
+<li><strong>Genéricos explícitos (<code>useState&lt;T&gt;</code>):</strong> Obligatorios cuando el estado puede ser <code>null</code>, <code>undefined</code>, o un tipo complejo (interfaz/unión):</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// El estado inicia como null y posteriormente albergará un objeto de tipo Usuario</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="nx">setUsuario</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">Usuario</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h3 id="12-inicializacion-perezosa-lazy-initial-state">1.2. Inicialización Perezosa (<em>Lazy Initial State</em>)</h3>
+<p>Si la inicialización del estado requiere un cálculo pesado (como leer <code>localStorage</code>, parsear un JSON grande o realizar un procesamiento complejo), pasar el resultado directo a <code>useState</code> provocará que dicha función se ejecute en <strong>cada renderizado</strong> del componente, degradando el rendimiento.</p>
+<p>Para evitarlo, se utiliza la <strong>inicialización perezosa</strong> pasando una <strong>función de inicialización</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ INCORRECTO: &#39;obtenerEstadoPesado()&#39; se ejecuta en CADA re-renderizado</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">setConfig</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="nx">obtenerEstadoPesado</span><span class="p">());</span>
+
+<span class="c1">// ✅ CORRECTO: La función de inicialización SOLO se ejecuta en el montaje inicial</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">setConfig</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">obtenerEstadoPesado</span><span class="p">());</span>
+</code></pre></div>
+<hr />
+<h2 id="2-el-principio-de-inmutabilidad-en-la-gestion-del-estado">2. El Principio de Inmutabilidad en la Gestión del Estado</h2>
+<p>React utiliza una estrategia de <strong>diferenciación por referencia</strong> (<em>Referential Equality Check</em>) para determinar si el estado ha cambiado. Si la referencia en memoria del nuevo estado es idéntica a la del estado anterior, React asume que no hay cambios y <strong>omite el re-renderizado</strong> (<em>bailout</em>).</p>
+<p>$$\text{Referencia Anterior} === \text{Referencia Nueva} \implies \text{No hay re-renderizado}$$</p>
+<p>Por tanto, <strong>el estado en React debe tratarse como estrictamente inmutable</strong>. Nunca se deben modificar las propiedades de un objeto o los elementos de un array directamente.</p>
+<hr />
+<h3 id="21-manipulacion-inmutable-de-objetos">2.1. Manipulación Inmutable de Objetos</h3>
+<p>Para actualizar un estado que contiene un objeto, se debe crear un <strong>nuevo objeto</strong> que copie las propiedades existentes e introduzca los cambios deseados utilizando el operador de propagación (<em>Spread Operator</em> <code>...</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kr">interface</span><span class="w"> </span><span class="nx">PerfilUsuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">preferencias</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">tema</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;claro&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;oscuro&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">notificaciones</span><span class="o">:</span><span class="w"> </span><span class="kr">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">FormularioPerfil</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">perfil</span><span class="p">,</span><span class="w"> </span><span class="nx">setPerfil</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">PerfilUsuario</span><span class="p">&gt;({</span>
+<span class="w">    </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ana@example.com&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">preferencias</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">tema</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;claro&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">notificaciones</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="c1">// ❌ INCORRECTO: Mutación directa</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleCambiarTemaIncorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">perfil</span><span class="p">.</span><span class="nx">preferencias</span><span class="p">.</span><span class="nx">tema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oscuro&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// No cambia la referencia en memoria</span>
+<span class="w">    </span><span class="nx">setPerfil</span><span class="p">(</span><span class="nx">perfil</span><span class="p">);</span><span class="w"> </span><span class="c1">// React NO re-renderiza</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// ✅ CORRECTO: Copia inmutable con operador Spread</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleCambiarTemaCorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setPerfil</span><span class="p">({</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">perfil</span><span class="p">,</span><span class="w"> </span><span class="c1">// Copia el nivel superior (nombre, email)</span>
+<span class="w">      </span><span class="nx">preferencias</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span><span class="nx">perfil</span><span class="p">.</span><span class="nx">preferencias</span><span class="p">,</span><span class="w"> </span><span class="c1">// Copia el objeto anidado</span>
+<span class="w">        </span><span class="nx">tema</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;oscuro&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Sobrescribe la propiedad específica</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleCambiarTemaCorrecto</span><span class="p">}&gt;</span>
+<span class="w">      </span><span class="nx">Cambiar</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tema</span><span class="w"> </span><span class="nx">oscuro</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="22-manipulacion-inmutable-de-arrays">2.2. Manipulación Inmutable de Arrays</h3>
+<p>A la hora de trabajar con listas en el estado, se deben evitar los métodos de array que mutan el array original (<code>push</code>, <code>pop</code>, <code>splice</code>, <code>sort</code>, <code>reverse</code>) y emplear métodos que devuelven <strong>nuevas instancias</strong> (<code>map</code>, <code>filter</code>, <code>concat</code>, destructuring):</p>
+<table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>Método Mutador (❌ Prohibido en React)</th>
+<th>Método Inmutable (✅ Recomendado)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Añadir elemento</strong></td>
+<td><code>array.push(item)</code></td>
+<td><code>[...array, item]</code></td>
+</tr>
+<tr>
+<td><strong>Eliminar elemento</strong></td>
+<td><code>array.splice(index, 1)</code></td>
+<td><code>array.filter(item =&gt; item.id !== idTarget)</code></td>
+</tr>
+<tr>
+<td><strong>Modificar elemento</strong></td>
+<td><code>array[index] = nuevoItem</code></td>
+<td><code>array.map(item =&gt; item.id === id ? nuevo : item)</code></td>
+</tr>
+<tr>
+<td><strong>Ordenar lista</strong></td>
+<td><code>array.sort()</code></td>
+<td><code>[...array].sort()</code> o <code>array.toSorted()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kr">interface</span><span class="w"> </span><span class="nx">ItemCarrito</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">GestorCarrito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">setItems</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">ItemCarrito</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+
+<span class="w">  </span><span class="c1">// 1. Añadir Elemento</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">agregarItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nuevo</span><span class="o">:</span><span class="w"> </span><span class="nx">ItemCarrito</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setItems</span><span class="p">([...</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">nuevo</span><span class="p">]);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// 2. Eliminar Elemento por ID</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">eliminarItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">idEliminar</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setItems</span><span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">idEliminar</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// 3. Incrementar Cantidad de un Elemento</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">incrementarCantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">idTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setItems</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">idTarget</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"> </span><span class="c1">// Devuelve los elementos no modificados sin alterar</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="3-actualizaciones-funcionales-y-automatic-batching">3. Actualizaciones Funcionales y <em>Automatic Batching</em></h2>
+<h3 id="31-el-problema-del-estado-desactualizado-stale-state">3.1. El Problema del Estado Desactualizado (<em>Stale State</em>)</h3>
+<p>Las funciones actualizadoras devueltas por <code>useState</code> son asíncronas desde la perspectiva de la ejecución del código. React encola las actualizaciones para procesarlas de forma eficiente.</p>
+<p>Si intentamos leer el estado inmediatamente después de invocar su función actualizadora, obtendremos el <strong>valor del estado en el renderizado actual</strong>, no el valor actualizado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">setContador</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">handleMultipleIncrementoIncorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Supongamos que contador = 0</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Encola: setContador(0 + 1)</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Encola: setContador(0 + 1)</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Encola: setContador(0 + 1)</span>
+<span class="w">  </span><span class="c1">// Resultado final tras el re-render: contador = 1 (¡NO 3!)</span>
+<span class="p">};</span>
+</code></pre></div>
+<hr />
+<h3 id="32-actualizaciones-de-estado-funcionales">3.2. Actualizaciones de Estado Funcionales</h3>
+<p>Para resolver la lectura de estados obsoletos cuando una actualización depende del valor inmediatamente anterior, se debe pasar una <strong>función actualizadora</strong> en lugar de un valor directo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">handleMultipleIncrementoCorrecto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// React pasa el valor más reciente acumulado en la cola como &#39;prev&#39;</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// prev = 0 -&gt; retorna 1</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// prev = 1 -&gt; retorna 2</span>
+<span class="w">  </span><span class="nx">setContador</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// prev = 2 -&gt; retorna 3</span>
+<span class="w">  </span><span class="c1">// Resultado final tras el re-render: contador = 3</span>
+<span class="p">};</span>
+</code></pre></div>
+<hr />
+<h3 id="33-agrupamiento-automatico-automatic-batching">3.3. Agrupamiento Automático (<em>Automatic Batching</em>)</h3>
+<p>A partir de React 18, la librería aplica <strong>Automatic Batching</strong> (agrupamiento automático) de forma nativa. Esto significa que múltiples cambios de estado desencadenados dentro del mismo evento (incluso dentro de promesas, <code>setTimeout</code> o manejadores asíncronos) se agrupan en <strong>un único ciclo de re-renderizado</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">handleOperacionMultiple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetchDatos</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// A pesar de haber 3 llamadas a funciones actualizadoras, </span>
+<span class="w">  </span><span class="c1">// React 18 solo realizará UN ÚNICO re-renderizado de la interfaz</span>
+<span class="w">  </span><span class="nx">setDatos</span><span class="p">(</span><span class="nx">datos</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setCargando</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+<hr />
+<h2 id="4-elevacion-del-estado-lifting-state-up">4. Elevación del Estado (<em>Lifting State Up</em>)</h2>
+<p>Cuando dos o más componentes de la jerarquía necesitan compartir un mismo estado o reaccionar a cambios comunes, el estado <strong>no debe duplicarse</strong> en cada uno de ellos.</p>
+<p>El patrón <strong>Lifting State Up</strong> consiste en <strong>elevar el estado al ancestro común más cercano</strong> de los componentes que lo necesitan. El ancestro gestiona el estado y lo distribuye hacia abajo mediante <code>props</code>:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph JerarquiaIncorrecta ["❌ Estado Duplicado / Desincronizado"]
+        Padre1["Padre (Sin Estado)"]
+        HijoA1["Hijo A (useState: cuenta)"]
+        HijoB1["Hijo B (useState: cuenta)"]
+        Padre1 --&gt; HijoA1
+        Padre1 --&gt; HijoB1
+    end
+
+    subgraph JerarquiaCorrecta ["✅ Estado Elevado (Lifting State Up)"]
+        Padre2["Padre (useState: cuenta)"]
+        HijoA2["Hijo A (props: cuenta, onIncrementar)"]
+        HijoB2["Hijo B (props: cuenta)"]
+        Padre2 --&gt;|"Props (cuenta, callback)"| HijoA2
+        Padre2 --&gt;|"Props (cuenta)"| HijoB2
+    end
+
+</code></pre>
+<h3 id="ejemplo-de-elevacion-del-estado">Ejemplo de Elevación del Estado</h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="c1">// --- HIJO 1: Control de entrada ---</span>
+<span class="kr">interface</span><span class="w"> </span><span class="nx">SelectorTemperaturaProps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">temperatura</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">onTemperaturaChange</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">nuevaTemp</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">SelectorTemperatura</span><span class="p">({</span><span class="w"> </span><span class="nx">temperatura</span><span class="p">,</span><span class="w"> </span><span class="nx">onTemperaturaChange</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">SelectorTemperaturaProps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">      </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span>
+<span class="w">      </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">temperatura</span><span class="p">}</span>
+<span class="w">      </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onTemperaturaChange</span><span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">))}</span>
+<span class="w">    </span><span class="p">/&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// --- HIJO 2: Visualización derivada ---</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">PanelEbullicion</span><span class="p">({</span><span class="w"> </span><span class="nx">celsius</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">celsius</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">celsius</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;alerta-exito&quot;</span><span class="p">&gt;</span><span class="nx">El</span><span class="w"> </span><span class="nx">agua</span><span class="w"> </span><span class="nx">herviría</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">esta</span><span class="w"> </span><span class="nx">temperatura</span><span class="p">.&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;alerta-info&quot;</span><span class="p">&gt;</span><span class="nx">El</span><span class="w"> </span><span class="nx">agua</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">herviría</span><span class="p">.&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// --- ANCESTRO COMÚN: Posee el estado elevado ---</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">CalculadoraTermica</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">temperatura</span><span class="p">,</span><span class="w"> </span><span class="nx">setTemperatura</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">number</span><span class="p">&gt;(</span><span class="mf">20</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="nx">Termómetro</span><span class="w"> </span><span class="nx">Interactivo</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">SelectorTemperatura</span><span class="w"> </span>
+<span class="w">        </span><span class="na">temperatura</span><span class="o">=</span><span class="p">{</span><span class="nx">temperatura</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="na">onTemperaturaChange</span><span class="o">=</span><span class="p">{</span><span class="nx">setTemperatura</span><span class="p">}</span><span class="w"> </span>
+<span class="w">      </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">PanelEbullicion</span><span class="w"> </span><span class="na">celsius</span><span class="o">=</span><span class="p">{</span><span class="nx">temperatura</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="5-extraccion-y-encapsulacion-en-custom-hooks">5. Extracción y Encapsulación en Custom Hooks</h2>
+<p>Un <strong>Custom Hook</strong> es una función de JavaScript que permite extraer la lógica de estado y de interacción fuera de los componentes visuales para hacerla reutilizable, mantenible y testeable.</p>
+<h3 id="51-reglas-estrictas-de-los-hooks-rules-of-hooks">5.1. Reglas Estrictas de los Hooks (<em>Rules of Hooks</em>)</h3>
+<p>Para asegurar que React pueda asociar las celdas de estado con los componentes correspondientes, se deben cumplir dos reglas fundamentales:</p>
+<ol>
+<li><strong>Solo llamar a Hooks en el nivel superior (<em>Top-Level</em>):</strong> Nunca llamar a un hook dentro de bucles (<code>for</code>), condiciones (<code>if</code>), funciones anidadas o bloques <code>try/catch</code>.</li>
+<li><strong>Solo llamar a Hooks desde funciones de React:</strong> Invocarlos exclusivamente desde componentes funcionales o desde dentro de otros Custom Hooks.</li>
+<li><strong>Convención de nomenclatura:</strong> El nombre de un Custom Hook debe comenzar obligatoriamente con el prefijo <strong><code>use</code></strong> (<code>useContador</code>, <code>useFormulario</code>, <code>useCarrito</code>).</li>
+</ol>
+<hr />
+<h3 id="52-ejemplo-de-custom-hook-usecontador">5.2. Ejemplo de Custom Hook: <code>useContador</code></h3>
+<p>A continuación se muestra cómo abstraer la lógica de un contador con límites e incremento parametrizado:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">OpcionesContador</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">valorInicial?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">minimo?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">maximo?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useContador</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">valorInicial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">minimo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="kc">Infinity</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">maximo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Infinity</span><span class="p">,</span>
+<span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">OpcionesContador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">setContador</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">valorInicial</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">incrementar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">paso</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setContador</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">prev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="nx">maximo</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">decrementar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">paso</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setContador</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">prev</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="nx">minimo</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">reiniciar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">valorInicial</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="c1">// Retornamos un objeto con el estado y los métodos de actualización</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">contador</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">incrementar</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">decrementar</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">reiniciar</span><span class="p">,</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="consumo-del-custom-hook-en-un-componente">Consumo del Custom Hook en un Componente:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useContador</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./useContador&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">ComponenteContadorModular</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">incrementar</span><span class="p">,</span><span class="w"> </span><span class="nx">decrementar</span><span class="p">,</span><span class="w"> </span><span class="nx">reiniciar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useContador</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">valorInicial</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">minimo</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maximo</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="nx">Cantidad</span><span class="w"> </span><span class="nx">Seleccionada</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">contador</span><span class="p">}&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">decrementar</span><span class="p">()}&gt;</span><span class="o">-</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">incrementar</span><span class="p">()}&gt;</span><span class="o">+</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">reiniciar</span><span class="p">}&gt;</span><span class="nx">Reiniciar</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="6-demostracion-practica-completa-aplicacion-de-carrito-de-compras">6. Demostración Práctica Completa: Aplicación de Carrito de Compras</h2>
+<p>Esta aplicación integra todos los conceptos vistos en la subunidad 9.2:</p>
+<ul>
+<li>Estado local tipado con TypeScript.</li>
+<li>Operaciones inmutables sobre arrays y objetos.</li>
+<li>Actualizaciones de estado funcionales.</li>
+<li>Elevación de estado (<em>Lifting State Up</em>).</li>
+<li>Custom Hook reutilizable (<code>useCarrito</code>).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="c1">// --- 1. MODELOS DE DATOS ---</span>
+<span class="k">export</span><span class="w"> </span><span class="kr">interface</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kr">interface</span><span class="w"> </span><span class="nx">ItemCarrito</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 2. CUSTOM HOOK: Encapsula la lógica de negocio del Carrito ---</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useCarrito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">setItems</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">ItemCarrito</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">agregarProducto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">producto</span><span class="o">:</span><span class="w"> </span><span class="nx">Producto</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setItems</span><span class="p">((</span><span class="nx">prevItems</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">existe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">prevItems</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">producto</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">existe</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">prevItems</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">          </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">producto</span><span class="p">.</span><span class="nx">id</span>
+<span class="w">            </span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="o">:</span><span class="w"> </span><span class="nx">item</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">[...</span><span class="nx">prevItems</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">producto</span><span class="p">,</span><span class="w"> </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}];</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">cambiarCantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setItems</span><span class="p">((</span><span class="nx">prevItems</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">prevItems</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">nuevaCantidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">delta</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">nuevaCantidad</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">cantidad</span><span class="o">:</span><span class="w"> </span><span class="nx">nuevaCantidad</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ItemCarrito</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">vaciarCarrito</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setItems</span><span class="p">([]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">totalPrecio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">cantidad</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">agregarProducto</span><span class="p">,</span><span class="w"> </span><span class="nx">cambiarCantidad</span><span class="p">,</span><span class="w"> </span><span class="nx">vaciarCarrito</span><span class="p">,</span><span class="w"> </span><span class="nx">totalPrecio</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 3. COMPONENTE HIJO: Lista de Productos Disponibles ---</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">PRODUCTOS_CATALOGO</span><span class="o">:</span><span class="w"> </span><span class="nx">Producto</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Teclado Mecánico RGB&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">89.99</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Ratón Ergonómico Inalámbrico&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">45.50</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Monitor 27&quot; 4K&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">299.00</span><span class="w"> </span><span class="p">},</span>
+<span class="p">];</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">CatalogoProps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">onAgregar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">producto</span><span class="o">:</span><span class="w"> </span><span class="nx">Producto</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">CatalogoProductos</span><span class="p">({</span><span class="w"> </span><span class="nx">onAgregar</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">CatalogoProps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;catalogo-box&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="nx">Catálogo</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Productos</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">PRODUCTOS_CATALOGO</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">prod</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">li</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">prod</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginBottom</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;8px&#39;</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;{</span><span class="nx">prod</span><span class="p">.</span><span class="nx">nombre</span><span class="p">}</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">{</span><span class="nx">prod</span><span class="p">.</span><span class="nx">precio</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)}</span><span class="err">€</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span>
+<span class="w">              </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onAgregar</span><span class="p">(</span><span class="nx">prod</span><span class="p">)}</span><span class="w"> </span>
+<span class="w">              </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginLeft</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10px&#39;</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">            </span><span class="p">&gt;</span>
+<span class="w">              </span><span class="nx">Añadir</span><span class="w"> </span><span class="nx">al</span><span class="w"> </span><span class="nx">Carrito</span>
+<span class="w">            </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 4. COMPONENTE HIJO: Vista Resumen del Carrito ---</span>
+<span class="kr">interface</span><span class="w"> </span><span class="nx">VistaCarritoProps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="nx">ItemCarrito</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">total</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">onCambiarCantidad</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="o">:</span><span class="w"> </span><span class="nx">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">onVaciar</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">VistaCarrito</span><span class="p">({</span><span class="w"> </span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">onCambiarCantidad</span><span class="p">,</span><span class="w"> </span><span class="nx">onVaciar</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">VistaCarritoProps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">El</span><span class="w"> </span><span class="nx">carrito</span><span class="w"> </span><span class="nx">está</span><span class="w"> </span><span class="nx">vacío</span><span class="p">.&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;carrito-box&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="nx">Tu</span><span class="w"> </span><span class="nx">Carrito</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">li</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginBottom</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;6px&#39;</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;{</span><span class="nx">item</span><span class="p">.</span><span class="nx">nombre</span><span class="p">}&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">precio</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)}</span><span class="err">€</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">cantidad</span><span class="p">}</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onCambiarCantidad</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginLeft</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;6px&#39;</span><span class="w"> </span><span class="p">}}&gt;</span><span class="o">+</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onCambiarCantidad</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginLeft</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;4px&#39;</span><span class="w"> </span><span class="p">}}&gt;</span><span class="o">-</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="nx">Total</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">total</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)}</span><span class="err">€</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onVaciar</span><span class="p">}&gt;</span><span class="nx">Vaciar</span><span class="w"> </span><span class="nx">Carrito</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 5. COMPONENTE PRINCIPAL (ORQUESTADOR) ---</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">AplicacionTienda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">agregarProducto</span><span class="p">,</span><span class="w"> </span><span class="nx">cambiarCantidad</span><span class="p">,</span><span class="w"> </span><span class="nx">vaciarCarrito</span><span class="p">,</span><span class="w"> </span><span class="nx">totalPrecio</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCarrito</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;600px&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">margin</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;20px auto&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sans-serif&#39;</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="nx">Tienda</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="nx">Línea</span><span class="w"> </span><span class="nx">DWEC</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">hr</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">CatalogoProductos</span><span class="w"> </span><span class="na">onAgregar</span><span class="o">=</span><span class="p">{</span><span class="nx">agregarProducto</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">hr</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">VistaCarrito</span><span class="w"> </span>
+<span class="w">        </span><span class="na">items</span><span class="o">=</span><span class="p">{</span><span class="nx">items</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="na">total</span><span class="o">=</span><span class="p">{</span><span class="nx">totalPrecio</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="na">onCambiarCantidad</span><span class="o">=</span><span class="p">{</span><span class="nx">cambiarCantidad</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="na">onVaciar</span><span class="o">=</span><span class="p">{</span><span class="nx">vaciarCarrito</span><span class="p">}</span><span class="w"> </span>
+<span class="w">      </span><span class="p">/&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

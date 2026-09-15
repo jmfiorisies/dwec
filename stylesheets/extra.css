@@ -1,0 +1,31 @@
+/* ============================================================
+   Diagramas Mermaid: usamos el soporte NATIVO de Material for
+   MkDocs (activado via pymdownx.superfences en mkdocs.yml), que
+   ya carga Mermaid, procesa correctamente el bloque <pre><code>
+   generado y se adapta solo al cambiar entre modo claro/oscuro.
+   No forzamos aqui colores ni tema propio para no interferir con
+   esa adaptacion automatica. Solo retoques puramente esteticos.
+   ============================================================ */
+
+.mermaid {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+/* Corregir texto de etiquetas de Git Graph en modo oscuro de MkDocs */
+[data-md-color-scheme="slate"] .data-header,
+[data-md-color-scheme="slate"] .commit-label {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+[data-md-color-scheme="slate"] .commit-label-bkg {
+  fill: #1e293b !important;
+  opacity: 0.9;
+}
+/* Color verde azulado para la cabecera de las tablas */
+.md-typeset table:not([class]) th {
+  background-color: #299388 !important; /* Verde teal de la imagen */
+  color: #ffffff !important;           /* Texto blanco brillante */
+  font-weight: bold;
+}

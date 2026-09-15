@@ -1,0 +1,952 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>10.1: Formularios Controlados y No Controlados en React - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#101-formularios-controlados-y-no-controlados-en-react" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10.1: Formularios Controlados y No Controlados en React
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-fundamentos-y-filosofia-de-control-en-componentes-de-formulario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Fundamentos y Filosofía de Control en Componentes de Formulario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-componentes-controlados-sincronizacion-directa-con-usestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Componentes Controlados: Sincronización Directa con useState
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Componentes Controlados: Sincronización Directa con useState">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-manejo-multi-campo-con-unico-objeto-de-estado-y-tailwind-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Manejo Multi-campo con Único Objeto de Estado y Tailwind CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-componentes-no-controlados-delegacion-en-el-dom-useref-y-formdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Componentes No Controlados: Delegación en el DOM (useRef y FormData)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Componentes No Controlados: Delegación en el DOM (useRef y FormData)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-procesamiento-global-eficiente-con-formdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Procesamiento Global Eficiente con FormData
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-analisis-comparativo-y-perfilado-de-rendimiento-on-vs-o1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Análisis Comparativo y Perfilado de Rendimiento (O(N) vs O(1))
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Análisis Comparativo y Perfilado de Rendimiento (O(N) vs O(1))">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuadro-comparativo-de-seleccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuadro Comparativo de Selección
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-demostracion-practica-completa-panel-de-configuracion-hibrido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Demostración Práctica Completa: Panel de Configuración Híbrido
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="101-formularios-controlados-y-no-controlados-en-react">10.1: Formularios Controlados y No Controlados en React</h1>
+<hr />
+<h2 id="1-fundamentos-y-filosofia-de-control-en-componentes-de-formulario">1. Fundamentos y Filosofía de Control en Componentes de Formulario</h2>
+<p>En el entorno del navegador web nativo, los elementos de formulario HTML (<code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>) mantienen su propio estado interno en el DOM real. Cuando un usuario escribe un carácter en un campo de texto, el navegador actualiza la propiedad <code>.value</code> del nodo nativo de forma imperativa sin requerir intervención de ningún script externo.</p>
+<p>En React, el paradigma principal establece que <strong>el estado de la aplicación debe residir en el Virtual DOM</strong> y ser la única fuente de verdad (<em>Single Source of Truth</em>). Esto genera una dualidad fundamental al trabajar con elementos interactivos de entrada:</p>
+<ol>
+<li><strong>¿Debe el DOM del navegador gestionar el estado de los datos introducidos?</strong></li>
+<li><strong>¿Debe React tomar el control absoluto de cada carácter tecleado mediante su propio estado local (<code>useState</code>)?</strong></li>
+</ol>
+<p>La respuesta define la arquitectura del formulario, dividiéndose en <strong>Componentes Controlados</strong> y <strong>Componentes No Controlados</strong>.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Dualidad ["Modelos de Gestión de Estado en Formularios"]
+        direction TB
+        DOM_Source["DOM del Navegador como Fuente de Verdad"]
+        React_Source["Estado de React (useState) como Fuente de Verdad"]
+    end
+
+    subgraph Enfoques ["Clasificación de Componentes"]
+        Uncontrolled["Componentes No Controlados&lt;br&gt;• Asignación vía defaultValue&lt;br&gt;• Lógica apoyada en useRef / FormData&lt;br&gt;• Lectura puntual en el evento onSubmit"]
+        Controlled["Componentes Controlados&lt;br&gt;• Enlace bidireccional vía value + onChange&lt;br&gt;• React intercepta cada evento de entrada&lt;br&gt;• Sincronización inmediata de UI y Estado"]
+    end
+
+    DOM_Source ==&gt; Uncontrolled
+    React_Source ==&gt; Controlled
+
+</code></pre>
+<hr />
+<h2 id="2-componentes-controlados-sincronizacion-directa-con-usestate">2. Componentes Controlados: Sincronización Directa con <code>useState</code></h2>
+<p>Un <strong>componente controlado</strong> es aquel en el que React asigna el valor del campo a través de la propiedad <code>value</code> (o <code>checked</code> en checkboxes) y escucha los cambios mediante el manejador <code>onChange</code>.</p>
+<p>$$\text{Pulsación} \longrightarrow \text{Disparo de } \text{onChange} \longrightarrow \text{Actualización de Estado } (\text{setState}) \longrightarrow \text{Re-render} \longrightarrow \text{Actualización del } \text{value}$$</p>
+<h3 id="21-manejo-multi-campo-con-unico-objeto-de-estado-y-tailwind-css">2.1. Manejo Multi-campo con Único Objeto de Estado y Tailwind CSS</h3>
+<p>El patrón recomendado para formularios con múltiples entradas consiste en <strong>agrupar el estado en un único objeto</strong> y utilizar una función manejadora genérica apoyada en la propiedad <code>name</code> del elemento HTML:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">FormularioRegistroState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">username</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">rol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;guest&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">aceptaTerminos</span><span class="o">:</span><span class="w"> </span><span class="kr">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">comentarios</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">FormularioRegistroControlado</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">formData</span><span class="p">,</span><span class="w"> </span><span class="nx">setFormData</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">FormularioRegistroState</span><span class="p">&gt;({</span>
+<span class="w">    </span><span class="nx">username</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">rol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">aceptaTerminos</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">comentarios</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">e</span><span class="o">:</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">ChangeEvent</span><span class="p">&lt;</span><span class="nt">HTMLInputElement</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="na">HTMLSelectElement</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="na">HTMLTextAreaElement</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">valorFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;checkbox&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">HTMLInputElement</span><span class="p">).</span><span class="nx">checked</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">setFormData</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">prev</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="nx">name</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">valorFinal</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="o">:</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">FormEvent</span><span class="p">&lt;</span><span class="nt">HTMLFormElement</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Datos listos para enviar al servidor:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">formData</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;max-w-md mx-auto p-6 bg-white rounded-xl shadow-md space-y-4 border border-slate-200&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h2</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-xl font-bold text-slate-800&quot;</span><span class="p">&gt;</span><span class="nx">Registro</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">(</span><span class="nx">Controlado</span><span class="p">)&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Campo Texto */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700 mb-1&quot;</span><span class="p">&gt;</span><span class="nx">Usuario</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">          </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+<span class="w">          </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;username&quot;</span>
+<span class="w">          </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span>
+<span class="w">          </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
+<span class="w">          </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500&quot;</span>
+<span class="w">        </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Campo Email */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700 mb-1&quot;</span><span class="p">&gt;</span><span class="nx">Correo</span><span class="w"> </span><span class="nx">Electrónico</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">          </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span>
+<span class="w">          </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;email&quot;</span>
+<span class="w">          </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span>
+<span class="w">          </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span>
+<span class="w">          </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500&quot;</span>
+<span class="w">        </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Select */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;rol&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700 mb-1&quot;</span><span class="p">&gt;</span><span class="nx">Rol</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Usuario</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">select</span>
+<span class="w">          </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;rol&quot;</span>
+<span class="w">          </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;rol&quot;</span>
+<span class="w">          </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">rol</span><span class="p">}</span>
+<span class="w">          </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white&quot;</span>
+<span class="w">        </span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">option</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="s">&quot;user&quot;</span><span class="p">&gt;</span><span class="nx">Usuario</span><span class="w"> </span><span class="nx">Estándar</span><span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">option</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span><span class="nx">Administrador</span><span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">option</span><span class="w"> </span><span class="na">value</span><span class="o">=</span><span class="s">&quot;guest&quot;</span><span class="p">&gt;</span><span class="nx">Invitado</span><span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Checkbox */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;flex items-center space-x-2&quot;</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">          </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span>
+<span class="w">          </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;aceptaTerminos&quot;</span>
+<span class="w">          </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;aceptaTerminos&quot;</span>
+<span class="w">          </span><span class="na">checked</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">aceptaTerminos</span><span class="p">}</span>
+<span class="w">          </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded&quot;</span>
+<span class="w">        </span><span class="p">/&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;aceptaTerminos&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-sm text-slate-600&quot;</span><span class="p">&gt;</span><span class="nx">Acepto</span><span class="w"> </span><span class="nx">los</span><span class="w"> </span><span class="nx">términos</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="nx">condiciones</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Textarea */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;comentarios&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700 mb-1&quot;</span><span class="p">&gt;</span><span class="nx">Comentarios</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">textarea</span>
+<span class="w">          </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;comentarios&quot;</span>
+<span class="w">          </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;comentarios&quot;</span>
+<span class="w">          </span><span class="na">rows</span><span class="o">=</span><span class="p">{</span><span class="mf">3</span><span class="p">}</span>
+<span class="w">          </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">comentarios</span><span class="p">}</span>
+<span class="w">          </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500&quot;</span>
+<span class="w">        </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span>
+<span class="w">        </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span>
+<span class="w">        </span><span class="na">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">formData</span><span class="p">.</span><span class="nx">aceptaTerminos</span><span class="p">}</span>
+<span class="w">        </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors&quot;</span>
+<span class="w">      </span><span class="p">&gt;</span>
+<span class="w">        </span><span class="nx">Registrar</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="3-componentes-no-controlados-delegacion-en-el-dom-useref-y-formdata">3. Componentes No Controlados: Delegación en el DOM (<code>useRef</code> y <code>FormData</code>)</h2>
+<p>Un <strong>componente no controlado</strong> mantiene el estado de sus campos directamente en el árbol DOM del navegador. En lugar de escribir un manejador <code>onChange</code> para cada actualización de carácter, se emplea <strong><code>defaultValue</code></strong> o la API <strong><code>FormData</code></strong> para extraer los datos puntualmente al enviar.</p>
+<h3 id="31-procesamiento-global-eficiente-con-formdata">3.1. Procesamiento Global Eficiente con <code>FormData</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">FormularioNoControladoFormData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="o">:</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">FormEvent</span><span class="p">&lt;</span><span class="nt">HTMLFormElement</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">formData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">datosFormulario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">fromEntries</span><span class="p">(</span><span class="nx">formData</span><span class="p">.</span><span class="nx">entries</span><span class="p">());</span>
+
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Objeto de datos procesado con FormData:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">datosFormulario</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;max-w-md mx-auto p-6 bg-slate-50 rounded-xl border border-slate-200 space-y-4&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-lg font-bold text-slate-800&quot;</span><span class="p">&gt;</span><span class="nx">Publicar</span><span class="w"> </span><span class="nx">Artículo</span><span class="w"> </span><span class="p">(</span><span class="nx">No</span><span class="w"> </span><span class="nx">Controlado</span><span class="p">)&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">        </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+<span class="w">        </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;titulo&quot;</span>
+<span class="w">        </span><span class="na">defaultValue</span><span class="o">=</span><span class="s">&quot;Título por Defecto&quot;</span>
+<span class="w">        </span><span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Título del Artículo&quot;</span>
+<span class="w">        </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg&quot;</span>
+<span class="w">      </span><span class="p">/&gt;</span>
+
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">textarea</span>
+<span class="w">        </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;contenido&quot;</span>
+<span class="w">        </span><span class="na">defaultValue</span><span class="o">=</span><span class="s">&quot;Contenido inicial del artículo...&quot;</span>
+<span class="w">        </span><span class="na">rows</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}</span>
+<span class="w">        </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full px-3 py-2 border border-slate-300 rounded-lg&quot;</span>
+<span class="w">      </span><span class="p">/&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Caso de uso ideal: Subida de archivos nativa */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700 mb-1&quot;</span><span class="p">&gt;</span><span class="nx">Adjuntar</span><span class="w"> </span><span class="nx">documento</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span><span class="w"> </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;adjunto&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100&quot;</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-900 transition-colors&quot;</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="nx">Publicar</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="4-analisis-comparativo-y-perfilado-de-rendimiento-on-vs-o1">4. Análisis Comparativo y Perfilado de Rendimiento (O(N) vs O(1))</h2>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor User as Usuario
+    participant Input as Input DOM
+    participant State as Estado React (useState)
+    participant Component as Componente Formulario
+
+    rect rgb(255, 253, 231)
+        Note over User, Component: Componente Controlado (Re-render por Tecla)
+        User-&gt;&gt;Input: Teclea 'A'
+        Input-&gt;&gt;State: onChange -&gt; setEstado('A')
+        State-&gt;&gt;Component: Re-renderiza Componente Padre e Hijos
+        Component-&gt;&gt;Input: Pasa nuevo prop value='A'
+    end
+
+    rect rgb(235, 245, 255)
+        Note over User, Component: Componente No Controlado (Aislamiento de Rendimiento)
+        User-&gt;&gt;Input: Teclea 'A'
+        Note over Input: El navegador actualiza el valor nativo&lt;br/&gt;(Cero re-renders en React)
+        User-&gt;&gt;Component: Clic en submit
+        Component-&gt;&gt;Input: Lee .current.value o FormData
+    end
+</code></pre>
+<h3 id="cuadro-comparativo-de-seleccion">Cuadro Comparativo de Selección</h3>
+<table>
+<thead>
+<tr>
+<th>Criterio / Funcionalidad</th>
+<th>Componente Controlado (<code>useState</code>)</th>
+<th>Componente No Controlado (<code>useRef</code> / <code>FormData</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fuente de Verdad</strong></td>
+<td>Estado local en React Virtual DOM</td>
+<td>Nodos del DOM Real del Navegador</td>
+</tr>
+<tr>
+<td><strong>Rendimiento de Escritura</strong></td>
+<td>Re-renderiza en cada pulsación ($O(N)$)</td>
+<td>Sin re-renders durante la escritura ($O(1)$)</td>
+</tr>
+<tr>
+<td><strong>Validación Instantánea</strong></td>
+<td><strong>Sencilla:</strong> Se valida el estado en cada render</td>
+<td>Requiere escuchadores manuales al DOM</td>
+</tr>
+<tr>
+<td><strong>Entradas de Archivos (<code>&lt;input type="file"&gt;</code>)</strong></td>
+<td>Solo Lectura (Por seguridad del navegador)</td>
+<td><strong>Enfoque Natural e Ideal</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-demostracion-practica-completa-panel-de-configuracion-hibrido">5. Demostración Práctica Completa: Panel de Configuración Híbrido</h2>
+<p>A continuación se expone una implementación en TypeScript que combina <strong>componentes controlados</strong> (para validación en vivo), <strong>componentes no controlados con <code>useRef**</code> (para subida de archivos) y </strong>Tailwind CSS**:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">NotificacionConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canal</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kr">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">PerfilUsuarioState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">nombreCompleto</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">biografia</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">notificaciones</span><span class="o">:</span><span class="w"> </span><span class="nx">NotificacionConfig</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">PanelConfiguracionHibrido</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">perfil</span><span class="p">,</span><span class="w"> </span><span class="nx">setPerfil</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">PerfilUsuarioState</span><span class="p">&gt;({</span>
+<span class="w">    </span><span class="nx">nombreCompleto</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Alex Dev&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">biografia</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Desarrollador Frontend.&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">notificaciones</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">canal</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Email Diario&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">canal</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;SMS de Seguridad&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">avatarInputRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRef</span><span class="p">&lt;</span><span class="nt">HTMLInputElement</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleTextoChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="o">:</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">ChangeEvent</span><span class="p">&lt;</span><span class="nt">HTMLInputElement</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="na">HTMLTextAreaElement</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">setPerfil</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">prev</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">name</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleToggleNotificacion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setPerfil</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">prev</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">notificaciones</span><span class="o">:</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">notificaciones</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">notif</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">        </span><span class="nx">notif</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">notif</span><span class="p">,</span><span class="w"> </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="o">!</span><span class="nx">notif</span><span class="p">.</span><span class="nx">activo</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">notif</span>
+<span class="w">      </span><span class="p">),</span>
+<span class="w">    </span><span class="p">}));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="o">:</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">FormEvent</span><span class="p">&lt;</span><span class="nt">HTMLFormElement</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">archivoAvatar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">avatarInputRef</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">files</span><span class="o">?</span><span class="p">.[</span><span class="mf">0</span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">payloadFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">perfil</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">avatarNombreArchivo</span><span class="o">:</span><span class="w"> </span><span class="nx">archivoAvatar</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">archivoAvatar</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sin-cambios.png&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;PAYLOAD HÍBRIDO ENVIADO:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">payloadFinal</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Configuración guardada correctamente.&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">esNombreValido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">perfil</span><span class="p">.</span><span class="nx">nombreCompleto</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;max-w-xl mx-auto my-8 p-6 bg-white border border-slate-200 rounded-xl shadow-lg space-y-6&quot;</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h2</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-2xl font-bold text-slate-800 border-b pb-3&quot;</span><span class="p">&gt;</span><span class="nx">Configuración</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Perfil</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;space-y-6&quot;</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="cm">/* Sección Controlada */</span><span class="p">}</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">fieldset</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-4&quot;</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">legend</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;px-2 text-sm font-semibold text-slate-700&quot;</span><span class="p">&gt;</span><span class="nx">Datos</span><span class="w"> </span><span class="nx">Personales</span><span class="w"> </span><span class="p">(</span><span class="nx">Controlados</span><span class="p">)&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;nombreCompleto&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700&quot;</span><span class="p">&gt;</span><span class="nx">Nombre</span><span class="w"> </span><span class="nx">Completo</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">mínimo</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="nx">caracteres</span><span class="p">)</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">              </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+<span class="w">              </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;nombreCompleto&quot;</span>
+<span class="w">              </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;nombreCompleto&quot;</span>
+<span class="w">              </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">perfil</span><span class="p">.</span><span class="nx">nombreCompleto</span><span class="p">}</span>
+<span class="w">              </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleTextoChange</span><span class="p">}</span>
+<span class="w">              </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;mt-1 w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500&quot;</span>
+<span class="w">            </span><span class="p">/&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="o">!</span><span class="nx">esNombreValido</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-xs text-red-500 mt-1 block&quot;</span><span class="p">&gt;</span><span class="nx">El</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="nx">es</span><span class="w"> </span><span class="nx">demasiado</span><span class="w"> </span><span class="nx">corto</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;}</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">htmlFor</span><span class="o">=</span><span class="s">&quot;biografia&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;block text-sm font-medium text-slate-700&quot;</span><span class="p">&gt;</span><span class="nx">Biografía</span><span class="o">:</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">textarea</span>
+<span class="w">              </span><span class="na">id</span><span class="o">=</span><span class="s">&quot;biografia&quot;</span>
+<span class="w">              </span><span class="na">name</span><span class="o">=</span><span class="s">&quot;biografia&quot;</span>
+<span class="w">              </span><span class="na">rows</span><span class="o">=</span><span class="p">{</span><span class="mf">2</span><span class="p">}</span>
+<span class="w">              </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">perfil</span><span class="p">.</span><span class="nx">biografia</span><span class="p">}</span>
+<span class="w">              </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleTextoChange</span><span class="p">}</span>
+<span class="w">              </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;mt-1 w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500&quot;</span>
+<span class="w">            </span><span class="p">/&gt;</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+
+<span class="w">        </span><span class="p">{</span><span class="cm">/* Sección No Controlada */</span><span class="p">}</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">fieldset</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;p-4 bg-slate-50 rounded-lg border border-slate-200&quot;</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">legend</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;px-2 text-sm font-semibold text-slate-700&quot;</span><span class="p">&gt;</span><span class="nx">Fotografía</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Perfil</span><span class="w"> </span><span class="p">(</span><span class="nx">No</span><span class="w"> </span><span class="nx">Controlado</span><span class="p">)&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">avatarInputRef</span><span class="p">}</span><span class="w"> </span><span class="na">accept</span><span class="o">=</span><span class="s">&quot;image/*&quot;</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;mt-2 text-sm text-slate-500&quot;</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+
+<span class="w">        </span><span class="p">{</span><span class="cm">/* Sección Dinámica */</span><span class="p">}</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">fieldset</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2&quot;</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">legend</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;px-2 text-sm font-semibold text-slate-700&quot;</span><span class="p">&gt;</span><span class="nx">Canales</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Notificación</span><span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">{</span><span class="nx">perfil</span><span class="p">.</span><span class="nx">notificaciones</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">notif</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">notif</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;flex items-center space-x-3 cursor-pointer&quot;</span><span class="p">&gt;</span>
+<span class="w">              </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">                </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span>
+<span class="w">                </span><span class="na">checked</span><span class="o">=</span><span class="p">{</span><span class="nx">notif</span><span class="p">.</span><span class="nx">activo</span><span class="p">}</span>
+<span class="w">                </span><span class="na">onChange</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleToggleNotificacion</span><span class="p">(</span><span class="nx">notif</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+<span class="w">                </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;h-4 w-4 text-blue-600 rounded&quot;</span>
+<span class="w">              </span><span class="p">/&gt;</span>
+<span class="w">              </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;text-sm text-slate-700&quot;</span><span class="p">&gt;{</span><span class="nx">notif</span><span class="p">.</span><span class="nx">canal</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">))}</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span>
+<span class="w">          </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span>
+<span class="w">          </span><span class="na">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">esNombreValido</span><span class="p">}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="s">&quot;w-full py-2.5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:bg-slate-300 transition-colors&quot;</span>
+<span class="w">        </span><span class="p">&gt;</span>
+<span class="w">          </span><span class="nx">Guardar</span><span class="w"> </span><span class="nx">Cambios</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

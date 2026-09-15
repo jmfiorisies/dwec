@@ -1,0 +1,860 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>7.1. React: Arquitectura Interna, Virtual DOM, Fiber Reconciler, Hooks y Ciclo de Vida - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#71-react-arquitectura-interna-virtual-dom-fiber-reconciler-hooks-y-ciclo-de-vida" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7.1. React: Arquitectura Interna, Virtual DOM, Fiber Reconciler, Hooks y Ciclo de Vida
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#711-origen-filosofia-y-principios-arquitectonicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.1. Origen, Filosofía y Principios Arquitectónicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#712-el-lenguaje-del-componente-jsx-y-el-proceso-de-transpilacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.2. El Lenguaje del Componente: JSX y el Proceso de Transpilación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#713-arquitectura-interna-virtual-dom-y-el-motor-react-fiber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.3. Arquitectura Interna: Virtual DOM y el Motor React Fiber
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1.3. Arquitectura Interna: Virtual DOM y el Motor React Fiber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-virtual-dom-y-la-complejidad-del-diffing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Virtual DOM y la Complejidad del Diffing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#react-fiber-el-motor-de-reconciliacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        React Fiber (El Motor de Reconciliación)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#714-flujo-unidireccional-de-datos-y-comunicacion-entre-componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.4. Flujo Unidireccional de Datos y Comunicación entre Componentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1.4. Flujo Unidireccional de Datos y Comunicación entre Componentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#canales-de-comunicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canales de Comunicación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#715-el-modelo-reactivo-funcional-hooks-y-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.5. El Modelo Reactivo Funcional: Hooks y Ciclo de Vida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1.5. El Modelo Reactivo Funcional: Hooks y Ciclo de Vida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hooks-fundamentales-y-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks Fundamentales y Ciclo de Vida:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#716-ejemplo-practico-integrador-typescript-jsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.6. Ejemplo Práctico Integrador (TypeScript + JSX)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="71-react-arquitectura-interna-virtual-dom-fiber-reconciler-hooks-y-ciclo-de-vida">7.1. React: Arquitectura Interna, Virtual DOM, Fiber Reconciler, Hooks y Ciclo de Vida</h1>
+<hr />
+<h3 id="711-origen-filosofia-y-principios-arquitectonicos">7.1.1. Origen, Filosofía y Principios Arquitectónicos</h3>
+<p>React no fue concebido como un framework MVC/MVVM tradicional de tipo "baterías incluidas" (como Angular), sino como una <strong>librería orientada exclusivamente a la capa de vista (View)</strong> mediante un enfoque funcional e inmutable.</p>
+<ul>
+<li>
+<p><strong>Origen:</strong> Fue creado por <strong>Jordan Walke</strong> en Facebook (2011/2013) tras experimentos previos como FaxJS, para resolver los cuellos de botella de sincronización de estado en el <em>News Feed</em> de Facebook e Instagram.</p>
+</li>
+<li>
+<p><strong>Inmutabilidad como Motor de Cambio:</strong> En lugar de observar y mutar propiedades individuales de objetos JavaScript en tiempo de ejecución, React exige tratar el estado como estructuras de datos <strong>inmutables</strong>. Para actualizar la vista, se reemplaza la referencia del estado anterior por una nueva copia modificada.</p>
+</li>
+<li>
+<p><strong>La Ecuación Fundamental:</strong></p>
+</li>
+</ul>
+<p>$$\text{UI} = f(\text{State})$$</p>
+<p>La interfaz de usuario es una proyección directa y declarativa del estado de la aplicación en un instante determinado.</p>
+<hr />
+<h3 id="712-el-lenguaje-del-componente-jsx-y-el-proceso-de-transpilacion">7.1.2. El Lenguaje del Componente: JSX y el Proceso de Transpilación</h3>
+<p><strong>JSX (JavaScript XML)</strong> es una extensión sintáctica de ECMAScript que permite escribir marcado estructurado de tipo HTML directamente dentro del código JavaScript.</p>
+<p>JSX <strong>no es HTML</strong> ni se inserta directamente como una cadena de texto en el DOM. Compiladores como <strong>Babel</strong>, <strong>SWC</strong> o <strong>ESBuild</strong> transforman la sintaxis JSX en llamadas a funciones de JavaScript que instancian objetos en memoria.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. Código escrito en JSX</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">elemento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn-primary&quot;</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="nx">Enviar</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="p">);</span>
+
+<span class="c1">// 2. Resultado de la transpilación (React.createElement / Transformador JSX)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">elementoTranspilado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span>
+<span class="w">  </span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">className</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;btn-primary&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">onClick</span><span class="o">:</span><span class="w"> </span><span class="nx">handleClick</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Enviar&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>La ejecución de <code>React.createElement()</code> produce un <strong>React Element</strong>: un objeto JavaScript plano (<em>Plain Old JavaScript Object - POJO</em>) que describe un nodo de la interfaz de usuario en el Virtual DOM:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Objeto JS resultante en memoria RAM (Nodo del Virtual DOM)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nx">$$typeof</span><span class="o">:</span><span class="w"> </span><span class="nb">Symbol</span><span class="p">(</span><span class="nx">react</span><span class="p">.</span><span class="nx">element</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;button&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">props</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">className</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;btn-primary&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">onClick</span><span class="o">:</span><span class="w"> </span><span class="nx">handleClick</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">children</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;span&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">props</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">children</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Enviar&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">ref</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="713-arquitectura-interna-virtual-dom-y-el-motor-react-fiber">7.1.3. Arquitectura Interna: Virtual DOM y el Motor React Fiber</h3>
+<h4 id="el-virtual-dom-y-la-complejidad-del-diffing">El Virtual DOM y la Complejidad del Diffing</h4>
+<p>El <strong>Virtual DOM (VDOM)</strong> es una representación ligera del DOM Real mantenida en memoria RAM. Cuando el estado de la aplicación cambia, React genera un nuevo árbol VDOM y ejecuta el proceso de <strong>Reconciliación</strong> (<em>Reconciliation</em>) comparándolo con el árbol anterior.</p>
+<p>Un algoritmo genérico para comparar dos árboles y calcular la cantidad mínima de operaciones tiene una complejidad temporal de $O(n^3)$, donde $n$ es el número de nodos. Para un árbol de 1,000 elementos, esto requeriría aproximadamente $10^9$ operaciones, colapsando el hilo principal del navegador.</p>
+<p>React reduce esta complejidad a un orden lineal <strong>$O(n)$</strong> mediante dos reglas heurísticas:</p>
+<ol>
+<li>
+<p><strong>Tipos de Elementos Distintos:</strong> Dos elementos de diferente tipo (por ejemplo, cambiar un <code>&lt;div&gt;</code> por un <code>&lt;section&gt;</code>) generarán árboles completamente diferentes. React destruye el subárbol anterior por completo (desmontando sus componentes) y construye el nuevo subárbol desde cero.</p>
+</li>
+<li>
+<p><strong>Propiedad <code>key</code> en Listas Dinámicas:</strong> Al renderizar colecciones de elementos, la propiedad <code>key</code> proporciona un identificador único y estable. Permite a React detectar reordenamientos, inserciones o eliminaciones sin necesidad de recrear los nodos del DOM Real.</p>
+</li>
+</ol>
+<pre class="mermaid"><code>graph TD
+    subgraph VDOM_Anterior["Árbol VDOM Anterior (Estado t0)"]
+        A1["ul"] --&gt; B1["li (key=1)"]
+        A1 --&gt; C1["li (key=2)"]
+    end
+
+    subgraph VDOM_Nuevo["Árbol VDOM Nuevo (Estado t1)"]
+        A2["ul"] --&gt; D2["li (key=3) [Nuevo]"]
+        A2 --&gt; B2["li (key=1)"]
+        A2 --&gt; C2["li (key=2)"]
+    end
+
+    VDOM_Anterior --&gt; Diffing["&lt;b&gt;Algoritmo Diffing O(n)&lt;/b&gt;&lt;br&gt;Identifica inserción con key=3 en posición inicial"]
+    VDOM_Nuevo --&gt; Diffing
+    Diffing --&gt; Patch["&lt;b&gt;Parche Mínimo al DOM Real:&lt;/b&gt;&lt;br&gt;document.createElement + insertBefore"]
+
+</code></pre>
+<h4 id="react-fiber-el-motor-de-reconciliacion">React Fiber (El Motor de Reconciliación)</h4>
+<p>Introducido a partir de React 16, <strong>Fiber</strong> es una reescritura completa del algoritmo de reconciliación. Su objetivo principal es permitir la <strong>renderización concurrente</strong> (<em>Concurrent Rendering</em>).</p>
+<p>Un <em>Fiber</em> representa una unidad de trabajo estructurada como un nodo de una lista doblemente enlazada. Su arquitectura divide el proceso de renderizado en dos fases bien diferenciadas:</p>
+<pre class="mermaid"><code>flowchart TD
+    StateChange["Cambio de Estado / Evento"] --&gt; RenderPhase
+
+    subgraph RenderPhase["1. Fase de Render / Reconciliación (Asíncrona e Interrumpible)"]
+        R1["Construcción del árbol de Fibers"] --&gt; R2["Algoritmo de Diferenciación (Diffing)"]
+        R2 --&gt; R3["Cálculo del árbol de efectos (Work-in-Progress)"]
+        Note1["Se puede pausar, abortar o reutilizar&lt;br&gt;si el navegador necesita un frame libre (16.6ms)"]
+    end
+
+    RenderPhase --&gt; CommitPhase
+
+    subgraph CommitPhase["2. Fase de Commit (Sincrónica e Ininterrumpida)"]
+        C1["Aplicación masiva de cambios en el DOM Real"]
+        C2["Ejecución de efectos visuales (useLayoutEffect)"]
+        C3["Ejecución de efectos asíncronos (useEffect)"]
+    end
+
+</code></pre>
+<hr />
+<h3 id="714-flujo-unidireccional-de-datos-y-comunicacion-entre-componentes">7.1.4. Flujo Unidireccional de Datos y Comunicación entre Componentes</h3>
+<p>El flujo de información en React es estrictamente <strong>descendente</strong> (top-down).</p>
+<ul>
+<li>
+<p><strong>Props (Propiedades):</strong> Parámetros de entrada inmutables pasados de componentes padres a componentes hijos. Un componente hijo nunca debe mutar sus propias props.</p>
+</li>
+<li>
+<p><strong>State (Estado):</strong> Información mutable gestionada internamente por un componente que se preserva entre re-renderizados.</p>
+</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    Parent["&lt;b&gt;Componente Padre&lt;/b&gt;&lt;br&gt;Mantiene el Estado: 'usuario'"] -- "1. Pasa datos vía Props" --&gt; Child["&lt;b&gt;Componente Hijo (Formulario)&lt;/b&gt;"]
+    Child -- "2. Invoca Callback (onSave)" --&gt; Parent
+    Parent -- "3. setState() actualiza el Estado" --&gt; Parent
+    Parent -- "4. Re-renderizado con nuevo Estado" --&gt; Child
+
+</code></pre>
+<h4 id="canales-de-comunicacion">Canales de Comunicación:</h4>
+<ol>
+<li>
+<p><strong>Padre a Hijo:</strong> Paso directo de datos a través de <code>props</code>.</p>
+</li>
+<li>
+<p><strong>Hijo a Padre:</strong> El padre pasa una función callback como <code>prop</code>; el hijo invoca dicha función pasando los nuevos datos como argumento.</p>
+</li>
+<li><strong>Componentes Distantes:</strong> Para evitar el arrastre manual de datos a través de componentes intermedios (<em>Prop Drilling</em>), se utiliza la <strong>Context API</strong> o gestores de estado centralizados (Zustand, Redux Toolkit).</li>
+</ol>
+<hr />
+<h3 id="715-el-modelo-reactivo-funcional-hooks-y-ciclo-de-vida">7.1.5. El Modelo Reactivo Funcional: Hooks y Ciclo de Vida</h3>
+<p>Con la llegada de React 16.8 (2019), los <strong>Hooks</strong> sustituyeron la definición de componentes basada en clases ES6 por funciones puras con celdas de estado vinculadas a la fibra del componente.</p>
+<h4 id="hooks-fundamentales-y-ciclo-de-vida">Hooks Fundamentales y Ciclo de Vida:</h4>
+<ul>
+<li>
+<p><strong><code>useState</code>:</strong> Declara una variable de estado y su función actualizadora.
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">setContador</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong><code>useEffect</code>:</strong> Unifica el comportamiento de <code>componentDidMount</code>, <code>componentDidUpdate</code> y <code>componentWillUnmount</code> para gestionar efectos secundarios (peticiones API, suscripciones o eventos del DOM).</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Código ejecutado tras el renderizado (Mount / Update)</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">suscripcion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canal</span><span class="p">.</span><span class="nx">conectar</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Función de limpieza (Cleanup Function - Unmount)</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">suscripcion</span><span class="p">.</span><span class="nx">desconectar</span><span class="p">();</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">dependencia</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Se re-ejecuta si el valor de &#39;dependencia&#39; cambia</span>
+</code></pre></div>
+<ul>
+<li><strong><code>useMemo</code> y <code>useCallback</code>:</strong></li>
+<li><code>useMemo</code>: Memoriza el resultado de un cálculo intensivo para no reevaluarlo salvo que sus dependencias varíen.</li>
+<li>
+<p><code>useCallback</code>: Memoriza la referencia en memoria de una función para evitar el re-renderizado de componentes hijos optimizados con <code>React.memo</code>.</p>
+</li>
+<li>
+<p><strong><code>useRef</code>:</strong> Devuelve un objeto mutable <code>{ current: valor }</code> que persiste durante todo el ciclo de vida del componente sin desencadenar re-renderizados al ser modificado. Se usa para referencias directas al DOM Real (<code>HTMLInputElement</code>, <code>HTMLCanvasElement</code>).</p>
+</li>
+</ul>
+<hr />
+<h3 id="716-ejemplo-practico-integrador-typescript-jsx">7.1.6. Ejemplo Práctico Integrador (TypeScript + JSX)</h3>
+<p>El siguiente ejemplo implementa una interfaz declarativa con gestión de estado inmutable, efectos secundarios asíncronos y referencias al DOM:</p>
+<div class="highlight"><pre><span></span><code>import React, { useState, useEffect, useRef } from &#39;react&#39;;
+
+// Interfaz que define el contrato de datos
+interface Usuario {
+  id: number;
+  nombre: string;
+  email: string;
+}
+
+export const GestorUsuarios: React.FC = () =&gt; {
+  // 1. Estado inmutable para usuarios y control de carga
+  const [usuarios, setUsuarios] = useState&lt;Usuario[]&gt;([]);
+  const [cargando, setCargando] = useState&lt;boolean&gt;(true);
+
+  // 2. Referencia directa al nodo del DOM para lectura imperativa puntual
+  const inputNombreRef = useRef&lt;HTMLInputElement&gt;(null);
+
+  // 3. Efecto secundario: Carga de datos al montar el componente (Mount)
+  useEffect(() =&gt; {
+    let activo = true;
+
+    const obtenerUsuarios = async () =&gt; {
+      try {
+        const respuesta = await fetch(&#39;https://jsonplaceholder.typicode.com/users&#39;);
+        const datos: Usuario[] = await respuesta.json();
+
+        if (activo) {
+          setUsuarios(datos);
+          setCargando(false);
+        }
+      } catch (error) {
+        console.error(&#39;Error al recuperar usuarios:&#39;, error);
+        if (activo) setCargando(false);
+      }
+    };
+
+    obtenerUsuarios();
+
+    // Cleanup: evita actualizar el estado si el componente se desmonta mientras carga
+    return () =&gt; {
+      activo = false;
+    };
+  }, []); // Array de dependencias vacío = Se ejecuta únicamente una vez al montar
+
+  // 4. Manejador de eventos con actualización inmutable de estado
+  const agregarUsuario = (evento: React.FormEvent) =&gt; {
+    evento.preventDefault();
+    const nombreIngresado = inputNombreRef.current?.value.trim();
+
+    if (!nombreIngresado) return;
+
+    const nuevoUsuario: Usuario = {
+      id: Date.now(),
+      nombre: nombreIngresado,
+      email: `${nombreIngresado.toLowerCase().replace(/\s+/g, &#39;&#39;)}@ejemplo.com`
+    };
+
+    // Inmutabilidad: Se crea una nueva referencia de array mediante Spread Operator
+    setUsuarios((prevUsuarios) =&gt; [...prevUsuarios, nuevoUsuario]);
+
+    // Limpieza directa del input a través de la ref
+    if (inputNombreRef.current) {
+      inputNombreRef.current.value = &#39;&#39;;
+    }
+  };
+
+  if (cargando) {
+    return &lt;p className=&quot;mensaje-estado&quot;&gt;Cargando directorio de usuarios...&lt;/p&gt;;
+  }
+
+  return (
+    &lt;section className=&quot;contenedor-gestion&quot;&gt;
+      &lt;h2&gt;Catálogo de Usuarios ({usuarios.length})&lt;/h2&gt;
+
+      &lt;form onSubmit={agregarUsuario} className=&quot;formulario-nuevo&quot;&gt;
+        &lt;input
+          ref={inputNombreRef}
+          type=&quot;text&quot;
+          placeholder=&quot;Nombre del nuevo usuario&quot;
+          className=&quot;input-texto&quot;
+        /&gt;
+        &lt;button type=&quot;submit&quot; className=&quot;btn-guardar&quot;&gt;
+          Añadir Usuario
+        &lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;ul className=&quot;lista-tarjetas&quot;&gt;
+        {usuarios.map((usuario) =&gt; (
+          &lt;li key={usuario.id} className=&quot;tarjeta-item&quot;&gt;
+            &lt;strong&gt;{usuario.nombre}&lt;/strong&gt;
+            &lt;span&gt;{usuario.email}&lt;/span&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  );
+};
+</code></pre></div>
+<hr />
+<p>¿Te gustaría desarrollar el apartado <strong>7.2</strong> centrado en la arquitectura de <strong>Vue.js (Reatividad con Proxies y Composition API)</strong> o prefieres profundizar en los <strong>patrones de diseño avanzados de React</strong> (Custom Hooks, Context API y Render Props)?</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
