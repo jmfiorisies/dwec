@@ -1,0 +1,76 @@
+site_name: Apuntes DWEC - Desarrollo Web en Entorno Cliente
+theme:
+  name: material
+  palette:
+    # Modo Claro
+    - scheme: default
+      primary: teal        # Mantiene el color verde/teal de tu cabecera
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+
+    # Modo Oscuro
+    - scheme: slate
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Inicio: index.md
+nav:
+  - 🟢 1.ª Evaluación (Vanilla JS):
+      - "UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)": dwec/ud1.md
+      - "UD 2: Sintaxis, Tipos y Funciones (RA2)": dwec/ud2.md
+      - "UD 3: Control de Flujo, Bucles y Arrays (RA2)": dwec/ud3.md
+      # - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": dwec/ud4.md
+      # - "UD 5: DOM Nativo y Gestión de Eventos (RA3)": dwec/ud5.md
+      # - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA3)": dwec/ud6.md
+  # - 🟡 2.ª Evaluación (React):
+  #     - "UD 7: React Core, JSX y Arquitectura Frontend (RA4)":
+  #         - "Visión General": dwec/ud7.md
+  #         - "7.1 React: Arquitectura Interna, Virtual DOM, Fiber y Hooks": dwec/ud7-1-frameworks.md
+  #         - "7.2 Props, Composición y Reutilización": dwec/ud7-2-props-composicion.md
+  #     - "UD 8: Eventos y Estado con useState (RA5)":
+  #         - "Visión General": dwec/ud8.md
+  #         - "8.1 Eventos Sintéticos y Manejo de Interacciones": dwec/ud8-1-eventos.md
+  #         - "8.2 Estado Local con useState y Custom Hooks": dwec/ud8-2-usestate-hooks.md
+  #     - "UD 9: Formularios y Validaciones (RA5)":
+  #         - "Visión General": dwec/ud9.md
+  #         - "9.1 Formularios Controlados y No Controlados": dwec/ud9-1-formularios-controlados.md
+  #         - "9.2 React Hook Form y Validaciones con Zod": dwec/ud9-2-react-hook-form-zod.md
+  #     - "UD 10: useRef, Rendimiento y React Fiber (RA6)":
+  #         - "Visión General": dwec/ud10.md
+  #         - "10.1 Referencias al DOM con useRef": dwec/ud10-1-acceso-dom-useref.md
+  #         - "10.2 Optimización de Rendimiento (useMemo, useCallback, memo)": dwec/ud10-2-optimizacion-rendimiento.md
+  #         - "10.3 Resiliencia y Suspense": dwec/ud10-3-resiliencia-suspense.md
+  #     - "UD 11: useEffect, BOM y React Router (RA6)":
+  #         - "Visión General": dwec/ud11.md
+  #         - "11.1 Ciclo de Vida y Efectos Secundarios (useEffect)": dwec/ud11-1-ciclo-vida-useeffect.md
+  #         - "11.2 Enrutamiento SPA con React Router": dwec/ud11-2-enrutamiento-react-router.md
+  #     - "UD 12: Context API y Estado Global (RA6)": dwec/ud12.md
+  # - Material adicional (sin asignar en la programación 26/27):
+  #     - "UD 13: Gestión de Estado Servidor y Asincronía Avanzada (RA6)":
+  #         - "Visión General": dwec/ud13.md
+  #         - "13.1 Fundamentos de TanStack Query": dwec/ud13-1-tanstack-query-fundamentos.md
+  #         - "13.2 Mutaciones y Estado Global": dwec/ud13-2-mutaciones-estado-global.md
+  #         - "13.4 CI/CD Pipelines y Seguridad Web": dwec/ud13-4-cicd-seguridad.md
+  # - Formación en Empresa:
+  #     - "FP Dual: Producción, APIs y React (RA7)":
+  #         - "Visión General": dwec/empresa.md
+  #         - "13.1 Estado Global de Cliente (Context API y Zustand)": dwec/empresa-1-estado-global.md
+  #         - "13.2 Consumo de APIs y Estado de Servidor (TanStack Query)": dwec/empresa-2-apis.md
+  #         - "13.3 Pruebas de Software en React (Vitest, RTL, Playwright y MSW)": dwec/empresa-3-testing.md
+  #         - "13.4 CI/CD Pipelines y Seguridad Web (XSS, CSP, Cookies)": dwec/empresa-4-cicd-seguridad.md

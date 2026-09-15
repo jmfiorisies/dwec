@@ -1,0 +1,14 @@
+venv/
+.venv/
+site/
+docs/dwec/ud4*
+docs/dwec/ud5*
+docs/dwec/ud6*
+docs/dwec/ud7*
+docs/dwec/ud8*
+docs/dwec/ud9*
+docs/dwec/ud10*
+docs/dwec/ud11*
+docs/dwec/ud12*
+docs/dwec/ud13*
+docs/dwec/empresa*
