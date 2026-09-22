@@ -405,10 +405,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#coercion-de-tipos-y-comparacion-estricta" class="md-nav__link">
+  <a href="#valor-vs-referencia-como-se-guardan-los-datos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Coerción de Tipos y Comparación Estricta
+        Valor vs. Referencia: Cómo se Guardan los Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coercion-de-tipos-valores-truthyfalsy-y-comparacion-estricta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coerción de Tipos, Valores Truthy/Falsy y Comparación Estricta
       
     </span>
   </a>
@@ -437,6 +448,17 @@
     <span class="md-ellipsis">
       
         Formas de Declarar Funciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las Limitaciones de las Arrow Functions (Importante — se te puede escapar)
       
     </span>
   </a>
@@ -653,10 +675,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#coercion-de-tipos-y-comparacion-estricta" class="md-nav__link">
+  <a href="#valor-vs-referencia-como-se-guardan-los-datos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Coerción de Tipos y Comparación Estricta
+        Valor vs. Referencia: Cómo se Guardan los Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coercion-de-tipos-valores-truthyfalsy-y-comparacion-estricta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coerción de Tipos, Valores Truthy/Falsy y Comparación Estricta
       
     </span>
   </a>
@@ -685,6 +718,17 @@
     <span class="md-ellipsis">
       
         Formas de Declarar Funciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las Limitaciones de las Arrow Functions (Importante — se te puede escapar)
       
     </span>
   </a>
@@ -814,9 +858,42 @@
 
 
 <h1 id="ud-2-sintaxis-tipos-y-funciones-ra2">UD 2: Sintaxis, Tipos y Funciones (RA2)</h1>
+<p>JavaScript tiene fama de ser "fácil de empezar, difícil de dominar". Esta unidad es la razón:
+cosas que parecen triviales (declarar una variable, comparar dos valores, escribir una
+función) esconden comportamientos que, si no se entienden bien desde el principio, generan
+bugs muy difíciles de rastrear más adelante. Tómate esta unidad con calma — no es solo
+sintaxis, es la base de todo lo que viene después.</p>
 <h2 id="1-sintaxis-basica-variables-y-tipos-de-datos">1. Sintaxis Básica, Variables y Tipos de Datos</h2>
-<p>JavaScript es un lenguaje de <strong>tipado dinámico y débil</strong>. Las variables no están ligadas a un tipo de dato fijo, sino que el tipo pertenece al valor asignado en tiempo de ejecución.</p>
+<p>JavaScript es un lenguaje de <strong>tipado dinámico y débil</strong>:</p>
+<ul>
+<li><strong>Dinámico</strong> significa que una misma variable puede contener un <code>Number</code> en un momento y un
+  <code>String</code> en otro — el tipo no se fija de antemano como en Java o C#, sino que se decide en
+  tiempo de ejecución según el valor que tenga en cada instante.</li>
+<li><strong>Débil</strong> significa que el propio lenguaje convierte automáticamente entre tipos cuando lo
+  considera necesario (esto se llama <em>coerción</em>, y lo veremos en detalle más abajo) — a
+  diferencia de un lenguaje de tipado fuerte, que te obligaría a convertir explícitamente.</li>
+</ul>
+<p>Esta flexibilidad es cómoda al principio, pero es también el origen de la mayoría de bugs de
+principiante en JavaScript. Todo lo que sigue está pensado para que sepas exactamente qué
+está pasando "por debajo" en cada línea que escribas.</p>
 <h3 id="declaracion-de-variables-var-let-y-const">Declaración de Variables: <code>var</code>, <code>let</code> y <code>const</code></h3>
+<p>Antes de 2015 (ES6), <code>var</code> era la única forma de declarar variables — y daba problemas serios
+que motivaron la creación de <code>let</code> y <code>const</code>. Un ejemplo real del problema:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Con var: el scope es de FUNCIÓN, no de bloque</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Imprime: 3, 3, 3  &lt;- ¡todas imprimen el mismo valor final, no 0, 1, 2!</span>
+<span class="c1">// Esto ocurre porque las 3 funciones comparten la MISMA variable &quot;i&quot; (scope de función)</span>
+
+<span class="c1">// Con let: el scope es de BLOQUE — cada vuelta del bucle tiene su propia &quot;i&quot;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Imprime: 0, 1, 2  &lt;- el resultado esperado</span>
+</code></pre></div>
+<p>Este es exactamente el tipo de bug que <code>let</code>/<code>const</code> eliminan de raíz. Por eso, en código
+moderno, <strong><code>var</code> prácticamente no se usa nunca</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -842,8 +919,8 @@
 <tr>
 <td><strong>Redeclarable</strong></td>
 <td>Sí (en el mismo ámbito)</td>
-<td>No</td>
-<td>No</td>
+<td>No — da error</td>
+<td>No — da error</td>
 </tr>
 <tr>
 <td><strong>Hoisting</strong></td>
@@ -863,49 +940,163 @@
 <span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Ana María&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// VÁLIDO: Mutación de propiedad</span>
 <span class="c1">// usuario = {};              // ERROR: TypeError (Reasignación de referencia)</span>
 </code></pre></div>
+<p><strong>Regla práctica para decidir:</strong> empieza siempre por <code>const</code>. Si más adelante descubres que
+necesitas reasignar esa variable, cámbiala a <code>let</code>. Así el propio código documenta qué
+variables van a cambiar y cuáles no — y el motor de JS puede avisarte si intentas reasignar
+algo que no debería cambiar.</p>
 <h3 id="tipos-de-datos-primitivos-y-complejos">Tipos de Datos Primitivos y Complejos</h3>
-<p>JavaScript clasifica sus tipos de datos en dos grandes categorías:</p>
-<ol>
-<li><strong>Primitivos (Inmutables, pasados por valor):</strong></li>
-<li><code>Number</code>: Enteros y coma flotante (ej. <code>42</code>, <code>3.14</code>). Incluye valores especiales: <code>NaN</code> (<em>Not a Number</em>), <code>Infinity</code>, <code>-Infinity</code>.</li>
-<li><code>String</code>: Cadenas de texto (<code>"texto"</code>, <code>'texto'</code>, <code>template string</code>).</li>
-<li><code>Boolean</code>: <code>true</code> o <code>false</code>.</li>
-<li><code>Undefined</code>: Variable declarada pero sin valor asignado.</li>
-<li><code>Null</code>: Ausencia intencionada de valor (representa un objeto "vacío").</li>
-<li><code>Symbol</code>: Identificador único e inmutable (ES6).</li>
-<li>
-<p><code>BigInt</code>: Enteros de precisión arbitraria para números extremadamente grandes (<code>10n</code>).</p>
-</li>
-<li>
-<p><strong>Complejos / Referencia (Mutables, pasados por referencia):</strong></p>
-</li>
-<li><code>Object</code>: Estructuras clave-valor (incluye Arrays, Funciones, Fechas, Expresiones Regulares).</li>
-</ol>
-<h3 id="coercion-de-tipos-y-comparacion-estricta">Coerción de Tipos y Comparación Estricta</h3>
-<p>JavaScript realiza conversión automática de tipos (coerción implícita) al evaluar ciertos operadores. Para evitar errores sutiles, se debe priorizar la comparación estricta (<code>===</code>) sobre la débil (<code>==</code>).</p>
+<p>JavaScript clasifica sus tipos de datos en dos grandes categorías, y la diferencia entre
+ambas no es solo académica — determina cómo se comportan al copiarlos (lo vemos en el
+siguiente apartado).</p>
+<p><strong>1. Primitivos</strong> (inmutables, se copian por valor):</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué es</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Number</code></td>
+<td>Enteros y decimales — JS no distingue entre ambos, todo es <code>Number</code></td>
+<td><code>42</code>, <code>3.14</code>, <code>-7</code></td>
+</tr>
+<tr>
+<td><code>String</code></td>
+<td>Cadenas de texto</td>
+<td><code>"hola"</code>, <code>'hola'</code>, <code>`hola`</code></td>
+</tr>
+<tr>
+<td><code>Boolean</code></td>
+<td>Verdadero o falso</td>
+<td><code>true</code>, <code>false</code></td>
+</tr>
+<tr>
+<td><code>Undefined</code></td>
+<td>Una variable que existe pero a la que nunca se le ha asignado un valor</td>
+<td><code>let x; // x es undefined</code></td>
+</tr>
+<tr>
+<td><code>Null</code></td>
+<td>Ausencia de valor asignada <strong>a propósito</strong> por el programador</td>
+<td><code>let seleccion = null;</code></td>
+</tr>
+<tr>
+<td><code>Symbol</code></td>
+<td>Un identificador único que nunca coincide con otro, ni aunque tenga la misma descripción</td>
+<td><code>Symbol("id") !== Symbol("id")</code></td>
+</tr>
+<tr>
+<td><code>BigInt</code></td>
+<td>Enteros de tamaño arbitrario, para cuando <code>Number</code> se queda corto</td>
+<td><code>9007199254740993n</code></td>
+</tr>
+</tbody>
+</table>
+<p>Dos casos especiales de <code>Number</code> que sorprenden a quien empieza:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">        </span><span class="c1">// Infinity (no es un error, es un valor válido)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hola&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// NaN (&quot;Not a Number&quot; — resultado de una operación numérica imposible)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="kc">NaN</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;number&quot;  &lt;- NaN ES de tipo number, aunque su nombre confunda</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">NaN</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">NaN</span><span class="p">);</span><span class="w">  </span><span class="c1">// false  &lt;- NaN nunca es igual a sí mismo; para comprobarlo usa Number.isNaN(valor)</span>
+</code></pre></div>
+<p><strong>Undefined vs. Null — la diferencia que confunde a todo el mundo al principio:</strong></p>
+<ul>
+<li><code>undefined</code> lo pone JavaScript automáticamente cuando algo no tiene valor todavía (una
+  variable declarada sin asignar, un parámetro que no se pasó, una propiedad que no existe).</li>
+<li><code>null</code> lo pones <strong>tú</strong>, explícitamente, para decir "aquí no hay nada, y es intencionado".</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined -- JS lo puso, tú no has hecho nada todavía</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">sesionActiva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// tú decides explícitamente que no hay sesión</span>
+</code></pre></div>
+<p><strong>2. Complejos / Referencia</strong> (mutables, se copian por referencia):</p>
+<ul>
+<li><code>Object</code>: la categoría que engloba todo lo demás — objetos literales <code>{}</code>, arrays <code>[]</code>,
+  funciones, fechas (<code>Date</code>), expresiones regulares... En JavaScript, casi todo lo que no es
+  primitivo es, por debajo, un objeto.</li>
+</ul>
+<h3 id="valor-vs-referencia-como-se-guardan-los-datos">Valor vs. Referencia: Cómo se Guardan los Datos</h3>
+<p>La distinción entre primitivos y complejos no es solo una etiqueta de categoría: determina
+<strong>qué ocurre realmente en memoria</strong> cuando asignas una variable a otra o la pasas como
+argumento a una función.</p>
+<ul>
+<li><strong>Primitivos → Copia por Valor:</strong> cada variable guarda su propio valor, independiente de las
+  demás. Modificar una copia nunca afecta al original.</li>
+<li><strong>Objetos → Copia por Referencia:</strong> la variable no contiene el objeto en sí, sino una
+  dirección que apunta a él en memoria. Copiar la variable copia la dirección, no el
+  contenido — ambas variables terminan apuntando al mismo objeto.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Primitivos: copia por VALOR</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">copiaEdad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">edad</span><span class="p">;</span>
+<span class="nx">copiaEdad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">30</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">edad</span><span class="p">,</span><span class="w"> </span><span class="nx">copiaEdad</span><span class="p">);</span><span class="w"> </span><span class="c1">// 25 30 — no se afectan entre sí</span>
+
+<span class="c1">// Objetos: copia por REFERENCIA</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">otraVariable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w"> </span><span class="c1">// copia la REFERENCIA, no el objeto</span>
+<span class="nx">otraVariable</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Laura&quot;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;Laura&quot; -- el &quot;original&quot; tambien cambio</span>
+</code></pre></div>
+<p>Esto explica por qué, más adelante, técnicas como el operador <em>spread</em> (<code>{ ...objeto }</code>) son
+necesarias para crear una copia real e independiente de un objeto — sin <em>spread</em>, solo
+estarías creando una segunda referencia al mismo dato.</p>
+<p><strong>Consecuencia práctica al comparar objetos:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// false -- son dos objetos DISTINTOS en memoria, aunque su contenido sea igual</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// true  -- es literalmente el mismo objeto</span>
+</code></pre></div>
+<h3 id="coercion-de-tipos-valores-truthyfalsy-y-comparacion-estricta">Coerción de Tipos, Valores <em>Truthy</em>/<em>Falsy</em> y Comparación Estricta</h3>
+<p>JavaScript realiza conversión automática de tipos (<strong>coerción implícita</strong>) al evaluar ciertos
+operadores. Para entender la coerción hace falta primero saber qué valores se consideran
+"falsos" cuando JavaScript necesita tratarlos como un booleano.</p>
+<p><strong>Los valores <em>falsy</em> (solo hay 8, apréndetelos de memoria):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">NaN</span>
+</code></pre></div>
+<p><strong>Todo lo demás es <em>truthy</em></strong> — incluido, y esto sorprende mucho a quien empieza:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- es un STRING no vacío, aunque contenga el texto &quot;0&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">([]));</span><span class="w">       </span><span class="c1">// true  -- un array vacío es un objeto, y los objetos siempre son truthy</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">({}));</span><span class="w">       </span><span class="c1">// true  -- igual que arriba</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- un espacio en blanco NO es un string vacío</span>
+</code></pre></div>
+<p>Con esta base, la coerción tiene más sentido:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Coerción Implícita (Evitar)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// &quot;55&quot; (Number se convierte a String)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">    </span><span class="c1">// 8   (String se convierte a Number)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// true (Coerción implícita de tipos)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// true (false se convierte a 0, y 0 == 0)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">     </span><span class="c1">// true (&quot;&quot; se convierte a 0)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">);</span><span class="w"> </span><span class="c1">// true (caso especial: solo son == entre sí)</span>
 
-<span class="c1">// Comparación Estricta (Recomendado)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// false (Compara valor Y tipo de dato)</span>
+<span class="c1">// Comparación Estricta (Recomendado SIEMPRE)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// false (Compara valor Y tipo de dato, sin convertir nada)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
 
-<span class="c1">// Coerción Explícita</span>
+<span class="c1">// Coerción Explícita (cuando SÍ quieres convertir, hazlo tú mismo y que se note en el código)</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">numeroTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;42&quot;</span><span class="p">;</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">numeroReal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">numeroTexto</span><span class="p">);</span><span class="w"> </span><span class="c1">// Conversión explícita a Number</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">numeroReal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">numeroTexto</span><span class="p">);</span><span class="w">   </span><span class="c1">// 42</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">comoTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span><span class="w">             </span><span class="c1">// &quot;100&quot;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">comoBooleano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot;cualquier cosa&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
 </code></pre></div>
+<p><strong>Regla de oro de esta unidad:</strong> usa siempre <code>===</code> y <code>!==</code>. El operador <code>==</code> existe por
+compatibilidad histórica, pero sus reglas de conversión son tan irregulares que ni los
+desarrolladores con años de experiencia las recuerdan todas de memoria — no vale la pena
+arriesgarse a un bug por ahorrarte un carácter.</p>
 <hr />
 <h2 id="2-declaracion-e-invocacion-de-funciones">2. Declaración e Invocación de Funciones</h2>
-<p>En JavaScript, las funciones son <strong>ciudadanos de primera clase</strong> (<em>First-Class Citizens</em>): se pueden almacenar en variables, pasar como argumentos y retornar desde otras funciones.</p>
+<p>En JavaScript, las funciones son <strong>ciudadanos de primera clase</strong> (<em>First-Class Citizens</em>): se
+pueden almacenar en variables, pasar como argumentos y retornar desde otras funciones — se
+tratan como cualquier otro valor (un <code>Number</code>, un <code>String</code>...).</p>
 <h3 id="formas-de-declarar-funciones">Formas de Declarar Funciones</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// 1. Declaración de Función (Sujeta a Hoisting)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. Declaración de Función (Sujeta a Hoisting completo)</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">sumar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// 2. Expresión de Función (No inicializada hasta su ejecución)</span>
+<span class="c1">// 2. Expresión de Función (No inicializada hasta que se ejecuta esa línea)</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">restar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
 <span class="p">};</span>
@@ -913,11 +1104,79 @@
 <span class="c1">// 3. Función Flecha (Arrow Function - ES6)</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">multiplicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// Retorno implícito para expresiones de una línea</span>
 </code></pre></div>
+<p>¿Cuál usar? Como regla práctica: usa <strong>arrow functions</strong> para casi todo (callbacks, funciones
+cortas, métodos de array), usa <strong>función declarada</strong> cuando quieras aprovechar el <em>hoisting</em>
+(por ejemplo, funciones auxiliares que se llaman desde arriba de donde se definen), y usa
+<strong>expresión de función tradicional</strong> solo cuando necesites las capacidades que las arrow
+functions no tienen — que es justo lo que viene ahora.</p>
+<h3 id="las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar">Las Limitaciones de las Arrow Functions (Importante — se te puede escapar)</h3>
+<p>Las arrow functions no son solo "una forma más corta de escribir funciones". Son <strong>estructuralmente
+distintas</strong> por dentro, y eso significa que hay cosas que NO puedes hacer con ellas. Estas
+limitaciones aparecen constantemente en exámenes y en bugs reales de principiante:</p>
+<p><strong>1. No tienen su propio <code>this</code> (ni <code>super</code>)</strong></p>
+<p>Ya lo vimos en el apartado 4, pero merece repetirse aquí: una arrow function <strong>hereda</strong> el
+<code>this</code> del lugar donde fue escrita, nunca tiene el suyo propio. Esto es justo lo que la hace
+peligrosa como método de un objeto (ver el ejemplo de la sección 4) y, a la vez, lo que la
+hace perfecta como callback dentro de un método (porque hereda el <code>this</code> correcto del método
+que la contiene).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">valor</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">incrementar</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Aquí &quot;this&quot; es &quot;contador&quot;, correctamente</span>
+<span class="w">    </span><span class="nx">setInterval</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// la arrow function HEREDA el &quot;this&quot; correcto de incrementar()</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<p><strong>2. No tienen el objeto <code>arguments</code></strong></p>
+<p>Las funciones tradicionales reciben automáticamente un objeto especial llamado <code>arguments</code>
+con todos los argumentos pasados, aunque no estén declarados como parámetros. Las arrow
+functions no lo tienen:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sumaTodo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// [1, 2, 3] -- funciona, aunque no se declararon parámetros</span>
+<span class="p">}</span>
+<span class="nx">sumaTodo</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">sumaTodoFlecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// ReferenceError: arguments is not defined</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Si necesitas algo parecido en una arrow function, usa el parámetro <em>rest</em> que ya viste:
+<code>const sumaTodo = (...args) =&gt; { console.log(args); }</code>.</p>
+<p><strong>3. No son aptas para <code>call</code>, <code>apply</code> y <code>bind</code></strong></p>
+<p>Estos tres métodos sirven para ejecutar una función indicando manualmente cuál será su
+<code>this</code>. Como una arrow function ya tiene su <code>this</code> fijado (heredado) desde el momento en que
+se escribió, intentar cambiárselo con <code>call</code>/<code>apply</code>/<code>bind</code> simplemente no tiene efecto:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">objeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sala A&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">normal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">flecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nx">normal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;Sala A&quot; -- call() SÍ puede fijar el &quot;this&quot;</span>
+<span class="nx">flecha</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// no funciona como esperas -- flecha ya tenía su &quot;this&quot; decidido de antes</span>
+</code></pre></div>
+<p><strong>4. No se pueden usar como constructor (con <code>new</code>)</strong></p>
+<p>Un constructor necesita crear su propio <code>this</code> (la nueva instancia). Como una arrow function
+no puede tener su propio <code>this</code>, JavaScript directamente prohíbe usarlas con <code>new</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">Persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// TypeError: Persona is not a constructor</span>
+</code></pre></div>
+<p><strong>5. No pueden usar <code>yield</code> (no pueden ser funciones generadoras)</strong></p>
+<p>Esto es más avanzado y lo verás si trabajas con <em>generadores</em> — por ahora basta con saber que
+existe esta limitación adicional.</p>
+<p><strong>En resumen:</strong> las arrow functions son geniales para callbacks cortos y para cuando quieres
+heredar el <code>this</code> de fuera — pero cuando necesites un método de un objeto que use <code>this</code>, un
+constructor, o acceso a <code>arguments</code>, usa una función tradicional (declarada o expresión).</p>
 <h3 id="parametros-por-defecto-y-parametros-rest">Parámetros por Defecto y Parámetros Rest</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// Parámetros por defecto</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// Parámetros por defecto: se usan SOLO si el argumento llega como undefined</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">saludar</span><span class="p">(</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Invitado&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">rol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Usuario&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola </span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">, tu rol es </span><span class="si">${</span><span class="nx">rol</span><span class="si">}</span><span class="sb">.`</span><span class="p">;</span>
 <span class="p">}</span>
+<span class="nx">saludar</span><span class="p">();</span><span class="w">              </span><span class="c1">// &quot;Hola Invitado, tu rol es Usuario.&quot;</span>
+<span class="nx">saludar</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">);</span><span class="w">          </span><span class="c1">// &quot;Hola Ana, tu rol es Usuario.&quot;</span>
+<span class="nx">saludar</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w">    </span><span class="c1">// &quot;Hola Ana, tu rol es null&quot; -- ¡null NO activa el valor por defecto, solo undefined lo hace!</span>
 
 <span class="c1">// Parámetros Rest (...args): Agrupa argumentos restantes en un Array</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">calcularSumaTotal</span><span class="p">(</span><span class="nx">factor</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">numeros</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -927,18 +1186,24 @@
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">calcularSumaTotal</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">));</span><span class="w"> </span><span class="c1">// (10 + 20 + 30) * 2 = 120</span>
 </code></pre></div>
+<p>El parámetro <em>rest</em> siempre debe ser el <strong>último</strong> de la lista de parámetros — agrupa "todo lo
+que sobre", así que no tendría sentido que hubiera más parámetros después de él.</p>
 <hr />
 <h2 id="3-ambitos-de-variables-scope-y-hoisting">3. Ámbitos de Variables (<em>Scope</em>) y <em>Hoisting</em></h2>
 <p>El <strong>ámbito</strong> determina la accesibilidad de las variables en distintas partes del código.</p>
-<pre class="mermaid"><code>flowchart TD
+<div class="highlight"><pre><span></span><code>flowchart TD
     Global[Ámbito Global] --&gt;|Accesible por todos| FunctionScope[Ámbito de Función / Local]
     FunctionScope --&gt;|Accesible solo dentro| BlockScope[Ámbito de Bloque: let / const dentro de IF/FOR]
-</code></pre>
+</code></pre></div>
 <h3 id="tipos-de-ambito">Tipos de Ámbito</h3>
 <ol>
-<li><strong>Global Scope:</strong> Variables declaradas fuera de cualquier función o bloque. Accesibles desde cualquier lugar del script.</li>
-<li><strong>Function Scope:</strong> Variables declaradas con <code>var</code> dentro de una función. No son accesibles fuera de ella.</li>
-<li><strong>Block Scope:</strong> Variables declaradas con <code>let</code> y <code>const</code> dentro de un bloque <code>{}</code> (como un <code>if</code> o un bucle <code>for</code>).</li>
+<li><strong>Global Scope:</strong> Variables declaradas fuera de cualquier función o bloque. Accesibles
+   desde cualquier lugar del script. <strong>Cuidado:</strong> cuantas más variables globales tengas, más
+   fácil es que dos partes distintas del código se pisen sin querer — úsalas con moderación.</li>
+<li><strong>Function Scope:</strong> Variables declaradas con <code>var</code> dentro de una función. No son accesibles
+   fuera de ella.</li>
+<li><strong>Block Scope:</strong> Variables declaradas con <code>let</code> y <code>const</code> dentro de un bloque <code>{}</code> (como un
+   <code>if</code> o un bucle <code>for</code>).</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">evaluarAmbito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -952,10 +1217,15 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="hoisting-y-zona-muerta-temporal-tdz"><em>Hoisting</em> y Zona Muerta Temporal (<em>TDZ</em>)</h3>
-<p>El <em>Hoisting</em> es el comportamiento del motor de JS que eleva las declaraciones de funciones y variables al principio de su ámbito durante la fase de compilación.</p>
+<p>El <em>Hoisting</em> es el comportamiento del motor de JS que eleva las declaraciones de funciones y
+variables al principio de su ámbito durante la fase de compilación, <strong>antes</strong> de ejecutar
+ninguna línea de código.</p>
 <ul>
-<li><strong><code>var</code>:</strong> Se eleva y se inicializa como <code>undefined</code>.</li>
-<li><strong><code>let</code> / <code>const</code>:</strong> Se elevan, pero <strong>no se inicializan</strong>. Permanecen en la <strong>Zona Muerta Temporal (TDZ)</strong> desde el inicio del bloque hasta que se ejecuta su declaración.</li>
+<li><strong><code>var</code>:</strong> Se eleva y se inicializa como <code>undefined</code>. Por eso puedes "usarla" antes de
+  declararla sin que salte error — simplemente vale <code>undefined</code> hasta que llegue la línea real.</li>
+<li><strong><code>let</code> / <code>const</code>:</strong> Se elevan, pero <strong>no se inicializan</strong>. Permanecen en la <strong>Zona Muerta
+  Temporal (TDZ)</strong> desde el inicio del bloque hasta que se ejecuta su declaración — acceder a
+  ellas antes de esa línea lanza un error, no un <code>undefined</code> silencioso.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// Comportamiento de HOISTING con var</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">textoVar</span><span class="p">);</span><span class="w"> </span><span class="c1">// Imprime: undefined (no lanza error)</span>
@@ -965,14 +1235,27 @@
 <span class="c1">// console.log(textoLet); // ReferenceError: Cannot access &#39;textoLet&#39; before initialization</span>
 <span class="kd">let</span><span class="w"> </span><span class="nx">textoLet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Mundo&quot;</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Las funciones declaradas también sufren hoisting completo</strong> (se elevan CON su contenido, no
+solo su nombre) — por eso puedes llamarlas antes de donde aparecen escritas en el archivo:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">saluda</span><span class="p">();</span><span class="w"> </span><span class="c1">// funciona, aunque saluda() está definida más abajo</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">saluda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Esto <strong>no</strong> ocurre con las expresiones de función ni las arrow functions, porque para ellas
+solo se eleva la declaración de la variable (<code>const miFuncion</code>), no su contenido — y esa
+variable, al usar <code>const</code>, está en TDZ hasta su línea real.</p>
 <hr />
 <h2 id="4-contexto-de-ejecucion-y-la-palabra-clave-this">4. Contexto de Ejecución y la Palabra Clave <code>this</code></h2>
-<p>La palabra clave <code>this</code> hace referencia al <strong>objeto de contexto</strong> en el que se está ejecutando el código actual. Su valor depende de <em>cómo</em> se invoca la función:</p>
+<p>La palabra clave <code>this</code> hace referencia al <strong>objeto de contexto</strong> en el que se está ejecutando
+el código actual. A diferencia de otros lenguajes, en JavaScript el valor de <code>this</code> <strong>no se
+decide al escribir la función, sino al invocarla</strong> — depende de <em>cómo</em> se llama, no de dónde
+se define (excepto en las arrow functions, que son la excepción a esta regla).</p>
 <ol>
-<li><strong>Invocación directa:</strong> <code>this</code> apunta al objeto global (<code>window</code> en navegador, <code>global</code> en Node.js) o <code>undefined</code> en <em>strict mode</em>.</li>
+<li><strong>Invocación directa:</strong> <code>this</code> apunta al objeto global (<code>window</code> en navegador, <code>global</code> en
+   Node.js) o <code>undefined</code> en <em>strict mode</em>.</li>
 <li><strong>Invocación como método de un objeto:</strong> <code>this</code> apunta al objeto que posee el método.</li>
 <li><strong>Invocación con <code>new</code>:</strong> <code>this</code> apunta a la nueva instancia creada.</li>
-<li><strong>En <em>Arrow Functions</em>:</strong> Las funciones flecha **no tienen su propio <code>this**</code>. Heredan el contexto <code>this</code> del ámbito léxico donde fueron creadas.</li>
+<li><strong>En <em>Arrow Functions</em>:</strong> Las funciones flecha <strong>no tienen su propio <code>this</code></strong>. Heredan el
+   contexto <code>this</code> del ámbito léxico donde fueron creadas (ver limitaciones en la sección 2).</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span>
@@ -985,11 +1268,32 @@
 <span class="p">};</span>
 
 <span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarTradicional</span><span class="p">();</span><span class="w"> </span><span class="c1">// Imprime: &quot;Hola, soy Carlos&quot;</span>
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarFlecha</span><span class="p">();</span><span class="w">      </span><span class="c1">// Imprime: &quot;Hola, soy undefined&quot; (hereda &#39;this&#39; global)</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarFlecha</span><span class="p">();</span><span class="w">      </span><span class="c1">// Imprime: &quot;Hola, soy undefined&quot; (hereda &#39;this&#39; global, no el de usuario)</span>
+</code></pre></div>
+<p><strong>Un bug clásico de principiante</strong> relacionado con esto — perder el <code>this</code> al pasar un método
+como callback:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">etiqueta</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Enviar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">manejarClic</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Botón pulsado: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">etiqueta</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Si lo llamas directamente, funciona:</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">manejarClic</span><span class="p">();</span><span class="w"> </span><span class="c1">// &quot;Botón pulsado: Enviar&quot;</span>
+
+<span class="c1">// Pero si lo pasas como referencia (por ejemplo a un event listener), pierdes el &quot;this&quot;:</span>
+<span class="c1">// elemento.addEventListener(&quot;click&quot;, boton.manejarClic); // this ya NO sería &quot;boton&quot;</span>
+
+<span class="c1">// Solución típica: envolverlo en una arrow function para preservar el &quot;this&quot; correcto</span>
+<span class="c1">// elemento.addEventListener(&quot;click&quot;, () =&gt; boton.manejarClic());</span>
 </code></pre></div>
 <hr />
 <h2 id="5-closures-clausuras">5. <em>Closures</em> (Clausuras)</h2>
-<p>Un <strong>Closure</strong> es la combinación de una función y el entorno léxico en el que fue declarada. Permite a una función interna acceder al ámbito de su función externa incluso después de que la función externa haya finalizado su ejecución.</p>
+<p>Un <strong>Closure</strong> es la combinación de una función y el entorno léxico en el que fue declarada.
+Permite a una función interna acceder al ámbito de su función externa incluso después de que
+la función externa haya terminado de ejecutarse — el motor de JavaScript "recuerda" ese
+entorno y no lo destruye mientras algo siga necesitándolo.</p>
 <h3 id="caso-de-uso-encapsulamiento-y-variables-privadas">Caso de Uso: Encapsulamiento y Variables Privadas</h3>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">crearContador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">contadorPrivado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Variable encapsulada (inaccesible desde fuera)</span>
@@ -1015,10 +1319,29 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miContador</span><span class="p">.</span><span class="nx">obtenerValor</span><span class="p">());</span><span class="c1">// 2</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">miContador</span><span class="p">.</span><span class="nx">contadorPrivado</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined (Acceso directo bloqueado)</span>
 </code></pre></div>
+<p><strong>¿Por qué funciona esto?</strong> <code>contadorPrivado</code> vive dentro del scope de <code>crearContador()</code>. En
+principio, cuando una función termina, sus variables locales deberían desaparecer. Pero como
+los objetos que devolvemos (<code>incrementar</code>, <code>decrementar</code>, <code>obtenerValor</code>) siguen "usando"
+<code>contadorPrivado</code>, el motor de JavaScript mantiene viva esa variable en memoria — es un
+closure. Cada llamada a <code>crearContador()</code> crea un <code>contadorPrivado</code> <strong>completamente nuevo e
+independiente</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">contadorA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearContador</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">contadorB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearContador</span><span class="p">();</span>
+<span class="nx">contadorA</span><span class="p">.</span><span class="nx">incrementar</span><span class="p">();</span>
+<span class="nx">contadorA</span><span class="p">.</span><span class="nx">incrementar</span><span class="p">();</span>
+<span class="nx">contadorB</span><span class="p">.</span><span class="nx">incrementar</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contadorA</span><span class="p">.</span><span class="nx">obtenerValor</span><span class="p">());</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contadorB</span><span class="p">.</span><span class="nx">obtenerValor</span><span class="p">());</span><span class="w"> </span><span class="c1">// 1 -- totalmente independiente de contadorA</span>
+</code></pre></div>
+<p><strong>Otros usos habituales de los closures</strong> que verás más adelante en el curso: recordar
+configuración entre llamadas a una función (por ejemplo, una función que "recuerda" un factor
+de conversión), o crear funciones especializadas a partir de una más genérica.</p>
 <hr />
 <h2 id="6-funciones-de-alto-orden-higher-order-functions-y-callbacks">6. Funciones de Alto Orden (<em>Higher-Order Functions</em>) y Callbacks</h2>
-<p>Una <strong>Función de Alto Orden (HOF)</strong> es una función que acepta otras funciones como argumentos o las devuelve como resultado.</p>
-<p>Un <strong>Callback</strong> es la función que se pasa como argumento a otra función para ser ejecutada posteriormente.</p>
+<p>Una <strong>Función de Alto Orden (HOF)</strong> es una función que cumple al menos una de estas dos
+condiciones: acepta otra función como argumento, o <strong>devuelve</strong> una función como resultado.</p>
+<p>Un <strong>Callback</strong> es la función que se pasa como argumento a otra función para ser ejecutada
+posteriormente, normalmente dentro del cuerpo de la función que la recibió.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Función de Alto Orden que recibe un Callback</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">procesarEntradaUsuario</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">nombreFormateado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">();</span>
@@ -1030,6 +1353,25 @@
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Usuario registrado: </span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="p">});</span><span class="w"> </span><span class="c1">// Imprime: &quot;Usuario registrado: JUAN PÉREZ&quot;</span>
 </code></pre></div>
+<p><strong>El otro tipo de HOF: una función que devuelve otra función.</strong> Esto es extremadamente común
+en JavaScript moderno y se apoya directamente en los closures que acabas de ver:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// HOF que DEVUELVE una función, &quot;recordando&quot; el argumento con el que se creó</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">crearMultiplicador</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">numero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">numero</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">factor</span><span class="p">;</span><span class="w"> </span><span class="c1">// &quot;factor&quot; se recuerda gracias al closure</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">duplicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearMultiplicador</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">triplicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearMultiplicador</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">duplicar</span><span class="p">(</span><span class="mf">5</span><span class="p">));</span><span class="w">  </span><span class="c1">// 10</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triplicar</span><span class="p">(</span><span class="mf">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// 15</span>
+</code></pre></div>
+<p>Ya conoces algunas HOF integradas en JavaScript sin saberlo — <code>setTimeout(callback, tiempo)</code>
+es una HOF (recibe una función). En la próxima unidad verás varias más: <code>map()</code>, <code>filter()</code> y
+<code>reduce()</code> son, todas ellas, funciones de alto orden que reciben un callback para decidir qué
+hacer con cada elemento de un array.</p>
 
 
 
