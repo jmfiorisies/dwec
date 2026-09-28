@@ -4,16 +4,16 @@ theme:
   palette:
     # Modo Claro
     - scheme: default
-      primary: teal        # Mantiene el color verde/teal de tu cabecera
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
 
     # Modo Oscuro
     - scheme: slate
-      primary: teal
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Cambiar a modo claro
@@ -43,6 +43,15 @@ extra_javascript:
 
 extra_css:
   - stylesheets/extra.css
+
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+        'dwec/ud1.md': 'unidades/ud01.md'
+        'dwec/ud2.md': 'unidades/ud02.md'
+        'dwec/ud3.md': 'unidades/ud03.md'
+        'dwec/docker.md': 'https://jmfiorisies.github.io/tech/docker/'
 
 nav:
   - Inicio: index.md
