@@ -41,7 +41,7 @@ flowchart TD
 
 ## 📚 Estructura Detallada del Plan de Estudios
 
-### 🟢 1.ª Evaluación: Vanilla JavaScript (44 horas)
+### 🟢 1.ª Evaluación: Vanilla JavaScript (63 horas)
 
 | Unidad Didáctica | Subunidades y Bloques Temáticos | Competencia Principal |
 | :--- | :--- | :--- |
@@ -49,21 +49,21 @@ flowchart TD
 | **UD 2: Sintaxis, Tipos y Funciones (RA2)** | Gestión de memoria (`let`, `const`), tipos de datos, funciones de primera clase, *closures* y *scope* | Dominar la sintaxis básica, la tipografía de datos y la programación funcional inicial |
 | **UD 3: Control de Flujo, Bucles y Arrays (RA2)** | Estructuras condicionales, iterativas y métodos funcionales de array (`map`, `filter`, `reduce`) | Implementar la lógica de control del programa y la manipulación avanzada de colecciones |
 | **UD 4: Objetos y Programación Orientada a Objetos (RA3)** | Objetos literales, clases, prototipos, herencia y encapsulamiento | Diseñar modelos de datos y estructuras de código reutilizables mediante POO |
-| **UD 5: DOM Nativo y Gestión de Eventos (RA3)** | Árbol DOM, manipulación dinámica, ciclo de eventos (*bubbling*, *capturing*) y delegación | Manipular el árbol del documento y gestionar la interactividad con el usuario |
-| **UD 6: Asincronía y Almacenamiento — Storage/Vite (RA3)** | Event Loop, Promesas, `async/await`, API Fetch, `localStorage`/`sessionStorage` y herramientas de construcción como Vite | Integrar peticiones a APIs externas, persistencia en cliente y compilación del proyecto |
+| **UD 5: DOM Nativo y Gestión de Eventos (RA4)** | Árbol DOM, manipulación dinámica, ciclo de eventos (*bubbling*, *capturing*) y delegación | Manipular el árbol del documento y gestionar la interactividad con el usuario |
+| **UD 6: Asincronía y Almacenamiento — Storage/Vite (RA4)** | Event Loop, Promesas, `async/await`, API Fetch, `localStorage`/`sessionStorage` y herramientas de construcción como Vite | Integrar peticiones a APIs externas, persistencia en cliente y compilación del proyecto |
 
 ---
 
-### 🟡 2.ª Evaluación: React (40 horas)
+### 🟡 2.ª Evaluación: React (48 horas)
 
 | Unidad Didáctica | Subunidades y Bloques Temáticos | Competencia Principal |
 | --- | --- | --- |
-| **UD 7: React Core, JSX y Arquitectura Frontend (RA4)** | Evolución de las arquitecturas web, Virtual DOM y Fiber, JSX, Props y Composición | Diseñar la arquitectura base de una SPA con React |
+| **UD 7: React Core, JSX y Arquitectura Frontend (RA5)** | Evolución de las arquitecturas web, Virtual DOM y Fiber, JSX, Props y Composición | Diseñar la arquitectura base de una SPA con React |
 | **UD 8: Eventos y Estado con `useState` (RA5)** | Eventos sintéticos, estado local y *custom hooks* | Gestionar la interactividad y el estado de un componente |
-| **UD 9: Formularios y Validaciones (RA5)** | Formularios controlados/no controlados, React Hook Form y Zod | Capturar y validar datos de usuario |
+| **UD 9: Formularios y Validaciones (RA6)** | Formularios controlados/no controlados, React Hook Form y Zod | Capturar y validar datos de usuario |
 | **UD 10: `useRef`, Rendimiento y React Fiber (RA6)** | Acceso al DOM con `useRef`, `useMemo`, `useCallback`, `React.memo` y `Suspense` | Optimizar el rendimiento de renderizado |
-| **UD 11: `useEffect`, BOM y React Router (RA6)** | Ciclo de vida, efectos secundarios y enrutamiento SPA | Sincronizar componentes con sistemas externos y rutas |
-| **UD 12: Context API y Estado Global (RA6)** | `createContext`, `useContext`, *Prop Drilling* y comparativa con Zustand/Redux | Gestionar el estado global sin acoplamiento excesivo |
+| **UD 11: `useEffect`, BOM y React Router (RA7)** | Ciclo de vida, efectos secundarios y enrutamiento SPA | Sincronizar componentes con sistemas externos y rutas |
+| **UD 12: Context API y Estado Global (RA7)** | `createContext`, `useContext`, *Prop Drilling* y comparativa con Zustand/Redux | Gestionar el estado global sin acoplamiento excesivo |
 
 ---
 

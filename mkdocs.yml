@@ -63,10 +63,10 @@ nav:
           - "Visión General": unidades/ud03.md
           - "3.1 Batería de Ejercicios": unidades/ud03-1-ejercicios.md
       # - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
-      # - "UD 5: DOM Nativo y Gestión de Eventos (RA3)": unidades/ud05.md
-      # - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA3)": unidades/ud06.md
+      # - "UD 5: DOM Nativo y Gestión de Eventos (RA4)": unidades/ud05.md
+      # - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)": unidades/ud06.md
   # - 🟡 2.ª Evaluación (React):
-  #     - "UD 7: React Core, JSX y Arquitectura Frontend (RA4)":
+  #     - "UD 7: React Core, JSX y Arquitectura Frontend (RA5)":
   #         - "Visión General": unidades/ud07.md
   #         - "7.1 React: Arquitectura Interna, Virtual DOM, Fiber y Hooks": unidades/ud07-1-frameworks.md
   #         - "7.2 Props, Composición y Reutilización": unidades/ud07-2-props-composicion.md
@@ -74,7 +74,7 @@ nav:
   #         - "Visión General": unidades/ud08.md
   #         - "8.1 Eventos Sintéticos y Manejo de Interacciones": unidades/ud08-1-eventos.md
   #         - "8.2 Estado Local con useState y Custom Hooks": unidades/ud08-2-usestate-hooks.md
-  #     - "UD 9: Formularios y Validaciones (RA5)":
+  #     - "UD 9: Formularios y Validaciones (RA6)":
   #         - "Visión General": unidades/ud09.md
   #         - "9.1 Formularios Controlados y No Controlados": unidades/ud09-1-formularios-controlados.md
   #         - "9.2 React Hook Form y Validaciones con Zod": unidades/ud09-2-react-hook-form-zod.md
@@ -83,11 +83,11 @@ nav:
   #         - "10.1 Referencias al DOM con useRef": unidades/ud10-1-acceso-dom-useref.md
   #         - "10.2 Optimización de Rendimiento (useMemo, useCallback, memo)": unidades/ud10-2-optimizacion-rendimiento.md
   #         - "10.3 Resiliencia y Suspense": unidades/ud10-3-resiliencia-suspense.md
-  #     - "UD 11: useEffect, BOM y React Router (RA6)":
+  #     - "UD 11: useEffect, BOM y React Router (RA7)":
   #         - "Visión General": unidades/ud11.md
   #         - "11.1 Ciclo de Vida y Efectos Secundarios (useEffect)": unidades/ud11-1-ciclo-vida-useeffect.md
   #         - "11.2 Enrutamiento SPA con React Router": unidades/ud11-2-enrutamiento-react-router.md
-  #     - "UD 12: Context API y Estado Global (RA6)": unidades/ud12.md
+  #     - "UD 12: Context API y Estado Global (RA7)": unidades/ud12.md
   # - Material adicional (sin asignar en la programación 26/27):
   #     - "UD 13: Gestión de Estado Servidor y Asincronía Avanzada (RA6)":
   #         - "Visión General": unidades/ud13.md
