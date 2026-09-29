@@ -1,6 +1,7 @@
 site_name: Apuntes DWEC - Desarrollo Web en Entorno Cliente
 theme:
   name: material
+  language: es
   palette:
     # Modo Claro
     - scheme: default
@@ -55,11 +56,12 @@ plugins:
 
 nav:
   - Inicio: index.md
-nav:
   - 🟢 1.ª Evaluación (Vanilla JS):
       - "UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)": unidades/ud01.md
       - "UD 2: Sintaxis, Tipos y Funciones (RA2)": unidades/ud02.md
-      - "UD 3: Control de Flujo, Bucles y Arrays (RA2)": unidades/ud03.md
+      - "UD 3: Control de Flujo, Bucles y Arrays (RA2)":
+          - "Visión General": unidades/ud03.md
+          - "3.1 Batería de Ejercicios": unidades/ud03-1-ejercicios.md
       # - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
       # - "UD 5: DOM Nativo y Gestión de Eventos (RA3)": unidades/ud05.md
       # - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA3)": unidades/ud06.md
