@@ -93,12 +93,12 @@ timeline
         15 Sep - 15 Oct : UD1 a UD3 : Fundamentos JS y Control de Flujo
         16 Oct - 27 Oct : Práctica 1 : Examen Parcial 1
         28 Oct - 27 Nov : UD4 a UD6 : POO, DOM/Eventos y Asincronía
-        28 Nov - 30 Nov : Examen Final 1.er Trimestre
+        28 Nov - 30 Nov : Examen Parcial 2
     section ❄️ 2.ª Evaluación (40h)
         01 Dic - 18 Dic : UD7 y UD8 : React Core y useState
-        21 Dic - 13 Ene : Práctica 4 : Examen Parcial 2 (tras Navidad)
+        21 Dic - 13 Ene : Práctica 4 : Examen Parcial 3 (tras Navidad)
         14 Ene - 05 Feb : UD9 a UD12 : Formularios, Rendimiento, useEffect y Context API
-        08 Feb - 12 Feb : Práctica 5 : Examen Final Ordinario
+        08 Feb - 12 Feb : Práctica 5 : Examen Parcial 4
 ```
 
 | Sem. | Fechas | Horas | Contenido / Hito |
@@ -113,18 +113,18 @@ timeline
 | — | 16 Nov – 18 Nov | 2h | 📋 **Práctica 2:** POO y Manipulación del DOM |
 | — | 19 Nov – 24 Nov | 6h | **UD6:** Asincronía y Almacenamiento (Storage/Vite) |
 | — | 25 Nov – 27 Nov | 2h | 📋 **Práctica 3:** Asincronía y Persistencia Local |
-| — | 28 Nov – 30 Nov | 2h | 📝 **Examen Final 1.er Trimestre** (UD1 → UD6) |
+| — | 28 Nov – 30 Nov | 2h | 📝 **Examen Parcial 2** (UD4 → UD6) |
 | — | 01 Dic – 11 Dic | 5h | **UD7:** React Core, JSX y Arquitectura Frontend |
 | — | 14 Dic – 18 Dic | 5h | **UD8:** Eventos y Estado con `useState` |
 | — | 21 Dic – 22 Dic | 2h | 📋 **Práctica 4:** Componentes React y Estado |
 | 🎄 | 23 Dic – 08 Ene | — | Vacaciones de Navidad |
-| — | 11 Ene – 13 Ene | 2h | 📝 **Examen Parcial 2** (UD7 → UD8) |
+| — | 11 Ene – 13 Ene | 2h | 📝 **Examen Parcial 3** (UD7 → UD8) |
 | — | 14 Ene – 20 Ene | 5h | **UD9:** Formularios y Validaciones |
 | — | 21 Ene – 27 Ene | 5h | **UD10:** `useRef`, Rendimiento y React Fiber |
 | — | 28 Ene – 02 Feb | 5h | **UD11:** `useEffect`, BOM y React Router |
 | — | 03 Feb – 05 Feb | 5h | **UD12:** Context API y Estado Global |
 | — | 08 Feb – 09 Feb | 2h | 📋 **Práctica 5:** Formularios, Rendimiento y Estado Global |
-| — | 10 Feb – 12 Feb | 4h | 📝 **Examen Final Ordinario** (UD1 → UD12) |
+| — | 10 Feb – 12 Feb | 4h | 📝 **Examen Parcial 4** (UD9 → UD12) |
 
 ---
 
@@ -149,7 +149,7 @@ timeline
 | **Ciclo Formativo** | 2.º CFGS Desarrollo de Aplicaciones Web (DAW) / Multiplataforma (DAM) |
 | **Carga Horaria** | 84 horas (12 Unidades Didácticas) |
 | **Inicio de Clases** | 15 de septiembre de 2026 |
-| **Examen Final Ordinario** | 12 de febrero de 2027 |
+| **Examen Parcial 4** | 12 de febrero de 2027 |
 
 ---
 
