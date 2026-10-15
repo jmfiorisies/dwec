@@ -52,6 +52,7 @@ plugins:
         'dwec/ud1.md': 'unidades/ud01.md'
         'dwec/ud2.md': 'unidades/ud02.md'
         'dwec/ud3.md': 'unidades/ud03.md'
+        'dwec/ud4.md': 'unidades/ud04.md'
         'dwec/docker.md': 'https://jmfiorisies.github.io/tech/docker/'
 
 nav:
@@ -62,7 +63,7 @@ nav:
       - "UD 3: Control de Flujo, Bucles y Arrays (RA2)":
           - "Visión General": unidades/ud03.md
           - "3.1 Batería de Ejercicios": unidades/ud03-1-ejercicios.md
-      # - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
+      - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
       # - "UD 5: DOM Nativo y Gestión de Eventos (RA4)": unidades/ud05.md
       # - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)": unidades/ud06.md
   # - 🟡 2.ª Evaluación (React):

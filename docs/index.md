@@ -48,7 +48,7 @@ flowchart TD
 | **UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)** | Entornos de ejecución (Navegador vs. Node.js), arquitecturas cliente/servidor, editores, linter y control de versiones | Configurar el entorno de desarrollo y comprender la arquitectura cliente/servidor |
 | **UD 2: Sintaxis, Tipos y Funciones (RA2)** | Gestión de memoria (`let`, `const`), tipos de datos, funciones de primera clase, *closures* y *scope* | Dominar la sintaxis básica, la tipografía de datos y la programación funcional inicial |
 | **UD 3: Control de Flujo, Bucles y Arrays (RA2)** | Estructuras condicionales, iterativas y métodos funcionales de array (`map`, `filter`, `reduce`) | Implementar la lógica de control del programa y la manipulación avanzada de colecciones |
-| **UD 4: Objetos y Programación Orientada a Objetos (RA3)** | Objetos literales, clases, prototipos, herencia y encapsulamiento | Diseñar modelos de datos y estructuras de código reutilizables mediante POO |
+| **UD 4: Objetos y Programación Orientada a Objetos (RA3)** | Objetos literales, prototipos, clases, herencia, encapsulamiento, composición y objetos nativos (`Math`, `Date`, `String`, `Intl`, `Error`) | Diseñar modelos de datos y estructuras de código reutilizables mediante POO |
 | **UD 5: DOM Nativo y Gestión de Eventos (RA4)** | Árbol DOM, manipulación dinámica, ciclo de eventos (*bubbling*, *capturing*) y delegación | Manipular el árbol del documento y gestionar la interactividad con el usuario |
 | **UD 6: Asincronía y Almacenamiento — Storage/Vite (RA4)** | Event Loop, Promesas, `async/await`, API Fetch, `localStorage`/`sessionStorage` y herramientas de construcción como Vite | Integrar peticiones a APIs externas, persistencia en cliente y compilación del proyecto |
 
