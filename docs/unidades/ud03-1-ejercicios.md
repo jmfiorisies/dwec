@@ -1,7 +1,8 @@
 # UD 3.1 · Batería de Ejercicios: Control de Flujo, Bucles y Arrays
 
-14 ejercicios principales (de truthy/falsy hasta `reduce`) + un bloque extra de 4 ejercicios
-sobre `find`, `findIndex`, `some`, `every` e `includes`.
+14 ejercicios principales (de truthy/falsy hasta `reduce`), un bloque extra de 4 ejercicios
+sobre `find`, `findIndex`, `some`, `every` e `includes`, y un bloque 5 de `??`, *spread*,
+destructuring y métodos encadenados.
 
 !!! tip "Antes de empezar"
     Repasa la [teoría de la UD3](ud03.md) y ten a mano la
@@ -278,3 +279,97 @@ Usando `pedidosTienda`:
 3. Calcula con `reduce()` el total acumulado de esos pedidos filtrados.
 4. Busca con `find()` el pedido de mayor total entre todos (pista: puedes combinarlo con
    `reduce()` para comparar, o recorrer y comparar el `total`).
+
+---
+
+## Bloque 5 · `??`, *spread*, destructuring y métodos encadenados
+
+Para los ejercicios 21 a 27 usa esta carta:
+
+```javascript
+const carta = [
+  { id: 1, nombre: "Café solo", categoria: "bebida", precio: 1.2, stock: 10 },
+  { id: 2, nombre: "Latte", categoria: "bebida", precio: 2.4, stock: 2 },
+  { id: 3, nombre: "Tostada", categoria: "comida", precio: 2.0, stock: 0 },
+  { id: 4, nombre: "Croissant", categoria: "comida", precio: 1.8, stock: 1 },
+  { id: 5, nombre: "Zumo", categoria: "bebida", precio: 3.0, stock: 6 },
+];
+```
+
+### Ejercicio 19 — `||` frente a `??`: predicción
+
+Escribe en un comentario qué crees que imprime cada línea y luego compruébalo:
+
+```javascript
+console.log(0 || 5, 0 ?? 5);
+console.log("" || "vacío", "" ?? "vacío");
+console.log(null || "x", null ?? "x");
+console.log(false || true, false ?? true);
+console.log(undefined?.nombre ?? "nada");
+```
+
+---
+
+### Ejercicio 20 — Precio con `??`
+
+Escribe `mostrarPrecio(producto)` que devuelva `"Gratis"` si el precio es `0`, el precio con
+`" €"` si existe, y `"Precio no disponible"` si la propiedad `precio` no existe o es `null`.
+Pruébala con `{ precio: 0 }`, `{ precio: 2.5 }`, `{}` y `{ precio: null }`.
+
+---
+
+### Ejercicio 21 — Buscar sin que explote: `find` + `?.` + `??`
+
+Escribe `stockDe(lista, id)` que devuelva el stock del producto o `-1` si no existe. **Debe
+devolver `0` (no `-1`) para un producto agotado**: compruébalo con la Tostada.
+
+---
+
+### Ejercicio 22 — Actualizar y quitar sin mutar
+
+1. Escribe `reponer(lista, id, unidades)` que devuelva un **array nuevo** con el stock del
+   producto sumado. Comprueba con `===` que `carta` no ha cambiado y que los productos no
+   tocados son los mismos objetos.
+2. Escribe `quitarProducto(lista, id)` que devuelva la lista sin ese producto, **sin usar
+   `splice`**.
+
+---
+
+### Ejercicio 23 — Destructuring
+
+1. Con destructuring de array, saca el primer producto de `carta` en `primero` y el resto en
+   `otros`.
+2. Con destructuring de objeto y *rest*, crea `latteSinStock`: el Latte sin la propiedad
+   `stock`, sin modificar `carta`.
+3. Escribe `etiqueta({ nombre, precio })` que devuelva `"Latte: 2.40 €"` desestructurando en el
+   parámetro.
+
+---
+
+### Ejercicio 24 — `filter` → `map`
+
+1. Array con los **nombres** de los productos agotados (`stock === 0`).
+2. Array de objetos `{ nombre, precioConIva }` solo de los productos de más de 2 € (IVA 10 %,
+   redondeado a 2 decimales).
+
+---
+
+### Ejercicio 25 — `filter` → `reduce`
+
+Número total de **unidades** de bebida en stock.
+
+---
+
+### Ejercicio 26 — `some` y `filter` → `map` → `join`
+
+Con `some()`, `true`/`false` según haya algún producto con stock bajo (< 3); y con `filter()` +
+`map()`, el texto `"Revisar: Latte, Tostada, Croissant"`.
+
+---
+
+### Ejercicio 27 (integrador) — `reduce` a un objeto y ordenar sin mutar
+
+1. Con `reduce()`, un objeto que cuente cuántos productos hay por categoría,
+   `{ bebida: 3, comida: 2 }`, **sin mutar el acumulador**.
+2. Una copia ordenada de mayor a menor precio, **sin mutar `carta`**, con solo los nombres.
+
