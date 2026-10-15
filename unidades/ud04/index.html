@@ -1,0 +1,3304 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ud03-1-ejercicios/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 4: Objetos y Programación Orientada a Objetos (RA3) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-4-objetos-y-programacion-orientada-a-objetos-ra3" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 4: Objetos y Programación Orientada a Objetos (RA3)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-1-ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 Batería de Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-de-datos-sueltos-a-modelos-con-comportamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: de datos sueltos a modelos con comportamiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-objetos-literales-pares-clave-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Objetos literales: pares clave → valor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Objetos literales: pares clave → valor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-punto-o-corchetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Punto o corchetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-metodos-y-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Métodos y this
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-referencias-y-copias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Referencias y copias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-recorrer-y-proteger-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Recorrer y proteger objetos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Recorrer y proteger objetos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-objectkeys-values-y-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Object.keys, values y entries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-const-objectseal-y-objectfreeze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. const, Object.seal y Object.freeze
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-prototipos-lo-que-hay-debajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Prototipos: lo que hay debajo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Prototipos: lo que hay debajo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-el-problema-muchos-objetos-con-los-mismos-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. El problema: muchos objetos con los mismos métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-prototype-y-la-cadena-de-prototipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. [[Prototype]] y la cadena de prototipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-como-busca-javascript-una-propiedad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Cómo busca JavaScript una propiedad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-funciones-constructoras-y-new-la-forma-clasica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Funciones constructoras y new (la forma clásica)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-los-metodos-viven-una-vez-en-el-prototipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Los métodos viven una vez en el prototipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-objectcreate-herencia-entre-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. Object.create: herencia entre objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-class-es-azucar-sintactico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7. class es azúcar sintáctico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Clases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Clases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-anatomia-de-una-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Anatomía de una clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-el-constructor-deja-el-objeto-en-un-estado-valido-o-no-lo-crea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. El constructor deja el objeto en un estado válido… o no lo crea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-getters-y-setters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Getters y setters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-encapsulacion-campos-y-metodos-privados-con" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. Encapsulación: campos y métodos privados con #
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-tres-formas-de-privado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. Tres formas de «privado»
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-static-lo-que-pertenece-a-la-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. static: lo que pertenece a la clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-el-this-perdido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7. El this perdido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-herencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Herencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Herencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-extends-y-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. extends y super
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-super-antes-de-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. super() antes de this
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-sobrescritura-y-polimorfismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Sobrescritura y polimorfismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-la-cadena-con-clases-e-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. La cadena con clases e instanceof
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-composicion-frente-a-herencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Composición frente a herencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Composición frente a herencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-es-un-o-tiene-un" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. «Es un» o «tiene un»
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-composicion-en-practica-delegar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Composición en práctica: delegar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-el-problema-del-pinguino-combinar-capacidades-mixins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. El problema del pingüino: combinar capacidades (mixins)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-cuatro-preguntas-antes-de-escribir-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Cuatro preguntas antes de escribir class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-objetos-nativos-del-lenguaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Objetos nativos del lenguaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Objetos nativos del lenguaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-math-y-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. Math y Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. Date
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-string-e-intl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. String e Intl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-error-es-una-clase-y-se-puede-heredar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Error es una clase… y se puede heredar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ejercicio-practico-guiado-modelo-de-una-tienda-con-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Ejercicio práctico guiado: modelo de una tienda con clases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia Tecnológica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia Tecnológica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árbol tecnológico completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Portal docente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-de-datos-sueltos-a-modelos-con-comportamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: de datos sueltos a modelos con comportamiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-objetos-literales-pares-clave-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Objetos literales: pares clave → valor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Objetos literales: pares clave → valor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-punto-o-corchetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Punto o corchetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-metodos-y-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Métodos y this
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-referencias-y-copias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Referencias y copias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-recorrer-y-proteger-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Recorrer y proteger objetos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Recorrer y proteger objetos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-objectkeys-values-y-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Object.keys, values y entries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-const-objectseal-y-objectfreeze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. const, Object.seal y Object.freeze
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-prototipos-lo-que-hay-debajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Prototipos: lo que hay debajo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Prototipos: lo que hay debajo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-el-problema-muchos-objetos-con-los-mismos-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. El problema: muchos objetos con los mismos métodos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-prototype-y-la-cadena-de-prototipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. [[Prototype]] y la cadena de prototipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-como-busca-javascript-una-propiedad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Cómo busca JavaScript una propiedad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-funciones-constructoras-y-new-la-forma-clasica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Funciones constructoras y new (la forma clásica)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-los-metodos-viven-una-vez-en-el-prototipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Los métodos viven una vez en el prototipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-objectcreate-herencia-entre-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. Object.create: herencia entre objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67-class-es-azucar-sintactico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7. class es azúcar sintáctico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Clases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Clases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-anatomia-de-una-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Anatomía de una clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-el-constructor-deja-el-objeto-en-un-estado-valido-o-no-lo-crea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. El constructor deja el objeto en un estado válido… o no lo crea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-getters-y-setters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Getters y setters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-encapsulacion-campos-y-metodos-privados-con" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. Encapsulación: campos y métodos privados con #
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-tres-formas-de-privado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. Tres formas de «privado»
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-static-lo-que-pertenece-a-la-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. static: lo que pertenece a la clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-el-this-perdido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7. El this perdido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-herencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Herencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Herencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-extends-y-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. extends y super
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-super-antes-de-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. super() antes de this
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-sobrescritura-y-polimorfismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Sobrescritura y polimorfismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-la-cadena-con-clases-e-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. La cadena con clases e instanceof
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-composicion-frente-a-herencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Composición frente a herencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Composición frente a herencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-es-un-o-tiene-un" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. «Es un» o «tiene un»
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-composicion-en-practica-delegar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Composición en práctica: delegar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-el-problema-del-pinguino-combinar-capacidades-mixins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. El problema del pingüino: combinar capacidades (mixins)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-cuatro-preguntas-antes-de-escribir-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Cuatro preguntas antes de escribir class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-objetos-nativos-del-lenguaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Objetos nativos del lenguaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Objetos nativos del lenguaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-math-y-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. Math y Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. Date
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-string-e-intl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. String e Intl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-error-es-una-clase-y-se-puede-heredar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Error es una clase… y se puede heredar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ejercicio-practico-guiado-modelo-de-una-tienda-con-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Ejercicio práctico guiado: modelo de una tienda con clases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-4-objetos-y-programacion-orientada-a-objetos-ra3">UD 4: Objetos y Programación Orientada a Objetos (RA3)</h1>
+<div class="presentacion">
+<p><span class="twemoji presentacion__icono"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 3h8a2 2 0 0 1 2-2 2 2 0 0 1 2 2h8v2h-1v11h-5.75L17 22h-2l-1.75-6h-2.5L9 22H7l1.75-6H3V5H2zm3 2v9h14V5zm6.85 6.85a.5.5 0 0 1-.35.15.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5c.14 0 .26.06.35.15l1.4 1.39c.32.32.64.64.64.96s-.32.64-.64.96z"/></svg></span> <strong>Presentación de clase</strong> · 55 diapositivas para seguir la unidad</p>
+<p><a class="md-button md-button--primary" href="../../assets/presentaciones/DWEC-UD4.pdf" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"/></svg></span> Abrir o descargar el PDF</a></p>
+</div>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 3 (RA3) — Desarrolla aplicaciones web utilizando el modelo de objetos de JavaScript, integrando estructuras clave-valor, la cadena de prototipos nativa, clases ES6+, herencia y mecanismos modernos de encapsulamiento, y aprovechando los objetos predefinidos del lenguaje.</p>
+</blockquote>
+<hr />
+<h2 id="1-donde-estamos-de-datos-sueltos-a-modelos-con-comportamiento">1. Dónde estamos: de datos sueltos a modelos con comportamiento <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th>Qué aprendimos</th>
+<th>Qué aporta hoy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UD1 – UD2</td>
+<td>Sintaxis, tipos, funciones, <code>this</code>, closures</td>
+<td><code>this</code> es la base de los métodos</td>
+</tr>
+<tr>
+<td>UD3</td>
+<td>Arrays, <code>map</code> / <code>filter</code> / <code>reduce</code>, desestructuración, spread</td>
+<td>Transformar objetos con lo que ya sabes de arrays</td>
+</tr>
+<tr>
+<td><strong>UD4 (hoy)</strong></td>
+<td><strong>Objetos y POO</strong></td>
+<td><strong>Modelar el dominio: datos + comportamiento</strong></td>
+</tr>
+<tr>
+<td>UD5</td>
+<td>DOM y eventos</td>
+<td>Pintar ese modelo en la página</td>
+</tr>
+</tbody>
+</table>
+<p>La pregunta de la unidad: <strong>¿cómo represento en código las cosas de mi aplicación (usuarios, productos, pedidos) con sus datos y lo que saben hacer?</strong></p>
+<p>La <strong>programación orientada a objetos (POO)</strong> organiza el código agrupando <strong>estado</strong> (datos) y <strong>comportamiento</strong> (funciones) en objetos que representan conceptos del problema. En una tienda online, <code>carrito.añadir(producto)</code> o <code>pedido.calcularTotal()</code> se leen casi como el propio negocio.</p>
+<div class="admonition warning">
+<p class="admonition-title">JavaScript es distinto a Java o C#</p>
+<p>Por debajo, JavaScript <strong>no tiene clases</strong>: tiene objetos enlazados con otros objetos (<strong>prototipos</strong>). La palabra <code>class</code> existe desde 2015, pero es una forma cómoda de escribir ese modelo. Por eso esta unidad va <strong>de abajo arriba</strong>: objetos → prototipos → clases → herencia y composición → objetos nativos.</p>
+</div>
+<hr />
+<h2 id="2-objetos-literales-pares-clave-valor">2. Objetos literales: pares clave → valor <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg></span></h2>
+<p>Un <strong>objeto</strong> es una colección de <strong>propiedades</strong>; cada propiedad es un par <strong>clave → valor</strong>. Las claves son siempre <code>string</code> (o <code>Symbol</code>); los valores pueden ser cualquier cosa. Cuando el valor es una función, la propiedad se llama <strong>método</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">31</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"editor"</span><span class="p">,</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">],</span><span class="w">      </span><span class="c1">// un array también es un objeto</span>
+<span class="w">  </span><span class="nx">direccion</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">"Sevilla"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// objeto anidado</span>
+<span class="w">  </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                       </span><span class="c1">// método (sintaxis corta, ES2015)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Todo lo que no es primitivo es un objeto</p>
+<p>Los primitivos son <code>string</code>, <code>number</code>, <code>boolean</code>, <code>null</code>, <code>undefined</code>, <code>bigint</code> y <code>symbol</code>. Todo lo demás (arrays, fechas, funciones…) es un objeto: <code>typeof []</code> devuelve <code>"object"</code>.</p>
+</div>
+<h3 id="21-punto-o-corchetes">2.1. Punto o corchetes</h3>
+<table>
+<thead>
+<tr>
+<th>Notación</th>
+<th>Ejemplo</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punto</td>
+<td><code>usuario.nombre</code></td>
+<td>La clave es un identificador válido. Es la habitual.</td>
+</tr>
+<tr>
+<td>Corchetes</td>
+<td><code>usuario[clave]</code></td>
+<td>La clave está en una variable, tiene guiones o espacios, o se calcula al vuelo.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">campo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"email"</span><span class="p">;</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">campo</span><span class="p">;</span><span class="w">           </span><span class="c1">// undefined → busca una clave llamada literalmente "campo"</span>
+<span class="nx">usuario</span><span class="p">[</span><span class="nx">campo</span><span class="p">];</span><span class="w">          </span><span class="c1">// como usuario.email → lo de dentro se EVALÚA</span>
+<span class="nx">usuario</span><span class="p">[</span><span class="s2">"fecha-alta"</span><span class="p">];</span><span class="w">   </span><span class="c1">// con guion: solo con corchetes</span>
+
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">telefono</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"600 000 000"</span><span class="p">;</span><span class="w"> </span><span class="c1">// añade</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32</span><span class="p">;</span><span class="w">                </span><span class="c1">// cambia</span>
+<span class="ow">delete</span><span class="w"> </span><span class="nx">usuario</span><span class="p">.</span><span class="nx">activo</span><span class="p">;</span><span class="w">            </span><span class="c1">// borra</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">dni</span><span class="p">;</span><span class="w">                      </span><span class="c1">// undefined: leer algo que no existe NO da error</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">dni</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">               </span><span class="c1">// ✗ TypeError: el error llega al acceder a undefined.algo</span>
+</code></pre></div>
+<p>Atajos al crear (ES2015):</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Luis"</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">campo</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="s2">"l@x.es"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// propiedad abreviada + clave calculada</span>
+<span class="c1">// { nombre: "Luis", email: "l@x.es" }</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Ya lo conoces de la UD3</p>
+<p><code>usuario?.direccion?.ciudad</code> no revienta si falta <code>direccion</code>, y <code>const { nombre, edad } = usuario</code> saca varias propiedades a la vez (desestructuración, con valores por defecto y alias).</p>
+</div>
+<hr />
+<h2 id="3-metodos-y-this">3. Métodos y <code>this</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.76 8.69a.76.76 0 0 0-.76.76V20.9c0 .42.34.76.76.76.19 0 .35-.06.48-.16l1.91-1.55 1.66 3.62c.13.27.4.43.69.43.11 0 .22 0 .33-.08l2.76-1.28c.38-.18.56-.64.36-1.01L17.28 18l2.41-.45a.9.9 0 0 0 .43-.26c.27-.32.23-.79-.12-1.08l-8.74-7.35-.01.01a.76.76 0 0 0-.49-.18M15 10V8h5v2zm-1.17-5.24 2.83-2.83 1.41 1.41-2.83 2.83zM10 0h2v5h-2zM3.93 14.66l2.83-2.83 1.41 1.41-2.83 2.83zm0-11.32 1.41-1.41 2.83 2.83-1.41 1.41zM7 10H2V8h5z"/></svg></span></h2>
+<p>Dentro de un método, <strong><code>this</code> es el objeto que está a la izquierda del punto en la llamada</strong>. Se decide al <strong>llamar</strong>, no al escribir el método.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">valor</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">incrementar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="p">;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">contador</span><span class="p">.</span><span class="nx">incrementar</span><span class="p">();</span><span class="w"> </span><span class="c1">// 1 → this === contador</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">otro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">valor</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="nx">incrementar</span><span class="o">:</span><span class="w"> </span><span class="nx">contador</span><span class="p">.</span><span class="nx">incrementar</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">otro</span><span class="p">.</span><span class="nx">incrementar</span><span class="p">();</span><span class="w">     </span><span class="c1">// 101 → mismo método, otro this</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Trampa: los métodos no se escriben con flecha</p>
+<p>Las funciones flecha <strong>no tienen <code>this</code> propio</strong>: usan el del ámbito donde se escribieron. <code>incrementar: () =&gt; this.valor++</code> no funciona (en un módulo, <code>this</code> es <code>undefined</code> fuera de cualquier función). Los métodos de objetos y clases se escriben con la sintaxis corta <code>metodo() { … }</code>. Las flechas son ideales, en cambio, como callbacks <strong>dentro</strong> de un método (UD2).</p>
+</div>
+<hr />
+<h2 id="4-referencias-y-copias">4. Referencias y copias <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 4 2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4M10 4H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3"/></svg></span></h2>
+<p>La variable <strong>no guarda el objeto</strong>: guarda una <strong>referencia</strong> (una flecha) hacia él.</p>
+<pre class="mermaid"><code>flowchart LR
+    a["const a"] --&gt; O1["{ precio: 99 }"]
+    b["const b = a"] --&gt; O1
+    c["const c = { ...a }"] --&gt; O2["{ precio: 99 → 5 } (objeto nuevo)"]</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">"Sevilla"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w">            </span><span class="c1">// copia la FLECHA: mismo objeto</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">99</span><span class="p">;</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">precio</span><span class="p">;</span><span class="w">               </span><span class="c1">// 99</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">a</span><span class="w"> </span><span class="p">};</span><span class="w">     </span><span class="c1">// objeto NUEVO, copia SUPERFICIAL</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span><span class="w">           </span><span class="c1">// a no cambia</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cádiz"</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡a.dir.ciudad también! dir sigue compartido</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>Qué hace</th>
+<th>Úsala para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>b = a</code></td>
+<td>Copia la referencia (mismo objeto)</td>
+<td>Compartir a propósito</td>
+</tr>
+<tr>
+<td><code>{ ...a }</code></td>
+<td>Objeto nuevo, copia de <strong>un</strong> nivel</td>
+<td>Cambiar propiedades sin tocar el original</td>
+</tr>
+<tr>
+<td><code>structuredClone(a)</code></td>
+<td>Copia profunda (todos los niveles)</td>
+<td>Clonar datos anidados. Lanza error si hay funciones; las instancias de clase pierden su clase</td>
+</tr>
+<tr>
+<td><code>a === b</code></td>
+<td>¿Es <strong>la misma</strong> referencia?</td>
+<td>Ojo: <code>{ x: 1 } === { x: 1 }</code> es <code>false</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Recuerda la UD2</p>
+<p>Primitivos por valor, objetos por referencia. Si pasas un objeto a una función, la función recibe una copia de la flecha y <strong>puede modificar</strong> el original. Por eso en la UD3 preferíamos devolver objetos nuevos en vez de mutar.</p>
+</div>
+<hr />
+<h2 id="5-recorrer-y-proteger-objetos">5. Recorrer y proteger objetos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 5h14v2H7zm0 8v-2h14v2zM4 4.5A1.5 1.5 0 0 1 5.5 6 1.5 1.5 0 0 1 4 7.5 1.5 1.5 0 0 1 2.5 6 1.5 1.5 0 0 1 4 4.5m0 6A1.5 1.5 0 0 1 5.5 12 1.5 1.5 0 0 1 4 13.5 1.5 1.5 0 0 1 2.5 12 1.5 1.5 0 0 1 4 10.5M7 19v-2h14v2zm-3-2.5A1.5 1.5 0 0 1 5.5 18 1.5 1.5 0 0 1 4 19.5 1.5 1.5 0 0 1 2.5 18 1.5 1.5 0 0 1 4 16.5"/></svg></span></h2>
+<h3 id="51-objectkeys-values-y-entries">5.1. <code>Object.keys</code>, <code>values</code> y <code>entries</code></h3>
+<p>Un objeto no tiene <code>map</code> ni <code>filter</code>, pero tres métodos estáticos lo convierten en array:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="nx">raton</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">monitor</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w">    </span><span class="c1">// ["teclado", "raton", "monitor"]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w">  </span><span class="c1">// [12, 0, 4]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w"> </span><span class="c1">// [["teclado", 12], ["raton", 0], ["monitor", 4]]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">prod</span><span class="p">,</span><span class="w"> </span><span class="nx">uds</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">stock</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">prod</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">uds</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">agotados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">).</span><span class="nx">filter</span><span class="p">((</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">stock</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// ["raton"]</span>
+
+<span class="c1">// Transformar un objeto entero: entries → map → fromEntries</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="o">:</span><span class="w"> </span><span class="mf">50</span><span class="p">,</span><span class="w"> </span><span class="nx">raton</span><span class="o">:</span><span class="w"> </span><span class="mf">15</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">conIva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">fromEntries</span><span class="p">(</span>
+<span class="w">  </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">precios</span><span class="p">).</span><span class="nx">map</span><span class="p">(([</span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">])</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">])</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">¿Y <code>for…in</code>?</p>
+<p><code>for…in</code> recorre también las propiedades <strong>heredadas</strong> del prototipo (sección 6). Por eso hoy se prefiere <code>Object.keys</code> / <code>Object.entries</code> con <code>for…of</code>. Y nunca <code>for…in</code> sobre arrays (UD3).</p>
+</div>
+<h3 id="52-const-objectseal-y-objectfreeze">5.2. <code>const</code>, <code>Object.seal</code> y <code>Object.freeze</code></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Reasignar la variable</th>
+<th>Cambiar valores</th>
+<th>Añadir propiedades</th>
+<th>Borrar propiedades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>const obj</code></td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code>Object.seal(obj)</code></td>
+<td>—</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><code>Object.freeze(obj)</code></td>
+<td>—</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">iva</span><span class="o">:</span><span class="w"> </span><span class="mf">0.21</span><span class="p">,</span><span class="w"> </span><span class="nx">moneda</span><span class="o">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">CONFIG</span><span class="p">.</span><span class="nx">iva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// en un módulo (Vite): TypeError; fuera de modo estricto: se ignora en silencio</span>
+<span class="nx">CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span><span class="w">      </span><span class="c1">// TypeError: Assignment to constant variable</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">cp</span><span class="o">:</span><span class="w"> </span><span class="s2">"41001"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">datos</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"28001"</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡funciona! freeze es SUPERFICIAL</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Modo estricto</p>
+<p>Los módulos ES (<code>&lt;script type="module"&gt;</code>, todos los ficheros de Vite) y el cuerpo de las clases van siempre en <strong>modo estricto</strong>, que convierte muchos errores silenciosos en excepciones. Varios ejemplos de esta unidad solo lanzan error por eso.</p>
+</div>
+<hr />
+<h2 id="6-prototipos-lo-que-hay-debajo">6. Prototipos: lo que hay debajo <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></h2>
+<h3 id="61-el-problema-muchos-objetos-con-los-mismos-metodos">6.1. El problema: muchos objetos con los mismos métodos</h3>
+<p>Una <strong>función fábrica</strong> crea objetos sin repetir el literal…</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">nombre</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">"Luis"</span><span class="p">);</span>
+<span class="nx">u1</span><span class="p">.</span><span class="nx">saludar</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">u2</span><span class="p">.</span><span class="nx">saludar</span><span class="p">;</span><span class="w"> </span><span class="c1">// false → cada objeto lleva SU copia de la función</span>
+</code></pre></div>
+<p>…pero cada objeto lleva su propia copia de <code>saludar</code>: mil usuarios, mil funciones idénticas. JavaScript resuelve esto con los <strong>prototipos</strong>.</p>
+<h3 id="62-prototype-y-la-cadena-de-prototipos">6.2. <code>[[Prototype]]</code> y la cadena de prototipos</h3>
+<p>Todo objeto tiene un <strong>enlace interno</strong> a otro objeto, su <strong>prototipo</strong>. En la especificación (y en DevTools) se llama <code>[[Prototype]]</code> y se consulta con <code>Object.getPrototypeOf(obj)</code>.</p>
+<pre class="mermaid"><code>flowchart TD
+    U["usuario&lt;br/&gt;nombre, edad"] --&gt;|"[[Prototype]]"| OP["Object.prototype&lt;br/&gt;toString, hasOwnProperty, valueOf"]
+    OP --&gt;|"[[Prototype]]"| N["null"]
+    L["lista = [1, 2]"] --&gt;|"[[Prototype]]"| AP["Array.prototype&lt;br/&gt;map, filter, reduce…"]
+    AP --&gt;|"[[Prototype]]"| OP</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">31</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                                   </span><span class="c1">// "[object Object]" — ¿de dónde sale?</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">usuario</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="w">  </span><span class="c1">// true: de ahí</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">])</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="w">    </span><span class="c1">// true: por eso todos los arrays tienen map</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title"><code>__proto__</code></p>
+<p>Es la forma antigua de acceder a ese enlace. Sigue funcionando por compatibilidad, pero en código nuevo se usa <code>Object.getPrototypeOf</code> / <code>Object.create</code>.</p>
+</div>
+<h3 id="63-como-busca-javascript-una-propiedad">6.3. Cómo busca JavaScript una propiedad</h3>
+<ol>
+<li>¿Es <strong>propiedad propia</strong> del objeto? → la usa.</li>
+<li>Si no, la busca en su <strong>prototipo</strong>.</li>
+<li>Si tampoco, sube al prototipo del prototipo…</li>
+<li>Si llega a <code>null</code> sin encontrarla → <code>undefined</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="s2">"nombre"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">                </span><span class="c1">// true</span>
+<span class="s2">"toString"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">              </span><span class="c1">// true (heredada): in mira toda la cadena</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">"nombre"</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">"toString"</span><span class="p">);</span><span class="w"> </span><span class="c1">// false: hasOwn solo mira el propio objeto</span>
+</code></pre></div>
+<p><strong>Sombreado (<em>shadowing</em>)</strong>: si el objeto tiene una propiedad propia con el mismo nombre que una heredada, se encuentra la propia primero. Así se «sobrescribe» un método heredado.</p>
+<div class="admonition warning">
+<p class="admonition-title">Leer sube por la cadena; escribir, no</p>
+<p><code>usuario.toString = () =&gt; "Soy Ana"</code> <strong>no</strong> cambia <code>Object.prototype</code>: crea una propiedad propia en <code>usuario</code>.</p>
+</div>
+<h3 id="64-funciones-constructoras-y-new-la-forma-clasica">6.4. Funciones constructoras y <code>new</code> (la forma clásica)</h3>
+<p>Antes de 2015 se usaban <strong>funciones constructoras</strong> (con mayúscula por convención) llamadas con <code>new</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">edad</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Persona</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">saludar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">"David"</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Hola, soy David"</span>
+</code></pre></div>
+<p>Lo que hace <code>new Persona("David", 30)</code>:</p>
+<ol>
+<li>Crea un objeto vacío <code>{}</code>.</li>
+<li>Lo <strong>enlaza</strong> al prototipo: su <code>[[Prototype]]</code> pasa a ser <code>Persona.prototype</code>.</li>
+<li>Ejecuta <code>Persona</code> con <code>this</code> = ese objeto (<code>this.nombre = "David"</code>…).</li>
+<li>Lo devuelve.</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">Sin <code>new</code> no funciona</p>
+<p><code>Persona("David", 30)</code> ejecuta la función con <code>this = undefined</code> (modo estricto) y lanza <code>TypeError</code>. En código antiguo, sin modo estricto, <code>this</code> era el objeto global y se creaban variables globales por accidente.</p>
+</div>
+<h3 id="65-los-metodos-viven-una-vez-en-el-prototipo">6.5. Los métodos viven una vez en el prototipo</h3>
+<pre class="mermaid"><code>flowchart BT
+    p1["p1&lt;br/&gt;nombre: David · edad: 30"] --&gt;|"[[Prototype]]"| PP["Persona.prototype&lt;br/&gt;saludar ƒ (una sola)&lt;br/&gt;constructor: Persona"]
+    p2["p2&lt;br/&gt;nombre: Eva · edad: 25"] --&gt;|"[[Prototype]]"| PP
+    p3["p3&lt;br/&gt;nombre: Iker · edad: 41"] --&gt;|"[[Prototype]]"| PP</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Fábrica</th>
+<th>Prototipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Datos (nombre, edad)</td>
+<td>en cada objeto</td>
+<td>en cada objeto</td>
+</tr>
+<tr>
+<td>Métodos</td>
+<td>copiados en cada uno</td>
+<td><strong>una vez</strong>, compartidos</td>
+</tr>
+<tr>
+<td>1 000 objetos</td>
+<td>1 000 funciones</td>
+<td>1 función</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla:</strong> los <strong>datos</strong> van en cada objeto (<code>this.x</code> en el constructor); el <strong>comportamiento</strong>, en el prototipo.</p>
+<div class="admonition danger">
+<p class="admonition-title">No modifiques los prototipos nativos</p>
+<p><code>Array.prototype.miMetodo = …</code> funciona, pero rompe librerías (<em>monkey patching</em>). El método <code>Array.prototype.flat</code> se llama así, y no <code>flatten</code>, porque una librería antigua ya había añadido un <code>flatten</code> incompatible.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title"><code>prototype</code> y <code>[[Prototype]]</code> no son lo mismo</p>
+<p><code>Persona.prototype</code> es una <strong>propiedad de la función</strong>: el objeto que se usará como prototipo de lo que cree <code>new Persona()</code>. <code>[[Prototype]]</code> es el <strong>enlace</strong> que tiene cada objeto. Se cumple <code>Object.getPrototypeOf(p) === Persona.prototype</code>.</p>
+</div>
+<h3 id="66-objectcreate-herencia-entre-objetos">6.6. <code>Object.create</code>: herencia entre objetos</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">describir</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> hace </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">sonido</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">gato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">animal</span><span class="p">);</span><span class="w"> </span><span class="c1">// gato → animal</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Misi"</span><span class="p">;</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">sonido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"miau"</span><span class="p">;</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">describir</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Misi hace miau"</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Object.getPrototypeOf(obj)</code></td>
+<td>Ver el prototipo de un objeto</td>
+</tr>
+<tr>
+<td><code>Object.create(proto)</code></td>
+<td>Crear un objeto con ese prototipo (<code>Object.create(null)</code>: sin prototipo)</td>
+</tr>
+<tr>
+<td><code>obj instanceof Clase</code></td>
+<td>¿Está <code>Clase.prototype</code> en la cadena de <code>obj</code>?</td>
+</tr>
+<tr>
+<td><code>console.dir(obj)</code></td>
+<td>Ver el objeto desplegable con su <code>[[Prototype]]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="67-class-es-azucar-sintactico">6.7. <code>class</code> es azúcar sintáctico</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Antes (función constructora)</label><label for="__tabbed_1_2">Ahora (class, ES2015)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Persona</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">saludar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Persona</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En los dos casos <code>typeof Persona === "function"</code> y <code>saludar</code> está en <code>Persona.prototype</code>. <strong>Azúcar sintáctico</strong> = otra forma de escribir algo que ya existía. Lo que <code>class</code> añade de verdad:</p>
+<ul>
+<li>Obliga a usar <code>new</code> (sin <code>new</code>: <code>TypeError</code>).</li>
+<li>El cuerpo va siempre en modo estricto.</li>
+<li>Los métodos no son enumerables (no salen en <code>for…in</code>).</li>
+<li>Permite <code>#privados</code>, <code>static</code> y <code>extends</code>/<code>super</code> cómodos.</li>
+</ul>
+<hr />
+<h2 id="7-clases">7. Clases <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 13.5v8H3v-8zm-2 2H5v4h4zM12 2l5.5 9h-11zm0 3.86L10.08 9h3.84zM17.5 13c2.5 0 4.5 2 4.5 4.5S20 22 17.5 22 13 20 13 17.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg></span></h2>
+<h3 id="71-anatomia-de-una-clase">7.1. Anatomía de una clase</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"general"</span><span class="p">;</span><span class="w">        </span><span class="c1">// ① campo público (uno por instancia)</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// ② constructor: se ejecuta solo con new</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">precio</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">precioConIva</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">              </span><span class="c1">// ③ método: va al prototipo (compartido)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span><span class="w"> </span><span class="c1">// ④ instancia</span>
+</code></pre></div>
+<pre class="mermaid"><code>classDiagram
+    class Producto {
+        +categoria
+        +nombre
+        +precio
+        +precioConIva()
+    }</code></pre>
+<p>En <strong>UML</strong> (diagrama de clases): nombre arriba, atributos en medio, métodos abajo; <code>+</code> público, <code>-</code> privado, subrayado o <code>static</code> para lo estático.</p>
+<h3 id="72-el-constructor-deja-el-objeto-en-un-estado-valido-o-no-lo-crea">7.2. El constructor deja el objeto en un estado válido… o no lo crea</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">nombre</span><span class="o">?</span><span class="p">.</span><span class="nx">trim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"El nombre es obligatorio"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Precio negativo"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">precio</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">stock</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✓</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">      </span><span class="c1">// ✗ Error: El nombre es obligatorio</span>
+<span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✗ TypeError: Class constructor Producto cannot be invoked without 'new'</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Las clases no se elevan (<em>hoisting</em>)</p>
+<p>Usar una clase antes de la línea donde se declara da <code>ReferenceError</code> (zona muerta temporal, UD2). En la práctica, cada clase va en su fichero y se importa arriba.</p>
+</div>
+<h3 id="73-getters-y-setters">7.3. Getters y setters</h3>
+<p><code>get</code> y <code>set</code> son métodos que <strong>se usan como si fueran propiedades</strong>: sirven para validar al escribir y calcular al leer.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">#precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">precio</span><span class="p">;</span><span class="w">  </span><span class="c1">// ← pasa por el set: validación en un solo sitio</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">get</span><span class="w"> </span><span class="nx">precio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#precio</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">set</span><span class="w"> </span><span class="nx">precio</span><span class="p">(</span><span class="nx">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">valor</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Precio negativo"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">#precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">valor</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">get</span><span class="w"> </span><span class="nx">precioConIva</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="c1">// propiedad calculada, solo lectura</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="p">;</span><span class="w">            </span><span class="c1">// 50       → get precio()</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20</span><span class="p">;</span><span class="w">       </span><span class="c1">// ✓        → set precio(20)</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">5</span><span class="p">;</span><span class="w">       </span><span class="c1">// ✗ RangeError</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">precioConIva</span><span class="p">;</span><span class="w">      </span><span class="c1">// 24.2     → sin paréntesis</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">precioConIva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✗ TypeError en modo estricto: solo tiene getter</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Solo cuando aporten algo</p>
+<p>Un get/set que solo copia el valor sobra. Úsalos para <strong>validar, calcular o proteger</strong>. Y el getter no debe tener efectos secundarios ni ser lento. Ojo: <code>get precio() { return this.precio; }</code> se llama a sí mismo sin fin (<code>RangeError: Maximum call stack size exceeded</code>); por eso el dato va en <code>#precio</code>.</p>
+</div>
+<h3 id="74-encapsulacion-campos-y-metodos-privados-con">7.4. Encapsulación: campos y métodos privados con <code>#</code></h3>
+<p><strong>Encapsular</strong> es esconder el estado interno y exponer solo una <strong>interfaz pública</strong> que garantiza que el estado siempre es válido. Desde ES2022, todo lo que empieza por <code>#</code> solo existe dentro del cuerpo de la clase.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">#saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">                 </span><span class="c1">// campo privado (hay que declararlo)</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">titular</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">titular</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">titular</span><span class="p">;</span><span class="w">   </span><span class="c1">// público</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">ingresar</span><span class="p">(</span><span class="nx">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">#validar</span><span class="p">(</span><span class="nx">cantidad</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">#saldo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">cantidad</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">get</span><span class="w"> </span><span class="nx">saldo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#saldo</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">#validar</span><span class="p">(</span><span class="nx">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// método privado</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Cantidad no válida"</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">cuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="p">(</span><span class="s2">"Marcos"</span><span class="p">);</span>
+<span class="nx">cuenta</span><span class="p">.</span><span class="nx">ingresar</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
+<span class="nx">cuenta</span><span class="p">.</span><span class="nx">saldo</span><span class="p">;</span><span class="w">         </span><span class="c1">// 100</span>
+<span class="nx">cuenta</span><span class="p">.</span><span class="n">#saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✗ SyntaxError: Private field '#saldo' must be declared in an enclosing class</span>
+</code></pre></div>
+<h3 id="75-tres-formas-de-privado">7.5. Tres formas de «privado»</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>_saldo</code> (convención)</th>
+<th>closure (UD2)</th>
+<th><code>#saldo</code> (ES2022)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Accesible desde fuera?</td>
+<td>Sí, cualquiera</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>¿Quién lo impide?</td>
+<td>Nadie: es un aviso</td>
+<td>El ámbito de la función</td>
+<td>El propio lenguaje</td>
+</tr>
+<tr>
+<td>Error al intentarlo</td>
+<td>Ninguno</td>
+<td>Es <code>undefined</code></td>
+<td><code>SyntaxError</code> al cargar</td>
+</tr>
+<tr>
+<td>¿Sale en <code>Object.keys</code> / JSON?</td>
+<td>Sí</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Dónde lo verás</td>
+<td>Código antiguo</td>
+<td>Fábricas, módulos</td>
+<td>Clases modernas</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Es un <code>SyntaxError</code>, no un error normal</p>
+<p>Se detecta <strong>al leer el fichero</strong>, antes de ejecutarlo: si escribes <code>obj.#saldo</code> fuera de la clase, <strong>no se ejecuta ninguna línea</strong> de ese script o módulo. Tampoco se puede capturar con <code>try/catch</code>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">La consola de Chrome sí te deja verlo</p>
+<p>Para depurar, la consola de DevTools permite leer <code>cuenta.#saldo</code>. No significa que sea público: en tu código fuente fallará.</p>
+</div>
+<p>Dentro de la clase, <code>#saldo in obj</code> comprueba si <code>obj</code> tiene ese campo privado (ES2022).</p>
+<h3 id="76-static-lo-que-pertenece-a-la-clase">7.6. <code>static</code>: lo que pertenece a la clase</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Pedido</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">#contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// privado y de la clase</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="nx">IVA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.21</span><span class="p">;</span><span class="w">     </span><span class="c1">// constante de la clase</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">lineas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="nx">Pedido</span><span class="p">.</span><span class="n">#contador</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">lineas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lineas</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="nx">desdeJSON</span><span class="p">(</span><span class="nx">texto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// método fábrica</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">texto</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Pedido</span><span class="p">(</span><span class="nx">datos</span><span class="p">.</span><span class="nx">lineas</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Pedido</span><span class="p">.</span><span class="nx">IVA</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 0.21</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Pedido</span><span class="p">([]).</span><span class="nx">IVA</span><span class="p">;</span><span class="w">            </span><span class="c1">// undefined: no es de la instancia</span>
+<span class="nx">Pedido</span><span class="p">.</span><span class="nx">desdeJSON</span><span class="p">(</span><span class="s1">'{"lineas":[]}'</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
+</code></pre></div>
+<p>Usos típicos: constantes, contadores, <strong>métodos fábrica</strong>, utilidades. <code>Math.max</code>, <code>Date.now</code>, <code>Object.keys</code> o <code>Number.isNaN</code> son métodos estáticos.</p>
+<div class="admonition tip">
+<p class="admonition-title">¿Método normal o <code>static</code>?</p>
+<p>¿Necesita los datos de <strong>una</strong> instancia concreta (<code>this</code>)? → método normal. ¿No? → <code>static</code>.</p>
+</div>
+<h3 id="77-el-this-perdido">7.7. El <code>this</code> perdido</h3>
+<p>Si pasas un método como <strong>callback</strong> sin su objeto, pierde su <code>this</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Temporizador</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">segundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">tic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">segundos</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Temporizador</span><span class="p">();</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">;</span>
+<span class="nx">f</span><span class="p">();</span><span class="w">                       </span><span class="c1">// ✗ TypeError: Cannot read properties of undefined (reading 'segundos')</span>
+<span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✗ el mismo TypeError</span>
+<span class="nx">setInterval</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span><span class="w">  </span><span class="c1">// ✗ sin error… y no cuenta</span>
+</code></pre></div>
+<p><code>t.tic</code> (sin paréntesis) es <strong>solo la función</strong>, sin el <code>t.</code> delante. Quien la llame después decide <code>this</code>: en una llamada suelta es <code>undefined</code>; <code>setInterval</code> la llama con <code>this = window</code>, así que suma en <code>window.segundos</code> (que acaba valiendo <code>NaN</code>) y <code>t.segundos</code> se queda en 0. <strong>Falla en silencio.</strong> En la UD5 pasará lo mismo con <code>addEventListener</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Solución</th>
+<th>Código</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flecha al pasarla</td>
+<td><code>setInterval(() =&gt; t.tic(), 1000)</code></td>
+<td>La habitual</td>
+</tr>
+<tr>
+<td><code>bind</code></td>
+<td><code>setInterval(t.tic.bind(t), 1000)</code></td>
+<td>Fijar <code>this</code> en una función reutilizable</td>
+</tr>
+<tr>
+<td>Campo flecha</td>
+<td><code>tic = () =&gt; { this.segundos++; };</code></td>
+<td>Manejadores de eventos (crea una función por instancia)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-herencia">8. Herencia <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 11 5.79V7H7a2 2 0 0 0-2 2v.71A2.5 2.5 0 0 0 3.5 12 2.5 2.5 0 0 0 5 14.29V15H4a2 2 0 0 0-2 2v1.21A2.5 2.5 0 0 0 .5 20.5 2.5 2.5 0 0 0 3 23a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 4 18.21V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 9 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2H7v-.71A2.5 2.5 0 0 0 8.5 12 2.5 2.5 0 0 0 7 9.71V9h10v.71A2.5 2.5 0 0 0 15.5 12a2.5 2.5 0 0 0 1.5 2.29V15h-1a2 2 0 0 0-2 2v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 15 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 21 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2h-1v-.71A2.5 2.5 0 0 0 20.5 12 2.5 2.5 0 0 0 19 9.71V9a2 2 0 0 0-2-2h-4V5.79a2.5 2.5 0 0 0 1.5-2.29A2.5 2.5 0 0 0 12 1m0 1.5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M6 11a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m12 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M3 19.5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1"/></svg></span></h2>
+<h3 id="81-extends-y-super">8.1. <code>extends</code> y <code>super</code></h3>
+<p>La <strong>herencia</strong> permite que una clase (subclase) obtenga las propiedades y métodos de otra (superclase) y añada o cambie comportamiento. En JavaScript es <strong>simple</strong>: un único padre.</p>
+<pre class="mermaid"><code>classDiagram
+    Usuario &lt;|-- Administrador : extends
+    class Usuario {
+        +nombre
+        +email
+        +saludar()
+        +puede(accion)
+    }
+    class Administrador {
+        +permisos
+        +puede(accion)
+    }</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">email</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">puede</span><span class="p">(</span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">accion</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"leer"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">Administrador</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">permisos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">);</span><span class="w">        </span><span class="c1">// constructor del padre</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">permisos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">permisos</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">puede</span><span class="p">(</span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">permisos</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">accion</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Administrador</span><span class="p">(</span><span class="s2">"Eva"</span><span class="p">,</span><span class="w"> </span><span class="s2">"e@x.es"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"leer"</span><span class="p">,</span><span class="w"> </span><span class="s2">"borrar"</span><span class="p">]);</span>
+<span class="nx">admin</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w">        </span><span class="c1">// heredado: "Hola, Eva"</span>
+<span class="nx">admin</span><span class="p">.</span><span class="nx">puede</span><span class="p">(</span><span class="s2">"borrar"</span><span class="p">);</span><span class="w">  </span><span class="c1">// propio: true</span>
+</code></pre></div>
+<h3 id="82-super-antes-de-this">8.2. <code>super()</code> antes de <code>this</code></h3>
+<p>El objeto lo crea la <strong>clase base</strong>: al hacer <code>new Administrador(…)</code>, el constructor de <code>Administrador</code> llama a <code>super(…)</code>, el de <code>Usuario</code> crea el objeto y su <code>this</code>, y solo entonces <code>Administrador</code> puede completarlo.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Administrador</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">permisos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">permisos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">permisos</span><span class="p">;</span><span class="w">   </span><span class="c1">// ✗ antes de super</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor</span>
+</code></pre></div>
+<ul>
+<li>Si la subclase <strong>no</strong> escribe constructor, JavaScript pone uno: <code>constructor(...args) { super(...args); }</code>.</li>
+<li>Si lo escribe, <strong>debe</strong> llamar a <code>super()</code> antes de usar <code>this</code>.</li>
+</ul>
+<h3 id="83-sobrescritura-y-polimorfismo">8.3. Sobrescritura y polimorfismo</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Figura</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">describir</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="kr">constructor</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">area</span><span class="p">().</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">Circulo</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Figura</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">super</span><span class="p">();</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">r</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">r</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">Rectangulo</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Figura</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">super</span><span class="p">();</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">figuras</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ow">new</span><span class="w"> </span><span class="nx">Circulo</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Rectangulo</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">)];</span>
+<span class="nx">figuras</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">f</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">describir</span><span class="p">());</span><span class="w"> </span><span class="c1">// ["Circulo: 3.14", "Rectangulo: 6.00"]</span>
+</code></pre></div>
+<ul>
+<li><strong>Sobrescribir</strong> (<em>override</em>): la subclase define un método con el mismo nombre que el heredado.</li>
+<li><strong><code>super.metodo()</code></strong>: reutiliza la versión del padre y la amplía (<code>describir() { return super.describir() + " (admin)"; }</code>).</li>
+<li><strong>Polimorfismo</strong>: el código que recorre <code>figuras</code> no pregunta qué tipo es cada una; cada objeto responde a su manera al mismo mensaje.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Señal de que quieres polimorfismo</p>
+<p>Si te descubres escribiendo <code>if (tipo === "circulo") … else if (tipo === "rectangulo") …</code>, probablemente cada tipo debería ser una clase con su propio método.</p>
+</div>
+<h3 id="84-la-cadena-con-clases-e-instanceof">8.4. La cadena con clases e <code>instanceof</code></h3>
+<p><code>extends</code> <strong>enlaza prototipos</strong>: es la misma cadena de la sección 6.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["admin&lt;br/&gt;nombre, email, permisos"] --&gt;|"[[Prototype]]"| AP["Administrador.prototype&lt;br/&gt;puede ƒ"]
+    AP --&gt;|"[[Prototype]]"| UP["Usuario.prototype&lt;br/&gt;saludar ƒ · puede ƒ"]
+    UP --&gt;|"[[Prototype]]"| OP["Object.prototype"]
+    OP --&gt; N["null"]</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">admin</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Administrador</span><span class="p">;</span><span class="w"> </span><span class="c1">// true</span>
+<span class="nx">admin</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Usuario</span><span class="p">;</span><span class="w">       </span><span class="c1">// true</span>
+<span class="nx">admin</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Object</span><span class="p">;</span><span class="w">        </span><span class="c1">// true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">Administrador</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">Usuario</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+<p><code>instanceof</code> no mira «con qué clase se creó» el objeto: mira si <code>Clase.prototype</code> aparece <strong>en algún punto</strong> de su cadena.</p>
+<hr />
+<h2 id="9-composicion-frente-a-herencia">9. Composición frente a herencia <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 13.5c0 1.76-1.3 3.22-3 3.46V20a2 2 0 0 1-2 2h-3.8v-.3a2.7 2.7 0 0 0-2.7-2.7c-1.5 0-2.7 1.21-2.7 2.7v.3H4a2 2 0 0 1-2-2v-3.8h.3C3.79 16.2 5 15 5 13.5s-1.21-2.7-2.7-2.7H2V7a2 2 0 0 1 2-2h3.04c.24-1.7 1.7-3 3.46-3s3.22 1.3 3.46 3H17a2 2 0 0 1 2 2v3.04c1.7.24 3 1.7 3 3.46M17 15h1.5a1.5 1.5 0 0 0 1.5-1.5 1.5 1.5 0 0 0-1.5-1.5H17V7h-5V5.5A1.5 1.5 0 0 0 10.5 4 1.5 1.5 0 0 0 9 5.5V7H4v2.12c1.76.68 3 2.38 3 4.38s-1.25 3.7-3 4.38V20h2.12a4.7 4.7 0 0 1 4.38-3c2 0 3.7 1.25 4.38 3H17z"/></svg></span></h2>
+<h3 id="91-es-un-o-tiene-un">9.1. «Es un» o «tiene un»</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Herencia (<code>extends</code>)</th>
+<th>Composición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relación</td>
+<td><strong>es un</strong>: Administrador ES UN Usuario</td>
+<td><strong>tiene un</strong>: Coche TIENE UN Motor</td>
+</tr>
+<tr>
+<td>Acoplamiento</td>
+<td>Fuerte: si cambia el padre, cambian los hijos</td>
+<td>Débil: las piezas se cambian</td>
+</tr>
+<tr>
+<td>Riesgo</td>
+<td>Jerarquías rígidas y profundas</td>
+<td>Algo más de código para conectar</td>
+</tr>
+<tr>
+<td>Encaja si</td>
+<td>La jerarquía es real, estable y poco profunda</td>
+<td>Se combinan comportamientos o pueden cambiar</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>«<em>Favor object composition over class inheritance</em>» — Gamma, Helm, Johnson y Vlissides, <em>Design Patterns</em> (1994). No significa «nunca heredes»: significa preguntarse cada vez si la relación es de verdad «es un».</p>
+</blockquote>
+<h3 id="92-composicion-en-practica-delegar">9.2. Composición en práctica: delegar</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Motor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">cv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">cv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cv</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`Motor de </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">cv</span><span class="si">}</span><span class="sb"> CV en marcha`</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">MotorElectrico</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s2">"Zumbido silencioso"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">Coche</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">modelo</span><span class="p">,</span><span class="w"> </span><span class="nx">motor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">modelo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modelo</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">motor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">motor</span><span class="p">;</span><span class="w">          </span><span class="c1">// TIENE UN motor</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">modelo</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">motor</span><span class="p">.</span><span class="nx">arrancar</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span><span class="w"> </span><span class="c1">// delega</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">"León"</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Motor</span><span class="p">(</span><span class="mf">150</span><span class="p">)).</span><span class="nx">arrancar</span><span class="p">();</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">"Born"</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MotorElectrico</span><span class="p">()).</span><span class="nx">arrancar</span><span class="p">();</span>
+</code></pre></div>
+<ul>
+<li>Cambiar de motor es pasar otro objeto, <strong>sin tocar <code>Coche</code></strong>.</li>
+<li><code>Coche</code> acepta cualquier objeto con un método <code>arrancar()</code> (<em>duck typing</em>).</li>
+<li>Con herencia harían falta <code>CocheGasolina</code>, <code>CocheElectrico</code>, <code>CocheHibrido</code>… y se multiplican con cada variante nueva.</li>
+</ul>
+<h3 id="93-el-problema-del-pinguino-combinar-capacidades-mixins">9.3. El problema del pingüino: combinar capacidades (mixins)</h3>
+<p>Si <code>Ave</code> sabe <code>volar()</code> y <code>Pinguino extends Ave</code>, el pingüino hereda algo que no puede hacer. Y pato y pez nadan, pero no son de la misma familia. Solución: capacidades sueltas que se copian donde hacen falta (<strong>mixins</strong>).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">puedeVolar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">volar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> vuela`</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">nadar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> nada`</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">pato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Pato"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeVolar</span><span class="p">,</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">pinguino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Pingu"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
+<span class="nx">pinguino</span><span class="p">.</span><span class="nx">nadar</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Pingu nada"</span>
+</code></pre></div>
+<p>Los métodos usan <code>this</code>, así que funcionan en cualquier objeto que tenga <code>nombre</code>. <code>Object.assign(destino, ...origenes)</code> copia las propiedades propias de los orígenes en el destino (copia superficial) y lo devuelve.</p>
+<h3 id="94-cuatro-preguntas-antes-de-escribir-class">9.4. Cuatro preguntas antes de escribir <code>class</code></h3>
+<pre class="mermaid"><code>flowchart TD
+    Q1{"¿Solo agrupa datos,&lt;br/&gt;sin comportamiento?"} --&gt;|sí| R1["Objeto literal { }"]
+    Q1 --&gt;|no| Q2{"¿Muchos objetos con&lt;br/&gt;los mismos métodos?"}
+    Q2 --&gt;|sí| R2["class"]
+    R2 --&gt; Q3{"¿Relación «es un»&lt;br/&gt;real y estable?"}
+    Q3 --&gt;|sí| R3["extends (1–2 niveles)"]
+    Q3 --&gt;|no| Q4{"¿Comparte capacidades con&lt;br/&gt;otros que no son familia?"}
+    Q4 --&gt;|sí| R4["Composición / mixin"]</code></pre>
+<p>Lo que <strong>no</strong> vale nunca: heredar solo «para reutilizar código» sin una relación real.</p>
+<hr />
+<h2 id="10-objetos-nativos-del-lenguaje">10. Objetos nativos del lenguaje <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 8h-3V6c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10h20V10c0-1.1-.9-2-2-2M9 6h6v2H9zm11 12H4v-3h2v1h2v-1h8v1h2v-1h2zm-2-5v-1h-2v1H8v-1H6v1H4v-3h16v3z"/></svg></span></h2>
+<p>JavaScript trae objetos listos para usar. Antes de escribir una función, comprueba si ya existe.</p>
+<table>
+<thead>
+<tr>
+<th>Objeto</th>
+<th>Para qué</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Math</code></td>
+<td>Cálculos</td>
+<td><code>Math.round</code>, <code>Math.random</code>, <code>Math.max</code></td>
+</tr>
+<tr>
+<td><code>Number</code></td>
+<td>Números</td>
+<td><code>Number()</code>, <code>Number.parseFloat</code>, <code>Number.isNaN</code>, <code>toFixed</code></td>
+</tr>
+<tr>
+<td><code>String</code></td>
+<td>Texto</td>
+<td><code>trim</code>, <code>includes</code>, <code>padStart</code>, <code>split</code>, <code>replaceAll</code></td>
+</tr>
+<tr>
+<td><code>Date</code></td>
+<td>Fechas y horas</td>
+<td><code>new Date()</code>, <code>Date.now()</code>, <code>getFullYear</code></td>
+</tr>
+<tr>
+<td><code>Intl</code></td>
+<td>Formato según idioma</td>
+<td>Moneda en euros, fechas en español</td>
+</tr>
+<tr>
+<td><code>Array</code></td>
+<td>Listas (UD3)</td>
+<td><code>map</code>, <code>filter</code>, <code>reduce</code></td>
+</tr>
+<tr>
+<td><code>JSON</code></td>
+<td>Texto ↔ objeto (UD6)</td>
+<td><code>JSON.stringify</code>, <code>JSON.parse</code></td>
+</tr>
+<tr>
+<td><code>Error</code></td>
+<td>Errores</td>
+<td><code>throw new Error(…)</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>Math</code>, <code>JSON</code> e <code>Intl</code> no se instancian con <code>new</code>: son objetos con métodos estáticos. <code>Date</code>, <code>Error</code> o <code>Map</code> son clases.</p>
+<div class="admonition question">
+<p class="admonition-title">¿Por qué <code>\"hola\".toUpperCase()</code> funciona si <code>\"hola\"</code> es un primitivo?</p>
+<p>JavaScript lo envuelve un instante en un objeto <code>String</code> (<em>autoboxing</em>) y busca el método en <code>String.prototype</code>. Otra vez la cadena de prototipos. Nunca crees envoltorios a mano (<code>new String("x")</code>).</p>
+</div>
+<h3 id="101-math-y-number">10.1. <code>Math</code> y <code>Number</code></h3>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th><code>round</code></th>
+<th><code>floor</code></th>
+<th><code>ceil</code></th>
+<th><code>trunc</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2.5</code></td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>-2.5</code></td>
+<td>-2</td>
+<td>-3</td>
+<td>-2</td>
+<td>-2</td>
+</tr>
+<tr>
+<td><code>2.49</code></td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1">// Entero aleatorio entre min y max (ambos incluidos)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">azar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">min</span><span class="p">;</span>
+
+<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...[</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">]);</span><span class="w">       </span><span class="c1">// 9 (spread, UD3)</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">();</span><span class="w">                   </span><span class="c1">// Infinity (¡ojo con arrays vacíos!)</span>
+
+<span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 0.30000000000000004</span>
+<span class="p">(</span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">       </span><span class="c1">// "0.30"  ← STRING</span>
+<span class="s2">"0.30"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">                   </span><span class="c1">// "0.301" (concatena)</span>
+<span class="nb">Number</span><span class="p">(</span><span class="s2">"12.5"</span><span class="p">);</span><span class="w">               </span><span class="c1">// 12.5</span>
+<span class="nb">Number</span><span class="p">(</span><span class="s2">"12,5"</span><span class="p">);</span><span class="w">               </span><span class="c1">// NaN: la coma no es decimal en JS</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nb">parseFloat</span><span class="p">(</span><span class="s2">"12.5€"</span><span class="p">);</span><span class="w">   </span><span class="c1">// 12.5: lee hasta donde puede</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nb">isNaN</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span><span class="w">            </span><span class="c1">// true</span>
+<span class="kc">NaN</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">NaN</span><span class="p">;</span><span class="w">                  </span><span class="c1">// false</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Dinero</p>
+<p>Los decimales se guardan en binario (IEEE 754) y muchos no son exactos: pasa en todos los lenguajes. Redondea <strong>solo al mostrar</strong> (<code>toFixed</code> / <code>Intl</code>) o trabaja en <strong>céntimos enteros</strong> (<code>1999</code> en vez de <code>19.99</code>). Nunca compares decimales con <code>===</code>.</p>
+</div>
+<h3 id="102-date">10.2. <code>Date</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">ahora</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">examen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="mf">2026</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">27</span><span class="p">);</span><span class="w">       </span><span class="c1">// ¡27 de NOVIEMBRE! (meses 0–11)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">iso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">"2026-11-27T09:00"</span><span class="p">);</span><span class="w">    </span><span class="c1">// ISO con hora: hora local</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">utc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">"2026-11-27"</span><span class="p">);</span><span class="w">          </span><span class="c1">// ISO SIN hora: medianoche UTC (01:00 en España)</span>
+
+<span class="nx">examen</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span><span class="w"> </span><span class="c1">// 2026</span>
+<span class="nx">examen</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span><span class="w">    </span><span class="c1">// 10 (0 = enero)</span>
+<span class="nx">examen</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span><span class="w">     </span><span class="c1">// 27 (día del mes)</span>
+<span class="nx">examen</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span><span class="w">      </span><span class="c1">// 5  (día de la SEMANA, 0 = domingo)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">dias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">((</span><span class="nx">examen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">ahora</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">86</span><span class="nx">_400_000</span><span class="p">);</span><span class="w"> </span><span class="c1">// restar fechas da milisegundos</span>
+<span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span><span class="w">           </span><span class="c1">// ms desde el 1-1-1970 (marca de tiempo)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Trampa</th>
+<th>Explicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meses de 0 a 11</td>
+<td><code>new Date(2026, 10, 27)</code> es noviembre</td>
+</tr>
+<tr>
+<td><code>getDay</code> ≠ <code>getDate</code></td>
+<td><code>getDay</code> = día de la semana; <code>getDate</code> = día del mes</td>
+</tr>
+<tr>
+<td>Restar da ms</td>
+<td>1 día = 86 400 000 ms</td>
+</tr>
+<tr>
+<td>Es mutable</td>
+<td><code>setDate()</code> cambia el objeto original</td>
+</tr>
+<tr>
+<td>ISO sin hora = UTC</td>
+<td><code>new Date("2026-11-27")</code> es medianoche <strong>UTC</strong>: en América cae el día 26. Añade la hora (<code>"2026-11-27T00:00"</code>) o usa números</td>
+</tr>
+<tr>
+<td>Formatos no ISO</td>
+<td><code>new Date("27/11/2026")</code> no está estandarizado: usa números o ISO</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Temporal</p>
+<p><code>Temporal</code> es la nueva API de fechas del lenguaje (inmutable y sin estas trampas). Está llegando a los navegadores, pero <code>Date</code> seguirá en todo el código existente durante años.</p>
+</div>
+<h3 id="103-string-e-intl">10.3. <code>String</code> e <code>Intl</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">entrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"  Ana@Correo.ES  "</span><span class="p">;</span>
+<span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">    </span><span class="c1">// "ana@correo.es"</span>
+<span class="s2">"Teclado"</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"cla"</span><span class="p">);</span><span class="w">       </span><span class="c1">// true</span>
+<span class="s2">"7"</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"0"</span><span class="p">);</span><span class="w">            </span><span class="c1">// "007"</span>
+<span class="s2">"a-b-c"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"-"</span><span class="p">);</span><span class="w">              </span><span class="c1">// ["a", "b", "c"]</span>
+<span class="s2">"2026-11-27"</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">);</span><span class="w">        </span><span class="c1">// "2026"</span>
+<span class="s2">"x.y.z"</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="s2">"/"</span><span class="p">);</span><span class="w">    </span><span class="c1">// "x/y/z"</span>
+
+<span class="c1">// Los strings son INMUTABLES</span>
+<span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span><span class="w">  </span><span class="c1">// devuelve uno nuevo…</span>
+<span class="nx">entrada</span><span class="p">;</span><span class="w">         </span><span class="c1">// …y entrada sigue con espacios</span>
+</code></pre></div>
+<p><code>Intl</code> formatea números, monedas, fechas y plurales según el idioma:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">eur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">NumberFormat</span><span class="p">(</span><span class="s2">"es-ES"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="s2">"currency"</span><span class="p">,</span><span class="w"> </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">1234.5</span><span class="p">);</span><span class="w">   </span><span class="c1">// "1234,50 €"</span>
+<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">12345.5</span><span class="p">);</span><span class="w">  </span><span class="c1">// "12.345,50 €"</span>
+
+<span class="nx">examen</span><span class="p">.</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s2">"es-ES"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">weekday</span><span class="o">:</span><span class="w"> </span><span class="s2">"long"</span><span class="p">,</span><span class="w"> </span><span class="nx">day</span><span class="o">:</span><span class="w"> </span><span class="s2">"numeric"</span><span class="p">,</span><span class="w"> </span><span class="nx">month</span><span class="o">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w"> </span><span class="p">});</span>
+<span class="c1">// "viernes, 27 de noviembre"</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Sin punto de millares en 4 cifras</p>
+<p><code>1234,50 €</code> sale sin punto: la norma española no agrupa los números de cuatro cifras. No es un error. Y nada de concatenar <code>" €"</code> ni cambiar puntos por comas a mano.</p>
+</div>
+<h3 id="104-error-es-una-clase-y-se-puede-heredar">10.4. <code>Error</code> es una clase… y se puede heredar</h3>
+<pre class="mermaid"><code>classDiagram
+    Error &lt;|-- TypeError
+    Error &lt;|-- RangeError
+    Error &lt;|-- ValidacionError
+    class Error {
+        +name
+        +message
+        +stack
+    }
+    class ValidacionError {
+        +campo
+    }</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">campo</span><span class="p">,</span><span class="w"> </span><span class="nx">mensaje</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">mensaje</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ValidacionError"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">campo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">campo</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="p">(</span><span class="s2">"email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Email no válido"</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">campo</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w">  </span><span class="c1">// error esperado: se muestra al usuario</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="nx">e</span><span class="p">;</span><span class="w">                           </span><span class="c1">// un bug: que siga subiendo</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Herencia bien usada: un <code>ValidacionError</code> <strong>es un</strong> <code>Error</code>. Lanza siempre <code>new Error(…)</code> o una subclase, nunca <code>throw "texto"</code> (sin <code>stack</code> ni <code>instanceof</code>). Lo usarás en formularios (UD5) y con <code>fetch</code> (UD6).</p>
+<hr />
+<h2 id="11-verificar-devtools">11. Verificar: DevTools <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>console.log(obj)</code></td>
+<td>Vista rápida. Muestra el estado <strong>al desplegar</strong>, no al imprimir</td>
+</tr>
+<tr>
+<td><code>console.dir(obj)</code></td>
+<td>Vista como objeto, con <code>[[Prototype]]</code> desplegable</td>
+</tr>
+<tr>
+<td><code>console.table(lista)</code></td>
+<td>Array de objetos como tabla</td>
+</tr>
+<tr>
+<td><code>Object.getPrototypeOf(x)</code></td>
+<td>Subir un eslabón de la cadena a mano</td>
+</tr>
+<tr>
+<td><code>debugger;</code></td>
+<td>Pausa en esa línea (con DevTools abierto) para ver <code>this</code> y las variables</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>&gt; console.dir(admin)
+▼ Administrador
+    nombre: "Eva"
+    email: "e@x.es"
+    permisos: (2) ['leer', 'borrar']
+  ▼ [[Prototype]]: Usuario
+      constructor: class Administrador
+      puede: ƒ puede(accion)
+    ▼ [[Prototype]]: Object
+        saludar: ƒ saludar()
+        puede: ƒ puede(accion)
+      ▸ [[Prototype]]: Object
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Cómo rotula Chrome los prototipos</p>
+<p>El primer «<code>[[Prototype]]: Usuario</code>» es en realidad <code>Administrador.prototype</code> (dentro se ve <code>constructor: class Administrador</code>): Chrome etiqueta cada prototipo con el nombre de la clase <strong>de la que hereda</strong>.</p>
+</div>
+<p>Pruébalo con el DOM: <code>Object.getPrototypeOf(document.body)</code> y sigue subiendo. Un botón es <code>HTMLButtonElement → HTMLElement → Element → Node → EventTarget → Object</code>: la UD5 es usar esa cadena.</p>
+<hr />
+<h2 id="12-errores-comunes">12. Errores comunes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>✗ Mal</th>
+<th>✓ Bien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Olvidar <code>new</code></td>
+<td><code>Producto("Ratón", 15)</code></td>
+<td><code>new Producto("Ratón", 15)</code></td>
+</tr>
+<tr>
+<td><code>this</code> antes de <code>super()</code></td>
+<td><code>this.permisos = p; super(n, e);</code></td>
+<td><code>super(n, e); this.permisos = p;</code></td>
+</tr>
+<tr>
+<td>Heredar «para reutilizar»</td>
+<td><code>class Carrito extends Producto</code></td>
+<td><code>class Carrito { #lineas = []; }</code></td>
+</tr>
+<tr>
+<td>Sobrescribir y perder al padre</td>
+<td><code>describir() { return "Admin"; }</code></td>
+<td><code>describir() { return super.describir() + "!"; }</code></td>
+</tr>
+<tr>
+<td>Método flecha en un objeto</td>
+<td><code>saludar: () =&gt; this.nombre</code></td>
+<td><code>saludar() { return this.nombre; }</code></td>
+</tr>
+<tr>
+<td>Pasar el método sin su objeto</td>
+<td><code>lista.forEach(t.tic)</code></td>
+<td><code>lista.forEach(() =&gt; t.tic())</code></td>
+</tr>
+<tr>
+<td><code>_privado</code> que no es privado</td>
+<td><code>this._saldo = 0;</code></td>
+<td><code>#saldo = 0;</code></td>
+</tr>
+<tr>
+<td>Meses de <code>Date</code> desde 1</td>
+<td><code>new Date(2026, 11, 27) // ¿nov?</code></td>
+<td><code>new Date(2026, 10, 27) // nov</code></td>
+</tr>
+<tr>
+<td>Copiar con <code>=</code></td>
+<td><code>const copia = original;</code></td>
+<td><code>const copia = { ...original };</code></td>
+</tr>
+<tr>
+<td>Sumar tras <code>toFixed</code></td>
+<td><code>total.toFixed(2) + envio</code></td>
+<td><code>(total + envio).toFixed(2)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-ejercicio-practico-guiado-modelo-de-una-tienda-con-clases">13. Ejercicio práctico guiado: modelo de una tienda con clases <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span></h2>
+<p>Proyecto Vite (como en la Práctica 1) con <strong>un fichero por clase</strong> en <code>src/modelo/</code> y un <code>src/main.js</code> que solo crea objetos y muestra resultados con <code>console.log</code> / <code>console.table</code>. <strong>Sin DOM todavía</strong>: es la base del modelo de la Práctica 2.</p>
+<pre class="mermaid"><code>classDiagram
+    Producto &lt;|-- ProductoDigital : extends
+    Carrito o-- Producto : tiene 0..*
+    class Producto {
+        +nombre
+        -precio
+        -stock
+        +IVA$
+        +get/set precio
+        +get precioConIva
+        +hayStock(uds)
+        +retirar(uds)
+    }
+    class ProductoDigital {
+        +urlDescarga
+        +hayStock() true
+    }
+    class Carrito {
+        -#lineas
+        +creado: Date
+        +añadir(producto, uds)
+        +quitar(nombre)
+        +get total
+        +resumen()
+    }</code></pre>
+<ol>
+<li><strong><code>Producto</code></strong>: <code>nombre</code> obligatorio, <code>precio</code> con setter que lanza <code>RangeError</code> si es negativo (el constructor también pasa por el setter), <code>#stock</code> privado, <code>static IVA = 0.21</code>, <code>get precioConIva</code>, <code>hayStock(uds)</code> y <code>retirar(uds)</code> (lanza <code>Error</code> si no hay stock).</li>
+<li><strong><code>ProductoDigital extends Producto</code></strong>: añade <code>urlDescarga</code>, llama bien a <code>super()</code> y sobrescribe <code>hayStock()</code> (siempre <code>true</code>) y <code>retirar()</code> (no hace nada).</li>
+<li><strong><code>Carrito</code></strong>: <strong>tiene</strong> productos (no hereda de nadie). Lista privada <code>#lineas</code> de <code>{ producto, uds }</code>; <code>añadir(producto, uds)</code> llama a <code>producto.retirar(uds)</code> (así falla si no hay stock) y, si el producto ya está, suma unidades; <code>quitar(nombre)</code>, <code>get total</code> <strong>redondeado a céntimos</strong> y <code>get unidades</code>.</li>
+<li><strong>Formato</strong>: <code>resumen()</code> devuelve <code>"3 artículos · 129,98 €"</code> usando <code>Intl.NumberFormat</code>; <code>creado</code> guarda la fecha con <code>Date</code>.</li>
+<li><strong>Comprobar</strong> en <code>main.js</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">49.99</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">raton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ebook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ProductoDigital</span><span class="p">(</span><span class="s2">"Ebook JS"</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="w"> </span><span class="s2">"https://ejemplo.es/js.pdf"</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Carrito</span><span class="p">();</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">teclado</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">ebook</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span><span class="w">      </span><span class="c1">// 129.98</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">resumen</span><span class="p">());</span><span class="w">  </span><span class="c1">// "3 artículos · 129,98 €"</span>
+
+<span class="c1">// Un error no capturado para el módulo entero: cada prueba de error, en su try/catch</span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// RangeError</span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">raton</span><span class="p">,</span><span class="w"> </span><span class="mf">99</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Error: sin stock</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">teclado</span><span class="p">));</span><span class="w"> </span><span class="c1">// ["nombre"] → los # no salen</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">¿Te sale <code>129.98000000000002</code>?</p>
+<p>Es el problema de los decimales de la sección 10.1 (<code>2 * 49.99 + 30</code>). Redondea en <code>get total</code>: <code>Math.round(t * 100) / 100</code>.</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Criterio de éxito</p>
+<p>Precio negativo → <code>RangeError</code>; <code>#stock</code> inaccesible desde <code>main.js</code>; total en formato <code>129,98 €</code>; y <code>Carrito</code> no hereda de nadie.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Si terminas: descuento por composición</p>
+<p>Crea <code>SinDescuento</code> y <code>DescuentoPorcentaje</code> (ambos con un método <code>aplicar(total)</code>) y haz que el <code>Carrito</code> <strong>tenga</strong> uno y lo use al calcular el total. Cambiar de descuento no debe obligar a tocar <code>Carrito</code>.</p>
+</div>
+<hr />
+<h2 id="14-comprueba-lo-aprendido">14. Comprueba lo aprendido <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3c3.88 0 7 3.14 7 7 0 2.8-1.63 5.19-4 6.31V21H9v-3H8c-1.11 0-2-.89-2-2v-3H4.5c-.42 0-.66-.5-.42-.81L6 9.66A7.003 7.003 0 0 1 13 3m-2.68 4.39h1.93c.01-.3.1-.53.28-.69a1 1 0 0 1 .66-.23c.31 0 .57.1.75.28.18.19.26.45.26.75 0 .32-.07.59-.23.82-.14.23-.35.43-.61.59-.51.34-.86.64-1.05.91-.2.26-.31.68-.31 1.18h2c0-.31.04-.56.13-.74.09-.19.26-.36.51-.52.45-.24.82-.53 1.11-.93s.44-.81.44-1.31c0-.76-.27-1.37-.81-1.82-.53-.45-1.26-.68-2.19-.68-.87 0-1.57.2-2.11.59-.52.41-.78.98-.77 1.77zM12 14h2v-2h-2zm1-13C8.41 1 4.61 4.42 4.06 8.9L2.5 11h-.03l-.02.03c-.55.76-.62 1.76-.19 2.59.36.69 1 1.17 1.74 1.32V16c0 1.85 1.28 3.42 3 3.87V23h11v-5.5c2.5-1.67 4-4.44 4-7.5 0-4.97-4.04-9-9-9"/></svg></span></h2>
+<details class="question">
+<summary>1. ¿Por qué se dice que <code>class</code> es azúcar sintáctico? ¿Qué hay debajo?</summary>
+<p>Porque <code>class</code> crea una <strong>función</strong> constructora y pone los métodos en su <strong><code>prototype</code></strong>; los objetos creados con <code>new</code> enlazan con él mediante <code>[[Prototype]]</code>. No añade un modelo de objetos nuevo: es otra forma de escribir constructoras y prototipos.</p>
+</details>
+<details class="question">
+<summary>2. <code>p1</code> y <code>p2</code> son instancias de <code>Persona</code>. ¿Cuántas copias de <code>saludar</code> existen? ¿Dónde?</summary>
+<p><strong>Una</strong>, en <code>Persona.prototype</code>. Las dos instancias la encuentran subiendo por su cadena de prototipos.</p>
+</details>
+<details class="question">
+<summary>3. ¿Qué diferencia real hay entre <code>#saldo</code> y <code>_saldo</code>? ¿Qué pasa si escribes <code>cuenta.#saldo</code> fuera de la clase?</summary>
+<p><code>_saldo</code> es una convención: la propiedad es pública. <code>#saldo</code> es privada y lo hace cumplir el lenguaje. Fuera de la clase es un <strong><code>SyntaxError</code></strong> que se detecta al cargar el fichero, así que no se ejecuta nada de ese script (en la consola de DevTools sí se puede leer, solo para depurar).</p>
+</details>
+<details class="question">
+<summary>4. <code>setInterval(t.tic, 1000)</code> no cuenta: <code>t.segundos</code> sigue a 0. ¿Por qué? Da dos arreglos.</summary>
+<p><code>t.tic</code> pasa la función sin su objeto; <code>setInterval</code> la llama con <code>this = window</code>, así que incrementa <code>window.segundos</code>. Arreglos: <code>setInterval(() =&gt; t.tic(), 1000)</code>, <code>setInterval(t.tic.bind(t), 1000)</code>, o declarar <code>tic = () =&gt; { … }</code> como campo flecha.</p>
+</details>
+<details class="question">
+<summary>5. <code>Carrito</code> y <code>Producto</code>: ¿herencia o composición?</summary>
+<p><strong>Composición</strong>: el carrito <strong>tiene</strong> productos; no <strong>es un</strong> producto. Heredar le daría <code>precio</code> o <code>hayStock</code>, que no tienen sentido para un carrito.</p>
+</details>
+<details class="question">
+<summary>6. ¿Qué devuelve <code>new Date(2026, 0, 31).getMonth()</code>? ¿Y <code>getDay()</code> de esa fecha?</summary>
+<p><code>getMonth()</code> devuelve <code>0</code> (enero). <code>getDay()</code> devuelve el día de la semana: el 31 de enero de 2026 fue sábado → <code>6</code>.</p>
+</details>
+<details class="question">
+<summary>7. ¿Qué imprime este código y por qué?</summary>
+<p><div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">sub</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">m</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">a</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">sub</span><span class="p">.</span><span class="nx">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">sub</span><span class="p">.</span><span class="nx">m</span><span class="p">);</span>
+</code></pre></div>
+<code>1 2</code>. El spread hace una copia <strong>superficial</strong>: <code>n</code> se copia, pero <code>sub</code> es la misma referencia en <code>a</code> y <code>b</code>.</p>
+</details>
+<details class="question">
+<summary>8. ¿Cuándo usarías un método <code>static</code>?</summary>
+<p>Cuando no necesita los datos de una instancia concreta (<code>this</code>): constantes, contadores, utilidades o métodos fábrica como <code>Pedido.desdeJSON(texto)</code>.</p>
+</details>
+<hr />
+<h2 id="15-glosario">15. Glosario <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.81 2C4.83 2.09 4 3 4 4v16c0 1.05.95 2 2 2h12c1.05 0 2-.95 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H5.81M12 13h1a1 1 0 0 1 1 1v4h-1v-2h-1v2h-1v-4a1 1 0 0 1 1-1m0 1v1h1v-1zm3 1h3v1l-2 3h2v1h-3v-1l2-3h-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objeto</strong></td>
+<td>Colección de propiedades clave → valor.</td>
+</tr>
+<tr>
+<td><strong>Propiedad / método</strong></td>
+<td>Par clave–valor / propiedad cuyo valor es una función.</td>
+</tr>
+<tr>
+<td><strong><code>this</code></strong></td>
+<td>Objeto sobre el que se llama el método (el que está a la izquierda del punto).</td>
+</tr>
+<tr>
+<td><strong>Referencia</strong></td>
+<td>La variable apunta al objeto; no lo contiene.</td>
+</tr>
+<tr>
+<td><strong>Copia superficial / profunda</strong></td>
+<td><code>{ ...obj }</code> copia un nivel / <code>structuredClone(obj)</code> copia todos.</td>
+</tr>
+<tr>
+<td><strong>Prototipo / <code>[[Prototype]]</code></strong></td>
+<td>Objeto del que otro hereda / enlace interno a ese objeto.</td>
+</tr>
+<tr>
+<td><strong>Cadena de prototipos</strong></td>
+<td>Prototipo del prototipo… hasta <code>null</code>.</td>
+</tr>
+<tr>
+<td><strong>Propiedad propia</strong></td>
+<td>La que está en el propio objeto (<code>Object.hasOwn</code>).</td>
+</tr>
+<tr>
+<td><strong>Función constructora</strong></td>
+<td>Función que se llama con <code>new</code> para crear objetos.</td>
+</tr>
+<tr>
+<td><strong><code>Object.create(proto)</code></strong></td>
+<td>Crea un objeto con el prototipo indicado.</td>
+</tr>
+<tr>
+<td><strong>Azúcar sintáctico</strong></td>
+<td>Sintaxis más cómoda para algo que ya existía.</td>
+</tr>
+<tr>
+<td><strong>Clase / instancia</strong></td>
+<td>Plantilla para crear objetos / objeto creado con <code>new Clase()</code>.</td>
+</tr>
+<tr>
+<td><strong>Constructor</strong></td>
+<td>Método que inicializa la instancia al hacer <code>new</code>.</td>
+</tr>
+<tr>
+<td><strong>Getter / setter</strong></td>
+<td>Métodos que se usan como si fueran propiedades (<code>get</code> / <code>set</code>).</td>
+</tr>
+<tr>
+<td><strong>Encapsulación</strong></td>
+<td>Ocultar el estado y exponer solo una interfaz pública.</td>
+</tr>
+<tr>
+<td><strong><code>#privado</code></strong></td>
+<td>Campo o método accesible solo dentro de la clase (ES2022).</td>
+</tr>
+<tr>
+<td><strong><code>static</code></strong></td>
+<td>Miembro de la clase, no de cada instancia.</td>
+</tr>
+<tr>
+<td><strong>Herencia (<code>extends</code>)</strong></td>
+<td>Una subclase obtiene propiedades y métodos de su superclase.</td>
+</tr>
+<tr>
+<td><strong><code>super</code></strong></td>
+<td>Llama al constructor (<code>super()</code>) o a un método (<code>super.m()</code>) del padre.</td>
+</tr>
+<tr>
+<td><strong>Sobrescritura</strong></td>
+<td>Redefinir en la subclase un método heredado.</td>
+</tr>
+<tr>
+<td><strong>Polimorfismo</strong></td>
+<td>Mismo método, distinta respuesta según el objeto.</td>
+</tr>
+<tr>
+<td><strong>Composición / delegación</strong></td>
+<td>Un objeto TIENE otros y les pide parte del trabajo.</td>
+</tr>
+<tr>
+<td><strong>Mixin</strong></td>
+<td>Objeto de métodos que se copian en otros (<code>Object.assign</code>).</td>
+</tr>
+<tr>
+<td><strong>Objetos predefinidos</strong></td>
+<td>Objetos que trae el lenguaje: <code>Math</code>, <code>Date</code>, <code>String</code>, <code>Intl</code>, <code>Error</code>…</td>
+</tr>
+<tr>
+<td><strong>Modo estricto</strong></td>
+<td>Variante del lenguaje que convierte errores silenciosos en excepciones; activo en módulos y clases.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-resumen-y-conexion-con-la-siguiente-unidad">16. Resumen y conexión con la siguiente unidad <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></h2>
+<ul>
+<li>Debajo de <code>class</code> hay <strong>funciones y una cadena de prototipos</strong>.</li>
+<li>Los <strong>datos</strong> van en cada instancia; los <strong>métodos</strong>, en el prototipo, compartidos.</li>
+<li>En una subclase, <strong><code>super()</code> antes de <code>this</code></strong>.</li>
+<li><strong><code>#privado</code></strong> lo hace cumplir el lenguaje; <code>_privado</code> es solo un aviso.</li>
+<li><strong>Composición o herencia</strong>: decisión consciente, «tiene un» frente a «es un».</li>
+<li><strong><code>Math</code>, <code>Date</code>, <code>String</code> e <code>Intl</code></strong> antes que reinventar.</li>
+<li>La POO es una herramienta, no un dogma: a veces un objeto literal o una función son mejor opción.</li>
+</ul>
+<p><strong>Siguiente — UD5: DOM nativo y gestión de eventos.</strong> Pintarás este modelo en la página con <code>createElement</code>, <code>classList</code> o <code>dataset</code>, responderás a la interacción con <code>addEventListener</code> y te reencontrarás con el <strong><code>this</code> perdido</strong> de la sección 7.7. Todo junto es la <strong>Práctica 2</strong>.</p>
+<hr />
+<h2 id="17-referencias-y-fuentes">17. Referencias y fuentes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg></span></h2>
+<ul>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Working_with_objects">Trabajar con objetos</a></li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">Herencia y la cadena de prototipos</a></li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes">Clases</a> · <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties">Propiedades privadas</a> · <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes/static">static</a></li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/this">this</a> · <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">Function.prototype.bind</a></li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a> · <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a> · <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> · <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></li>
+<li>javascript.info — <a href="https://es.javascript.info/prototypes">Prototipos, herencia</a> · <a href="https://es.javascript.info/classes">Clases</a></li>
+<li>Gamma, Helm, Johnson y Vlissides (1994). <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
