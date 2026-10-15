@@ -482,6 +482,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#de-funcion-tradicional-a-arrow-function-en-tres-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        De Función Tradicional a Arrow Function en Tres Pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -497,6 +508,17 @@
     <span class="md-ellipsis">
       
         Parámetros por Defecto y Parámetros Rest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-frente-a-spread-los-mismos-tres-puntos-dos-cosas-opuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rest frente a Spread: los Mismos Tres Puntos, dos Cosas Opuestas
       
     </span>
   </a>
@@ -581,6 +603,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#devolver-un-objeto-de-funciones-sin-dejar-escapar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devolver un Objeto de Funciones sin Dejar Escapar el Estado
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -591,6 +624,17 @@
     <span class="md-ellipsis">
       
         6. Funciones de Alto Orden (Higher-Order Functions) y Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-practica-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Practica lo aprendido 🏋️
       
     </span>
   </a>
@@ -972,6 +1016,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#de-funcion-tradicional-a-arrow-function-en-tres-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        De Función Tradicional a Arrow Function en Tres Pasos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -987,6 +1042,17 @@
     <span class="md-ellipsis">
       
         Parámetros por Defecto y Parámetros Rest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-frente-a-spread-los-mismos-tres-puntos-dos-cosas-opuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rest frente a Spread: los Mismos Tres Puntos, dos Cosas Opuestas
       
     </span>
   </a>
@@ -1071,6 +1137,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#devolver-un-objeto-de-funciones-sin-dejar-escapar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devolver un Objeto de Funciones sin Dejar Escapar el Estado
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1081,6 +1158,17 @@
     <span class="md-ellipsis">
       
         6. Funciones de Alto Orden (Higher-Order Functions) y Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-practica-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Practica lo aprendido 🏋️
       
     </span>
   </a>
@@ -1356,6 +1444,70 @@ cortas, métodos de array), usa <strong>función declarada</strong> cuando quier
 (por ejemplo, funciones auxiliares que se llaman desde arriba de donde se definen), y usa
 <strong>expresión de función tradicional</strong> solo cuando necesites las capacidades que las arrow
 functions no tienen — que es justo lo que viene ahora.</p>
+<h3 id="de-funcion-tradicional-a-arrow-function-en-tres-pasos">De Función Tradicional a <em>Arrow Function</em> en Tres Pasos</h3>
+<p>La forma más fácil de entender una <em>arrow function</em> es construirla a partir de una expresión de
+función tradicional:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. Expresión de función tradicional</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">precioConIva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 2. Quitamos "function" y ponemos la flecha después de los parámetros</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">precioConIva2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 3. Si el cuerpo es SOLO un return, quitamos llaves y return: retorno implícito</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">precioConIva3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">precioConIva</span><span class="p">(</span><span class="mf">10</span><span class="p">),</span><span class="w"> </span><span class="nx">precioConIva2</span><span class="p">(</span><span class="mf">10</span><span class="p">),</span><span class="w"> </span><span class="nx">precioConIva3</span><span class="p">(</span><span class="mf">10</span><span class="p">));</span><span class="w"> </span><span class="c1">// 12.1 12.1 12.1</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Situación</th>
+<th>Cómo se escribe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sin parámetros</td>
+<td><code>() =&gt; "hola"</code></td>
+</tr>
+<tr>
+<td>Un parámetro</td>
+<td><code>(x) =&gt; x * 2</code> (los paréntesis son opcionales, pero Prettier los pone)</td>
+</tr>
+<tr>
+<td>Varios parámetros</td>
+<td><code>(a, b) =&gt; a + b</code></td>
+</tr>
+<tr>
+<td>Cuerpo con varias líneas</td>
+<td><code>(a, b) =&gt; { const s = a + b; return s; }</code> (con llaves, el <code>return</code> es <strong>obligatorio</strong>)</td>
+</tr>
+<tr>
+<td>Devolver un objeto literal</td>
+<td><code>(nombre) =&gt; ({ nombre, precio: 0 })</code> (el objeto va <strong>entre paréntesis</strong>)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Los dos errores más típicos con las flechas</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ 1. Llaves sin return → devuelve undefined</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">doble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">doble</span><span class="p">(</span><span class="mf">4</span><span class="p">));</span><span class="w"> </span><span class="c1">// undefined</span>
+
+<span class="c1">// ❌ 2. Devolver un objeto sin paréntesis → JS cree que las llaves son el cuerpo</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">crearCafe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">crearCafe</span><span class="p">(</span><span class="s2">"Latte"</span><span class="p">));</span><span class="w"> </span><span class="c1">// undefined ("nombre:" se interpreta como una etiqueta)</span>
+
+<span class="c1">// ✅ Correcto</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">dobleBien</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">crearCafeBien</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dobleBien</span><span class="p">(</span><span class="mf">4</span><span class="p">),</span><span class="w"> </span><span class="nx">crearCafeBien</span><span class="p">(</span><span class="s2">"Latte"</span><span class="p">));</span><span class="w"> </span><span class="c1">// 8 { nombre: 'Latte' }</span>
+</code></pre></div>
+</div>
 <h3 id="las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar">Las Limitaciones de las Arrow Functions (Importante — se te puede escapar)</h3>
 <p>Las arrow functions no son solo "una forma más corta de escribir funciones". Son <strong>estructuralmente
 distintas</strong> por dentro, y eso significa que hay cosas que NO puedes hacer con ellas. Estas
@@ -1390,8 +1542,18 @@ functions no lo tienen:</p>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// ReferenceError: arguments is not defined</span>
 <span class="p">};</span>
 </code></pre></div>
-<p>Si necesitas algo parecido en una arrow function, usa el parámetro <em>rest</em> que ya viste:
-<code>const sumaTodo = (...args) =&gt; { console.log(args); }</code>.</p>
+<p>Además, aunque se imprima parecido, <code>arguments</code> <strong>no es un array</strong>: es un objeto «parecido a un
+array» (<em>array-like</em>), con <code>length</code> e índices pero <strong>sin <code>map</code>, <code>filter</code> ni <code>reduce</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">totalAntiguo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nb">arguments</span><span class="p">));</span><span class="w"> </span><span class="c1">// false</span>
+<span class="w">  </span><span class="c1">// arguments.reduce(...)  ❌ TypeError: arguments.reduce is not a function</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nb">arguments</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// hay que convertirlo antes</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalAntiguo</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">));</span><span class="w"> </span><span class="c1">// 6</span>
+</code></pre></div>
+<p>Por eso, en código moderno se usa <strong>siempre el parámetro <em>rest</em></strong> (<code>...args</code>): funciona en las
+arrow functions y ya es un array de verdad. <code>arguments</code> solo hay que saber reconocerlo en código
+antiguo: <code>const sumaTodo = (...args) =&gt; { console.log(args); }</code>.</p>
 <p><strong>3. No son aptas para <code>call</code>, <code>apply</code> y <code>bind</code></strong></p>
 <p>Estos tres métodos sirven para ejecutar una función indicando manualmente cuál será su
 <code>this</code>. Como una arrow function ya tiene su <code>this</code> fijado (heredado) desde el momento en que
@@ -1434,7 +1596,62 @@ constructor, o acceso a <code>arguments</code>, usa una función tradicional (de
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">calcularSumaTotal</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">));</span><span class="w"> </span><span class="c1">// (10 + 20 + 30) * 2 = 120</span>
 </code></pre></div>
 <p>El parámetro <em>rest</em> siempre debe ser el <strong>último</strong> de la lista de parámetros — agrupa "todo lo
-que sobre", así que no tendría sentido que hubiera más parámetros después de él.</p>
+que sobre", así que no tendría sentido que hubiera más parámetros después de él
+(<code>(...productos, mesa) =&gt; {}</code> es un <strong>SyntaxError</strong>).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Parámetros normales + rest: el rest recoge "lo que sobra"</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">mesa</span><span class="p">,</span><span class="w"> </span><span class="nx">camarero</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">productos</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">  </span><span class="sb">`Mesa </span><span class="si">${</span><span class="nx">mesa</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">camarero</span><span class="si">}</span><span class="sb">): </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb"> productos → </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ticket</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"Luis"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Café"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tostada"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Zumo"</span><span class="p">));</span>
+<span class="c1">// Mesa 4 (Luis): 3 productos → Café, Tostada, Zumo</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">totalCuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">importes</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">importes</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalCuenta</span><span class="p">());</span><span class="w"> </span><span class="c1">// 0 → importes es [] y reduce devuelve el valor inicial</span>
+</code></pre></div>
+<h3 id="rest-frente-a-spread-los-mismos-tres-puntos-dos-cosas-opuestas"><em>Rest</em> frente a <em>Spread</em>: los Mismos Tres Puntos, dos Cosas Opuestas</h3>
+<p>Los <code>...</code> aparecen con dos significados contrarios según <strong>dónde</strong> se escriban. Los vas a usar
+constantemente a partir de ahora (en la UD3 son la base para no mutar arrays):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong><em>Rest</em></strong> (agrupar)</th>
+<th><strong><em>Spread</em></strong> (esparcir)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dónde aparece</strong></td>
+<td>En los <strong>parámetros</strong> de una función o a la <strong>izquierda</strong> de un destructuring</td>
+<td>En una <strong>llamada</strong>, dentro de <code>[ ]</code> o dentro de <code>{ }</code></td>
+</tr>
+<tr>
+<td><strong>Qué hace</strong></td>
+<td>Mete varios valores sueltos <strong>en un array</strong></td>
+<td>Saca los elementos de un array/objeto <strong>como valores sueltos</strong></td>
+</tr>
+<tr>
+<td><strong>Ejemplo</strong></td>
+<td><code>const sumar = (...nums) =&gt; …</code></td>
+<td><code>Math.max(...precios)</code> · <code>[...lista, nuevo]</code> · <code>{ ...p, precio: 2 }</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Truco para distinguirlos</p>
+<p>Si los <code>...</code> están <strong>recibiendo</strong> valores, es <em>rest</em>; si los están <strong>dando</strong>, es <em>spread</em>.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">precios</span><span class="p">));</span><span class="w"> </span><span class="c1">// 3   (spread: pasa 1.2, 2.4, 3 sueltos)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">precios</span><span class="p">));</span><span class="w">    </span><span class="c1">// NaN (le llega UN array, no números)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">latte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">latteMasCaro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">latte</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// spread: copia y lo de la derecha "gana"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">latte</span><span class="p">.</span><span class="nx">precio</span><span class="p">,</span><span class="w"> </span><span class="nx">latteMasCaro</span><span class="p">.</span><span class="nx">precio</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2.4 2.6</span>
+</code></pre></div>
+<p>Recuerda lo visto en <a href="#valor-vs-referencia-como-se-guardan-los-datos">Valor vs. Referencia</a>:
+el <em>spread</em> crea un objeto o array <strong>nuevo</strong>, que es justo lo que necesitas para modificar datos
+sin tocar el original. En la UD3 verás cómo usarlo para actualizar un elemento de un array.</p>
 <hr />
 <h2 id="3-ambitos-de-variables-scope-y-hoisting">3. Ámbitos de Variables (<em>Scope</em>) y <em>Hoisting</em></h2>
 <p>El <strong>ámbito</strong> determina la accesibilidad de las variables en distintas partes del código.</p>
@@ -1580,9 +1797,91 @@ independiente</strong>:</p>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contadorA</span><span class="p">.</span><span class="nx">obtenerValor</span><span class="p">());</span><span class="w"> </span><span class="c1">// 2</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contadorB</span><span class="p">.</span><span class="nx">obtenerValor</span><span class="p">());</span><span class="w"> </span><span class="c1">// 1 -- totalmente independiente de contadorA</span>
 </code></pre></div>
+<h3 id="devolver-un-objeto-de-funciones-sin-dejar-escapar-el-estado">Devolver un Objeto de Funciones sin Dejar Escapar el Estado</h3>
+<p>El mismo patrón, escrito con <em>arrow functions</em> y sin mutar el estado, es muy habitual (un
+registro de pedidos, un historial de ventas…). Vamos a desmontarlo línea a línea:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">crearCaja</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">pedidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w"> </span><span class="c1">// (1) variable PRIVADA: solo la ven las funciones de abajo</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// (2) cada propiedad del objeto es una función que "recuerda" pedidos</span>
+<span class="w">    </span><span class="nx">registrar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">pedido</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">pedidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">pedidos</span><span class="p">,</span><span class="w"> </span><span class="nx">pedido</span><span class="p">];</span><span class="w"> </span><span class="c1">// (3) array NUEVO, sin push</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">obtenerPedidos</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[...</span><span class="nx">pedidos</span><span class="p">],</span><span class="w"> </span><span class="c1">// (4) devuelve una COPIA, no el original</span>
+<span class="w">    </span><span class="nx">total</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pedidos</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">importe</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">importe</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">numeroPedidos</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pedidos</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">caja</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCaja</span><span class="p">();</span><span class="w"> </span><span class="c1">// (5) aquí se ejecuta crearCaja UNA vez y se crea UN `pedidos`</span>
+<span class="nx">caja</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">3.6</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">caja</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">5.0</span><span class="w"> </span><span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">caja</span><span class="p">.</span><span class="nx">numeroPedidos</span><span class="p">());</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">caja</span><span class="p">.</span><span class="nx">total</span><span class="p">());</span><span class="w">         </span><span class="c1">// 8.6</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">caja</span><span class="p">.</span><span class="nx">pedidos</span><span class="p">);</span><span class="w">         </span><span class="c1">// undefined ← no se puede tocar desde fuera</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Marca</th>
+<th>Qué pasa y por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(1)</strong></td>
+<td><code>pedidos</code> es local a <code>crearCaja</code>, pero las funciones devueltas la siguen usando: el motor la mantiene viva (<strong>closure</strong>). Es <code>let</code> porque en (3) se <strong>reasigna</strong>.</td>
+</tr>
+<tr>
+<td><strong>(2)</strong></td>
+<td>El objeto devuelto es la <strong>interfaz pública</strong>: lo único que el resto del programa puede hacer con <code>pedidos</code>.</td>
+</tr>
+<tr>
+<td><strong>(3)</strong></td>
+<td><code>[...pedidos, pedido]</code> equivale a un <code>push</code>, pero <strong>sin mutar</strong>: se crea un array nuevo.</td>
+</tr>
+<tr>
+<td><strong>(4)</strong></td>
+<td>Si devolviera <code>pedidos</code> tal cual, quien lo reciba tendría <strong>la referencia al array privado</strong> y podría modificarlo. Con <code>[...pedidos]</code> se entrega una copia.</td>
+</tr>
+<tr>
+<td><strong>(5)</strong></td>
+<td>Cada llamada a <code>crearCaja()</code> crea su <strong>propio</strong> <code>pedidos</code>, independiente de las demás.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>¿Por qué importa la copia del punto (4)?</strong> Compruébalo con una versión que devuelve la
+referencia:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">crearCajaInsegura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">pedidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">registrar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">pedido</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pedidos</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pedido</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">obtenerPedidos</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pedidos</span><span class="p">,</span><span class="w"> </span><span class="c1">// ❌ devuelve la referencia</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">insegura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCajaInsegura</span><span class="p">();</span>
+<span class="nx">insegura</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">3.6</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">insegura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">99</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1000</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// ¡fraude desde fuera!</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insegura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2 ← el "privado" ha sido modificado</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">segura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCaja</span><span class="p">();</span>
+<span class="nx">segura</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">3.6</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">segura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">99</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1000</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// modifica solo la copia</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">segura</span><span class="p">.</span><span class="nx">numeroPedidos</span><span class="p">());</span><span class="w"> </span><span class="c1">// 1 ← intacto</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Copia superficial</p>
+<p><code>[...pedidos]</code> crea un array nuevo, pero los objetos pedido de dentro son los mismos:
+<code>segura.obtenerPedidos()[0].importe = 0</code> todavía cambiaría el pedido guardado. Si hiciera
+falta blindarlo del todo: <code>pedidos.map((p) =&gt; ({ ...p }))</code> o <code>structuredClone(pedidos)</code>.</p>
+</div>
 <p><strong>Otros usos habituales de los closures</strong> que verás más adelante en el curso: recordar
 configuración entre llamadas a una función (por ejemplo, una función que "recuerda" un factor
-de conversión), o crear funciones especializadas a partir de una más genérica.</p>
+de conversión), o crear funciones especializadas a partir de una más genérica — justo lo que
+viene en el apartado siguiente.</p>
 <hr />
 <h2 id="6-funciones-de-alto-orden-higher-order-functions-y-callbacks">6. Funciones de Alto Orden (<em>Higher-Order Functions</em>) y Callbacks</h2>
 <p>Una <strong>Función de Alto Orden (HOF)</strong> es una función que cumple al menos una de estas dos
@@ -1615,10 +1914,98 @@ en JavaScript moderno y se apoya directamente en los closures que acabas de ver:
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">duplicar</span><span class="p">(</span><span class="mf">5</span><span class="p">));</span><span class="w">  </span><span class="c1">// 10</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triplicar</span><span class="p">(</span><span class="mf">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// 15</span>
 </code></pre></div>
+<p>Con <em>arrow functions</em> se escribe en una sola línea, con <strong>dos flechas seguidas</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">crearDescuento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">porcentaje</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">porcentaje</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="c1">// Es lo mismo que:</span>
+<span class="c1">// const crearDescuento = (porcentaje) =&gt; {</span>
+<span class="c1">//   return (precio) =&gt; { return precio * (1 - porcentaje / 100); };</span>
+<span class="c1">// };</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">descuentoSocio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearDescuento</span><span class="p">(</span><span class="mf">10</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">descuentoHappyHour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearDescuento</span><span class="p">(</span><span class="mf">50</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">descuentoSocio</span><span class="p">(</span><span class="mf">2.0</span><span class="p">));</span><span class="w">     </span><span class="c1">// 1.8</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">descuentoHappyHour</span><span class="p">(</span><span class="mf">2.0</span><span class="p">));</span><span class="w"> </span><span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">descuentoSocio</span><span class="p">);</span><span class="w">   </span><span class="c1">// "function" ← lo que devolvió es una función</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Dos llamadas, dos momentos</p>
+<p><code>crearDescuento(10)</code> <strong>no calcula nada</strong>: fabrica y devuelve una función que «recuerda»
+<code>porcentaje = 10</code>. El cálculo ocurre después, al llamar <code>descuentoSocio(2.0)</code>. También se
+puede llamar todo seguido: <code>crearDescuento(10)(2.0)</code>.</p>
+</div>
+<p>Las dos ideas se pueden juntar: una función que recibe <strong>configuración</strong> (con valor por defecto)
+y devuelve un <strong>objeto de funciones</strong> con estado privado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">crearCajaConIva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">iva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">tickets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">cobrar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">mesa</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">importes</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">importes</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">));</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">mesa</span><span class="p">,</span><span class="w"> </span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">total</span><span class="o">:</span><span class="w"> </span><span class="nb">Number</span><span class="p">((</span><span class="nx">base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">iva</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">)).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="w"> </span><span class="p">};</span>
+<span class="w">      </span><span class="nx">tickets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">tickets</span><span class="p">,</span><span class="w"> </span><span class="nx">ticket</span><span class="p">];</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">ticket</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">recaudado</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">tickets</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">terraza</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCajaConIva</span><span class="p">();</span><span class="w"> </span><span class="c1">// iva = 10 por defecto</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">terraza</span><span class="p">.</span><span class="nx">cobrar</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.4</span><span class="p">));</span><span class="w"> </span><span class="c1">// { mesa: 2, base: 3.6, total: 3.96 }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">terraza</span><span class="p">.</span><span class="nx">recaudado</span><span class="p">());</span><span class="w">         </span><span class="c1">// 3.96</span>
+</code></pre></div>
+<p>En una sola función aparecen: <em>arrow functions</em>, parámetro por defecto, <em>rest</em>, closure,
+<em>spread</em> para no mutar, <code>reduce</code> y destructuring (<code>{ total }</code> en el parámetro, que verás en la
+UD3).</p>
 <p>Ya conoces algunas HOF integradas en JavaScript sin saberlo — <code>setTimeout(callback, tiempo)</code>
 es una HOF (recibe una función). En la próxima unidad verás varias más: <code>map()</code>, <code>filter()</code> y
 <code>reduce()</code> son, todas ellas, funciones de alto orden que reciben un callback para decidir qué
 hacer con cada elemento de un array.</p>
+<hr />
+<h2 id="7-practica-lo-aprendido">7. Practica lo aprendido 🏋️</h2>
+<p>Resuélvelos en la consola del navegador (<code>F12</code> → <em>Console</em>) o con <code>node fichero.js</code>. Antes de
+ejecutar cada ejemplo, <strong>escribe en un comentario qué crees que va a salir</strong> y luego compruébalo.</p>
+<p><strong>1 · <em>Arrow functions</em></strong></p>
+<ol>
+<li>Convierte a <em>arrow function</em> con retorno implícito:
+   <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">esCaro</span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">aplicarDescuento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">,</span><span class="w"> </span><span class="nx">porcentaje</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">porcentaje</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></li>
+<li>Escribe <code>crearPedido</code> como <em>arrow function</em> que reciba <code>cliente</code> y <code>producto</code> y devuelva el
+   objeto <code>{ cliente, producto, servido: false }</code> con retorno implícito.</li>
+</ol>
+<p><strong>2 · <em>Rest<em>, <code>arguments</code> y </em>spread</em></strong></p>
+<ol>
+<li>Escribe <code>media(...notas)</code> que devuelva la media de todas las notas recibidas, o <code>0</code> si no
+   recibe ninguna.</li>
+<li>Escribe <code>registrarConsumo(mesa, ...productos)</code> que devuelva <code>{ mesa, productos, total }</code>,
+   donde <code>productos</code> son objetos <code>{ nombre, precio }</code> y <code>total</code> su suma.</li>
+<li>Reescribe con <em>rest</em> y como <em>arrow function</em>:
+   <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">nombresEnMayusculas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nb">arguments</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<p><strong>3 · Closures y funciones que devuelven funciones</strong></p>
+<ol>
+<li>Escribe <code>crearSaludo(saludo)</code> que devuelva una función que reciba un <code>nombre</code> y devuelva
+   <code>"&lt;saludo&gt;, &lt;nombre&gt;"</code>. Crea <code>buenosDias</code> y <code>buenasTardes</code> y pruébalas.</li>
+<li>Escribe <code>crearFiltroPrecio(max)</code> que devuelva una función <strong>apta para usar dentro de
+   <code>filter</code></strong>: <code>carta.filter(crearFiltroPrecio(2))</code>.</li>
+<li>Escribe <code>crearContadorVisitas()</code> que devuelva <code>{ visitar, visitas, reiniciar }</code>. Comprueba
+   que dos contadores son independientes y que <code>contador.cuenta = 100</code> no afecta.</li>
+<li>Escribe <code>crearListaEspera()</code> que devuelva <code>{ apuntar(nombre), atenderSiguiente(), verLista() }</code>:
+   <code>apuntar</code> añade al final <strong>sin <code>push</code></strong>; <code>atenderSiguiente</code> devuelve el primero y lo quita
+   <strong>sin <code>shift</code></strong> (pista: destructuring con <em>rest</em>, UD3) o <code>"Nadie esperando"</code> si no hay nadie
+   (pista: <code>??</code>, UD3); <code>verLista</code> devuelve una copia.</li>
+<li><em>(Función de alto orden propia)</em> Escribe <code>aplicarATodos(lista, transformacion)</code> que devuelva
+    un array nuevo aplicando <code>transformacion</code> a cada elemento, <strong>sin usar <code>map</code></strong> (con
+    <code>for...of</code> y <em>spread</em>). Úsala pasándole <code>crearDescuento(10)</code> como callback.</li>
+</ol>
 
 
 

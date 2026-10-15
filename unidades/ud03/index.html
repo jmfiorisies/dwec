@@ -736,6 +736,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#patrones-para-no-mutar-anadir-actualizar-y-quitar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrones para no Mutar: Añadir, Actualizar y Quitar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring-sacar-valores-de-arrays-y-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destructuring: Sacar Valores de Arrays y Objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -802,6 +824,17 @@
     <span class="md-ellipsis">
       
         6.5. Búsqueda y Validación: find(), findIndex(), some(), every(), includes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-encadenar-metodos-filter-map-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. Encadenar Métodos: filter() → map() → reduce()
       
     </span>
   </a>
@@ -1312,6 +1345,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#patrones-para-no-mutar-anadir-actualizar-y-quitar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrones para no Mutar: Añadir, Actualizar y Quitar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring-sacar-valores-de-arrays-y-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destructuring: Sacar Valores de Arrays y Objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1378,6 +1433,17 @@
     <span class="md-ellipsis">
       
         6.5. Búsqueda y Validación: find(), findIndex(), some(), every(), includes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-encadenar-metodos-filter-map-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. Encadenar Métodos: filter() → map() → reduce()
       
     </span>
   </a>
@@ -1588,6 +1654,81 @@
 <span class="c1">// Encadenamiento Opcional combinado con Nullish Coalescing</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">ciudadEnvio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">usuarioAutenticado</span><span class="o">?</span><span class="p">.</span><span class="nx">perfil</span><span class="o">?</span><span class="p">.</span><span class="nx">direccion</span><span class="o">?</span><span class="p">.</span><span class="nx">ciudad</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">"Ciudad no especificada"</span><span class="p">;</span>
 </code></pre></div>
+<p>Los dos sirven para poner un <strong>valor por defecto</strong>, pero deciden de forma distinta <strong>cuándo</strong>
+hace falta:</p>
+<table>
+<thead>
+<tr>
+<th>Valor de <code>a</code></th>
+<th><code>a &#124;&#124; "def"</code></th>
+<th><code>a ?? "def"</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>undefined</code></td>
+<td><code>"def"</code></td>
+<td><code>"def"</code></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>"def"</code></td>
+<td><code>"def"</code></td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td><code>"def"</code> ⚠️</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>""</code></td>
+<td><code>"def"</code> ⚠️</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>"def"</code> ⚠️</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>"Latte"</code></td>
+<td><code>"Latte"</code></td>
+<td><code>"Latte"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Regla para decidir</p>
+<ul>
+<li>¿El <code>0</code>, <code>""</code> o <code>false</code> son <strong>valores válidos</strong> (precio 0, stock 0, un texto vacío a
+  propósito)? → <strong><code>??</code></strong>.</li>
+<li>¿Quieres que <strong>cualquier cosa vacía</strong> cuente como «no hay nada» (por ejemplo, el usuario
+  pulsa Enter sin escribir)? → <strong><code>||</code></strong>.</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">descuento</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">producto</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"sin datos"</span><span class="p">);</span><span class="w"> </span><span class="c1">// "sin datos" ❌ sí hay dato: quedan 0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">producto</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">"sin datos"</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0 ✅</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">producto</span><span class="p">.</span><span class="nx">categoria</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">"Sin categoría"</span><span class="p">);</span><span class="w"> </span><span class="c1">// propiedad inexistente → undefined → "Sin categoría"</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">leerNombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">entrada</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"Cliente anónimo"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">leerNombre</span><span class="p">(</span><span class="s2">"   "</span><span class="p">));</span><span class="w"> </span><span class="c1">// "Cliente anónimo" ← aquí || es justo lo que queremos</span>
+</code></pre></div>
+<p><strong><code>?.</code> + <code>??</code> después de un <code>find()</code>.</strong> <code>find()</code> devuelve <code>undefined</code> cuando no encuentra nada, y
+leer una propiedad de <code>undefined</code> lanza <code>TypeError</code>. <code>?.</code> corta la cadena y <code>??</code> pone el mensaje:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">carta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Café solo"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">1.2</span><span class="w"> </span><span class="p">}];</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombreDe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">carta</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">"Producto no encontrado"</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nombreDe</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span><span class="w">  </span><span class="c1">// "Café solo"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nombreDe</span><span class="p">(</span><span class="mf">99</span><span class="p">));</span><span class="w"> </span><span class="c1">// "Producto no encontrado"  (sin ?. → TypeError)</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Error típico</p>
+<p>Mezclar <code>??</code> con <code>||</code> o <code>&amp;&amp;</code> sin paréntesis es un <strong>SyntaxError</strong>:
+<code>a || b ?? c</code> ❌ → <code>(a || b) ?? c</code> ✅</p>
+</div>
 <hr />
 <h3 id="33-sentencia-switch">3.3. Sentencia <code>switch</code></h3>
 <p>Es una estructura de selección múltiple que evalúa una expresión contra diferentes cláusulas <code>case</code>. Utiliza <strong>estrictamente la comparación de tipo y valor (<code>===</code>)</strong>.</p>
@@ -1744,6 +1885,72 @@
 <span class="kd">const</span><span class="w"> </span><span class="nx">numerosOrdenados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">numerosDesordenados</span><span class="p">].</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numerosOrdenados</span><span class="p">);</span><span class="w"> </span><span class="c1">// [5, 10, 25, 40, 100] (ORDEN NUMÉRICO CORRECTO)</span>
 </code></pre></div>
+<h3 id="patrones-para-no-mutar-anadir-actualizar-y-quitar">Patrones para no Mutar: Añadir, Actualizar y Quitar</h3>
+<p>El operador <em>spread</em> (<code>...</code>, visto en la UD2) y los métodos que devuelven un array nuevo bastan
+para cualquier cambio sin tocar el original:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">carta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Café solo"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="p">},</span>
+<span class="p">];</span>
+
+<span class="c1">// ✅ Añadir: array nuevo con lo que había + lo nuevo (en lugar de push)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">cartaAmpliada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">carta</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Té"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="p">}];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">carta</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">cartaAmpliada</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2 3 ← el original intacto</span>
+
+<span class="c1">// ✅ Quitar: filter ya devuelve un array nuevo (en lugar de splice)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sinCafe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+
+<span class="c1">// ✅ Actualizar UN elemento: map + spread (el patrón más importante)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">vender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">lista</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">  </span><span class="nx">lista</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">unidades</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">p</span><span class="p">));</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">cartaTrasVenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vender</span><span class="p">(</span><span class="nx">carta</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">carta</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">stock</span><span class="p">,</span><span class="w"> </span><span class="nx">cartaTrasVenta</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">stock</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">carta</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">cartaTrasVenta</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span><span class="w"> </span><span class="c1">// true  ← los no tocados se reutilizan</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">carta</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">cartaTrasVenta</span><span class="p">[</span><span class="mf">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// false ← el modificado es un objeto nuevo</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Error típico: copiar la referencia en lugar del objeto</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">copiaMala</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span><span class="p">;</span><span class="w">   </span><span class="c1">// NO es una copia: es la MISMA lista</span>
+<span class="nx">copiaMala</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">9</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// ...y acabas de mutar `carta`</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">              </span><span class="c1">// ❌ find devuelve el objeto que está DENTRO del array original</span>
+</code></pre></div>
+Además, la copia con <em>spread</em> es <strong>superficial</strong>: <code>[...carta]</code> crea un array nuevo, pero los
+objetos de dentro siguen siendo los mismos. Por eso, para cambiar un elemento hay que crear
+también un objeto nuevo con <code>{ ...p, … }</code>, como hace <code>vender</code>.</p>
+</div>
+<h3 id="destructuring-sacar-valores-de-arrays-y-objetos">Destructuring: Sacar Valores de Arrays y Objetos</h3>
+<p>El <em>destructuring</em> (desestructuración) extrae valores de un array o propiedades de un objeto en
+variables, en una sola línea:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">"Cádiz"</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">persona</span><span class="p">;</span><span class="w">          </span><span class="c1">// por NOMBRE de propiedad</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="nx">localidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"?"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">persona</span><span class="p">;</span><span class="w"> </span><span class="c1">// renombrar y valor por defecto</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="p">,</span><span class="w"> </span><span class="nx">localidad</span><span class="p">);</span><span class="w">       </span><span class="c1">// "Ana" 30 "Cádiz"</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">numeros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">];</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">primero</span><span class="p">,</span><span class="w"> </span><span class="nx">segundo</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">numeros</span><span class="p">;</span><span class="w">         </span><span class="c1">// por POSICIÓN</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">primero</span><span class="p">,</span><span class="w"> </span><span class="nx">segundo</span><span class="p">);</span><span class="w">              </span><span class="c1">// 10 20</span>
+
+<span class="c1">// Con rest (UD2): el resto de elementos o de propiedades</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">cabeza</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">cola</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Luis"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Marta"</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cabeza</span><span class="p">,</span><span class="w"> </span><span class="nx">cola</span><span class="p">);</span><span class="w">                  </span><span class="c1">// "Ana" ["Luis", "Marta"]</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">cafe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="nx">notaInterna</span><span class="o">:</span><span class="w"> </span><span class="s2">"proveedor B"</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">notaInterna</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">cafeParaMostrar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cafe</span><span class="p">;</span><span class="w"> </span><span class="c1">// "quitar" un campo sin mutar</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cafeParaMostrar</span><span class="p">);</span><span class="w">               </span><span class="c1">// { id: 1, nombre: 'Latte', precio: 2.4 }</span>
+
+<span class="c1">// En los PARÁMETROS de una función: usa solo lo que necesitas del objeto</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">etiqueta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">precio</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="si">}</span><span class="sb"> €`</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">etiqueta</span><span class="p">(</span><span class="nx">cafe</span><span class="p">));</span><span class="w">                </span><span class="c1">// "Latte: 2.40 €"</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Lo vas a ver todo el rato</p>
+<p>La última forma —desestructurar en los parámetros— es la que usan los callbacks de <code>map</code>,
+<code>filter</code> y <code>reduce</code> en el apartado 6 (<code>({ precio, stock }) =&gt; precio * stock</code>) y la forma en
+que un componente de React recibe sus <em>props</em> a partir de la UD7.</p>
+</div>
 <hr />
 <h2 id="6-metodos-iterativos-de-alto-nivel-programacion-funcional">6. Métodos Iterativos de Alto Nivel (Programación Funcional) 🚀</h2>
 <p>Los métodos iterativos ejecutan una función <em>callback</em> proporcionada sobre cada elemento de la colección.</p>
@@ -1857,6 +2064,97 @@
 <span class="kd">const</span><span class="w"> </span><span class="nx">esSuperusuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rolesAsignados</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"SUPERADMIN"</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
 </code></pre></div>
 <hr />
+<h3 id="66-encadenar-metodos-filter-map-reduce">6.6. Encadenar Métodos: <code>filter()</code> → <code>map()</code> → <code>reduce()</code></h3>
+<p>Como cada método devuelve algo, se pueden <strong>encadenar</strong> como una tubería: el resultado de uno es
+la entrada del siguiente.</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Array original&lt;br&gt;(10 productos)"] --&gt;|"filter()&lt;br&gt;¿me quedo con este?"| B["Array más corto&lt;br&gt;(4 productos)"]
+    B --&gt;|"map()&lt;br&gt;¿en qué lo convierto?"| C["Array igual de largo&lt;br&gt;(4 textos / 4 números)"]
+    C --&gt;|"reduce()&lt;br&gt;¿cómo lo junto?"| D["UN valor&lt;br&gt;(total, objeto…)"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>El callback devuelve…</th>
+<th>El resultado es…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filter</code></td>
+<td><code>true</code>/<code>false</code> (¿se queda?)</td>
+<td>Array con <strong>menos o igual</strong> elementos, <strong>sin cambiarlos</strong></td>
+</tr>
+<tr>
+<td><code>map</code></td>
+<td>El <strong>nuevo valor</strong> del elemento</td>
+<td>Array con <strong>los mismos</strong> elementos, <strong>transformados</strong></td>
+</tr>
+<tr>
+<td><code>reduce</code></td>
+<td>El <strong>acumulador</strong> actualizado</td>
+<td><strong>Un solo valor</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">carta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Café solo"</span><span class="p">,</span><span class="w"> </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">"bebida"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">"bebida"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Tostada"</span><span class="p">,</span><span class="w"> </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">"comida"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Croissant"</span><span class="p">,</span><span class="w"> </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">"comida"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">1.8</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Zumo"</span><span class="p">,</span><span class="w"> </span><span class="nx">categoria</span><span class="o">:</span><span class="w"> </span><span class="s2">"bebida"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="w"> </span><span class="p">},</span>
+<span class="p">];</span>
+
+<span class="c1">// Listado de bebidas con stock, formateado: filter → map</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">lineasBebidas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">categoria</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"bebida"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">p</span><span class="p">.</span><span class="nx">nombre</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mf">10</span><span class="p">)</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="si">}</span><span class="sb"> €`</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">lineasBebidas</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">"\n"</span><span class="p">));</span>
+<span class="c1">// Café solo  1.20 €</span>
+<span class="c1">// Latte      2.40 €</span>
+<span class="c1">// Zumo       3.00 €</span>
+
+<span class="c1">// Valor del stock de la comida: filter → map → reduce (con destructuring en los parámetros)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">valorComida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(({</span><span class="w"> </span><span class="nx">categoria</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">categoria</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"comida"</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(({</span><span class="w"> </span><span class="nx">precio</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">stock</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">valor</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">valor</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">valorComida</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// "1.80"  (0 × 2.00 + 1 × 1.80)</span>
+
+<span class="c1">// Contar por categoría con reduce SIN mutar el acumulador (objeto nuevo en cada vuelta)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">porCategoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">carta</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
+<span class="w">  </span><span class="p">(</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">categoria</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">categoria</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">acc</span><span class="p">[</span><span class="nx">categoria</span><span class="p">]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">{},</span>
+<span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">porCategoria</span><span class="p">);</span><span class="w"> </span><span class="c1">// { bebida: 3, comida: 2 }</span>
+</code></pre></div>
+<p>En el último ejemplo, <code>[categoria]</code> entre corchetes usa <strong>el valor</strong> de la variable como nombre
+de la propiedad (<em>computed property name</em>): <code>{ [categoria]: 1 }</code> con <code>categoria = "bebida"</code> es
+<code>{ bebida: 1 }</code>.</p>
+<p><strong>¿Primero <code>filter</code> o primero <code>map</code>?</strong> Casi siempre <strong>primero <code>filter</code></strong>: si transformas antes,
+pierdes las propiedades por las que querías filtrar y además trabajas con elementos que vas a
+tirar.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ Después del map ya no hay objetos, solo textos: no se puede filtrar por stock</span>
+<span class="nx">carta</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">nombre</span><span class="p">).</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// [] siempre (p es un string)</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Errores típicos al encadenar</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ 1. Llaves sin return dentro del callback</span>
+<span class="nx">carta</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// [] → el callback devuelve undefined (falsy)</span>
+
+<span class="c1">// ❌ 2. Usar map para "filtrar": no quita elementos, deja undefined</span>
+<span class="nx">carta</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">nombre</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+<span class="c1">// ["Café solo", "Latte", undefined, "Croissant", "Zumo"]</span>
+
+<span class="c1">// ❌ 3. Usar filter para "transformar": filter nunca cambia los elementos</span>
+<span class="nx">carta</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// devuelve los OBJETOS completos, no los nombres</span>
+
+<span class="c1">// ❌ 4. forEach + push en lugar de map/filter (funciona, pero no es lo que toca)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">carta</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">nombres</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">nombre</span><span class="p">));</span><span class="w"> </span><span class="c1">// → carta.map((p) =&gt; p.nombre)</span>
+</code></pre></div>
+</div>
+<hr />
 <h2 id="7-tabla-comparativa-definitiva-de-metodos-de-arrays">7. Tabla Comparativa Definitiva de Métodos de Arrays 📊</h2>
 <table>
 <thead>
@@ -1968,8 +2266,9 @@
 <p class="admonition-title">Batería de ejercicios de la UD3</p>
 <p>Pon a prueba todo lo visto en la unidad con la
 <strong><a href="../ud03-1-ejercicios/">batería de ejercicios de control de flujo, bucles y arrays</a></strong>:
-condicionales, bucles clásicos, mutabilidad de arrays y métodos funcionales
-(<code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, <code>some</code>, <code>every</code>…).</p>
+condicionales, bucles clásicos, mutabilidad de arrays, métodos funcionales
+(<code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, <code>some</code>, <code>every</code>…) y un bloque final de <code>??</code>, <em>spread</em>,
+destructuring y métodos encadenados.</p>
 </div>
 
 
