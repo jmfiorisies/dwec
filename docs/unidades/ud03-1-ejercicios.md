@@ -10,6 +10,10 @@ destructuring y métodos encadenados.
     Puedes resolver los ejercicios en la consola del navegador (`F12` → *Console*) o en un fichero
     `.js` ejecutado con Node.
 
+!!! info "¿Prefieres corrección automática?"
+    La **[3.2 · Batería de repaso con comprobador](ud03-2-bateria-repaso.md)** trae un kit con un
+    proyecto Vite y un comprobador que te dice qué tienes bien y qué falla.
+
 ---
 
 ## Bloque 1 · Condicionales
