@@ -1,0 +1,2849 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ud03-1-ejercicios/">
+      
+      
+        <link rel="next" href="../ud04/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>3.2 Batería de repaso con comprobador (UD1–UD3) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-32-bateria-de-repaso-con-comprobador-ud1-ud3" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.2 Batería de repaso con comprobador (UD1–UD3)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-1-ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 Batería de Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Batería de repaso con comprobador (UD1–UD3)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Batería de repaso con comprobador (UD1–UD3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Cómo funciona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Cómo funciona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orden-y-tiempo-orientativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden y tiempo orientativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-empezar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Antes de empezar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Antes de empezar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-que-necesitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo que necesitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descomprimir-y-preparar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descomprimir y preparar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-ordenes-del-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las órdenes del kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-hay-en-el-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué hay en el kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-0-el-entorno-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 0 · El entorno paso a paso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLOQUE 0 · El entorno paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-comprobar-las-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1 · Comprobar las herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-git-tu-historial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2 · Git: tu historial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-docker-compose-el-servidor-de-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.3 · Docker Compose: el servidor de Vite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-indexhtml-carga-tu-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.4 · index.html carga tu JavaScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-modulos-export-e-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.5 · Módulos: export e import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-eslint-el-corrector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.6 · ESLint: el corrector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-d-depurar-en-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE D · Depurar en el navegador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLOQUE D · Depurar en el navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#d1-las-devtools-en-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.1 · Las DevTools en 5 minutos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-ejemplo-resuelto-el-total-del-ticket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.2 · 👀 Ejemplo resuelto: el total del ticket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d3-tu-turno-4-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.3 · ✍️ Tu turno: 4 bugs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-1-tipos-conversiones-y-operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 1 · Tipos, conversiones y operadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-2-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 2 · Funciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-3-closures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 3 · Closures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-4-control-de-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 4 · Control de flujo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-5-arrays-e-inmutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 5 · Arrays e inmutabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-6-integrador-una-venta-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 6 · Integrador: una venta completa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicalo-con-tus-palabras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✍️ Explícalo con tus palabras
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#al-terminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📤 Al terminar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Chuleta de repaso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia Tecnológica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia Tecnológica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árbol tecnológico completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Portal docente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Cómo funciona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Cómo funciona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orden-y-tiempo-orientativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden y tiempo orientativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-empezar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Antes de empezar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Antes de empezar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-que-necesitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo que necesitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descomprimir-y-preparar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descomprimir y preparar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-ordenes-del-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las órdenes del kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-hay-en-el-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué hay en el kit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-0-el-entorno-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 0 · El entorno paso a paso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLOQUE 0 · El entorno paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-comprobar-las-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1 · Comprobar las herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-git-tu-historial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2 · Git: tu historial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-docker-compose-el-servidor-de-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.3 · Docker Compose: el servidor de Vite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-indexhtml-carga-tu-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.4 · index.html carga tu JavaScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-modulos-export-e-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.5 · Módulos: export e import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-eslint-el-corrector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.6 · ESLint: el corrector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-d-depurar-en-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE D · Depurar en el navegador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLOQUE D · Depurar en el navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#d1-las-devtools-en-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.1 · Las DevTools en 5 minutos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-ejemplo-resuelto-el-total-del-ticket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.2 · 👀 Ejemplo resuelto: el total del ticket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d3-tu-turno-4-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D.3 · ✍️ Tu turno: 4 bugs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-1-tipos-conversiones-y-operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 1 · Tipos, conversiones y operadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-2-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 2 · Funciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-3-closures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 3 · Closures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-4-control-de-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 4 · Control de flujo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-5-arrays-e-inmutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 5 · Arrays e inmutabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloque-6-integrador-una-venta-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLOQUE 6 · Integrador: una venta completa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicalo-con-tus-palabras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✍️ Explícalo con tus palabras
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#al-terminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📤 Al terminar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-de-repaso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Chuleta de repaso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-32-bateria-de-repaso-con-comprobador-ud1-ud3">UD 3.2 · Batería de repaso con comprobador (UD1 → UD3)</h1>
+<p>Una batería de ejercicios <strong>paso a paso</strong> para repasar todo lo dado hasta la UD3: el entorno
+(Vite, Docker, Git, ESLint), depurar en el navegador, tipos, funciones, closures, control de flujo
+y arrays. A diferencia de la <a href="../ud03-1-ejercicios/">3.1</a>, aquí trabajas en un proyecto de verdad
+y un <strong>comprobador automático</strong> te dice qué tienes bien, qué falla y por qué.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Para qué</strong></td>
+<td>Repasar UD1–UD3 a tu ritmo, con corrección automática</td>
+</tr>
+<tr>
+<td><strong>Tiempo</strong></td>
+<td>Unas <strong>10 horas</strong> en total. Puedes hacerlo por bloques, en el orden de la tabla de abajo</td>
+</tr>
+<tr>
+<td><strong>Material</strong></td>
+<td>El kit: <a href="../../assets/descargas/kit-dwec-repaso-ud1-ud3.zip">⬇️ kit-dwec-repaso-ud1-ud3.zip</a></td>
+</tr>
+<tr>
+<td><strong>No es una práctica evaluable</strong></td>
+<td>No se entrega (salvo que tu profesor te lo pida)</td>
+</tr>
+</tbody>
+</table>
+<p><a class="md-button md-button--primary" href="../../assets/descargas/kit-dwec-repaso-ud1-ud3.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"/></svg></span> Descargar el kit</a>
+<a class="md-button" href="../ud03-1-ejercicios/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 13v-2h14v2zm0 6v-2h14v2zM7 7V5h14v2zM3 8V5H2V4h2v4zm-1 9v-1h3v4H2v-1h2v-.5H3v-1h1V17zm2.25-7a.75.75 0 0 1 .75.75c0 .2-.08.39-.21.52L3.12 13H5v1H2v-.92L4 11H2v-1z"/></svg></span> Batería 3.1 (sin kit)</a></p>
+<h2 id="como-funciona">🎯 Cómo funciona</h2>
+<p>No tienes que construir un programa entero. Vas a ir <strong>bloque a bloque</strong>, y en cada uno siempre
+pasa lo mismo:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📖 <strong>Lo que tienes que saber</strong></td>
+<td>La idea en pocas líneas, con código</td>
+</tr>
+<tr>
+<td>🔮 <strong>¿Qué da?</strong></td>
+<td>Escribes lo que crees que da un trozo de código <strong>antes</strong> de probarlo. Luego el comprobador te explica el porqué</td>
+</tr>
+<tr>
+<td>👀 <strong>Ejemplo</strong></td>
+<td>Un ejercicio ya resuelto en el propio fichero. Léelo bien: los tuyos se parecen</td>
+</tr>
+<tr>
+<td>🪜 <strong>Escalera</strong></td>
+<td>2–4 ejercicios muy cortos, de uno en uno, para coger el concepto antes de los de verdad</td>
+</tr>
+<tr>
+<td>✍️ <strong>Tu turno</strong></td>
+<td>Funciones cortas que escribes tú, ya combinando cosas</td>
+</tr>
+<tr>
+<td>✅ <strong>Cómo sabes que está bien</strong></td>
+<td><code>./refuerzo.sh comprobar N</code> te dice qué está bien y qué falla</td>
+</tr>
+</tbody>
+</table>
+<p>El comprobador <strong>no te da la solución</strong>: te dice qué caso falla y qué ha salido. Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code>  ✘ 1.1   formatearEuros
+         formatearEuros(5) debería dar '5,00 €' y da '5.00 €'
+</code></pre></div>
+<p>Con las predicciones, cuando compruebas <strong>un solo bloque</strong> (<code>./refuerzo.sh comprobar 1</code>), te explica
+el <strong>porqué</strong> de las que aciertas y te da una <strong>pista</strong> (no la respuesta) de las que fallas:</p>
+<div class="highlight"><pre><span></span><code>  ✔ p2 · "5" * 3  → 15: *, - y / no existen para textos, así que convierten a número
+  ✘ p5 · NaN ?? 1  → no es 1. Pista: ?? no mira si es falsy: solo si es null o undefined
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Para estudiar</p>
+<p>Lee <strong>todas</strong> las explicaciones, también las de las que aciertas: a veces se acierta por
+intuición sin saber por qué. Cuando todo un bloque esté en verde, intenta explicar cada
+predicción en voz alta sin mirar.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Sin IA y sin copiar</p>
+<p>Esto es para que <strong>aprendas</strong>. Si te lo resuelve una IA o lo copias, el comprobador saldrá en
+verde pero no habrás aprendido nada. Si te atascas, usa las <strong>pistas</strong> (están plegadas: ábrelas
+solo cuando las necesites) y los apuntes de <a href="../ud02/">UD2</a> y <a href="../ud03/">UD3</a>.</p>
+</div>
+<h3 id="orden-y-tiempo-orientativo">Orden y tiempo orientativo</h3>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Qué</th>
+<th>Tiempo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>El entorno paso a paso: Docker, Vite, Git, módulos y ESLint</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>Depurar en el navegador con breakpoints (5 bugs)</td>
+<td>1 h 15 min</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Tipos, conversiones y operadores (<code>\|\|</code>, <code>??</code>, <code>?.</code>)</td>
+<td>1 h</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Funciones: las 3 formas, por defecto, <em>rest</em>, HOF</td>
+<td>1 h 15 min</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Closures</td>
+<td>1 h 15 min</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Control de flujo: <code>if</code>, <code>switch</code>, bucles</td>
+<td>1 h</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Arrays e inmutabilidad: <code>map</code>, <code>filter</code>, <code>find</code>, <code>reduce</code>, <code>sort</code>, spread</td>
+<td>2 h</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>Integrador: una venta de RetroStock completa</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td>✍️</td>
+<td><code>respuestas.md</code>: explícalo con tus palabras</td>
+<td>30 min</td>
+</tr>
+</tbody>
+</table>
+<p>Hazlos <strong>en orden</strong>: cada bloque usa funciones de los anteriores. Al terminar cada uno, haz un
+commit (paso 0.2).</p>
+<hr />
+<h2 id="antes-de-empezar">📦 Antes de empezar</h2>
+<h3 id="lo-que-necesitas">Lo que necesitas</h3>
+<ul>
+<li><strong>Docker</strong> funcionando (el mismo que usaste en la práctica 1). Compruébalo: <code>docker info</code> no
+  debe dar error.</li>
+<li><strong>Git</strong>, <strong>VS Code</strong> y <strong>Chrome</strong> (o Firefox).</li>
+<li><strong>Internet</strong> solo la primera vez (para construir la imagen).</li>
+<li>En <strong>Windows</strong>: abre la terminal <strong>Git Bash</strong> o <strong>WSL</strong> (las órdenes son de Linux).</li>
+</ul>
+<details class="tip">
+<summary>Plan B: no tengo Docker en casa</summary>
+<p>Si tienes <strong>Node 20 o más nuevo</strong> (<code>node --version</code>), el kit funciona sin Docker:
+<code>./refuerzo.sh arrancar</code> usa tu Node (necesita internet la primera vez para descargar Vite) y
+<code>./refuerzo.sh comprobar</code> funciona igual. Lo único que no tendrás es ESLint (paso 0.6): esas
+comprobaciones salen con un <code>!</code> amarillo y las revisamos en clase. El paso 0.3 (Docker
+Compose) <strong>hazlo igualmente</strong>: el comprobador revisa el fichero.</p>
+</details>
+<h3 id="descomprimir-y-preparar">Descomprimir y preparar</h3>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>kit-dwec-repaso-ud1-ud3.zip<span class="w">      </span><span class="c1"># descomprime el kit</span>
+<span class="nb">cd</span><span class="w"> </span>dwec-refuerzo-p1<span class="w">                 </span><span class="c1"># entra en su carpeta</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>refuerzo.sh<span class="w">                </span><span class="c1"># da permiso de ejecución al script</span>
+./refuerzo.sh<span class="w"> </span>preparar<span class="w">              </span><span class="c1"># tu nombre + construir la imagen (unos minutos)</span>
+code<span class="w"> </span>.<span class="w">                              </span><span class="c1"># abre la carpeta en VS Code</span>
+</code></pre></div>
+<h3 id="las-ordenes-del-kit">Las órdenes del kit</h3>
+<p>Todas se escriben <strong>en la terminal, dentro de la carpeta <code>dwec-refuerzo-p1</code></strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Orden</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>./refuerzo.sh preparar</code></td>
+<td>(1 vez) Tu nombre y construir la imagen</td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh arrancar</code></td>
+<td>Arrancar Vite → http://localhost:6100</td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh comprobar</code></td>
+<td>Ver qué llevas bien y qué te falta (todo)</td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh comprobar 3</code></td>
+<td>Solo un bloque: <code>0</code>, <code>d</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>final</code></td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh lint</code></td>
+<td>Pasar ESLint a todo <code>src/</code></td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh logs</code></td>
+<td>Ver los mensajes de Vite (Ctrl+C para salir)</td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh parar</code></td>
+<td>Parar Vite al terminar (no se pierde nada)</td>
+</tr>
+<tr>
+<td><code>./refuerzo.sh entregar</code></td>
+<td>Generar el <code>.zip</code> de la entrega en <code>entrega/</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="que-hay-en-el-kit">Qué hay en el kit</h3>
+<div class="highlight"><pre><span></span><code>dwec-refuerzo-p1/
+├── refuerzo.sh            ← el mando: todas las órdenes
+├── docker-compose.yml     ← ✍️ paso 0.3
+├── Dockerfile             ← la imagen (Node + Vite + ESLint + Git). No hace falta tocarlo
+├── index.html             ← ✍️ paso 0.4
+├── depuracion.md          ← ✍️ bloque D: tu informe de depuración
+├── respuestas.md          ← ✍️ al final: explícalo con tus palabras
+├── src/
+│   ├── main.js            ← ✍️ paso 0.5
+│   ├── bloque0/           ← ✍️ pasos 0.5 y 0.6
+│   ├── depuracion/        ← ✍️ bloque D: caja.js tiene los bugs
+│   ├── bloque1/ … bloque6/  ← ✍️ predicciones.js + los ejercicios de cada bloque
+│   └── pagina/            ← estilos (no se tocan)
+└── comprobador/           ← las pruebas (puedes leerlas, no las cambies)
+</code></pre></div>
+<hr />
+<h2 id="bloque-0-el-entorno-paso-a-paso">BLOQUE 0 · El entorno paso a paso</h2>
+<p>En la práctica 1, a varios no os arrancaba el proyecto. Aquí lo montamos <strong>pieza a pieza</strong> para que
+sepas qué hace cada una y, sobre todo, <strong>qué mirar cuando no funciona</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    %% cadena
+    C["docker-compose.yml&lt;br/&gt;arranca el contenedor"] --&gt; V["Vite&lt;br/&gt;sirve la carpeta en :6100"]
+    V --&gt; H["index.html&lt;br/&gt;carga main.js"]
+    H --&gt; M["main.js&lt;br/&gt;importa los demás módulos"]
+    M --&gt; P["La página funciona"]</code></pre>
+<h3 id="01-comprobar-las-herramientas">0.1 · Comprobar las herramientas</h3>
+<p>✍️ <strong>Tu turno.</strong> Ejecuta y comprueba que ninguna da error:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>--version<span class="w">          </span><span class="c1"># Docker version 2x.x…</span>
+docker<span class="w"> </span>compose<span class="w"> </span>version<span class="w">    </span><span class="c1"># Docker Compose version v2…</span>
+git<span class="w"> </span>--version<span class="w">             </span><span class="c1"># git version 2.x</span>
+./refuerzo.sh<span class="w"> </span>ayuda<span class="w">       </span><span class="c1"># la lista de órdenes; abajo dice «Modo: docker»</span>
+</code></pre></div>
+<details class="tip">
+<summary>Si algo falla</summary>
+<ul>
+<li><code>permission denied</code> con Docker en Linux: <code>sudo usermod -aG docker $USER</code> y <strong>cierra sesión</strong>.</li>
+<li><code>Cannot connect to the Docker daemon</code>: Docker no está arrancado (<code>sudo systemctl start docker</code>
+  o abre Docker Desktop).</li>
+<li><code>refuerzo.sh: Permission denied</code>: te falta <code>chmod +x refuerzo.sh</code>.</li>
+</ul>
+</details>
+<h3 id="02-git-tu-historial">0.2 · Git: tu historial</h3>
+<p>📖 <strong>Lo que tienes que saber.</strong> Git guarda «fotos» (commits) de tu carpeta. Un buen historial cuenta
+cómo has trabajado. El ciclo es siempre el mismo: <strong>cambias → <code>git add</code> →
+<code>git commit -m "qué has hecho"</code></strong>.</p>
+<p>👀 <strong>Ejemplo</strong> (hazlo tal cual, con tus datos):</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w">                                       </span><span class="c1"># convierte la carpeta en un repositorio</span>
+git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Tu Nombre Apellido"</span><span class="w">      </span><span class="c1"># quién firma los commits</span>
+git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"tu-correo@ejemplo.com"</span>
+git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                                      </span><span class="c1"># prepara TODOS los ficheros</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Kit inicial del refuerzo"</span><span class="w">       </span><span class="c1"># primera foto</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">                              </span><span class="c1"># ves tu commit</span>
+</code></pre></div>
+<p>✍️ <strong>Tu turno.</strong> A partir de ahora, <strong>al terminar cada bloque</strong> haz un commit con un mensaje que
+diga qué has hecho, por ejemplo <code>git commit -m "Bloque 0: entorno montado"</code>. Se piden al
+menos <strong>8 commits</strong> al final.</p>
+<p>✅ <code>./refuerzo.sh comprobar 0</code> → <strong>0.2</strong> en verde.</p>
+<h3 id="03-docker-compose-el-servidor-de-vite">0.3 · Docker Compose: el servidor de Vite</h3>
+<p>📖 <strong>Lo que tienes que saber.</strong> Un <strong>servicio</strong> de <code>docker-compose.yml</code> es «una máquina» que Docker
+arranca a partir de una imagen. Lo que necesitas saber de cada línea:</p>
+<table>
+<thead>
+<tr>
+<th>Clave</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image</code></td>
+<td>De qué imagen sale el contenedor</td>
+</tr>
+<tr>
+<td><code>volumes</code></td>
+<td>Qué carpeta de <strong>tu PC</strong> se ve dentro del contenedor: <code>CARPETA_PC:CARPETA_CONTENEDOR</code></td>
+</tr>
+<tr>
+<td><code>working_dir</code></td>
+<td>En qué carpeta del contenedor se ejecuta la orden</td>
+</tr>
+<tr>
+<td><code>ports</code></td>
+<td>Qué puerto de <strong>tu PC</strong> lleva a qué puerto del contenedor: <code>PUERTO_PC:PUERTO_CONTENEDOR</code></td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>La orden que ejecuta el contenedor al arrancar</td>
+</tr>
+</tbody>
+</table>
+<p>👀 <strong>Ejemplo.</strong> Abre <code>docker-compose.yml</code>: el servicio <code>comprobador</code> está completo y comentado
+(es el que usa <code>./refuerzo.sh comprobar</code>).</p>
+<p>✍️ <strong>Tu turno.</strong> Completa los tres <code>____</code> del servicio <code>web</code>:</p>
+<ol>
+<li><code>volumes</code>: tu carpeta del kit (<code>.</code>) montada en <code>/app</code>, igual que en el ejemplo.</li>
+<li><code>ports</code>: en tu PC abrirás el <strong>6100</strong>; Vite escucha dentro del contenedor en el <strong>5173</strong>.</li>
+<li><code>command</code>: Vite tiene que escuchar en <strong>todas las direcciones</strong> del contenedor (<code>0.0.0.0</code>); si
+   no, solo se le podría llamar desde dentro y tu navegador no llegaría.</li>
+</ol>
+<p>Después:</p>
+<div class="highlight"><pre><span></span><code>./refuerzo.sh<span class="w"> </span>arrancar<span class="w">        </span><span class="c1"># → ✔ Vite arrancado: abre http://localhost:6100</span>
+</code></pre></div>
+<details class="tip">
+<summary>Pista</summary>
+<p>En YAML <strong>los espacios importan</strong>: el <code>-</code> de cada lista va 6 espacios a la derecha, debajo de la
+clave. Si <code>arrancar</code> dice que hay un error, ejecuta <code>docker compose config</code> y lee la línea que
+indica. El puerto va entre comillas: <code>"127.0.0.1:____:____"</code> → primero el de tu PC.</p>
+</details>
+<p>✅ La página abre (todavía dice «tu JavaScript todavía no se está cargando»: es normal) y
+<code>./refuerzo.sh comprobar 0</code> → <strong>0.3</strong> en verde.</p>
+<h3 id="04-indexhtml-carga-tu-javascript">0.4 · <code>index.html</code> carga tu JavaScript</h3>
+<p>📖 <strong>Lo que tienes que saber.</strong> El navegador solo ejecuta el JavaScript que el HTML le dice. Como
+usamos <code>import</code>/<code>export</code>, el fichero se carga como <strong>módulo</strong>: <code>&lt;script type="module" …&gt;</code>. Sin
+<code>type="module"</code>, el primer <code>import</code> da <code>SyntaxError: Cannot use import statement outside a module</code>.</p>
+<p>👀 <strong>Ejemplo.</strong> En <code>index.html</code>, la hoja de estilos ya está enlazada:
+<code>&lt;link rel="stylesheet" href="/src/pagina/estilos.css" /&gt;</code>. La ruta empieza en la carpeta del kit.</p>
+<p>✍️ <strong>Tu turno.</strong> Donde dice <code>TU TURNO (paso 0.4)</code>, añade la etiqueta <code>&lt;script&gt;</code> que carga
+<code>/src/main.js</code> como módulo. Guarda: Vite recarga la página solo.</p>
+<p>✅ En la página aparece el <strong>Bloque D</strong> con sus botones, y arriba «Página cargada el…». Además,
+<code>./refuerzo.sh comprobar 0</code> → <strong>0.4</strong> en verde.</p>
+<h3 id="05-modulos-export-e-import">0.5 · Módulos: <code>export</code> e <code>import</code></h3>
+<p>📖 <strong>Lo que tienes que saber.</strong> Cada fichero <code>.js</code> es un <strong>módulo</strong> con sus propias variables. Para
+usar una función de otro fichero, el que la tiene la <strong>exporta</strong> y el que la usa la <strong>importa</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// fecha.js                                   // main.js</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span><span class="w">            </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"./bloque0/fecha.js"</span><span class="p">;</span>
+</code></pre></div>
+<p>Los errores que vimos en la práctica 1 (todos hacen que la página se quede sin JavaScript):</p>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Qué ves</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Falta el <code>export</code></td>
+<td>Consola (F12): <code>does not provide an export named 'saludar'</code></td>
+</tr>
+<tr>
+<td>Ruta sin <code>./</code> (<code>"bloque0/saludo.js"</code>)</td>
+<td>Vite da un error 500 y te enseña en qué fichero y línea</td>
+</tr>
+<tr>
+<td>Ruta con comillas invertidas <code>`./bloque0/saludo.js`</code></td>
+<td>Igual: error 500 de Vite. En un <code>import</code>, la ruta va entre comillas normales</td>
+</tr>
+<tr>
+<td>Ruta sin <code>.js</code></td>
+<td>Vite lo arregla solo, pero <strong>ponlo siempre</strong>: sin Vite (o en otro proyecto) falla</td>
+</tr>
+<tr>
+<td><code>&lt;script&gt;</code> sin <code>type="module"</code></td>
+<td>Consola: <code>Cannot use import statement outside a module</code></td>
+</tr>
+</tbody>
+</table>
+<p>👀 <strong>Ejemplo.</strong> <code>src/bloque0/fecha.js</code> y la línea de <code>import</code> de <code>fechaDeHoy</code> en <code>src/main.js</code>.</p>
+<p>✍️ <strong>Tu turno.</strong></p>
+<ol>
+<li>En <code>src/bloque0/saludo.js</code>: exporta <code>saludar</code> y haz que devuelva
+   <code>`Hola, ${nombre}. ¡El entorno funciona!`</code>.</li>
+<li>En <code>src/main.js</code>: impórtala y cambia la línea del saludo para que use <code>saludar("Tu Nombre")</code>.</li>
+</ol>
+<p>✅ La cabecera de la página dice «Hola, Tu Nombre. ¡El entorno funciona!». <strong>Abre la consola (F12 →
+Consola)</strong>: no debe haber nada en rojo. <code>./refuerzo.sh comprobar 0</code> → <strong>0.5</strong> en verde.</p>
+<h3 id="06-eslint-el-corrector">0.6 · ESLint: el corrector</h3>
+<p>📖 <strong>Lo que tienes que saber.</strong> ESLint lee tu código y avisa de lo que está mal o es peligroso,
+<strong>sin ejecutarlo</strong>. Las reglas del kit (las mismas que pedía la práctica 1):</p>
+<table>
+<thead>
+<tr>
+<th>Regla</th>
+<th>Qué prohíbe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>no-var</code></td>
+<td><code>var</code> (usa <code>let</code> o <code>const</code>)</td>
+</tr>
+<tr>
+<td><code>prefer-const</code></td>
+<td><code>let</code> en una variable que nunca se reasigna (usa <code>const</code>)</td>
+</tr>
+<tr>
+<td><code>eqeqeq</code></td>
+<td><code>==</code> y <code>!=</code> (usa <code>===</code> y <code>!==</code>)</td>
+</tr>
+<tr>
+<td><code>no-unused-vars</code></td>
+<td>Variables que se declaran y no se usan</td>
+</tr>
+<tr>
+<td><code>no-console</code> (aviso)</td>
+<td><code>console.log</code> olvidados</td>
+</tr>
+</tbody>
+</table>
+<p>👀 <strong>Ejemplo.</strong> Cómo se lee un error:</p>
+<div class="highlight"><pre><span></span><code>/app/src/bloque0/errores-lint.js
+  6:3  error  Unexpected var, use let or const instead  no-var
+  ↑ ↑                                                   ↑
+línea columna            qué pasa                      la regla
+</code></pre></div>
+<p>✍️ <strong>Tu turno.</strong> <code>./refuerzo.sh lint src/bloque0/errores-lint.js</code> da 4 errores. Arréglalos uno a
+uno <strong>sin cambiar lo que hace la función</strong> (contar los productos con stock 0).</p>
+<p>✅ <code>./refuerzo.sh lint src/bloque0/errores-lint.js</code> → «sin errores» y <strong>0.6</strong> en verde.</p>
+<div class="admonition note">
+<p class="admonition-title">¿Y los errores del resto de <code>src/</code>?</p>
+<p><code>./refuerzo.sh lint</code> (sin fichero) también se queja de <code>import</code> que «no se usan» en los
+bloques que aún no has hecho. Es normal: desaparecen cuando escribes las funciones.</p>
+</div>
+<p><strong>Commit:</strong> <code>git add . &amp;&amp; git commit -m "Bloque 0: entorno montado"</code></p>
+<hr />
+<h2 id="bloque-d-depurar-en-el-navegador">BLOQUE D · Depurar en el navegador</h2>
+<p>📖 <strong>Lo que tienes que saber.</strong> Un <strong>breakpoint</strong> para el programa en una línea y te deja ver
+<strong>todas</strong> las variables en ese momento, sin escribir nada. Luego avanzas línea a línea y ves cómo
+cambian. Es mucho más rápido que llenar el código de <code>console.log</code> (que además hay que borrar).</p>
+<h3 id="d1-las-devtools-en-5-minutos">D.1 · Las DevTools en 5 minutos</h3>
+<p>Abre http://localhost:6100 y pulsa <strong>F12</strong>. Ve a la pestaña <strong>Fuentes</strong> (<em>Sources</em>; en Firefox,
+<strong>Depurador</strong>).</p>
+<table>
+<thead>
+<tr>
+<th>Quieres…</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abrir un fichero</td>
+<td><strong>Ctrl+P</strong> y escribe <code>caja.js</code></td>
+</tr>
+<tr>
+<td>Poner un breakpoint</td>
+<td>Clic en el <strong>número de línea</strong> (sale una marca azul). Otro clic lo quita</td>
+</tr>
+<tr>
+<td>Breakpoint condicional</td>
+<td>Clic derecho en el número → <em>Añadir punto de interrupción condicional</em> → escribe p. ej. <code>unidades === 4</code></td>
+</tr>
+<tr>
+<td>Ver las variables</td>
+<td>Panel <strong>Ámbito</strong> (<em>Scope</em>) a la derecha, en <em>Local</em></td>
+</tr>
+<tr>
+<td>Vigilar una expresión</td>
+<td>Panel <strong>Watch</strong> (en español, <em>Observar</em> o <em>Inspección</em>) → <code>+</code> → escribe <code>lineas[i]</code> o <code>productos === PRODUCTOS</code></td>
+</tr>
+<tr>
+<td>Seguir hasta el siguiente breakpoint</td>
+<td><strong>F8</strong> (▶)</td>
+</tr>
+<tr>
+<td>Ejecutar la línea y pararse en la siguiente</td>
+<td><strong>F10</strong> (<em>paso por encima</em>)</td>
+</tr>
+<tr>
+<td>Entrar dentro de la función que se llama</td>
+<td><strong>F11</strong></td>
+</tr>
+<tr>
+<td>Salir de la función actual</td>
+<td><strong>Mayús+F11</strong></td>
+</tr>
+<tr>
+<td>Ver el valor de algo en un momento</td>
+<td>Pasa el ratón por encima de la variable en el código</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">La consola también vale mientras está parado</p>
+<p>Con el programa parado, en la pestaña <strong>Consola</strong> puedes escribir <code>linea</code>, <code>total</code>,
+<code>lineas.length</code>… y te da el valor <strong>en ese momento</strong>. Es la forma rápida de comprobar una idea.</p>
+</div>
+<h3 id="d2-ejemplo-resuelto-el-total-del-ticket">D.2 · 👀 Ejemplo resuelto: el total del ticket</h3>
+<p><strong>Síntoma.</strong> En la página, «Calcular el total» da <strong>85 €</strong> y debería dar <strong>105 €</strong>.</p>
+<p>Sigue estos pasos <strong>tú</strong> (con el ratón, no solo leyendo):</p>
+<ol>
+<li>F12 → Fuentes → Ctrl+P → <code>caja.js</code>.</li>
+<li>Clic en el número de la línea <strong>17</strong> (<code>const linea = lineas[i];</code>).</li>
+<li>En la página, pulsa «Calcular el total». El programa <strong>se para</strong> en la línea 17.</li>
+<li>Mira <strong>Ámbito → Local</strong>: <code>i = 1</code>. Despliega <code>lineas</code>: tiene 3 elementos (0, 1 y 2).</li>
+<li>Pulsa <strong>F10</strong>: ahora <code>linea</code> es el <strong>Zelda</strong>… ¿y el Tetris, que está en la posición 0?</li>
+<li>Pulsa <strong>F8</strong> dos veces: la siguiente parada es con <code>i = 2</code> y luego termina. <strong>Nunca ha pasado por <code>i = 0</code>.</strong></li>
+<li>Conclusión: el bucle empieza en 1 y los arrays empiezan en 0 → <strong>20 € del Tetris sin sumar</strong>
+   (105 − 20 = 85 ✔).</li>
+<li>Arreglo: <code>for (let i = 0; …)</code>. Guarda, quita el breakpoint y vuelve a pulsar: <strong>105,00 €</strong>.</li>
+</ol>
+<p>Así está escrita la ficha del ejemplo en <code>depuracion.md</code>: síntoma, dónde pusiste el breakpoint,
+<strong>qué viste</strong> (con los valores), por qué falla y el arreglo.</p>
+<h3 id="d3-tu-turno-4-bugs">D.3 · ✍️ Tu turno: 4 bugs</h3>
+<p>Para cada uno: <strong>reprodúcelo</strong> en la página, <strong>para</strong> el programa con un breakpoint en la función
+que toca, <strong>mira</strong> las variables hasta entender qué pasa, <strong>arréglalo</strong> en <code>caja.js</code> y <strong>rellena su
+ficha</strong> en <code>depuracion.md</code>. Nada de <code>console.log</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Bug</th>
+<th>Botón</th>
+<th>Lo que debería pasar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>Añadir unidades de Zelda</td>
+<td>Hay 2. Si escribes 3, debe haber 5. Si escribes «hola» o cancelas, siguen 2</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Ver el stock</td>
+<td>Sonic 2 tiene stock 0: debe salir <strong>0</strong>. Pokémon Rojo no tiene el dato: «sin datos»</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Ordenar por precio → Ver el catálogo original</td>
+<td>El original sigue en su orden: Tetris, Zelda, Sonic, Crash, Pokémon</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Precio de 4 Crash / de 3 Crash</td>
+<td>4 unidades → 10 %: <strong>22,50 €</strong>. 3 unidades → 5 %: <strong>23,75 €</strong></td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista del bug 1</summary>
+<p>Breakpoint dentro de <code>sumarUnidades</code>. En <em>Ámbito</em>, fíjate en <strong>cómo</strong> se muestran <code>actuales</code> y
+<code>textoDelUsuario</code>: ¿los dos son números? (un texto sale entre comillas). ¿Qué devuelve siempre
+<code>prompt</code>? Para lo de «hola»: haz la predicción <code>Number("hola")</code> en la consola.</p>
+</details>
+<details class="tip">
+<summary>Pista del bug 2</summary>
+<p>Breakpoint condicional en <code>stockTexto</code> con la condición <code>producto.titulo === "Sonic 2"</code>. ¿Cuánto
+vale <code>producto.stock</code>? ¿Y <code>stock</code> después de esa línea? Repasa la tabla de <code>||</code> y <code>??</code> del bloque 1.</p>
+</details>
+<details class="tip">
+<summary>Pista del bug 3</summary>
+<p>Pulsa «Ordenar» con un breakpoint en <code>ordenarPorPrecio</code>. En <strong>Watch</strong> añade
+<code>productos === PRODUCTOS</code> y, después de la línea del <code>sort</code>, <code>ordenados === productos</code>.
+Si los dos son <code>true</code>… ¿cuántos arrays hay en realidad?</p>
+</details>
+<details class="tip">
+<summary>Pista del bug 4</summary>
+<p>Breakpoint condicional con <code>unidades === 4</code> y avanza con <strong>F10</strong> línea a línea: ¿entra en el
+primer <code>if</code> o salta al <code>else if</code>? Calcula a mano <code>4 &gt; 4</code>.</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar d</code> → los 4 bugs, el ejemplo y <code>depuracion.md</code> en verde. Antes de
+entregar: <strong>quita todos los breakpoints</strong> y cualquier <code>debugger;</code> que hayas escrito.</p>
+<div class="admonition info">
+<p class="admonition-title">La palabra <code>debugger;</code></p>
+<p>Si escribes <code>debugger;</code> en una línea de tu código, el navegador se para ahí cuando las DevTools
+están abiertas: es un breakpoint escrito en el código. Útil cuando no encuentras la línea en
+Fuentes. <strong>Bórralo</strong> al terminar (ESLint te avisa).</p>
+</div>
+<p><strong>Commit:</strong> <code>git commit -am "Bloque D: 4 bugs depurados"</code></p>
+<hr />
+<h2 id="bloque-1-tipos-conversiones-y-operadores">BLOQUE 1 · Tipos, conversiones y operadores</h2>
+<p>Ficheros: <code>src/bloque1/predicciones.js</code> y <code>src/bloque1/tipos.js</code>.</p>
+<p>📖 <strong>Lo que tienes que saber.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Expresión</th>
+<th>Da</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"5" + 3</code></td>
+<td><code>"53"</code></td>
+<td>Con un texto, <code>+</code> <strong>concatena</strong></td>
+</tr>
+<tr>
+<td><code>"5" * 3</code></td>
+<td><code>15</code></td>
+<td><code>*</code>, <code>-</code>, <code>/</code> convierten a número</td>
+</tr>
+<tr>
+<td><code>Number("12.5")</code> · <code>Number("12,5")</code></td>
+<td><code>12.5</code> · <code>NaN</code></td>
+<td>La coma no es decimal en JS</td>
+</tr>
+<tr>
+<td><code>"5" === 5</code></td>
+<td><code>false</code></td>
+<td><code>===</code> compara también el tipo (por eso nunca <code>==</code>)</td>
+</tr>
+<tr>
+<td><code>a \|\| b</code></td>
+<td><code>b</code> si <code>a</code> es <em>falsy</em></td>
+<td>Falsy: <code>0</code>, <code>""</code>, <code>false</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></td>
+</tr>
+<tr>
+<td><code>a ?? b</code></td>
+<td><code>b</code> solo si <code>a</code> es <code>null</code> o <code>undefined</code></td>
+<td>El <code>0</code> y el <code>""</code> <strong>sí</strong> son valores</td>
+</tr>
+<tr>
+<td><code>obj?.prop</code></td>
+<td><code>undefined</code> si <code>obj</code> no existe</td>
+<td>En vez de romper con <code>TypeError</code></td>
+</tr>
+<tr>
+<td><code>n.toFixed(2)</code></td>
+<td>un <strong>texto</strong></td>
+<td><code>(5).toFixed(2)</code> → <code>"5.00"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla de oro:</strong> si el <code>0</code> (o el <code>""</code>) es un dato válido, usa <code>??</code>. Si un valor vacío no
+te vale, <code>||</code>.</p>
+<p>🔮 <strong>¿Qué da?</strong> Abre <code>predicciones.js</code>, escribe tus 10 respuestas <strong>sin probar nada</strong> y luego
+<code>./refuerzo.sh comprobar 1</code>. Las que falles, pruébalas en la consola del navegador y <strong>piensa por
+qué</strong> antes de corregirlas. Apunta en un papel las que no entiendas: es tu lista de estudio.</p>
+<p>👀 <strong>Ejemplos</strong> en <code>tipos.js</code>: <code>redondear</code> (lo usarás en todos los bloques) y <code>formatearUnidades</code>
+(ternario + plantilla).</p>
+<p>🪜 <strong>Escalera</strong> (en <code>tipos.js</code>, antes de los ejercicios):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Concepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.a</td>
+<td><code>esTexto(valor)</code></td>
+<td><code>typeof</code></td>
+</tr>
+<tr>
+<td>1.b</td>
+<td><code>sumarTextos(a, b)</code> → <code>"3"</code> y <code>"4"</code> dan <code>7</code></td>
+<td>Convertir antes de sumar</td>
+</tr>
+<tr>
+<td>1.c</td>
+<td><code>valorODefecto(valor, defecto)</code></td>
+<td><code>??</code> (el <code>0</code> y el <code>""</code> son valores)</td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno</strong> (en <code>tipos.js</code>; cada función trae sus ejemplos de entrada y salida en el comentario):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td><code>formatearEuros(numero)</code> → <code>"42,75 €"</code></td>
+<td><code>toFixed</code>, <code>replace</code>, plantillas</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td><code>aNumero(texto)</code> → número o <code>null</code></td>
+<td>Lo que devuelve <code>prompt</code>, <code>Number</code>, <code>NaN</code></td>
+</tr>
+<tr>
+<td>1.3</td>
+<td><code>stockVisible(producto)</code></td>
+<td><code>?.</code> y <code>??</code> con el <code>0</code></td>
+</tr>
+<tr>
+<td>1.4</td>
+<td><code>nombreCorto(producto)</code></td>
+<td>Cuándo <code>\|\|</code> y cuándo <code>??</code></td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 1.2</summary>
+<p>Por orden: si <code>texto</code> es <code>null</code> o, quitando espacios, es <code>""</code>, devuelve <code>null</code>. Si no, quita
+espacios, cambia la coma por punto y conviértelo con <code>Number</code>. Si sale <code>NaN</code>, <code>null</code>.
+⚠️ <code>NaN === NaN</code> es <code>false</code>: para saber si algo es <code>NaN</code> se usa <code>Number.isNaN(x)</code>.</p>
+</details>
+<details class="tip">
+<summary>Pista de 1.4</summary>
+<p>El título vacío <strong>no</strong> vale (→ <code>||</code>), pero la plataforma solo se sustituye si <strong>no viene</strong> (→ <code>??</code>).</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 1</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="bloque-2-funciones">BLOQUE 2 · Funciones</h2>
+<p>Ficheros: <code>src/bloque2/predicciones.js</code> y <code>src/bloque2/funciones.js</code>.</p>
+<p>📖 <strong>Lo que tienes que saber.</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1 · Declarada: se puede llamar ANTES de la línea donde está (hoisting)</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">precioConEstado</span><span class="p">(</span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"usado-como-nuevo"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// 2 · Expresión de función: es una variable; no existe hasta que se ejecuta esta línea</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">precioFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// 3 · Arrow: corta. Con una sola expresión, el return es implícito</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">doble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">crear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">titulo</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">titulo</span><span class="w"> </span><span class="p">});</span><span class="w">    </span><span class="c1">// ⚠️ un objeto va entre PARÉNTESIS</span>
+<span class="w">                                           </span><span class="c1">//    sin ellos, { } es un bloque y devuelve undefined</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Ejemplo</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parámetro por defecto</td>
+<td><code>(a, b = 2) =&gt; a * b</code></td>
+<td><code>f(3)</code> y <code>f(3, undefined)</code> usan el 2; <code>f(3, null)</code> <strong>no</strong> (null es un valor)</td>
+</tr>
+<tr>
+<td><em>Rest</em></td>
+<td><code>(...numeros) =&gt; …</code></td>
+<td>Junta todos los argumentos en <strong>un array</strong> (<code>[]</code> si no hay ninguno)</td>
+</tr>
+<tr>
+<td><em>Spread</em></td>
+<td><code>Math.max(...[4, 9, 2])</code></td>
+<td>Separa el array en argumentos sueltos</td>
+</tr>
+<tr>
+<td>HOF</td>
+<td><code>contarSi(lista, condicion)</code></td>
+<td>Una función que <strong>recibe</strong> (o devuelve) otra función</td>
+</tr>
+</tbody>
+</table>
+<p>🔮 <strong>¿Qué da?</strong> <code>predicciones.js</code> (9). Mismo método que en el bloque 1.</p>
+<p>👀 <strong>Ejemplos</strong> en <code>funciones.js</code>: <code>precioConEstado</code> (declarada + por defecto, Tabla A de la P1) y
+<code>contarSi</code> (una HOF que cuenta los que cumplen una condición sin usar <code>.filter()</code>, escrita a mano
+para que veas cómo funcionan por dentro los métodos de array).</p>
+<p>🪜 <strong>Escalera:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Concepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.a</td>
+<td><code>triple(n)</code></td>
+<td>Función <strong>declarada</strong></td>
+</tr>
+<tr>
+<td>2.b</td>
+<td><code>esPar(n)</code></td>
+<td><strong>Arrow</strong> de una línea, sin llaves ni <code>return</code></td>
+</tr>
+<tr>
+<td>2.c</td>
+<td><code>saludar(nombre)</code> → <code>"Hola, invitado"</code> si no viene</td>
+<td>Parámetro <strong>por defecto</strong></td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td><code>descuentoVolumen(unidades)</code></td>
+<td>Tabla B, función <strong>declarada</strong>, los límites (<code>&gt;=</code>)</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td><code>precioFinal(base, estado, unidades)</code></td>
+<td><strong>Expresión</strong> de función, por defecto, reutilizar funciones</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td><code>crearProducto(id, titulo, precio, stock)</code></td>
+<td><strong>Arrow</strong> que devuelve un objeto, por defecto</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td><code>sumarImportes(...importes)</code></td>
+<td>Parámetro <strong><em>rest</em></strong> + <code>for...of</code></td>
+</tr>
+<tr>
+<td>2.5</td>
+<td><code>buscarCon(lista, condicion)</code></td>
+<td>HOF: tu propio <code>.find()</code> <strong>sin usar <code>.find()</code></strong></td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 2.2</summary>
+<p>No repitas las tablas: primero <code>precioConEstado(base, estado)</code> y luego multiplica por
+<code>(1 - descuentoVolumen(unidades))</code>. Redondea al final. Comprueba a mano el caso 1:
+45 × 1 × 0,95 = 42,75.</p>
+</details>
+<details class="tip">
+<summary>Pista de 2.5</summary>
+<p>Copia la estructura de <code>contarSi</code>. La diferencia: en vez de contar, en cuanto un elemento cumple
+la condición lo <strong>devuelves</strong> (<code>return elemento</code> dentro del bucle). Si el bucle termina sin
+encontrar ninguno, <code>return null</code>.</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 2</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="bloque-3-closures">BLOQUE 3 · Closures</h2>
+<p>Ficheros: <code>src/bloque3/predicciones.js</code> y <code>src/bloque3/closures.js</code>.</p>
+<p>📖 <strong>Lo que tienes que saber.</strong> Una <strong>closure</strong> es una función que «recuerda» las variables de la
+función donde se creó, aunque esa función ya haya terminado. Sirve para tener <strong>datos privados</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">crearMarcador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">puntos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">                    </span><span class="c1">// ← privada: solo la ven las funciones de abajo</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">anotar</span><span class="p">(</span><span class="nx">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">puntos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">cantidad</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">puntos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">puntos</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearMarcador</span><span class="p">();</span><span class="w">          </span><span class="c1">// cada llamada crea SUS PROPIOS «puntos»</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">m2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearMarcador</span><span class="p">();</span>
+<span class="nx">m1</span><span class="p">.</span><span class="nx">anotar</span><span class="p">(</span><span class="mf">10</span><span class="p">);</span>
+<span class="nx">m1</span><span class="p">.</span><span class="nx">puntos</span><span class="p">();</span><span class="w">   </span><span class="c1">// 10</span>
+<span class="nx">m2</span><span class="p">.</span><span class="nx">puntos</span><span class="p">();</span><span class="w">   </span><span class="c1">// 0  ← no se mezclan</span>
+</code></pre></div>
+<p>Desde fuera solo se puede usar lo que devuelve el <code>return</code>: no hay forma de llegar a la variable
+<code>puntos</code> y cambiarla a mano.</p>
+<p>Y si devuelves un array privado, devuelve una <strong>copia</strong> (<code>[...lista]</code>): si no, desde fuera pueden
+hacer <code>push</code> en tu array.</p>
+<p>Tres formas de closure, de menos a más:</p>
+<table>
+<thead>
+<tr>
+<th>Devuelve…</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>una</strong> función</td>
+<td><code>crearDescuento(20)</code> → <code>(precio) =&gt; …</code></td>
+</tr>
+<tr>
+<td>un <strong>objeto</strong> de funciones</td>
+<td><code>crearListaDeseos()</code> → <code>{ anadir, quitar, … }</code></td>
+</tr>
+<tr>
+<td>una función que recuerda un estado que <strong>cambia</strong></td>
+<td><code>crearGeneradorId(13)</code> → 13, 14, 15…</td>
+</tr>
+</tbody>
+</table>
+<p>🔮 <strong>¿Qué da?</strong> <code>predicciones.js</code> (7), sobre el <code>crearMarcador</code> del ejemplo.</p>
+<p>👀 <strong>Ejemplo</strong> en <code>closures.js</code>: <code>crearMarcador</code>, con <code>jugadas</code> privadas que se devuelven copiadas.</p>
+<p>🪜 <strong>Escalera:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Concepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.a</td>
+<td><code>crearMultiplicador(factor)</code></td>
+<td>Devolver <strong>una</strong> función que recuerda <code>factor</code></td>
+</tr>
+<tr>
+<td>3.b</td>
+<td><code>crearPasos(paso)</code> → <code>{ avanzar, posicion }</code></td>
+<td>Un <strong>objeto</strong> con dos funciones que comparten una variable que cambia</td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td><code>crearDescuento(porcentaje)</code></td>
+<td>Función que devuelve una función</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td><code>crearListaDeseos()</code></td>
+<td>Objeto de funciones con estado privado, <em>rest</em>, copia defensiva</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td><code>crearGeneradorId(inicial)</code></td>
+<td>Estado que cambia en cada llamada, por defecto</td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 3.2</summary>
+<p>Copia la forma del marcador: un <code>let titulos = []</code> dentro y un <code>return { … }</code> con 4 funciones.
+<code>anadir(...nuevos)</code>: recorre <code>nuevos</code> con <code>for...of</code> y añade (sin <code>push</code>:
+<code>titulos = [...titulos, t]</code>) solo los que sean texto, no vacíos y que no estén ya
+(<code>titulos.includes(t)</code>), contando cuántos añades. <code>quitar</code>: si no está, <code>false</code>; si está,
+<code>titulos = titulos.filter(...)</code> y <code>true</code>.</p>
+</details>
+<details class="tip">
+<summary>Pista de 3.3</summary>
+<p><code>let siguiente = inicial;</code> y devuelve una arrow que hace <code>return siguiente++</code>. Ojo: <code>x++</code>
+devuelve el valor <strong>de antes</strong> de sumar. Pruébalo en la consola.</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 3</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="bloque-4-control-de-flujo">BLOQUE 4 · Control de flujo</h2>
+<p>Ficheros: <code>src/bloque4/predicciones.js</code> y <code>src/bloque4/control.js</code>.</p>
+<p>📖 <strong>Lo que tienes que saber.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ternario <code>c ? a : b</code></td>
+<td>Una decisión simple con <strong>dos</strong> caminos que devuelve un valor</td>
+</tr>
+<tr>
+<td><code>if / else if / else</code></td>
+<td>Varios caminos o condiciones con rangos (<code>&lt; 3</code>, <code>&gt;= 4</code>…)</td>
+</tr>
+<tr>
+<td><code>switch</code></td>
+<td>Comparar <strong>un</strong> valor con varios valores exactos. <strong>Cada <code>case</code> necesita <code>break</code> (o <code>return</code>)</strong>: si no, sigue ejecutando el siguiente</td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td>Repetir mientras se cumpla algo (un menú). ¡Que la condición acabe siendo falsa!</td>
+</tr>
+<tr>
+<td><code>for (let i = …)</code></td>
+<td>Repetir un número conocido de veces</td>
+</tr>
+<tr>
+<td><code>for...of</code></td>
+<td>Recorrer los <strong>valores</strong> de un array</td>
+</tr>
+<tr>
+<td><code>for...in</code></td>
+<td>Recorre las <strong>claves</strong> (en un array: <code>"0"</code>, <code>"1"</code>… como texto). No lo uses con arrays</td>
+</tr>
+</tbody>
+</table>
+<p>🔮 <strong>¿Qué da?</strong> <code>predicciones.js</code> (7). La primera es la trampa del <code>switch</code> sin <code>break</code>.</p>
+<p>👀 <strong>Ejemplo</strong> en <code>control.js</code>: <code>procesarSemaforo(colores)</code>. Es <strong>el mismo esquema que el menú de
+la práctica 1</strong> (bucle + <code>switch</code>), pero en vez de <code>prompt</code> recibe un array con lo que el usuario
+teclearía. Así se puede probar automáticamente. Fíjate en los dos <code>case</code> seguidos y en cómo
+«apagar» termina el bucle.</p>
+<p>🪜 <strong>Escalera:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Concepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.a</td>
+<td><code>signo(numero)</code> → <code>"positivo"</code> / <code>"negativo"</code> / <code>"cero"</code></td>
+<td><code>if / else if / else</code></td>
+</tr>
+<tr>
+<td>4.b</td>
+<td><code>sumarHasta(n)</code> → 1 + 2 + … + n</td>
+<td><code>for</code> con acumulador</td>
+</tr>
+<tr>
+<td>4.c</td>
+<td><code>contarVocales(texto)</code></td>
+<td><code>for...of</code> sobre un texto, letra a letra</td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td><code>clasificarStock(stock)</code></td>
+<td><code>if / else if / else</code>, validar el tipo</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td><code>nombreEstado(estado)</code></td>
+<td><code>switch</code> con <code>default</code></td>
+</tr>
+<tr>
+<td>4.3</td>
+<td><code>simularMenu(entradas)</code></td>
+<td>El menú de RetroStock: bucle + <code>switch</code> + salir</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td><code>tablaDescuentos(maxUnidades)</code></td>
+<td><code>for</code> y funciones <strong>importadas</strong> de otros bloques</td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 4.3</summary>
+<p>Copia <code>procesarSemaforo</code> y cambia los <code>case</code>. Lo de «Fin sin salir»: después del bucle, si
+<strong>todavía</strong> se seguía (no se pulsó el 6), añádelo. Si el comprobador dice «no termina nunca»,
+te falta avanzar el índice (<code>i++</code>).</p>
+</details>
+<details class="tip">
+<summary>Pista de 4.4</summary>
+<p><code>for (let u = 1; u &lt;= maxUnidades; u++)</code> y en cada vuelta mete en el array
+<code>`${formatearUnidades(u)} → ${Math.round(descuentoVolumen(u) * 100)} %`</code>.</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 4</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="bloque-5-arrays-e-inmutabilidad">BLOQUE 5 · Arrays e inmutabilidad</h2>
+<p>Ficheros: <code>src/bloque5/predicciones.js</code>, <code>src/bloque5/arrays.js</code> y <code>src/bloque5/datos.js</code> (el
+catálogo de prueba, no se toca).</p>
+<p>📖 <strong>Lo que tienes que saber.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Devuelve</th>
+<th>Para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map(fn)</code></td>
+<td>Array <strong>del mismo tamaño</strong>, transformado</td>
+<td>Formatear, cambiar un elemento</td>
+</tr>
+<tr>
+<td><code>filter(fn)</code></td>
+<td>Array con los que cumplen (puede ser <code>[]</code>)</td>
+<td>Filtrar</td>
+</tr>
+<tr>
+<td><code>find(fn)</code></td>
+<td><strong>El primero</strong> que cumple, o <code>undefined</code></td>
+<td>Buscar uno</td>
+</tr>
+<tr>
+<td><code>some(fn)</code> / <code>every(fn)</code></td>
+<td><code>true</code>/<code>false</code>: ¿alguno? / ¿todos?</td>
+<td>Avisos, validar</td>
+</tr>
+<tr>
+<td><code>reduce((acc, x) =&gt; …, inicial)</code></td>
+<td><strong>Un</strong> valor</td>
+<td>Sumar, el máximo, un resumen. <strong>Siempre con valor inicial</strong></td>
+</tr>
+<tr>
+<td><code>sort((a, b) =&gt; a.precio - b.precio)</code></td>
+<td>⚠️ <strong>El mismo array</strong>, ordenado</td>
+<td>Ordenar. Sin comparador ordena como texto: <code>[10, 9, 1]</code> → <code>[1, 10, 9]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Inmutabilidad.</strong> Un array guardado en una variable es una <strong>referencia</strong>: <code>const b = a</code> <strong>no</strong>
+copia, son el mismo array. <code>const</code> solo impide reasignar la variable, no cambiar su contenido.
+Para no mutar:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">copia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">lista</span><span class="p">];</span><span class="w">                                   </span><span class="c1">// copiar un array</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ordenada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">lista</span><span class="p">].</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">precio</span><span class="p">);</span><span class="w">   </span><span class="c1">// ordenar sin mutar</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="o">:</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">stock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">p</span><span class="p">));</span><span class="w">  </span><span class="c1">// cambiar uno</span>
+</code></pre></div>
+<p><strong>Destructuring:</strong> <code>const { titulo, stock = 0 } = producto;</code> y también en parámetros:
+<code>.map(({ titulo, precio }) =&gt; …)</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">El catálogo de <code>datos.js</code> está congelado</p>
+<p>Tiene <code>Object.freeze</code>: si tu código lo modifica (<code>push</code>, <code>sort</code>, <code>p.stock = …</code>), salta un
+<code>TypeError</code> y el comprobador te dice «Estás MODIFICANDO el catálogo original». Es justo lo que
+hay que evitar siempre.</p>
+</div>
+<p>🔮 <strong>¿Qué da?</strong> <code>predicciones.js</code> (10).</p>
+<p>👀 <strong>Ejemplos</strong> en <code>arrays.js</code>: <code>titulos</code> (<code>map</code>), <code>deCategoria</code> (<code>filter</code>) y <code>reponer</code>
+(inmutabilidad: <code>map</code> + spread). El 5.7 se parece mucho a <code>reponer</code>.</p>
+<p>🪜 <strong>Escalera</strong> (con arrays de números, un método cada vez):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Concepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.a</td>
+<td><code>dobles(numeros)</code></td>
+<td><code>map</code></td>
+</tr>
+<tr>
+<td>5.b</td>
+<td><code>mayoresQue(numeros, limite)</code></td>
+<td><code>filter</code></td>
+</tr>
+<tr>
+<td>5.c</td>
+<td><code>sumaTotal(numeros)</code></td>
+<td><code>reduce</code> con valor inicial</td>
+</tr>
+<tr>
+<td>5.d</td>
+<td><code>anadirAlFinal(lista, elemento)</code></td>
+<td>Spread, sin <code>push</code></td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td><code>buscarPorId(catalogo, id)</code></td>
+<td><code>find</code> + <code>??</code></td>
+</tr>
+<tr>
+<td>5.2</td>
+<td><code>buscarPorTitulo(catalogo, texto)</code></td>
+<td><code>filter</code>, <code>toLowerCase</code>, <code>includes</code></td>
+</tr>
+<tr>
+<td>5.3</td>
+<td><code>valorStock(catalogo)</code></td>
+<td><code>reduce</code> con valor inicial</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td><code>ordenarPorPrecio(catalogo)</code></td>
+<td><code>sort</code> con comparador <strong>sin mutar</strong></td>
+</tr>
+<tr>
+<td>5.5</td>
+<td><code>hayStockBajo(catalogo)</code></td>
+<td><code>some</code></td>
+</tr>
+<tr>
+<td>5.6</td>
+<td><code>lineasCatalogo(catalogo)</code></td>
+<td><code>filter</code> + <code>map</code> encadenados, destructuring, ternario</td>
+</tr>
+<tr>
+<td>5.7</td>
+<td><code>vender(catalogo, id, unidades)</code></td>
+<td>Inmutabilidad: <code>map</code> + spread, por defecto</td>
+</tr>
+<tr>
+<td>5.8</td>
+<td><code>resumenVentas(ventas)</code></td>
+<td><code>reduce</code> + destructuring, lista vacía</td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 5.7</summary>
+<p>Primero busca el producto con <code>find</code>. Si no existe o <code>producto.stock &lt; unidades</code>, devuelve
+<code>catalogo</code> tal cual. Si no, haz lo mismo que <code>reponer</code> pero restando.</p>
+</details>
+<details class="tip">
+<summary>Pista de 5.8</summary>
+<p>Dos <code>reduce</code>: uno suma <code>total</code> (empieza en 0). El otro busca la venta con más unidades: empieza
+en <code>null</code> y en cada vuelta se queda con la venta actual si <code>max === null</code> o si tiene más unidades
+que <code>max</code>. Al final, <code>masVendido</code> es su <code>titulo</code> (o <code>null</code>: <code>?.</code> y <code>??</code>).</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 5</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="bloque-6-integrador-una-venta-completa">BLOQUE 6 · Integrador: una venta completa</h2>
+<p>Fichero: <code>src/bloque6/tienda.js</code>.</p>
+<p>📖 <strong>Lo que tienes que saber.</strong> No hay nada nuevo: hay que <strong>juntar</strong> lo que ya tienes
+(<code>buscarPorId</code>, <code>precioFinal</code>, <code>vender</code>, <code>redondear</code>, <code>formatearEuros</code>…). Es la opción «Registrar
+venta» de la práctica 1, que a muchos no os salía, y los <strong>casos 1 y 2</strong> de la práctica tienen que
+dar exactamente:</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Producto</th>
+<th>Venta</th>
+<th>Precio unitario</th>
+<th>Total</th>
+<th>Stock final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Chrono Trigger · 45 € · <code>usado-como-nuevo</code> · stock 4</td>
+<td>3 uds.</td>
+<td>42,75 €</td>
+<td>128,25 €</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Streets of Rage 2 · 60 € · <code>nuevo-precintado</code> · stock 10</td>
+<td>4 uds.</td>
+<td>67,50 €</td>
+<td>270,00 €</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>✍️ <strong>Tu turno:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Función</th>
+<th>Practica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td><code>registrarVenta(catalogo, id, unidades)</code> → <code>{ catalogo, venta }</code> o <code>{ catalogo, error }</code></td>
+<td>Validar en orden, reutilizar, no mutar</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td><code>ticket(venta)</code> → <code>"Chrono Trigger · 3 uds. × 42,75 € = 128,25 €"</code></td>
+<td>Destructuring de un objeto, plantillas</td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Pista de 6.1</summary>
+<p>Tres <code>if</code> con <code>return</code> temprano para los errores (en el orden del comentario) y, al final, la
+venta buena: <code>precioUnitario = precioFinal(…)</code>, <code>total = redondear(precioUnitario * unidades)</code> y
+<code>catalogo: vender(catalogo, id, unidades)</code>. <code>Number.isInteger("2")</code> es <code>false</code>: así rechazas
+también los textos.</p>
+</details>
+<p>✅ <code>./refuerzo.sh comprobar 6</code> → todo en verde. <strong>Commit.</strong></p>
+<hr />
+<h2 id="explicalo-con-tus-palabras">✍️ Explícalo con tus palabras</h2>
+<p>Rellena <code>respuestas.md</code> (5 preguntas): <code>||</code> frente a
+<code>??</code>, los tres puntos <code>...</code>, closures, mutar y depurar. <strong>Con tus palabras</strong> y un ejemplo tuyo.</p>
+<p>✅ <code>./refuerzo.sh comprobar final</code> → <strong>F.1</strong> en verde.</p>
+<hr />
+<h2 id="al-terminar">📤 Al terminar</h2>
+<ol>
+<li><code>./refuerzo.sh comprobar</code> → mira el resumen. Lo que no esté en verde, vuelve a ese bloque.</li>
+<li>Último commit: <code>git add . &amp;&amp; git commit -m "Repaso terminado"</code>.</li>
+<li>Si tu profesor te lo pide: <code>./refuerzo.sh entregar</code> genera <code>entrega/refuerzo-p1-tunombre.zip</code>
+   (la carpeta entera, con el historial de Git y el informe del comprobador).</li>
+<li><code>./refuerzo.sh parar</code>.</li>
+</ol>
+<hr />
+<h2 id="chuleta-de-repaso">📋 Chuleta de repaso</h2>
+<p>Lo que más falla, en una tabla. Si la entiendes entera sin mirar los bloques, vas bien.</p>
+<table>
+<thead>
+<tr>
+<th>Si ves…</th>
+<th>Piensa…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"5" + 3</code></td>
+<td>Con un texto, <code>+</code> concatena → <code>"53"</code>. <code>prompt</code> siempre devuelve texto</td>
+</tr>
+<tr>
+<td><code>x \|\| valor</code></td>
+<td>Salta con <code>0</code>, <code>""</code>, <code>false</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></td>
+</tr>
+<tr>
+<td><code>x ?? valor</code></td>
+<td>Salta <strong>solo</strong> con <code>null</code> y <code>undefined</code> (el <code>0</code> es un dato)</td>
+</tr>
+<tr>
+<td><code>obj?.prop</code></td>
+<td>No rompe si <code>obj</code> no existe: da <code>undefined</code></td>
+</tr>
+<tr>
+<td><code>() =&gt; { a: 1 }</code></td>
+<td>Devuelve <code>undefined</code>: para un objeto, <code>() =&gt; ({ a: 1 })</code></td>
+</tr>
+<tr>
+<td><code>function f(...args)</code></td>
+<td><em>Rest</em>: junta en un array</td>
+</tr>
+<tr>
+<td><code>[...lista]</code></td>
+<td><em>Spread</em>: copia</td>
+</tr>
+<tr>
+<td><code>switch</code> sin <code>break</code></td>
+<td>Sigue ejecutando el <code>case</code> siguiente</td>
+</tr>
+<tr>
+<td><code>for...in</code> en un array</td>
+<td>Da los índices como texto: <code>"0"</code>, <code>"1"</code></td>
+</tr>
+<tr>
+<td><code>lista.sort()</code></td>
+<td><strong>Muta</strong> y, sin comparador, ordena como texto</td>
+</tr>
+<tr>
+<td><code>const b = a</code> (array)</td>
+<td>No copia: es el mismo array</td>
+</tr>
+<tr>
+<td><code>find</code> sin resultado</td>
+<td><code>undefined</code> → usa <code>?? null</code> o <code>?? "No existe"</code></td>
+</tr>
+<tr>
+<td><code>reduce</code> sin valor inicial</td>
+<td>Con <code>[]</code> da <code>TypeError</code></td>
+</tr>
+<tr>
+<td>Una función que devuelve funciones</td>
+<td>Closure: las variables de dentro son privadas y cada llamada crea las suyas</td>
+</tr>
+<tr>
+<td>«No sé por qué falla»</td>
+<td>Breakpoint en la función, mira <em>Ámbito</em>, avanza con F10</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
