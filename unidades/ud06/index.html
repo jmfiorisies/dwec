@@ -1,0 +1,3045 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ud05/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-6-asincronia-y-almacenamiento-storagevite-ra4" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-1-ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 Batería de Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-2-bateria-repaso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Batería de repaso con comprobador (UD1–UD3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-la-aplicacion-ya-se-ve-ahora-tiene-que-recordar-y-hablar-con-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: la aplicación ya se ve; ahora tiene que recordar y hablar con el servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-modelo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El modelo de ejecución
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El modelo de ejecución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-un-solo-hilo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Un solo hilo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-el-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. El event loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-temporizadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Temporizadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-microtareas-frente-a-tareas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Microtareas frente a tareas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-callbacks-y-el-callback-hell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Callbacks y el callback hell
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-promesas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Promesas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Promesas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-es-una-promesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. ¿Qué es una promesa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-crear-una-promesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Crear una promesa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-then-catch-y-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. then, catch y finally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-encadenar-lo-que-devuelves-es-lo-que-recibe-el-siguiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Encadenar: lo que devuelves es lo que recibe el siguiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-varias-promesas-a-la-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Varias promesas a la vez
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-errores-en-las-promesas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Errores en las promesas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-async-await" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. async / await
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. async / await">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-promesas-leidas-de-arriba-abajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Promesas, leídas de arriba abajo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-errores-con-try-catch-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Errores con try / catch / finally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-en-serie-o-en-paralelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. En serie o en paralelo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-trampas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Trampas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-http-y-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTP y JSON
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTP y JSON">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-http-en-un-vistazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. HTTP en un vistazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-fetch-hablar-con-una-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. fetch: hablar con una API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. fetch: hablar con una API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-pedir-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Pedir datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-fetch-no-falla-con-un-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. fetch no falla con un 404
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-enviar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Enviar datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-los-cuatro-estados-de-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Los cuatro estados de la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-cancelar-y-poner-un-tiempo-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Cancelar y poner un tiempo límite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. CORS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-almacenamiento-en-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Almacenamiento en el navegador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Almacenamiento en el navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-donde-guardar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. ¿Dónde guardar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-la-api-de-localstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. La API de localStorage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-guardar-objetos-y-desconfiar-de-lo-leido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Guardar objetos (y desconfiar de lo leído)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-guardar-instancias-de-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. Guardar instancias de clases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-limites-y-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. Límites y seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-el-evento-storage-sincronizar-pestanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. El evento storage: sincronizar pestañas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-modulos-y-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Módulos y Vite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Módulos y Vite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-modulos-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Módulos ES
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-desarrollo-frente-a-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. Desarrollo frente a producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-variables-de-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Variables de entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-public-datos-de-prueba-sin-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. public/: datos de prueba sin servidor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-import-dinamico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. Import dinámico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ejercicio-practico-guiado-cartelera-de-cine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Ejercicio práctico guiado: cartelera de cine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia Tecnológica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia Tecnológica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árbol tecnológico completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Portal docente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-la-aplicacion-ya-se-ve-ahora-tiene-que-recordar-y-hablar-con-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: la aplicación ya se ve; ahora tiene que recordar y hablar con el servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-modelo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El modelo de ejecución
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El modelo de ejecución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-un-solo-hilo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Un solo hilo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-el-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. El event loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-temporizadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Temporizadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-microtareas-frente-a-tareas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Microtareas frente a tareas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-callbacks-y-el-callback-hell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Callbacks y el callback hell
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-promesas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Promesas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Promesas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-que-es-una-promesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. ¿Qué es una promesa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-crear-una-promesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Crear una promesa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-then-catch-y-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. then, catch y finally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-encadenar-lo-que-devuelves-es-lo-que-recibe-el-siguiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Encadenar: lo que devuelves es lo que recibe el siguiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-varias-promesas-a-la-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Varias promesas a la vez
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-errores-en-las-promesas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Errores en las promesas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-async-await" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. async / await
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. async / await">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-promesas-leidas-de-arriba-abajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Promesas, leídas de arriba abajo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-errores-con-try-catch-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Errores con try / catch / finally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-en-serie-o-en-paralelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. En serie o en paralelo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-trampas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Trampas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-http-y-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTP y JSON
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTP y JSON">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-http-en-un-vistazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. HTTP en un vistazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-fetch-hablar-con-una-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. fetch: hablar con una API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. fetch: hablar con una API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-pedir-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Pedir datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-fetch-no-falla-con-un-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. fetch no falla con un 404
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-enviar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Enviar datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-los-cuatro-estados-de-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. Los cuatro estados de la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-cancelar-y-poner-un-tiempo-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Cancelar y poner un tiempo límite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. CORS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-almacenamiento-en-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Almacenamiento en el navegador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Almacenamiento en el navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-donde-guardar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. ¿Dónde guardar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-la-api-de-localstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. La API de localStorage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-guardar-objetos-y-desconfiar-de-lo-leido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Guardar objetos (y desconfiar de lo leído)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-guardar-instancias-de-clases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. Guardar instancias de clases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-limites-y-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. Límites y seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-el-evento-storage-sincronizar-pestanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. El evento storage: sincronizar pestañas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-modulos-y-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Módulos y Vite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Módulos y Vite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-modulos-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Módulos ES
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-desarrollo-frente-a-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. Desarrollo frente a producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-variables-de-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Variables de entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-public-datos-de-prueba-sin-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. public/: datos de prueba sin servidor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-import-dinamico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. Import dinámico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ejercicio-practico-guiado-cartelera-de-cine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Ejercicio práctico guiado: cartelera de cine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-6-asincronia-y-almacenamiento-storagevite-ra4">UD 6: Asincronía y almacenamiento (Storage/Vite) (RA4)</h1>
+<div class="presentacion">
+<p><span class="twemoji presentacion__icono"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 3h8a2 2 0 0 1 2-2 2 2 0 0 1 2 2h8v2h-1v11h-5.75L17 22h-2l-1.75-6h-2.5L9 22H7l1.75-6H3V5H2zm3 2v9h14V5zm6.85 6.85a.5.5 0 0 1-.35.15.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5c.14 0 .26.06.35.15l1.4 1.39c.32.32.64.64.64.96s-.32.64-.64.96z"/></svg></span> <strong>Presentación de clase</strong> · 57 diapositivas para seguir la unidad</p>
+<p><a class="md-button md-button--primary" href="../../assets/presentaciones/DWEC-UD6.pdf" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"/></svg></span> Abrir o descargar el PDF</a></p>
+</div>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 4 (RA4), criterios e–i — Desarrolla aplicaciones web que se comunican de forma asíncrona con servidores (promesas, <code>async/await</code>, API Fetch), gestiona el almacenamiento de datos en el cliente (<code>localStorage</code>, <code>sessionStorage</code>) y utiliza herramientas de construcción (Vite) y módulos para organizar y desplegar el proyecto.</p>
+</blockquote>
+<hr />
+<h2 id="1-donde-estamos-la-aplicacion-ya-se-ve-ahora-tiene-que-recordar-y-hablar-con-el-servidor">1. Dónde estamos: la aplicación ya se ve; ahora tiene que recordar y hablar con el servidor <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th>Qué aprendimos</th>
+<th>Qué aporta hoy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UD4</td>
+<td>Objetos y clases: el <strong>modelo</strong></td>
+<td>Lo que hay que guardar y reconstruir</td>
+</tr>
+<tr>
+<td>UD5</td>
+<td>DOM y eventos</td>
+<td>Pintar los datos que lleguen de la red</td>
+</tr>
+<tr>
+<td><strong>UD6 (hoy)</strong></td>
+<td><strong>Asincronía y almacenamiento</strong></td>
+<td><strong>Pedir datos sin congelar la página y recordarlos al recargar</strong></td>
+</tr>
+<tr>
+<td>UD7</td>
+<td>React</td>
+<td>Lo mismo, con un framework</td>
+</tr>
+</tbody>
+</table>
+<p>La pregunta de la unidad: <strong>¿cómo pido datos a un servidor sin congelar la página, y cómo hago que mi aplicación se acuerde de todo al recargar?</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Diseña para cuando las cosas van mal</p>
+<p>Un buen frontend se nota sobre todo cuando la red es lenta, cuando no hay conexión o cuando el servidor responde con un error. Esta unidad trata tanto del caso feliz como de esos tres.</p>
+</div>
+<hr />
+<h2 id="2-el-modelo-de-ejecucion">2. El modelo de ejecución <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18a6 6 0 0 1-6-6c0-1 .25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12a8 8 0 0 0 8 8v3l4-4-4-4m0-11V1L8 5l4 4V6a6 6 0 0 1 6 6c0 1-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12a8 8 0 0 0-8-8"/></svg></span></h2>
+<h3 id="21-un-solo-hilo">2.1. Un solo hilo</h3>
+<p>JavaScript, en el navegador, hace <strong>una cosa a la vez</strong>: tiene una sola <strong>pila de llamadas</strong>, y mientras tu código se ejecuta el navegador no puede pintar ni atender un clic.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ✗ un bucle de 3 s congela la página entera (ni clics, ni scroll)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">3000</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">fin</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1">// ✓ «avísame dentro de 3 s» y seguir</span>
+<span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;ya&quot;</span><span class="p">),</span><span class="w"> </span><span class="mf">3000</span><span class="p">);</span>
+</code></pre></div>
+<p>Por eso lo lento (la red, los temporizadores, los archivos) <strong>no se espera</strong>: se <strong>pide</strong>, y el resultado llega <strong>más tarde</strong>. Asíncrono no significa «en paralelo»: tu código sigue siendo de un hilo; lo que va aparte es <strong>la espera</strong>, y la hace el navegador.</p>
+<h3 id="22-el-event-loop">2.2. El event loop</h3>
+<pre class="mermaid"><code>flowchart LR
+    P["Pila de llamadas&lt;br/&gt;tu código"] --&gt;|1 · pide| W["Web APIs del navegador&lt;br/&gt;fetch · setTimeout · eventos"]
+    W --&gt;|2 · al terminar| MQ["Cola de microtareas&lt;br/&gt;then · await"]
+    W --&gt;|2 · al terminar| TQ["Cola de tareas&lt;br/&gt;timers · clics"]
+    MQ --&gt;|3 · primero TODAS| EL(("event loop"))
+    TQ --&gt;|3 · luego UNA| EL
+    EL --&gt;|4 · cuando la pila está vacía| P</code></pre>
+<ol>
+<li>Tu código pide algo al navegador (las <strong>Web APIs</strong>: <code>fetch</code>, <code>setTimeout</code>, <code>addEventListener</code>) y <strong>sigue</strong>.</li>
+<li>Cuando termina, el navegador deja el callback en una <strong>cola</strong>: la de <strong>microtareas</strong> (<code>then</code>, lo que va después de un <code>await</code>) o la de <strong>tareas</strong> (temporizadores, eventos como el clic).</li>
+<li>El <strong>event loop</strong> espera a que la pila esté vacía; entonces ejecuta <strong>todas</strong> las microtareas y después <strong>una</strong> tarea, pinta si toca y vuelve a empezar.</li>
+</ol>
+<h3 id="23-temporizadores">2.3. Temporizadores</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;una vez, dentro de 1 s&quot;</span><span class="p">),</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+<span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span><span class="w">                                  </span><span class="c1">// cancelado</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">reloj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setInterval</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pintarHora</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">()),</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+<span class="nx">clearInterval</span><span class="p">(</span><span class="nx">reloj</span><span class="p">);</span><span class="w">                              </span><span class="c1">// parar</span>
+</code></pre></div>
+<ul>
+<li>Los milisegundos son un <strong>mínimo</strong>, no un tiempo exacto: si la pila está ocupada, el callback espera. Las pestañas en segundo plano se ralentizan.</li>
+<li><code>setTimeout(f, 0)</code> no es «ya», sino «cuando la pila esté vacía».</li>
+<li>Para medir tiempo de verdad, compara con <strong><code>Date.now()</code></strong>, no cuentes ticks.</li>
+</ul>
+<h3 id="24-microtareas-frente-a-tareas">2.4. Microtareas frente a tareas</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;1 · síncrono&quot;</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;2 · tarea&quot;</span><span class="p">),</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;3 · microtarea&quot;</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;4 · síncrono&quot;</span><span class="p">);</span>
+<span class="c1">// 1 · síncrono</span>
+<span class="c1">// 4 · síncrono</span>
+<span class="c1">// 3 · microtarea</span>
+<span class="c1">// 2 · tarea</span>
+</code></pre></div>
+<p><strong>La regla:</strong> primero todo el código síncrono; luego <strong>todas</strong> las microtareas; y solo entonces la siguiente tarea.</p>
+<h3 id="25-callbacks-y-el-callback-hell">2.5. Callbacks y el <em>callback hell</em></h3>
+<p>Antes de las promesas, encadenar operaciones asíncronas era anidar callbacks:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">obtenerUsuario</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">usuario</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">obtenerTablero</span><span class="p">(</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">tablero</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">tablero</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">obtenerTareas</span><span class="p">(</span><span class="nx">tablero</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">tareas</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">render</span><span class="p">(</span><span class="nx">tareas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Una pirámide difícil de leer, con un <code>if (err)</code> en cada nivel. Los callbacks siguen existiendo (<code>addEventListener</code>, <code>setTimeout</code>), pero para <strong>encadenar</strong> se usan promesas y <code>async/await</code>.</p>
+<hr />
+<h2 id="3-promesas">3. Promesas <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2h12v6l-4 4 4 4v6H6v-6l4-4-4-4zm10 14.5-4-4-4 4V20h8zm-4-5 4-4V4H8v3.5zM10 6h4v.75l-2 2-2-2z"/></svg></span></h2>
+<h3 id="31-que-es-una-promesa">3.1. ¿Qué es una promesa?</h3>
+<p>Un objeto que representa <strong>un resultado que todavía no está</strong>. Como el tique de la cafetería: no tienes el café, pero tienes algo que te avisará cuando esté (o de que se ha acabado la leche).</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    direction LR
+    [*] --&gt; pending: se crea
+    pending --&gt; fulfilled: resolve(valor)
+    pending --&gt; rejected: reject(error)
+    fulfilled --&gt; [*]
+    rejected --&gt; [*]</code></pre>
+<p>Una promesa empieza <strong>pendiente</strong> y acaba <strong>cumplida</strong> (con un valor) o <strong>rechazada</strong> (con un error). Una vez resuelta, <strong>no cambia nunca</strong>.</p>
+<h3 id="32-crear-una-promesa">3.2. Crear una promesa</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// convertir setTimeout en una promesa</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">esperar</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">tirarDado</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">6</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">n</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;¡Un 1!&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La función de dentro (el <strong>ejecutor</strong>) se ejecuta enseguida. Casi nunca escribirás <code>new Promise</code>: <code>fetch</code> y las APIs modernas ya devuelven promesas.</p>
+<h3 id="33-then-catch-y-finally">3.3. <code>then</code>, <code>catch</code> y <code>finally</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">mostrarCargando</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">tirarDado</span><span class="p">()</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Has sacado&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">finally</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mostrarCargando</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Esto sale ANTES que el dado&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><code>then</code> solo <strong>registra</strong> qué hacer: el código sigue y el <code>then</code> se ejecuta después, como microtarea.</p>
+<h3 id="34-encadenar-lo-que-devuelves-es-lo-que-recibe-el-siguiente">3.4. Encadenar: lo que devuelves es lo que recibe el siguiente</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;/api/usuario&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span><span class="w">                            </span><span class="c1">// devuelve una promesa: se espera</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">u</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/tableros/</span><span class="si">${</span><span class="nx">u</span><span class="p">.</span><span class="nx">tablero</span><span class="si">}</span><span class="sb">`</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tablero</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">render</span><span class="p">(</span><span class="nx">tablero</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span><span class="w">                   </span><span class="c1">// el error de CUALQUIER paso</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">El error n.º 1: un <code>then</code> con llaves y sin <code>return</code></p>
+<p><code>.then((r) =&gt; { r.json(); })</code> no devuelve nada: el siguiente <code>then</code> recibe <code>undefined</code> y no hay ningún error. Con llaves, <code>return</code>; sin llaves, el <code>return</code> es implícito: <code>.then((r) =&gt; r.json())</code>.</p>
+</div>
+<h3 id="35-varias-promesas-a-la-vez">3.5. Varias promesas a la vez</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Se cumple cuando…</th>
+<th>Se rechaza cuando…</th>
+<th>Para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Promise.all([…])</code></td>
+<td><strong>Todas</strong> se cumplen (array de valores, en el orden del array)</td>
+<td>La <strong>primera</strong> falla</td>
+<td>Cargar varias cosas que hacen falta todas</td>
+</tr>
+<tr>
+<td><code>Promise.allSettled([…])</code></td>
+<td>Todas terminan, bien o mal (<code>[{ status, value \| reason }]</code>)</td>
+<td>Nunca</td>
+<td>Saber qué ha ido bien y qué no</td>
+</tr>
+<tr>
+<td><code>Promise.race([…])</code></td>
+<td>La primera que <strong>termine</strong></td>
+<td>Si la primera en terminar falla</td>
+<td>Tiempo límite</td>
+</tr>
+<tr>
+<td><code>Promise.any([…])</code></td>
+<td>La primera que <strong>se cumpla</strong></td>
+<td>Fallan todas (<code>AggregateError</code>)</td>
+<td>Servidores espejo</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="nx">tareas</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/usuario&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/tareas&quot;</span><span class="p">)]);</span>
+</code></pre></div>
+<h3 id="36-errores-en-las-promesas">3.6. Errores en las promesas</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mf">5</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;falla en &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">n</span><span class="p">);</span><span class="w"> </span><span class="p">})</span><span class="w">   </span><span class="c1">// rechaza la cadena</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;no se ejecuta&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="c1">// RECUPERA</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;sigue con&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">));</span><span class="w">            </span><span class="c1">// sigue con 0</span>
+</code></pre></div>
+<ul>
+<li>Un <code>throw</code> dentro de un <code>then</code> salta al siguiente <code>catch</code>; lo que devuelve <code>catch</code> sigue la cadena como cumplido.</li>
+<li>Un rechazo que nadie captura sale en la consola como <strong><code>Uncaught (in promise)</code></strong>: el error se pierde y la interfaz se queda colgada. <strong>Toda cadena termina en <code>catch</code></strong> (o en <code>try/catch</code> con <code>await</code>).</li>
+<li>Un <code>try/catch</code> normal <strong>no</strong> captura el error de una promesa que no esperas: <code>try { fetch(url) } catch {}</code> no ve nada.</li>
+</ul>
+<hr />
+<h2 id="4-async-await">4. <code>async</code> / <code>await</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 6v12l8.5-6M4 18l8.5-6L4 6z"/></svg></span></h2>
+<h3 id="41-promesas-leidas-de-arriba-abajo">4.1. Promesas, leídas de arriba abajo</h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">cargar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;/datos/tareas.json&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">tareas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">(</span><span class="nx">tareas</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">tareas</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>async</code></strong>: la función devuelve <strong>siempre una promesa</strong>; su <code>return</code> es el valor con el que se cumple.</li>
+<li><strong><code>await</code></strong>: pausa <strong>esa función</strong> hasta que la promesa se resuelva y da su valor. <strong>No congela la página</strong>: mientras espera, el event loop sigue atendiendo eventos y pintando.</li>
+<li>Se usa dentro de funciones <code>async</code> o en el <strong>nivel superior de un módulo</strong>.</li>
+</ul>
+<h3 id="42-errores-con-try-catch-finally">4.2. Errores con <code>try / catch / finally</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">cargarTareas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">estado</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Cargando…&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">boton</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tareas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/datos/tareas.json&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">render</span><span class="p">(</span><span class="nx">tareas</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">estado</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">estado</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`Error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">boton</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">   </span><span class="c1">// pase lo que pase</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Pon el <code>try</code> donde sepas qué hacer con el error (normalmente, en la interfaz). Las funciones de bajo nivel, como <code>getJSON</code>, <strong>lanzan</strong>; la interfaz <strong>decide</strong>.</p>
+<h3 id="43-en-serie-o-en-paralelo">4.3. En serie o en paralelo</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// ≈ 1,5 s: la segunda espera a la primera</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/usuario&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1 s</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/tareas&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// 0,5 s</span>
+
+<span class="c1">// ≈ 1 s: las dos a la vez</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">u2</span><span class="p">,</span><span class="w"> </span><span class="nx">t2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/usuario&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/api/tareas&quot;</span><span class="p">)]);</span>
+</code></pre></div>
+<p>En serie, solo si la segunda petición <strong>necesita</strong> el resultado de la primera. Si son independientes, <code>Promise.all</code>.</p>
+<h3 id="44-trampas">4.4. Trampas</h3>
+<table>
+<thead>
+<tr>
+<th>Trampa</th>
+<th>Qué pasa</th>
+<th>Arreglo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Olvidar <code>await</code></td>
+<td>Tienes una <code>Promise</code>, no el valor (<code>datos.length</code> → <code>undefined</code>)</td>
+<td><code>const datos = await getJSON(url);</code></td>
+</tr>
+<tr>
+<td><code>await</code> dentro de <code>forEach</code></td>
+<td><code>forEach</code> no espera: termina enseguida y los errores se pierden</td>
+<td><code>for (const t of tareas) await guardar(t);</code> o <code>await Promise.all(tareas.map(guardar));</code></td>
+</tr>
+<tr>
+<td>Llamar a una función <code>async</code> sin <code>await</code> ni <code>.catch</code></td>
+<td><code>Uncaught (in promise)</code></td>
+<td><code>cargar().catch(mostrarError);</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Consola de Chrome</p>
+<p>En la consola de DevTools puedes escribir <code>await</code> directamente. En tus ficheros, solo dentro de funciones <code>async</code> o en el nivel superior de un módulo.</p>
+</div>
+<hr />
+<h2 id="5-http-y-json">5. HTTP y JSON <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span></h2>
+<h3 id="51-http-en-un-vistazo">5.1. HTTP en un vistazo</h3>
+<p>Una <strong>petición</strong> lleva un <strong>método</strong>, una URL, <strong>cabeceras</strong> y, a veces, un <strong>cuerpo</strong>. La <strong>respuesta</strong> trae un <strong>código de estado</strong>, cabeceras y cuerpo.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/api/tareas</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span><span class="nt">&quot;titulo&quot;</span><span class="p">:</span><span class="s2">&quot;Entregar&quot;</span><span class="p">,</span><span class="nt">&quot;prioridad&quot;</span><span class="p">:</span><span class="s2">&quot;alta&quot;</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="nt">&quot;titulo&quot;</span><span class="p">:</span><span class="s2">&quot;Entregar&quot;</span><span class="p">,</span><span class="nt">&quot;prioridad&quot;</span><span class="p">:</span><span class="s2">&quot;alta&quot;</span><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Para</th>
+<th></th>
+<th>Código</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>Leer</td>
+<td></td>
+<td><code>200</code> · <code>201</code> · <code>204</code></td>
+<td>OK · creado · OK sin cuerpo</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>Crear</td>
+<td></td>
+<td><code>400</code> · <code>401</code> · <code>403</code></td>
+<td>Datos mal · sin sesión · sin permiso</td>
+</tr>
+<tr>
+<td><code>PUT</code> · <code>PATCH</code></td>
+<td>Reemplazar · cambiar</td>
+<td></td>
+<td><code>404</code></td>
+<td>No existe</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>Borrar</td>
+<td></td>
+<td><code>500</code> · <code>503</code></td>
+<td>Fallo del servidor · no disponible</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2xx</strong> = bien · <strong>4xx</strong> = la culpa es de la petición · <strong>5xx</strong> = la culpa es del servidor.</p>
+<h3 id="52-json">5.2. JSON</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">texto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hecha</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
+<span class="c1">// &#39;{&quot;id&quot;:1,&quot;titulo&quot;:&quot;A&quot;,&quot;hecha&quot;:false}&#39;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">texto</span><span class="p">);</span>
+<span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;{titulo: &#39;A&#39;}&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// SyntaxError: claves sin comillas dobles</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Valor en JavaScript</th>
+<th>En JSON</th>
+<th>Al volver con <code>parse</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code>, <code>number</code>, <code>boolean</code>, <code>null</code>, arrays, objetos</td>
+<td>Igual</td>
+<td>Igual</td>
+</tr>
+<tr>
+<td><code>Date</code></td>
+<td><code>"2026-11-20T08:00:00.000Z"</code></td>
+<td><strong>Un string</strong></td>
+</tr>
+<tr>
+<td><code>undefined</code>, funciones</td>
+<td>Desaparecen (dentro de un array, <code>null</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Instancia de una clase</td>
+<td>Solo sus propiedades <strong>públicas</strong></td>
+<td>Objeto normal, sin métodos ni <code>#privados</code></td>
+</tr>
+<tr>
+<td><code>NaN</code>, <code>Infinity</code></td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>Reglas del formato: claves <strong>siempre</strong> entre comillas dobles, sin comillas simples, sin comas finales, sin comentarios.</p>
+<hr />
+<h2 id="6-fetch-hablar-con-una-api">6. <code>fetch</code>: hablar con una API <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z"/></svg></span></h2>
+<h3 id="61-pedir-datos">6.1. Pedir datos</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">respuesta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;/datos/tareas.json&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// se cumple al llegar las CABECERAS</span>
+<span class="nx">respuesta</span><span class="p">.</span><span class="nx">ok</span><span class="p">;</span><span class="w">                                          </span><span class="c1">// true si el código es 200–299</span>
+<span class="nx">respuesta</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span><span class="w">                                      </span><span class="c1">// 200</span>
+<span class="nx">respuesta</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">);</span><span class="w">                 </span><span class="c1">// &quot;application/json&quot;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tareas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">respuesta</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span><span class="w">                 </span><span class="c1">// lee el CUERPO y lo parsea</span>
+</code></pre></div>
+<ul>
+<li>Dos <code>await</code>: uno para la respuesta y otro para el cuerpo. Para texto, <code>r.text()</code>; para archivos, <code>r.blob()</code>.</li>
+<li>El cuerpo <strong>solo se lee una vez</strong>: un segundo <code>r.json()</code> lanza <code>TypeError: … body stream already read</code>.</li>
+<li>En Vite, lo que hay en <strong><code>public/</code></strong> se sirve en la raíz: <code>public/datos/tareas.json</code> → <code>fetch("/datos/tareas.json")</code>.</li>
+</ul>
+<h3 id="62-fetch-no-falla-con-un-404">6.2. <code>fetch</code> no falla con un 404</h3>
+<table>
+<thead>
+<tr>
+<th>Qué pasa</th>
+<th>¿<code>fetch</code> rechaza?</th>
+<th><code>respuesta.ok</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200 OK</td>
+<td>No</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>404 No existe · 500 Error del servidor</td>
+<td><strong>No</strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>Sin conexión, servidor caído, bloqueado por CORS</td>
+<td>Sí: <code>TypeError: Failed to fetch</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><code>fetch</code> solo rechaza cuando <strong>no hay respuesta</strong>. Los errores HTTP son respuestas «normales»: los tienes que convertir tú en error. Hazlo en <strong>una sola función</strong> que use todo el proyecto:</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">r</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP </span><span class="si">${</span><span class="nx">r</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb"> en </span><span class="si">${</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">tipo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">tipo</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">url</span><span class="si">}</span><span class="sb"> no es JSON`</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">En el servidor de desarrollo de Vite no hay 404</p>
+<p>Con <code>npm run dev</code>, un fichero que no existe responde <strong>200 con el <code>index.html</code></strong> (Vite está pensado para aplicaciones de una sola página). Sin comprobar el <code>Content-Type</code>, el fallo llega en <code>r.json()</code> como <code>SyntaxError: Unexpected token '&lt;'…</code>, que no dice nada útil. Con <code>npm run preview</code> o un servidor real, sí sale el 404.</p>
+</div>
+<h3 id="63-enviar-datos">6.3. Enviar datos</h3>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">postJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="nx">datos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w">                                   </span><span class="c1">// por defecto es GET</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">datos</span><span class="p">),</span><span class="w">                      </span><span class="c1">// un STRING, no el objeto</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">r</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP </span><span class="si">${</span><span class="nx">r</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span><span class="w">                                    </span><span class="c1">// con 201, el recurso creado con su id</span>
+<span class="p">}</span>
+
+<span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/tareas/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DELETE&quot;</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<ul>
+<li>Para practicar sin servidor propio, <code>https://jsonplaceholder.typicode.com/posts</code> acepta <code>POST</code> y responde <strong>201</strong> (no guarda nada de verdad).</li>
+<li>Con un <code>FormData</code> (UD5) también se puede enviar: <code>body: new FormData(form)</code>, y entonces <strong>no</strong> pongas <code>Content-Type</code>.</li>
+</ul>
+<h3 id="64-los-cuatro-estados-de-la-interfaz">6.4. Los cuatro estados de la interfaz</h3>
+<pre class="mermaid"><code>flowchart LR
+    C["Cargando&lt;br/&gt;mensaje o esqueleto · aria-busy"] --&gt; E["Error&lt;br/&gt;mensaje + Reintentar"]
+    C --&gt; V["Vacío&lt;br/&gt;«Aún no hay tareas»"]
+    C --&gt; D["Datos&lt;br/&gt;la lista (UD5)"]
+    E --&gt;|Reintentar| C</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">pintarEstado</span><span class="p">({</span><span class="w"> </span><span class="nx">cargando</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">tareas</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">zona</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;aria-busy&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">cargando</span><span class="p">));</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cargando</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrar</span><span class="p">(</span><span class="s2">&quot;Cargando…&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrar</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">reintentar</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">tareas</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">mostrar</span><span class="p">(</span><span class="s2">&quot;Aún no hay tareas&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">(</span><span class="nx">tareas</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si solo programas el caso feliz, la aplicación <strong>parece rota</strong> en cuanto la red va lenta. Pruébalo en DevTools → Network: <strong>Slow 4G</strong> para el «Cargando…» y <strong>Offline</strong> para el error.</p>
+<h3 id="65-cancelar-y-poner-un-tiempo-limite">6.5. Cancelar y poner un tiempo límite</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">controlador</span><span class="p">;</span>
+<span class="nx">buscador</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">controlador</span><span class="o">?</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span><span class="w">                     </span><span class="c1">// cancela la búsqueda anterior</span>
+<span class="w">  </span><span class="nx">controlador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`/api/buscar?q=</span><span class="si">${</span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">buscador</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="nx">controlador</span><span class="p">.</span><span class="nx">signal</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">render</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;AbortError&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="w">   </span><span class="c1">// cancelar no es un fallo</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="nx">AbortSignal</span><span class="p">.</span><span class="nx">timeout</span><span class="p">(</span><span class="mf">5000</span><span class="p">)</span><span class="w"> </span><span class="p">});</span><span class="w">   </span><span class="c1">// rechaza con TimeoutError a los 5 s</span>
+</code></pre></div>
+<p>Sin cancelar, la respuesta de «ra» puede llegar <strong>después</strong> que la de «ratón» y pisarla (<strong>condición de carrera</strong>). Mejor aún: no pidas en cada tecla; espera 300 ms sin escribir (<strong>debounce</strong>, con <code>setTimeout</code> y <code>clearTimeout</code>) y entonces pide.</p>
+<h3 id="66-cors">6.6. CORS</h3>
+<p>El <strong>origen</strong> es protocolo + dominio + puerto: <code>http://localhost:5173</code> y <code>http://localhost:3000</code> son orígenes distintos. Por defecto, el navegador <strong>no deja que tu código lea</strong> la respuesta de otro origen, salvo que el servidor la permita con la cabecera <strong><code>Access-Control-Allow-Origin</code></strong>. Si no la envía, la petición llega y el servidor responde, pero <code>fetch</code> rechaza con <code>TypeError</code> y la consola dice <em>blocked by CORS policy</em>.</p>
+<ul>
+<li>Lo decide <strong>el servidor</strong>: no se arregla desde el frontend.</li>
+<li>En desarrollo, Vite puede redirigir las peticiones a tu API con <code>server.proxy</code>.</li>
+<li>CORS no es un error de tu código: es una protección del navegador.</li>
+</ul>
+<hr />
+<h2 id="7-almacenamiento-en-el-navegador">7. Almacenamiento en el navegador <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7zm2 16H5V5h11.17L19 7.83zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3M6 6h9v4H6z"/></svg></span></h2>
+<h3 id="71-donde-guardar">7.1. ¿Dónde guardar?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>localStorage</code></th>
+<th><code>sessionStorage</code></th>
+<th>Cookies</th>
+<th>IndexedDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cuánto dura</td>
+<td>Hasta que se borre</td>
+<td>Hasta cerrar la pestaña</td>
+<td>Hasta su caducidad</td>
+<td>Hasta que se borre</td>
+</tr>
+<tr>
+<td>Capacidad</td>
+<td>≈ 5 MB por origen</td>
+<td>≈ 5 MB por origen</td>
+<td>≈ 4 KB cada una</td>
+<td>Mucho más</td>
+</tr>
+<tr>
+<td>¿Viaja al servidor?</td>
+<td>No</td>
+<td>No</td>
+<td>Sí, en cada petición</td>
+<td>No</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Síncrona, solo strings</td>
+<td>Síncrona, solo strings</td>
+<td><code>document.cookie</code></td>
+<td>Asíncrona, objetos</td>
+</tr>
+<tr>
+<td>Para</td>
+<td>Preferencias, borradores</td>
+<td>Un asistente de varios pasos</td>
+<td>Sesión (las pone el servidor)</td>
+<td>Datos grandes, modo offline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-la-api-de-localstorage">7.2. La API de <code>localStorage</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;tema&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;oscuro&quot;</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;tema&quot;</span><span class="p">);</span><span class="w">          </span><span class="c1">// &quot;oscuro&quot;</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;no-existe&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// null</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s2">&quot;tema&quot;</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span><span class="w">                  </span><span class="c1">// todo lo de este origen</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;visitas&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;visitas&quot;</span><span class="p">);</span><span class="w">       </span><span class="c1">// &quot;3&quot;  ← todo es string</span>
+</code></pre></div>
+<ul>
+<li>Es <strong>por origen</strong>: el <code>localhost:5173</code> de <code>npm run dev</code> y el <code>localhost:4173</code> de <code>npm run preview</code> tienen datos distintos.</li>
+<li><strong>Prefija las claves</strong> con el nombre de la app (<code>"tablero:tareas"</code>): en <code>localhost</code> conviven todos tus proyectos.</li>
+<li>En DevTools → <strong>Application → Local Storage</strong> las ves, editas y borras.</li>
+</ul>
+<h3 id="73-guardar-objetos-y-desconfiar-de-lo-leido">7.3. Guardar objetos (y desconfiar de lo leído)</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">CLAVE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tablero:preferencias&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">DEFECTO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tema</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;claro&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">guardar</span><span class="p">(</span><span class="nx">prefs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">CLAVE</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">prefs</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">cargar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">CLAVE</span><span class="p">))</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="nx">DEFECTO</span><span class="p">;</span><span class="w">   </span><span class="c1">// parse(null) → null</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">DEFECTO</span><span class="p">;</span><span class="w">                                               </span><span class="c1">// texto corrupto</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Sin <code>stringify</code>, <code>setItem("x", { a: 1 })</code> guarda <code>"[object Object]"</code>. Un <code>Set</code> o un <code>Map</code> se serializan como <code>{}</code>: guárdalos como array (<code>[...miSet]</code>).</li>
+<li>Lo que viene de <code>localStorage</code> lo puede haber cambiado el usuario o una versión antigua de tu app: <strong>valida al cargar</strong> y no dejes que un <code>SyntaxError</code> impida arrancar la página.</li>
+</ul>
+<h3 id="74-guardar-instancias-de-clases">7.4. Guardar instancias de clases</h3>
+<p><code>JSON.stringify</code> solo ve las propiedades <strong>públicas</strong>, y <code>JSON.parse</code> devuelve objetos normales, sin métodos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tarea</span><span class="p">({</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">prioridad</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;alta&quot;</span><span class="w"> </span><span class="p">});</span><span class="w">   </span><span class="c1">// titulo y prioridad son #privados</span>
+<span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span><span class="w">           </span><span class="c1">// &#39;{&quot;id&quot;:1,&quot;limite&quot;:null,&quot;creada&quot;:&quot;2026-…&quot;}&#39;  ← ¡sin titulo!</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">copia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">t</span><span class="p">));</span>
+<span class="nx">copia</span><span class="p">.</span><span class="nx">subirPrioridad</span><span class="p">();</span><span class="w">      </span><span class="c1">// TypeError: no es una Tarea</span>
+</code></pre></div>
+<p>El patrón: <strong><code>toJSON()</code></strong> decide qué se guarda (<code>JSON.stringify</code> lo llama solo) y <strong><code>static desde(datos)</code></strong> reconstruye la instancia pasando otra vez por el constructor, que valida:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fechaISO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">  </span><span class="sb">`</span><span class="si">${</span><span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span><span class="si">}</span><span class="sb">-</span><span class="si">${</span><span class="nb">String</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">).</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">-</span><span class="si">${</span><span class="nb">String</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()).</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">Tarea</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// …</span>
+<span class="w">  </span><span class="nx">toJSON</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">titulo</span><span class="p">,</span><span class="w"> </span><span class="nx">prioridad</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">prioridad</span><span class="p">,</span><span class="w"> </span><span class="nx">limite</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">limite</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">fechaISO</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">limite</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="nx">desde</span><span class="p">(</span><span class="nx">datos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tarea</span><span class="p">(</span><span class="nx">datos</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Fechas de calendario y <code>toISOString()</code></p>
+<p><code>toISOString()</code> convierte a <strong>UTC</strong>: una fecha del 23 a medianoche en España sale como <code>"2026-10-22T22:00:00.000Z"</code>, <strong>el día anterior</strong>. Para guardar una fecha de calendario, formátala en hora local (como <code>fechaISO</code>).</p>
+</div>
+<h3 id="75-limites-y-seguridad">7.5. Límites y seguridad</h3>
+<ul>
+<li>Unos <strong>5 MB por origen</strong>: si se llena, <code>setItem</code> lanza <strong><code>QuotaExceededError</code></strong> (usa <code>try/catch</code> al guardar).</li>
+<li>Es <strong>síncrono</strong>: no guardes mucho en cada tecla.</li>
+<li><strong>No es privado</strong>: cualquier script de la página lo lee; con un XSS (UD5) se lo llevan todo. <strong>Nunca</strong> tokens de sesión ni contraseñas: la sesión va en cookies <code>HttpOnly</code>, que pone el servidor y JavaScript no puede leer.</li>
+<li>No se sincroniza entre dispositivos y se puede borrar (el usuario, el modo incógnito, el navegador por falta de espacio).</li>
+</ul>
+<h3 id="76-el-evento-storage-sincronizar-pestanas">7.6. El evento <code>storage</code>: sincronizar pestañas</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;storage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;tablero:tareas&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">tablero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cargarTablero</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Salta en las <strong>otras</strong> pestañas del mismo origen cuando una cambia <code>localStorage</code> (nunca en la que hace el cambio). <code>e.key</code>, <code>e.oldValue</code> y <code>e.newValue</code> dicen qué cambió.</p>
+<hr />
+<h2 id="8-modulos-y-vite">8. Módulos y Vite <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m13.78 15.3 6 6 2.11-2.16-6-6zm3.72-5.2c-.39 0-.81-.05-1.14-.19L4.97 21.25l-2.11-2.11 7.41-7.4L8.5 9.96l-.72.7-1.45-1.41v2.86l-.7.7-3.52-3.56.7-.7h2.81l-1.4-1.41 3.56-3.56a2.976 2.976 0 0 1 4.22 0L9.89 5.74l1.41 1.4-.71.71 1.79 1.78 1.82-1.88c-.14-.33-.2-.75-.2-1.12a3.49 3.49 0 0 1 3.5-3.52c.59 0 1.11.14 1.58.42L16.41 6.2l1.5 1.5 2.67-2.67c.28.47.42.97.42 1.6 0 1.92-1.55 3.47-3.5 3.47"/></svg></span></h2>
+<h3 id="81-modulos-es">8.1. Módulos ES</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// api.js</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/datos&quot;</span><span class="p">;</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* … */</span><span class="w"> </span><span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Api</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* … */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// main.js</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Api</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getJSON</span><span class="p">,</span><span class="w"> </span><span class="nx">BASE</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./api.js&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">api</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./api.js&quot;</span><span class="p">;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Qué implica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ámbito propio</td>
+<td>Nada es global: lo que no exportas no sale del fichero</td>
+</tr>
+<tr>
+<td>Modo estricto siempre</td>
+<td><code>this</code> suelto es <code>undefined</code>; asignar a algo congelado lanza (UD4)</td>
+</tr>
+<tr>
+<td>Se ejecutan una sola vez</td>
+<td>Importar el mismo módulo en cinco sitios es <strong>una</strong> instancia</td>
+</tr>
+<tr>
+<td>Diferidos</td>
+<td>Esperan al árbol (UD5) y admiten <code>await</code> en el nivel superior</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-desarrollo-frente-a-produccion">8.2. Desarrollo frente a producción</h3>
+<table>
+<thead>
+<tr>
+<th>Orden (con Docker)</th>
+<th>Qué hace</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker compose up</code> (<code>npm run dev</code>)</td>
+<td>Servidor de desarrollo con recarga instantánea (HMR)</td>
+<td>Mientras programas</td>
+</tr>
+<tr>
+<td><code>docker compose run --rm web npm run build</code></td>
+<td>Crea <strong><code>dist/</code></strong>: código junto, minificado y con huellas en los nombres (<code>index-4f2a.js</code>)</td>
+<td>Antes de publicar</td>
+</tr>
+<tr>
+<td><code>docker compose run --rm web npm run preview</code></td>
+<td>Sirve <code>dist/</code> para probarlo como en producción (puerto 4173)</td>
+<td>Comprobar el build</td>
+</tr>
+</tbody>
+</table>
+<p><code>dist/</code> no se edita a mano ni se sube a Git: se vuelve a generar. Lo que se publica en un servidor estático es <code>dist/</code>. Las huellas en los nombres sirven para la caché: si el fichero cambia, cambia su nombre.</p>
+<h3 id="83-variables-de-entorno">8.3. Variables de entorno</h3>
+<div class="highlight"><pre><span></span><code># .env.development
+VITE_API_URL=http://localhost:3000/api
+
+# .env.production
+VITE_API_URL=https://api.miweb.es
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_API_URL</span><span class="p">;</span>
+<span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MODE</span><span class="p">;</span><span class="w">   </span><span class="c1">// &quot;development&quot; o &quot;production&quot;</span>
+<span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DEV</span><span class="p">;</span><span class="w">    </span><span class="c1">// true con npm run dev</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Las variables <code>VITE_</code> no son secretas</p>
+<p>Solo las que empiezan por <code>VITE_</code> llegan al código del navegador, y Vite copia su valor <strong>dentro del JavaScript de <code>dist/</code></strong>: cualquiera las lee. Nunca claves de API privadas ni contraseñas en el frontend.</p>
+</div>
+<h3 id="84-public-datos-de-prueba-sin-servidor">8.4. <code>public/</code>: datos de prueba sin servidor</h3>
+<div class="highlight"><pre><span></span><code>mi-proyecto/
+├── index.html
+├── public/
+│   └── datos/
+│       └── peliculas.json     → se pide como fetch(&quot;/datos/peliculas.json&quot;)
+└── src/
+    ├── api.js
+    └── main.js
+</code></pre></div>
+<p>Lo que hay en <code>public/</code> se sirve en la raíz y se copia tal cual a <code>dist/</code>. Con un JSON ahí practicas <code>fetch</code>, estados y errores; el día que exista la API de verdad, solo cambia la URL.</p>
+<h3 id="85-import-dinamico">8.5. Import dinámico</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">botonEstadisticas</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">pintarGrafica</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s2">&quot;./graficas.js&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// se descarga la primera vez</span>
+<span class="w">  </span><span class="nx">pintarGrafica</span><span class="p">(</span><span class="nx">tablero</span><span class="p">.</span><span class="nx">resumen</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><code>import()</code> devuelve una <strong>promesa</strong> con el módulo. En el build, <code>graficas.js</code> va en un fichero aparte (<em>code splitting</em>), así la primera carga es más ligera.</p>
+<hr />
+<h2 id="9-verificar-devtools">9. Verificar: DevTools <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Network → Fetch/XHR</strong></td>
+<td>Cada petición: método, código, tamaño y tiempo</td>
+</tr>
+<tr>
+<td>Clic en una petición</td>
+<td><strong>Headers</strong> (lo enviado), <strong>Preview / Response</strong> (lo recibido)</td>
+</tr>
+<tr>
+<td><strong>Throttling: Slow 4G</strong></td>
+<td>Simular una red lenta: ¿se ve el «Cargando…»?</td>
+</tr>
+<tr>
+<td><strong>Throttling: Offline</strong></td>
+<td>Sin red: ¿sale el error con «Reintentar»?</td>
+</tr>
+<tr>
+<td><strong>Disable cache</strong></td>
+<td>No usar respuestas guardadas mientras programas</td>
+</tr>
+<tr>
+<td><strong>Application → Local Storage</strong></td>
+<td>Ver, editar y borrar claves (prueba a meter un JSON corrupto)</td>
+</tr>
+<tr>
+<td><strong>Console</strong></td>
+<td><code>Uncaught (in promise)</code> = una promesa rechazada sin <code>catch</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-errores-comunes">10. Errores comunes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Síntoma</th>
+<th>Arreglo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Olvidar <code>await</code></td>
+<td><code>Promise {&lt;pending&gt;}</code> en vez del valor</td>
+<td><code>const d = await getJSON(url);</code></td>
+</tr>
+<tr>
+<td><code>then</code> con llaves sin <code>return</code></td>
+<td>El siguiente recibe <code>undefined</code></td>
+<td><code>.then((r) =&gt; r.json())</code></td>
+</tr>
+<tr>
+<td><code>await</code> dentro de <code>forEach</code></td>
+<td>No espera; los errores se pierden</td>
+<td><code>for…of</code> o <code>Promise.all(map)</code></td>
+</tr>
+<tr>
+<td>Sin <code>catch</code></td>
+<td><code>Uncaught (in promise)</code>, interfaz colgada</td>
+<td><code>try/catch</code> o <code>.catch(…)</code></td>
+</tr>
+<tr>
+<td>Confiar en que <code>fetch</code> falla con un 404</td>
+<td><code>SyntaxError: Unexpected token '&lt;'</code></td>
+<td><code>if (!r.ok) throw …</code> y mirar el <code>Content-Type</code></td>
+</tr>
+<tr>
+<td><code>body: datos</code></td>
+<td>Se envía <code>[object Object]</code></td>
+<td><code>body: JSON.stringify(datos)</code></td>
+</tr>
+<tr>
+<td><code>setItem("t", tareas)</code></td>
+<td>Se guarda <code>[object Object]</code></td>
+<td><code>setItem("t", JSON.stringify(tareas))</code></td>
+</tr>
+<tr>
+<td><code>JSON.parse</code> sin protección</td>
+<td>Un dato corrupto impide arrancar</td>
+<td><code>try { … } catch { valor por defecto }</code></td>
+</tr>
+<tr>
+<td>Guardar una clase con <code>JSON.stringify</code></td>
+<td>Faltan datos (<code>#privados</code>) y métodos</td>
+<td><code>toJSON()</code> + <code>static desde(datos)</code></td>
+</tr>
+<tr>
+<td>Un token en <code>localStorage</code> o en <code>VITE_</code></td>
+<td>Lo puede leer cualquiera</td>
+<td>Cookies <code>HttpOnly</code> / un servidor intermediario</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-ejercicio-practico-guiado-cartelera-de-cine">11. Ejercicio práctico guiado: cartelera de cine <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span></h2>
+<p>Proyecto Vite en Docker con esta estructura:</p>
+<div class="highlight"><pre><span></span><code>public/datos/peliculas.json   8 películas: id, titulo, año, genero, duracion
+src/api.js                    getJSON(url, opciones) · postJSON(url, datos) · comprobar ok y Content-Type
+src/almacen.js                cargarFavoritos() → Set · guardarFavoritos(set) · con try/catch
+src/vista.js                  pintar(estado): cargando · error con «Reintentar» · vacío · datos (template de la UD5)
+src/main.js                   estado = { cargando, error, peliculas, favoritos } · async cargar() · delegación
+</code></pre></div>
+<ol>
+<li><strong>Cargar</strong> la cartelera con <code>getJSON("/datos/peliculas.json")</code>.</li>
+<li><strong>Estados</strong>: «Cargando…» con <code>aria-busy</code>, error con botón «Reintentar», «No hay películas» y la lista.</li>
+<li><strong>Favoritos</strong>: una ★ por película (con <code>aria-pressed</code>) que se guarda en <code>localStorage</code> y sigue tras recargar.</li>
+<li><strong>Valorar</strong>: un botón que envía <code>{ peliculaId, nota: 5 }</code> con <code>POST</code> a <code>https://jsonplaceholder.typicode.com/posts</code> y muestra la respuesta (201) o el error.</li>
+<li><strong>Comprobar</strong>: con Slow 4G, con Offline, con una URL mal escrita y con un JSON corrupto en Application.</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Criterio de éxito</p>
+<p>Se ve el «Cargando…» con la red lenta; sale un error legible sin red o con una URL mala, y «Reintentar» funciona; los favoritos siguen tras recargar; y un JSON corrupto en <code>localStorage</code> no rompe la página.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Si terminas</p>
+<p>Un buscador con <em>debounce</em> de 300 ms que filtre la cartelera, y un parámetro <code>?lento</code> en la URL que haga <code>await esperar(1500)</code> antes de cargar.</p>
+</div>
+<hr />
+<h2 id="12-comprueba-lo-aprendido">12. Comprueba lo aprendido <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3c3.88 0 7 3.14 7 7 0 2.8-1.63 5.19-4 6.31V21H9v-3H8c-1.11 0-2-.89-2-2v-3H4.5c-.42 0-.66-.5-.42-.81L6 9.66A7.003 7.003 0 0 1 13 3m-2.68 4.39h1.93c.01-.3.1-.53.28-.69a1 1 0 0 1 .66-.23c.31 0 .57.1.75.28.18.19.26.45.26.75 0 .32-.07.59-.23.82-.14.23-.35.43-.61.59-.51.34-.86.64-1.05.91-.2.26-.31.68-.31 1.18h2c0-.31.04-.56.13-.74.09-.19.26-.36.51-.52.45-.24.82-.53 1.11-.93s.44-.81.44-1.31c0-.76-.27-1.37-.81-1.82-.53-.45-1.26-.68-2.19-.68-.87 0-1.57.2-2.11.59-.52.41-.78.98-.77 1.77zM12 14h2v-2h-2zm1-13C8.41 1 4.61 4.42 4.06 8.9L2.5 11h-.03l-.02.03c-.55.76-.62 1.76-.19 2.59.36.69 1 1.17 1.74 1.32V16c0 1.85 1.28 3.42 3 3.87V23h11v-5.5c2.5-1.67 4-4.44 4-7.5 0-4.97-4.04-9-9-9"/></svg></span></h2>
+<details class="question">
+<summary>1. ¿En qué orden sale esto? <code>console.log(1); setTimeout(() =&gt; console.log(2)); Promise.resolve().then(() =&gt; console.log(3)); console.log(4);</code></summary>
+<p><code>1 4 3 2</code>: primero el código síncrono, luego las microtareas (<code>then</code>) y después las tareas (<code>setTimeout</code>).</p>
+</details>
+<details class="question">
+<summary>2. ¿Por qué un <code>await</code> no congela la página y un <code>while</code> de 3 segundos sí?</summary>
+<p><code>await</code> pausa solo esa función y devuelve el control al event loop, que sigue atendiendo eventos y pintando. El <code>while</code> ocupa la pila de llamadas y el navegador no puede hacer nada hasta que termina.</p>
+</details>
+<details class="question">
+<summary>3. <code>fetch</code> a una URL que no existe responde 404. ¿Se ejecuta el <code>catch</code>? ¿Qué hay que añadir?</summary>
+<p>No: <code>fetch</code> se cumple con una respuesta con <code>ok: false</code>. Hay que comprobar <code>if (!r.ok) throw new Error(…)</code>. Y en el servidor de desarrollo de Vite ni siquiera hay 404 (devuelve el <code>index.html</code>), por eso conviene mirar también el <code>Content-Type</code>.</p>
+</details>
+<details class="question">
+<summary>4. Dos peticiones independientes de 1 s y 0,5 s: ¿cuánto tarda con dos <code>await</code> seguidos? ¿Y con <code>Promise.all</code>?</summary>
+<p>Unos 1,5 s en serie y 1 s con <code>Promise.all</code>, que espera a todas a la vez y tarda lo que la más lenta.</p>
+</details>
+<details class="question">
+<summary>5. ¿Qué pierdes al guardar una instancia de una clase con <code>JSON.stringify</code> y recuperarla con <code>JSON.parse</code>? ¿Cómo lo arreglas?</summary>
+<p>Los <code>#privados</code>, los métodos y el tipo: vuelve un objeto normal. Con <code>toJSON()</code> decides qué datos se guardan y con <code>static desde(datos)</code> creas una instancia nueva con <code>new</code>, que además vuelve a validar.</p>
+</details>
+<details class="question">
+<summary>6. ¿Qué imprime <code>localStorage.setItem("n", 1); console.log(localStorage.getItem("n") + 1)</code>?</summary>
+<p><code>"11"</code>: <code>localStorage</code> guarda strings, y <code>"1" + 1</code> concatena.</p>
+</details>
+<details class="question">
+<summary>7. ¿Por qué no se deben guardar tokens de sesión en <code>localStorage</code>?</summary>
+<p>Porque cualquier script de la página puede leerlo: un ataque XSS se los llevaría. La sesión se guarda en cookies <code>HttpOnly</code>, que JavaScript no puede leer.</p>
+</details>
+<details class="question">
+<summary>8. ¿Qué es CORS y quién lo arregla?</summary>
+<p>Una protección del navegador que impide leer respuestas de otro origen salvo que el servidor lo permita con la cabecera <code>Access-Control-Allow-Origin</code>. Lo arregla el servidor (o un proxy en desarrollo), no el frontend.</p>
+</details>
+<details class="question">
+<summary>9. ¿Para qué sirve <code>AbortController</code> en un buscador?</summary>
+<p>Para cancelar la petición anterior cuando el usuario sigue escribiendo, y evitar que una respuesta vieja llegue tarde y pise a la buena.</p>
+</details>
+<details class="question">
+<summary>10. ¿Son secretas las variables <code>VITE_</code> del <code>.env</code>?</summary>
+<p>No: Vite copia su valor dentro del JavaScript de <code>dist/</code>, que cualquiera puede leer.</p>
+</details>
+<hr />
+<h2 id="13-glosario">13. Glosario <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.81 2C4.83 2.09 4 3 4 4v16c0 1.05.95 2 2 2h12c1.05 0 2-.95 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H5.81M12 13h1a1 1 0 0 1 1 1v4h-1v-2h-1v2h-1v-4a1 1 0 0 1 1-1m0 1v1h1v-1zm3 1h3v1l-2 3h2v1h-3v-1l2-3h-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Síncrono / asíncrono</strong></td>
+<td>Esperar a que termine cada instrucción / iniciar una operación y recibir su resultado más tarde</td>
+</tr>
+<tr>
+<td><strong>Pila de llamadas</strong></td>
+<td>Funciones en ejecución, una encima de otra</td>
+</tr>
+<tr>
+<td><strong>Web APIs</strong></td>
+<td>Funciones del navegador (red, temporizadores, DOM) que trabajan fuera del hilo de JavaScript</td>
+</tr>
+<tr>
+<td><strong>Event loop</strong></td>
+<td>Bucle que pasa los callbacks de las colas a la pila cuando está vacía</td>
+</tr>
+<tr>
+<td><strong>Microtarea / tarea</strong></td>
+<td><code>then</code>/<code>await</code> (van primero) / temporizadores y eventos</td>
+</tr>
+<tr>
+<td><strong>Callback</strong></td>
+<td>Función que se pasa para que otra la llame</td>
+</tr>
+<tr>
+<td><strong>Promesa</strong></td>
+<td>Objeto con el resultado futuro de una operación: pendiente, cumplida o rechazada</td>
+</tr>
+<tr>
+<td><strong><code>async</code> / <code>await</code></strong></td>
+<td>Función que devuelve una promesa / pausa la función hasta resolverla</td>
+</tr>
+<tr>
+<td><strong><code>Promise.all</code></strong></td>
+<td>Espera a todas las promesas; falla si falla una</td>
+</tr>
+<tr>
+<td><strong>HTTP</strong></td>
+<td>Protocolo de petición y respuesta de la web</td>
+</tr>
+<tr>
+<td><strong>Código de estado</strong></td>
+<td>Número de la respuesta: 2xx bien, 4xx petición, 5xx servidor</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>Formato de texto para intercambiar datos</td>
+</tr>
+<tr>
+<td><strong><code>fetch</code></strong></td>
+<td>API del navegador para hacer peticiones HTTP</td>
+</tr>
+<tr>
+<td><strong><code>response.ok</code></strong></td>
+<td><code>true</code> si el código está entre 200 y 299</td>
+</tr>
+<tr>
+<td><strong><code>AbortController</code></strong></td>
+<td>Permite cancelar una petición</td>
+</tr>
+<tr>
+<td><strong>Debounce</strong></td>
+<td>Esperar a que el usuario deje de escribir antes de actuar</td>
+</tr>
+<tr>
+<td><strong>Origen / CORS</strong></td>
+<td>Protocolo + dominio + puerto / permiso del servidor para leer desde otro origen</td>
+</tr>
+<tr>
+<td><strong><code>localStorage</code></strong></td>
+<td>Almacén clave → string del navegador que se conserva al cerrar</td>
+</tr>
+<tr>
+<td><strong><code>toJSON</code> / rehidratar</strong></td>
+<td>Decidir cómo se serializa un objeto / reconstruir instancias a partir de datos</td>
+</tr>
+<tr>
+<td><strong>Módulo ES</strong></td>
+<td>Fichero con ámbito propio que comparte con <code>export</code> / <code>import</code></td>
+</tr>
+<tr>
+<td><strong>Build</strong></td>
+<td>Preparar el código para producción (<code>dist/</code>)</td>
+</tr>
+<tr>
+<td><strong><code>import.meta.env</code></strong></td>
+<td>Variables de entorno (las <code>VITE_</code>) disponibles en el código</td>
+</tr>
+<tr>
+<td><strong><code>import()</code></strong></td>
+<td>Carga un módulo bajo demanda y devuelve una promesa</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-resumen-y-conexion-con-la-siguiente-unidad">14. Resumen y conexión con la siguiente unidad <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></h2>
+<ul>
+<li>JavaScript tiene <strong>un hilo</strong>: lo lento se pide y llega después gracias al <strong>event loop</strong>. Orden: <strong>síncrono → microtareas → tareas</strong>.</li>
+<li><strong>Promesas</strong> y <strong><code>async/await</code></strong> con <code>try/catch</code>; <strong><code>Promise.all</code></strong> si las operaciones son independientes.</li>
+<li><strong><code>fetch</code> no falla con un 404</strong>: comprueba <code>response.ok</code> (y el <code>Content-Type</code>). Programa los <strong>cuatro estados</strong> de la interfaz.</li>
+<li><strong><code>localStorage</code></strong>: strings, JSON, <code>try/catch</code>, <code>toJSON</code> + <code>desde</code> para las clases, y <strong>nunca secretos</strong>.</li>
+<li><strong>Vite</strong>: <code>dev</code> para trabajar, <code>build</code> para publicar <code>dist/</code>, <code>.env</code> con <code>VITE_</code> (públicas) y <code>public/</code> para datos de prueba.</li>
+</ul>
+<p><strong>Siguiente: UD7 · React.</strong> El <code>render()</code> que hacías a mano, automático; componentes en lugar de <code>crearItem</code>; y por debajo, el mismo DOM, los mismos eventos y el mismo <code>fetch</code>.</p>
+<hr />
+<h2 id="15-referencias-y-fuentes">15. Referencias y fuentes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg></span></h2>
+<ul>
+<li>MDN Web Docs — <a href="https://developer.mozilla.org/es/docs/Learn_web_development/Extensions/Async_JS">JavaScript asíncrono</a>, <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Using_promises">Usar promesas</a>, <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/async_function"><code>async function</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model">El event loop</a>.</li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch">Usar Fetch</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"><code>AbortController</code></a>, <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Guides/CORS">CORS</a>, <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status">Códigos de estado HTTP</a>.</li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Web/API/Web_Storage_API">Web Storage API</a> y <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify</code></a>.</li>
+<li>Vite — <a href="https://vite.dev/guide/env-and-mode">Variables de entorno y modos</a>, <a href="https://vite.dev/guide/assets#the-public-directory">Carpeta <code>public</code></a>, <a href="https://vite.dev/guide/build">Construir para producción</a>.</li>
+<li>Philip Roberts — <a href="http://latentflip.com/loupe/">Loupe</a>, visualización del event loop.</li>
+<li>OWASP — <a href="https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html#local-storage">HTML5 Security Cheat Sheet: Local Storage</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

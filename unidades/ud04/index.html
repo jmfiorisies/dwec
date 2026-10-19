@@ -12,6 +12,8 @@
         <link rel="prev" href="../ud03-2-bateria-repaso/">
       
       
+        <link rel="next" href="../ud05/">
+      
       
         
       
@@ -1119,6 +1121,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1905,11 +1963,11 @@
 <h2 id="2-objetos-literales-pares-clave-valor">2. Objetos literales: pares clave → valor <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg></span></h2>
 <p>Un <strong>objeto</strong> es una colección de <strong>propiedades</strong>; cada propiedad es un par <strong>clave → valor</strong>. Las claves son siempre <code>string</code> (o <code>Symbol</code>); los valores pueden ser cualquier cosa. Cuando el valor es una función, la propiedad se llama <strong>método</strong>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">31</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">activo</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"editor"</span><span class="p">,</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">],</span><span class="w">      </span><span class="c1">// un array también es un objeto</span>
-<span class="w">  </span><span class="nx">direccion</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">"Sevilla"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// objeto anidado</span>
+<span class="w">  </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;editor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">],</span><span class="w">      </span><span class="c1">// un array también es un objeto</span>
+<span class="w">  </span><span class="nx">direccion</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sevilla&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// objeto anidado</span>
 <span class="w">  </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                       </span><span class="c1">// método (sintaxis corta, ES2015)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="w">  </span><span class="p">},</span>
@@ -1941,21 +1999,21 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">campo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"email"</span><span class="p">;</span>
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">campo</span><span class="p">;</span><span class="w">           </span><span class="c1">// undefined → busca una clave llamada literalmente "campo"</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">campo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">;</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">campo</span><span class="p">;</span><span class="w">           </span><span class="c1">// undefined → busca una clave llamada literalmente &quot;campo&quot;</span>
 <span class="nx">usuario</span><span class="p">[</span><span class="nx">campo</span><span class="p">];</span><span class="w">          </span><span class="c1">// como usuario.email → lo de dentro se EVALÚA</span>
-<span class="nx">usuario</span><span class="p">[</span><span class="s2">"fecha-alta"</span><span class="p">];</span><span class="w">   </span><span class="c1">// con guion: solo con corchetes</span>
+<span class="nx">usuario</span><span class="p">[</span><span class="s2">&quot;fecha-alta&quot;</span><span class="p">];</span><span class="w">   </span><span class="c1">// con guion: solo con corchetes</span>
 
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">telefono</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"600 000 000"</span><span class="p">;</span><span class="w"> </span><span class="c1">// añade</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">telefono</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;600 000 000&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// añade</span>
 <span class="nx">usuario</span><span class="p">.</span><span class="nx">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">32</span><span class="p">;</span><span class="w">                </span><span class="c1">// cambia</span>
 <span class="ow">delete</span><span class="w"> </span><span class="nx">usuario</span><span class="p">.</span><span class="nx">activo</span><span class="p">;</span><span class="w">            </span><span class="c1">// borra</span>
 <span class="nx">usuario</span><span class="p">.</span><span class="nx">dni</span><span class="p">;</span><span class="w">                      </span><span class="c1">// undefined: leer algo que no existe NO da error</span>
 <span class="nx">usuario</span><span class="p">.</span><span class="nx">dni</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">               </span><span class="c1">// ✗ TypeError: el error llega al acceder a undefined.algo</span>
 </code></pre></div>
 <p>Atajos al crear (ES2015):</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Luis"</span><span class="p">;</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">campo</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="s2">"l@x.es"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// propiedad abreviada + clave calculada</span>
-<span class="c1">// { nombre: "Luis", email: "l@x.es" }</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Luis&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">campo</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;l@x.es&quot;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// propiedad abreviada + clave calculada</span>
+<span class="c1">// { nombre: &quot;Luis&quot;, email: &quot;l@x.es&quot; }</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Ya lo conoces de la UD3</p>
@@ -1988,14 +2046,14 @@
     a["const a"] --&gt; O1["{ precio: 99 }"]
     b["const b = a"] --&gt; O1
     c["const c = { ...a }"] --&gt; O2["{ precio: 99 → 5 } (objeto nuevo)"]</code></pre>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">"Sevilla"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ciudad</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sevilla&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w">            </span><span class="c1">// copia la FLECHA: mismo objeto</span>
 <span class="nx">b</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">99</span><span class="p">;</span>
 <span class="nx">a</span><span class="p">.</span><span class="nx">precio</span><span class="p">;</span><span class="w">               </span><span class="c1">// 99</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">a</span><span class="w"> </span><span class="p">};</span><span class="w">     </span><span class="c1">// objeto NUEVO, copia SUPERFICIAL</span>
 <span class="nx">c</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span><span class="w">           </span><span class="c1">// a no cambia</span>
-<span class="nx">c</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cádiz"</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡a.dir.ciudad también! dir sigue compartido</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Cádiz&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡a.dir.ciudad también! dir sigue compartido</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2038,15 +2096,15 @@
 <p>Un objeto no tiene <code>map</code> ni <code>filter</code>, pero tres métodos estáticos lo convierten en array:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="nx">raton</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">monitor</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="w"> </span><span class="p">};</span>
 
-<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w">    </span><span class="c1">// ["teclado", "raton", "monitor"]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w">    </span><span class="c1">// [&quot;teclado&quot;, &quot;raton&quot;, &quot;monitor&quot;]</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w">  </span><span class="c1">// [12, 0, 4]</span>
-<span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w"> </span><span class="c1">// [["teclado", 12], ["raton", 0], ["monitor", 4]]</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">stock</span><span class="p">);</span><span class="w"> </span><span class="c1">// [[&quot;teclado&quot;, 12], [&quot;raton&quot;, 0], [&quot;monitor&quot;, 4]]</span>
 
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">prod</span><span class="p">,</span><span class="w"> </span><span class="nx">uds</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">stock</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">prod</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">uds</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">agotados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">).</span><span class="nx">filter</span><span class="p">((</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">stock</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// ["raton"]</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">agotados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">stock</span><span class="p">).</span><span class="nx">filter</span><span class="p">((</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">stock</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// [&quot;raton&quot;]</span>
 
 <span class="c1">// Transformar un objeto entero: entries → map → fromEntries</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">precios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="o">:</span><span class="w"> </span><span class="mf">50</span><span class="p">,</span><span class="w"> </span><span class="nx">raton</span><span class="o">:</span><span class="w"> </span><span class="mf">15</span><span class="w"> </span><span class="p">};</span>
@@ -2093,12 +2151,12 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">iva</span><span class="o">:</span><span class="w"> </span><span class="mf">0.21</span><span class="p">,</span><span class="w"> </span><span class="nx">moneda</span><span class="o">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w"> </span><span class="p">});</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">iva</span><span class="o">:</span><span class="w"> </span><span class="mf">0.21</span><span class="p">,</span><span class="w"> </span><span class="nx">moneda</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="w"> </span><span class="p">});</span>
 <span class="nx">CONFIG</span><span class="p">.</span><span class="nx">iva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// en un módulo (Vite): TypeError; fuera de modo estricto: se ignora en silencio</span>
 <span class="nx">CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span><span class="w">      </span><span class="c1">// TypeError: Assignment to constant variable</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">cp</span><span class="o">:</span><span class="w"> </span><span class="s2">"41001"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
-<span class="nx">datos</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"28001"</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡funciona! freeze es SUPERFICIAL</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">({</span><span class="w"> </span><span class="nx">dir</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">cp</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;41001&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">datos</span><span class="p">.</span><span class="nx">dir</span><span class="p">.</span><span class="nx">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;28001&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// ¡funciona! freeze es SUPERFICIAL</span>
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Modo estricto</p>
@@ -2116,8 +2174,8 @@
 <span class="w">    </span><span class="p">},</span>
 <span class="w">  </span><span class="p">};</span>
 <span class="p">}</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">"Luis"</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearUsuario</span><span class="p">(</span><span class="s2">&quot;Luis&quot;</span><span class="p">);</span>
 <span class="nx">u1</span><span class="p">.</span><span class="nx">saludar</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">u2</span><span class="p">.</span><span class="nx">saludar</span><span class="p">;</span><span class="w"> </span><span class="c1">// false → cada objeto lleva SU copia de la función</span>
 </code></pre></div>
 <p>…pero cada objeto lleva su propia copia de <code>saludar</code>: mil usuarios, mil funciones idénticas. JavaScript resuelve esto con los <strong>prototipos</strong>.</p>
@@ -2128,8 +2186,8 @@
     OP --&gt;|"[[Prototype]]"| N["null"]
     L["lista = [1, 2]"] --&gt;|"[[Prototype]]"| AP["Array.prototype&lt;br/&gt;map, filter, reduce…"]
     AP --&gt;|"[[Prototype]]"| OP</code></pre>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">31</span><span class="w"> </span><span class="p">};</span>
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                                   </span><span class="c1">// "[object Object]" — ¿de dónde sale?</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">edad</span><span class="o">:</span><span class="w"> </span><span class="mf">31</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                                   </span><span class="c1">// &quot;[object Object]&quot; — ¿de dónde sale?</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">usuario</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="w">  </span><span class="c1">// true: de ahí</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">([</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">])</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="w">    </span><span class="c1">// true: por eso todos los arrays tienen map</span>
 </code></pre></div>
@@ -2144,10 +2202,10 @@
 <li>Si tampoco, sube al prototipo del prototipo…</li>
 <li>Si llega a <code>null</code> sin encontrarla → <code>undefined</code>.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="s2">"nombre"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">                </span><span class="c1">// true</span>
-<span class="s2">"toString"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">              </span><span class="c1">// true (heredada): in mira toda la cadena</span>
-<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">"nombre"</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
-<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">"toString"</span><span class="p">);</span><span class="w"> </span><span class="c1">// false: hasOwn solo mira el propio objeto</span>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;nombre&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">                </span><span class="c1">// true</span>
+<span class="s2">&quot;toString&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w">              </span><span class="c1">// true (heredada): in mira toda la cadena</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nombre&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;toString&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// false: hasOwn solo mira el propio objeto</span>
 </code></pre></div>
 <p><strong>Sombreado (<em>shadowing</em>)</strong>: si el objeto tiene una propiedad propia con el mismo nombre que una heredada, se encuentra la propia primero. Así se «sobrescribe» un método heredado.</p>
 <div class="admonition warning">
@@ -2164,8 +2222,8 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">"David"</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Hola, soy David"</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">&quot;David&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w"> </span><span class="c1">// &quot;Hola, soy David&quot;</span>
 </code></pre></div>
 <p>Lo que hace <code>new Persona("David", 30)</code>:</p>
 <ol>
@@ -2225,9 +2283,9 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="p">};</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">gato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">animal</span><span class="p">);</span><span class="w"> </span><span class="c1">// gato → animal</span>
-<span class="nx">gato</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Misi"</span><span class="p">;</span>
-<span class="nx">gato</span><span class="p">.</span><span class="nx">sonido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"miau"</span><span class="p">;</span>
-<span class="nx">gato</span><span class="p">.</span><span class="nx">describir</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Misi hace miau"</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Misi&quot;</span><span class="p">;</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">sonido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;miau&quot;</span><span class="p">;</span>
+<span class="nx">gato</span><span class="p">.</span><span class="nx">describir</span><span class="p">();</span><span class="w"> </span><span class="c1">// &quot;Misi hace miau&quot;</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2291,7 +2349,7 @@
 <h2 id="7-clases">7. Clases <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 13.5v8H3v-8zm-2 2H5v4h4zM12 2l5.5 9h-11zm0 3.86L10.08 9h3.84zM17.5 13c2.5 0 4.5 2 4.5 4.5S20 22 17.5 22 13 20 13 17.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg></span></h2>
 <h3 id="71-anatomia-de-una-clase">7.1. Anatomía de una clase</h3>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"general"</span><span class="p">;</span><span class="w">        </span><span class="c1">// ① campo público (uno por instancia)</span>
+<span class="w">  </span><span class="nx">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;general&quot;</span><span class="p">;</span><span class="w">        </span><span class="c1">// ① campo público (uno por instancia)</span>
 
 <span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// ② constructor: se ejecuta solo con new</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span>
@@ -2303,7 +2361,7 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span><span class="w"> </span><span class="c1">// ④ instancia</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span><span class="w"> </span><span class="c1">// ④ instancia</span>
 </code></pre></div>
 <pre class="mermaid"><code>classDiagram
     class Producto {
@@ -2317,10 +2375,10 @@
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Producto</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">nombre</span><span class="o">?</span><span class="p">.</span><span class="nx">trim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"El nombre es obligatorio"</span><span class="p">);</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;El nombre es obligatorio&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Precio negativo"</span><span class="p">);</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">&quot;Precio negativo&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">precio</span><span class="p">;</span>
@@ -2328,9 +2386,9 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✓</span>
-<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">      </span><span class="c1">// ✗ Error: El nombre es obligatorio</span>
-<span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✗ TypeError: Class constructor Producto cannot be invoked without 'new'</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Ratón&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✓</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">      </span><span class="c1">// ✗ Error: El nombre es obligatorio</span>
+<span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Ratón&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✗ TypeError: Class constructor Producto cannot be invoked without &#39;new&#39;</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Las clases no se elevan (<em>hoisting</em>)</p>
@@ -2351,7 +2409,7 @@
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="nx">set</span><span class="w"> </span><span class="nx">precio</span><span class="p">(</span><span class="nx">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">valor</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Precio negativo"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">valor</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">&quot;Precio negativo&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">#precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">valor</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 
@@ -2360,7 +2418,7 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">50</span><span class="p">);</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="p">;</span><span class="w">            </span><span class="c1">// 50       → get precio()</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20</span><span class="p">;</span><span class="w">       </span><span class="c1">// ✓        → set precio(20)</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">5</span><span class="p">;</span><span class="w">       </span><span class="c1">// ✗ RangeError</span>
@@ -2390,14 +2448,14 @@
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="n">#validar</span><span class="p">(</span><span class="nx">cantidad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// método privado</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">"Cantidad no válida"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cantidad</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">RangeError</span><span class="p">(</span><span class="s2">&quot;Cantidad no válida&quot;</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">cuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="p">(</span><span class="s2">"Marcos"</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">cuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CuentaBancaria</span><span class="p">(</span><span class="s2">&quot;Marcos&quot;</span><span class="p">);</span>
 <span class="nx">cuenta</span><span class="p">.</span><span class="nx">ingresar</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
 <span class="nx">cuenta</span><span class="p">.</span><span class="nx">saldo</span><span class="p">;</span><span class="w">         </span><span class="c1">// 100</span>
-<span class="nx">cuenta</span><span class="p">.</span><span class="n">#saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✗ SyntaxError: Private field '#saldo' must be declared in an enclosing class</span>
+<span class="nx">cuenta</span><span class="p">.</span><span class="n">#saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span><span class="w">  </span><span class="c1">// ✗ SyntaxError: Private field &#39;#saldo&#39; must be declared in an enclosing class</span>
 </code></pre></div>
 <h3 id="75-tres-formas-de-privado">7.5. Tres formas de «privado»</h3>
 <table>
@@ -2469,7 +2527,7 @@
 
 <span class="nx">Pedido</span><span class="p">.</span><span class="nx">IVA</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 0.21</span>
 <span class="ow">new</span><span class="w"> </span><span class="nx">Pedido</span><span class="p">([]).</span><span class="nx">IVA</span><span class="p">;</span><span class="w">            </span><span class="c1">// undefined: no es de la instancia</span>
-<span class="nx">Pedido</span><span class="p">.</span><span class="nx">desdeJSON</span><span class="p">(</span><span class="s1">'{"lineas":[]}'</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
+<span class="nx">Pedido</span><span class="p">.</span><span class="nx">desdeJSON</span><span class="p">(</span><span class="s1">&#39;{&quot;lineas&quot;:[]}&#39;</span><span class="p">).</span><span class="nx">id</span><span class="p">;</span>
 </code></pre></div>
 <p>Usos típicos: constantes, contadores, <strong>métodos fábrica</strong>, utilidades. <code>Math.max</code>, <code>Date.now</code>, <code>Object.keys</code> o <code>Number.isNaN</code> son métodos estáticos.</p>
 <div class="admonition tip">
@@ -2485,7 +2543,7 @@
 <span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Temporizador</span><span class="p">();</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">;</span>
-<span class="nx">f</span><span class="p">();</span><span class="w">                       </span><span class="c1">// ✗ TypeError: Cannot read properties of undefined (reading 'segundos')</span>
+<span class="nx">f</span><span class="p">();</span><span class="w">                       </span><span class="c1">// ✗ TypeError: Cannot read properties of undefined (reading &#39;segundos&#39;)</span>
 <span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✗ el mismo TypeError</span>
 <span class="nx">setInterval</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tic</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span><span class="w">  </span><span class="c1">// ✗ sin error… y no cuenta</span>
 </code></pre></div>
@@ -2538,7 +2596,7 @@
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">email</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="nx">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola, </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">  </span><span class="nx">puede</span><span class="p">(</span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">accion</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"leer"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">puede</span><span class="p">(</span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">accion</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;leer&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">class</span><span class="w"> </span><span class="nx">Administrador</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
@@ -2549,9 +2607,9 @@
 <span class="w">  </span><span class="nx">puede</span><span class="p">(</span><span class="nx">accion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">permisos</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">accion</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Administrador</span><span class="p">(</span><span class="s2">"Eva"</span><span class="p">,</span><span class="w"> </span><span class="s2">"e@x.es"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"leer"</span><span class="p">,</span><span class="w"> </span><span class="s2">"borrar"</span><span class="p">]);</span>
-<span class="nx">admin</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w">        </span><span class="c1">// heredado: "Hola, Eva"</span>
-<span class="nx">admin</span><span class="p">.</span><span class="nx">puede</span><span class="p">(</span><span class="s2">"borrar"</span><span class="p">);</span><span class="w">  </span><span class="c1">// propio: true</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Administrador</span><span class="p">(</span><span class="s2">&quot;Eva&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;e@x.es&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;leer&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;borrar&quot;</span><span class="p">]);</span>
+<span class="nx">admin</span><span class="p">.</span><span class="nx">saludar</span><span class="p">();</span><span class="w">        </span><span class="c1">// heredado: &quot;Hola, Eva&quot;</span>
+<span class="nx">admin</span><span class="p">.</span><span class="nx">puede</span><span class="p">(</span><span class="s2">&quot;borrar&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// propio: true</span>
 </code></pre></div>
 <h3 id="82-super-antes-de-this">8.2. <code>super()</code> antes de <code>this</code></h3>
 <p>El objeto lo crea la <strong>clase base</strong>: al hacer <code>new Administrador(…)</code>, el constructor de <code>Administrador</code> llama a <code>super(…)</code>, el de <code>Usuario</code> crea el objeto y su <code>this</code>, y solo entonces <code>Administrador</code> puede completarlo.</p>
@@ -2561,7 +2619,7 @@
 <span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
-<span class="c1">// ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor</span>
+<span class="c1">// ReferenceError: Must call super constructor in derived class before accessing &#39;this&#39; or returning from derived constructor</span>
 </code></pre></div>
 <ul>
 <li>Si la subclase <strong>no</strong> escribe constructor, JavaScript pone uno: <code>constructor(...args) { super(...args); }</code>.</li>
@@ -2584,7 +2642,7 @@
 <span class="p">}</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">figuras</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ow">new</span><span class="w"> </span><span class="nx">Circulo</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Rectangulo</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">)];</span>
-<span class="nx">figuras</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">f</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">describir</span><span class="p">());</span><span class="w"> </span><span class="c1">// ["Circulo: 3.14", "Rectangulo: 6.00"]</span>
+<span class="nx">figuras</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">f</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">describir</span><span class="p">());</span><span class="w"> </span><span class="c1">// [&quot;Circulo: 3.14&quot;, &quot;Rectangulo: 6.00&quot;]</span>
 </code></pre></div>
 <ul>
 <li><strong>Sobrescribir</strong> (<em>override</em>): la subclase define un método con el mismo nombre que el heredado.</li>
@@ -2651,7 +2709,7 @@
 <span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`Motor de </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">cv</span><span class="si">}</span><span class="sb"> CV en marcha`</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">class</span><span class="w"> </span><span class="nx">MotorElectrico</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s2">"Zumbido silencioso"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">arrancar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;Zumbido silencioso&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">class</span><span class="w"> </span><span class="nx">Coche</span><span class="w"> </span><span class="p">{</span>
@@ -2664,8 +2722,8 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">"León"</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Motor</span><span class="p">(</span><span class="mf">150</span><span class="p">)).</span><span class="nx">arrancar</span><span class="p">();</span>
-<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">"Born"</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MotorElectrico</span><span class="p">()).</span><span class="nx">arrancar</span><span class="p">();</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">&quot;León&quot;</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Motor</span><span class="p">(</span><span class="mf">150</span><span class="p">)).</span><span class="nx">arrancar</span><span class="p">();</span>
+<span class="ow">new</span><span class="w"> </span><span class="nx">Coche</span><span class="p">(</span><span class="s2">&quot;Born&quot;</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MotorElectrico</span><span class="p">()).</span><span class="nx">arrancar</span><span class="p">();</span>
 </code></pre></div>
 <ul>
 <li>Cambiar de motor es pasar otro objeto, <strong>sin tocar <code>Coche</code></strong>.</li>
@@ -2681,9 +2739,9 @@
 <span class="w">  </span><span class="nx">nadar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb"> nada`</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
 <span class="p">};</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">pato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Pato"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeVolar</span><span class="p">,</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">pinguino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Pingu"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
-<span class="nx">pinguino</span><span class="p">.</span><span class="nx">nadar</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Pingu nada"</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">pato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Pato&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeVolar</span><span class="p">,</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">pinguino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Pingu&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">puedeNadar</span><span class="p">);</span>
+<span class="nx">pinguino</span><span class="p">.</span><span class="nx">nadar</span><span class="p">();</span><span class="w"> </span><span class="c1">// &quot;Pingu nada&quot;</span>
 </code></pre></div>
 <p>Los métodos usan <code>this</code>, así que funcionan en cualquier objeto que tenga <code>nombre</code>. <code>Object.assign(destino, ...origenes)</code> copia las propiedades propias de los orígenes en el destino (copia superficial) y lo devuelve.</p>
 <h3 id="94-cuatro-preguntas-antes-de-escribir-class">9.4. Cuatro preguntas antes de escribir <code>class</code></h3>
@@ -2797,11 +2855,11 @@
 <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">();</span><span class="w">                   </span><span class="c1">// Infinity (¡ojo con arrays vacíos!)</span>
 
 <span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 0.30000000000000004</span>
-<span class="p">(</span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">       </span><span class="c1">// "0.30"  ← STRING</span>
-<span class="s2">"0.30"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">                   </span><span class="c1">// "0.301" (concatena)</span>
-<span class="nb">Number</span><span class="p">(</span><span class="s2">"12.5"</span><span class="p">);</span><span class="w">               </span><span class="c1">// 12.5</span>
-<span class="nb">Number</span><span class="p">(</span><span class="s2">"12,5"</span><span class="p">);</span><span class="w">               </span><span class="c1">// NaN: la coma no es decimal en JS</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nb">parseFloat</span><span class="p">(</span><span class="s2">"12.5€"</span><span class="p">);</span><span class="w">   </span><span class="c1">// 12.5: lee hasta donde puede</span>
+<span class="p">(</span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">       </span><span class="c1">// &quot;0.30&quot;  ← STRING</span>
+<span class="s2">&quot;0.30&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">                   </span><span class="c1">// &quot;0.301&quot; (concatena)</span>
+<span class="nb">Number</span><span class="p">(</span><span class="s2">&quot;12.5&quot;</span><span class="p">);</span><span class="w">               </span><span class="c1">// 12.5</span>
+<span class="nb">Number</span><span class="p">(</span><span class="s2">&quot;12,5&quot;</span><span class="p">);</span><span class="w">               </span><span class="c1">// NaN: la coma no es decimal en JS</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nb">parseFloat</span><span class="p">(</span><span class="s2">&quot;12.5€&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// 12.5: lee hasta donde puede</span>
 <span class="nb">Number</span><span class="p">.</span><span class="nb">isNaN</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span><span class="w">            </span><span class="c1">// true</span>
 <span class="kc">NaN</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">NaN</span><span class="p">;</span><span class="w">                  </span><span class="c1">// false</span>
 </code></pre></div>
@@ -2812,8 +2870,8 @@
 <h3 id="102-date">10.2. <code>Date</code></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">ahora</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">examen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="mf">2026</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">27</span><span class="p">);</span><span class="w">       </span><span class="c1">// ¡27 de NOVIEMBRE! (meses 0–11)</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">iso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">"2026-11-27T09:00"</span><span class="p">);</span><span class="w">    </span><span class="c1">// ISO con hora: hora local</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">utc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">"2026-11-27"</span><span class="p">);</span><span class="w">          </span><span class="c1">// ISO SIN hora: medianoche UTC (01:00 en España)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">iso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2026-11-27T09:00&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// ISO con hora: hora local</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">utc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2026-11-27&quot;</span><span class="p">);</span><span class="w">          </span><span class="c1">// ISO SIN hora: medianoche UTC (01:00 en España)</span>
 
 <span class="nx">examen</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span><span class="w"> </span><span class="c1">// 2026</span>
 <span class="nx">examen</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span><span class="w">    </span><span class="c1">// 10 (0 = enero)</span>
@@ -2862,25 +2920,25 @@
 <p><code>Temporal</code> es la nueva API de fechas del lenguaje (inmutable y sin estas trampas). Está llegando a los navegadores, pero <code>Date</code> seguirá en todo el código existente durante años.</p>
 </div>
 <h3 id="103-string-e-intl">10.3. <code>String</code> e <code>Intl</code></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">entrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"  Ana@Correo.ES  "</span><span class="p">;</span>
-<span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">    </span><span class="c1">// "ana@correo.es"</span>
-<span class="s2">"Teclado"</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"cla"</span><span class="p">);</span><span class="w">       </span><span class="c1">// true</span>
-<span class="s2">"7"</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"0"</span><span class="p">);</span><span class="w">            </span><span class="c1">// "007"</span>
-<span class="s2">"a-b-c"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"-"</span><span class="p">);</span><span class="w">              </span><span class="c1">// ["a", "b", "c"]</span>
-<span class="s2">"2026-11-27"</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">);</span><span class="w">        </span><span class="c1">// "2026"</span>
-<span class="s2">"x.y.z"</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="s2">"/"</span><span class="p">);</span><span class="w">    </span><span class="c1">// "x/y/z"</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">entrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;  Ana@Correo.ES  &quot;</span><span class="p">;</span>
+<span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">    </span><span class="c1">// &quot;ana@correo.es&quot;</span>
+<span class="s2">&quot;Teclado&quot;</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;cla&quot;</span><span class="p">);</span><span class="w">       </span><span class="c1">// true</span>
+<span class="s2">&quot;7&quot;</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// &quot;007&quot;</span>
+<span class="s2">&quot;a-b-c&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">);</span><span class="w">              </span><span class="c1">// [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
+<span class="s2">&quot;2026-11-27&quot;</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">);</span><span class="w">        </span><span class="c1">// &quot;2026&quot;</span>
+<span class="s2">&quot;x.y.z&quot;</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// &quot;x/y/z&quot;</span>
 
 <span class="c1">// Los strings son INMUTABLES</span>
 <span class="nx">entrada</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span><span class="w">  </span><span class="c1">// devuelve uno nuevo…</span>
 <span class="nx">entrada</span><span class="p">;</span><span class="w">         </span><span class="c1">// …y entrada sigue con espacios</span>
 </code></pre></div>
 <p><code>Intl</code> formatea números, monedas, fechas y plurales según el idioma:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">eur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">NumberFormat</span><span class="p">(</span><span class="s2">"es-ES"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="s2">"currency"</span><span class="p">,</span><span class="w"> </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w"> </span><span class="p">});</span>
-<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">1234.5</span><span class="p">);</span><span class="w">   </span><span class="c1">// "1234,50 €"</span>
-<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">12345.5</span><span class="p">);</span><span class="w">  </span><span class="c1">// "12.345,50 €"</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">eur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">NumberFormat</span><span class="p">(</span><span class="s2">&quot;es-ES&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;currency&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">1234.5</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;1234,50 €&quot;</span>
+<span class="nx">eur</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mf">12345.5</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;12.345,50 €&quot;</span>
 
-<span class="nx">examen</span><span class="p">.</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s2">"es-ES"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">weekday</span><span class="o">:</span><span class="w"> </span><span class="s2">"long"</span><span class="p">,</span><span class="w"> </span><span class="nx">day</span><span class="o">:</span><span class="w"> </span><span class="s2">"numeric"</span><span class="p">,</span><span class="w"> </span><span class="nx">month</span><span class="o">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w"> </span><span class="p">});</span>
-<span class="c1">// "viernes, 27 de noviembre"</span>
+<span class="nx">examen</span><span class="p">.</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s2">&quot;es-ES&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">weekday</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;long&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">day</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">month</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;long&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="c1">// &quot;viernes, 27 de noviembre&quot;</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Sin punto de millares en 4 cifras</p>
@@ -2902,13 +2960,13 @@
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">campo</span><span class="p">,</span><span class="w"> </span><span class="nx">mensaje</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">mensaje</span><span class="p">);</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ValidacionError"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ValidacionError&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">campo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">campo</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="p">(</span><span class="s2">"email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Email no válido"</span><span class="p">);</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Email no válido&quot;</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">ValidacionError</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">campo</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w">  </span><span class="c1">// error esperado: se muestra al usuario</span>
@@ -2952,9 +3010,9 @@
 </table>
 <div class="highlight"><pre><span></span><code>&gt; console.dir(admin)
 ▼ Administrador
-    nombre: "Eva"
-    email: "e@x.es"
-    permisos: (2) ['leer', 'borrar']
+    nombre: &quot;Eva&quot;
+    email: &quot;e@x.es&quot;
+    permisos: (2) [&#39;leer&#39;, &#39;borrar&#39;]
   ▼ [[Prototype]]: Usuario
       constructor: class Administrador
       puede: ƒ puede(accion)
@@ -3066,20 +3124,20 @@
 <li><strong>Formato</strong>: <code>resumen()</code> devuelve <code>"3 artículos · 129,98 €"</code> usando <code>Intl.NumberFormat</code>; <code>creado</code> guarda la fecha con <code>Date</code>.</li>
 <li><strong>Comprobar</strong> en <code>main.js</code>:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Teclado"</span><span class="p">,</span><span class="w"> </span><span class="mf">49.99</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">raton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">"Ratón"</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">ebook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ProductoDigital</span><span class="p">(</span><span class="s2">"Ebook JS"</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="w"> </span><span class="s2">"https://ejemplo.es/js.pdf"</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">teclado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">49.99</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">raton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Producto</span><span class="p">(</span><span class="s2">&quot;Ratón&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">15</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ebook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ProductoDigital</span><span class="p">(</span><span class="s2">&quot;Ebook JS&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https://ejemplo.es/js.pdf&quot;</span><span class="p">);</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Carrito</span><span class="p">();</span>
 <span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">teclado</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
 <span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">ebook</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">total</span><span class="p">);</span><span class="w">      </span><span class="c1">// 129.98</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">resumen</span><span class="p">());</span><span class="w">  </span><span class="c1">// "3 artículos · 129,98 €"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">resumen</span><span class="p">());</span><span class="w">  </span><span class="c1">// &quot;3 artículos · 129,98 €&quot;</span>
 
 <span class="c1">// Un error no capturado para el módulo entero: cada prueba de error, en su try/catch</span>
 <span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">teclado</span><span class="p">.</span><span class="nx">precio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// RangeError</span>
 <span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">añadir</span><span class="p">(</span><span class="nx">raton</span><span class="p">,</span><span class="w"> </span><span class="mf">99</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Error: sin stock</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">teclado</span><span class="p">));</span><span class="w"> </span><span class="c1">// ["nombre"] → los # no salen</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">teclado</span><span class="p">));</span><span class="w"> </span><span class="c1">// [&quot;nombre&quot;] → los # no salen</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">¿Te sale <code>129.98000000000002</code>?</p>

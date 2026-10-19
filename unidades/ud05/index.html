@@ -1,0 +1,3384 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ud04/">
+      
+      
+        <link rel="next" href="../ud06/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>UD 5: DOM Nativo y Gestión de Eventos (RA4) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ud-5-dom-nativo-y-gestion-de-eventos-ra4" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UD 5: DOM Nativo y Gestión de Eventos (RA4)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-1-ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 Batería de Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-2-bateria-repaso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Batería de repaso con comprobador (UD1–UD3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-del-modelo-en-memoria-a-la-pagina-que-responde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: del modelo en memoria a la página que responde
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-arbol-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El árbol DOM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El árbol DOM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-tipos-de-nodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Tipos de nodo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-window-y-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. window y document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-cuando-esta-listo-el-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. ¿Cuándo está listo el DOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-moverse-por-el-arbol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Moverse por el árbol
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-seleccionar-elementos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Seleccionar elementos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Seleccionar elementos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-nodelist-estatica-frente-a-htmlcollection-viva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. NodeList estática frente a HTMLCollection viva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-leer-contenido-atributos-y-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Leer contenido, atributos y datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Leer contenido, atributos y datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-textcontent-innertext-e-innerhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. textContent, innerText e innerHTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-atributos-frente-a-propiedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Atributos frente a propiedades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-dataset-une-el-elemento-con-su-dato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. dataset: une el elemento con su dato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-matches-y-closest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. matches y closest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-modificar-clases-y-estilos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Modificar: clases y estilos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Modificar: clases y estilos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-classlist-el-css-decide-el-aspecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. classList: el CSS decide el aspecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-style-y-variables-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. style y variables CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-insertar-y-borrar-nodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear, insertar y borrar nodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Crear, insertar y borrar nodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-createelement-configurar-append" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. createElement → configurar → append
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-donde-se-inserta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. Dónde se inserta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-template-el-html-en-el-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. &lt;template&gt;: el HTML en el HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-seguridad-innerhtml-y-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Seguridad: innerHTML y XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pintar-desde-el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pintar desde el modelo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pintar desde el modelo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Rendimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Eventos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Eventos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-addeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. addEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-el-objeto-evento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. El objeto evento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-los-eventos-mas-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Los eventos más usados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-propagacion-y-delegacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Propagación y delegación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Propagación y delegación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-captura-objetivo-y-burbuja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. Captura, objetivo y burbuja
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-preventdefault-frente-a-stoppropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. preventDefault frente a stopPropagation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-delegacion-de-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. Delegación de eventos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-listeners-duplicados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Listeners duplicados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-this-teclado-accesibilidad-y-eventos-propios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. this, teclado, accesibilidad y eventos propios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. this, teclado, accesibilidad y eventos propios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-this-en-los-manejadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1. this en los manejadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-si-se-puede-pulsar-que-sea-un-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2. Si se puede pulsar, que sea un &lt;button&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-eventos-personalizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3. Eventos personalizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Formularios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Formularios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-leer-un-formulario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1. Leer un formulario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-input-change-y-submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2. input, change y submit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-validacion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3. Validación nativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-constraint-validation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4. Constraint Validation API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-mostrar-los-errores-bien" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5. Mostrar los errores bien
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-validar-en-el-cliente-no-es-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6. Validar en el cliente no es seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ejercicio-practico-guiado-agenda-de-contactos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ejercicio práctico guiado: agenda de contactos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia Tecnológica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia Tecnológica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árbol tecnológico completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Portal docente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-donde-estamos-del-modelo-en-memoria-a-la-pagina-que-responde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dónde estamos: del modelo en memoria a la página que responde
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-arbol-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El árbol DOM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El árbol DOM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-tipos-de-nodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Tipos de nodo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-window-y-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. window y document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-cuando-esta-listo-el-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. ¿Cuándo está listo el DOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-moverse-por-el-arbol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Moverse por el árbol
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-seleccionar-elementos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Seleccionar elementos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Seleccionar elementos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-nodelist-estatica-frente-a-htmlcollection-viva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. NodeList estática frente a HTMLCollection viva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-leer-contenido-atributos-y-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Leer contenido, atributos y datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Leer contenido, atributos y datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-textcontent-innertext-e-innerhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. textContent, innerText e innerHTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-atributos-frente-a-propiedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Atributos frente a propiedades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-dataset-une-el-elemento-con-su-dato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. dataset: une el elemento con su dato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-matches-y-closest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. matches y closest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-modificar-clases-y-estilos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Modificar: clases y estilos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Modificar: clases y estilos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-classlist-el-css-decide-el-aspecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. classList: el CSS decide el aspecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-style-y-variables-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. style y variables CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-insertar-y-borrar-nodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear, insertar y borrar nodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Crear, insertar y borrar nodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-createelement-configurar-append" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. createElement → configurar → append
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-donde-se-inserta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. Dónde se inserta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-template-el-html-en-el-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. &lt;template&gt;: el HTML en el HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-seguridad-innerhtml-y-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Seguridad: innerHTML y XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pintar-desde-el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pintar desde el modelo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pintar desde el modelo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Rendimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Eventos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Eventos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-addeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. addEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-el-objeto-evento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. El objeto evento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-los-eventos-mas-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Los eventos más usados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-propagacion-y-delegacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Propagación y delegación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Propagación y delegación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-captura-objetivo-y-burbuja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. Captura, objetivo y burbuja
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-preventdefault-frente-a-stoppropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. preventDefault frente a stopPropagation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-delegacion-de-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. Delegación de eventos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-listeners-duplicados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Listeners duplicados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-this-teclado-accesibilidad-y-eventos-propios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. this, teclado, accesibilidad y eventos propios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. this, teclado, accesibilidad y eventos propios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-this-en-los-manejadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1. this en los manejadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-si-se-puede-pulsar-que-sea-un-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2. Si se puede pulsar, que sea un &lt;button&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-eventos-personalizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3. Eventos personalizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Formularios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Formularios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-leer-un-formulario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1. Leer un formulario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-input-change-y-submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2. input, change y submit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-validacion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3. Validación nativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-constraint-validation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4. Constraint Validation API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#125-mostrar-los-errores-bien" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5. Mostrar los errores bien
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-validar-en-el-cliente-no-es-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6. Validar en el cliente no es seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-verificar-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Verificar: DevTools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Errores comunes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ejercicio-practico-guiado-agenda-de-contactos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ejercicio práctico guiado: agenda de contactos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-comprueba-lo-aprendido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Comprueba lo aprendido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-glosario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Glosario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-resumen-y-conexion-con-la-siguiente-unidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Resumen y conexión con la siguiente unidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-referencias-y-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Referencias y fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ud-5-dom-nativo-y-gestion-de-eventos-ra4">UD 5: DOM nativo y gestión de eventos (RA4)</h1>
+<div class="presentacion">
+<p><span class="twemoji presentacion__icono"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 3h8a2 2 0 0 1 2-2 2 2 0 0 1 2 2h8v2h-1v11h-5.75L17 22h-2l-1.75-6h-2.5L9 22H7l1.75-6H3V5H2zm3 2v9h14V5zm6.85 6.85a.5.5 0 0 1-.35.15.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5c.14 0 .26.06.35.15l1.4 1.39c.32.32.64.64.64.96s-.32.64-.64.96z"/></svg></span> <strong>Presentación de clase</strong> · 57 diapositivas para seguir la unidad</p>
+<p><a class="md-button md-button--primary" href="../../assets/presentaciones/DWEC-UD5.pdf" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"/></svg></span> Abrir o descargar el PDF</a></p>
+</div>
+<blockquote>
+<p><strong>Referencia Módulo DWEC:</strong> Resultado de Aprendizaje 4 (RA4), criterios a–d — Manipula el árbol del documento (DOM) desde JavaScript para crear, modificar y eliminar contenido dinámicamente, y gestiona la interacción del usuario mediante el modelo de eventos del navegador (propagación, delegación) y formularios validados.</p>
+</blockquote>
+<hr />
+<h2 id="1-donde-estamos-del-modelo-en-memoria-a-la-pagina-que-responde">1. Dónde estamos: del modelo en memoria a la página que responde <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th>Qué aprendimos</th>
+<th>Qué aporta hoy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UD3</td>
+<td>Arrays: <code>map</code>, <code>filter</code>, <code>find</code>, <code>sort</code></td>
+<td>Convertir colecciones de nodos y pintar listas</td>
+</tr>
+<tr>
+<td>UD4</td>
+<td>Objetos y clases: el <strong>modelo</strong></td>
+<td>Los datos que la página va a mostrar</td>
+</tr>
+<tr>
+<td><strong>UD5 (hoy)</strong></td>
+<td><strong>DOM y eventos</strong></td>
+<td><strong>Que el modelo se vea y que el usuario lo cambie</strong></td>
+</tr>
+<tr>
+<td>UD6</td>
+<td>Asincronía y almacenamiento</td>
+<td><code>fetch</code>, <code>async/await</code>, <code>localStorage</code></td>
+</tr>
+</tbody>
+</table>
+<p>La pregunta de la unidad: <strong>¿cómo hago que lo que pasa en mi modelo se vea en la página, y que lo que hace el usuario en la página cambie el modelo?</strong></p>
+<p>Cualquier interfaz repite el mismo ciclo:</p>
+<pre class="mermaid"><code>flowchart LR
+    E["1 · Evento&lt;br/&gt;el usuario pulsa"] --&gt; M["2 · Modelo&lt;br/&gt;carrito.añadir(producto)"]
+    M --&gt; R["3 · Render&lt;br/&gt;se repinta lo que cambia"]
+    R --&gt;|espera el siguiente| E</code></pre>
+<div class="admonition info">
+<p class="admonition-title">El DOM no es JavaScript</p>
+<p>El <strong>DOM</strong> (<em>Document Object Model</em>) es un estándar del navegador, del WHATWG. JavaScript es el lenguaje con el que lo manejamos, pero el árbol es el mismo para cualquier herramienta que hable con el navegador. Los frameworks como React (UD7) hacen esto por ti, <strong>sobre el mismo DOM</strong>.</p>
+</div>
+<hr />
+<h2 id="2-el-arbol-dom">2. El árbol DOM <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3zm12 7h6v4h-6zm0 7h6v4h-6zm-2-4H7v5h6v2H5V9h2v2h6z"/></svg></span></h2>
+<p>El navegador lee el HTML y construye un <strong>árbol de objetos</strong>. Cada etiqueta es un <strong>nodo elemento</strong>; el texto que contiene es un <strong>nodo de texto</strong>; anidar etiquetas es la relación <strong>padre → hijos</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Tareas<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;lista&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;hecha&quot;</span><span class="p">&gt;</span>Comprar pan<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Estudiar DOM<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    body --&gt; h1 --&gt; t1["'Tareas'"]
+    body --&gt; ul["ul#lista"]
+    ul --&gt; li1["li.hecha"] --&gt; t2["'Comprar pan'"]
+    ul --&gt; li2["li"] --&gt; t3["'Estudiar DOM'"]</code></pre>
+<p>Cambiar uno de esos objetos cambia la página <strong>al momento</strong>, sin recargar. Ojo: lo que cambia es el <strong>árbol en memoria</strong> (lo que ves en DevTools → Elements), no el fichero HTML. Si recargas, el árbol se reconstruye desde el HTML original.</p>
+<h3 id="21-tipos-de-nodo">2.1. Tipos de nodo</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th style="text-align: center;"><code>nodeType</code></th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elemento</td>
+<td style="text-align: center;">1</td>
+<td><code>&lt;li&gt;</code>, <code>&lt;button&gt;</code></td>
+</tr>
+<tr>
+<td>Texto</td>
+<td style="text-align: center;">3</td>
+<td><code>"Comprar pan"</code>, <strong>y también los saltos de línea entre etiquetas</strong></td>
+</tr>
+<tr>
+<td>Comentario</td>
+<td style="text-align: center;">8</td>
+<td><code>&lt;!-- nota --&gt;</code></td>
+</tr>
+<tr>
+<td>Documento</td>
+<td style="text-align: center;">9</td>
+<td><code>document</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">ul</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#lista&quot;</span><span class="p">);</span>
+<span class="nx">ul</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">    </span><span class="c1">// 5 → texto, li, texto, li, texto</span>
+<span class="nx">ul</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">      </span><span class="c1">// 2 → solo los &lt;li&gt;</span>
+<span class="nx">ul</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">;</span><span class="w">           </span><span class="c1">// #text &quot;\n    &quot;</span>
+<span class="nx">ul</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span><span class="w">    </span><span class="c1">// &lt;li class=&quot;hecha&quot;&gt;</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Usa siempre las versiones <em>Element</em></p>
+<p><code>children</code>, <code>firstElementChild</code>, <code>lastElementChild</code>, <code>nextElementSibling</code>, <code>previousElementSibling</code> y <code>parentElement</code> ignoran los nodos de texto. Las versiones sin <em>Element</em> (<code>childNodes</code>, <code>firstChild</code>, <code>nextSibling</code>) te devuelven también esos textos invisibles.</p>
+</div>
+<h3 id="22-window-y-document">2.2. <code>window</code> y <code>document</code></h3>
+<ul>
+<li><strong><code>window</code></strong> es el <strong>navegador</strong> (la pestaña) y el objeto global. De él cuelgan <code>location</code> (la URL), <code>history</code>, <code>navigator</code>, <code>localStorage</code> (UD6), <code>console</code>, <code>setTimeout</code>… A todo eso se le llama <strong>BOM</strong> (<em>Browser Object Model</em>).</li>
+<li><strong><code>document</code></strong> es <strong>la página</strong>: la raíz del DOM. <code>window.document === document</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">;</span><span class="w">       </span><span class="c1">// ancho de la ventana</span>
+<span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span><span class="w">           </span><span class="c1">// &quot;http://localhost:5173/&quot;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hola&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// cambia el texto de la pestaña</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Módulos y variables globales</p>
+<p>En un <code>&lt;script&gt;</code> clásico, las variables con <code>var</code> y las funciones declaradas acaban en <code>window</code>. En los <strong>módulos</strong> de Vite no: cada fichero tiene su propio ámbito.</p>
+</div>
+<h3 id="23-cuando-esta-listo-el-dom">2.3. ¿Cuándo está listo el DOM?</h3>
+<p><code>document.querySelector</code> devuelve <strong><code>null</code></strong> si el elemento todavía no existe. El navegador lee el HTML de arriba abajo:</p>
+<table>
+<thead>
+<tr>
+<th>Cómo cargas el script</th>
+<th>¿Cuándo se ejecuta?</th>
+<th style="text-align: center;">¿Ve el <code>&lt;body&gt;</code>?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;script src&gt;</code> en <code>&lt;head&gt;</code></td>
+<td>En cuanto lo encuentra, parando la lectura</td>
+<td style="text-align: center;">✗ <code>null</code></td>
+</tr>
+<tr>
+<td><code>&lt;script src&gt;</code> al final de <code>&lt;body&gt;</code></td>
+<td>Al llegar ahí</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>&lt;script defer src&gt;</code></td>
+<td>Tras leer todo el HTML</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>&lt;script type="module" src&gt;</code> (Vite)</td>
+<td>Diferido, como <code>defer</code>, siempre</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<p>Los eventos de carga: <strong><code>DOMContentLoaded</code></strong> (en <code>document</code>) salta cuando el árbol está completo; <strong><code>load</code></strong> (en <code>window</code>), cuando además han cargado imágenes y hojas de estilo. Verás mucho código antiguo con:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;DOMContentLoaded&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">iniciar</span><span class="p">());</span>
+</code></pre></div>
+<p>Con <code>type="module"</code> no hace falta, porque el script ya espera al árbol.</p>
+<div class="admonition warning">
+<p class="admonition-title">«Cannot read properties of null»</p>
+<p>Si sale al empezar el script, o has buscado el elemento antes de que existiera, o el selector está mal (<code>"lista"</code> busca la etiqueta <code>&lt;lista&gt;</code>; el id es <code>"#lista"</code>).</p>
+</div>
+<h3 id="24-moverse-por-el-arbol">2.4. Moverse por el árbol</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span><span class="w">        </span><span class="c1">// el 2.º &lt;li&gt;</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span><span class="w">                    </span><span class="c1">// &lt;ul id=&quot;lista&quot;&gt;</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span><span class="w">           </span><span class="c1">// el 1.er &lt;li&gt;</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span><span class="w">               </span><span class="c1">// el siguiente o null</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">;</span><span class="w">                </span><span class="c1">// su primer hijo elemento</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">btn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">li</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">);</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;ul&quot;</span><span class="p">);</span><span class="w">                   </span><span class="c1">// sube hasta el &lt;ul&gt;</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.no-existe&quot;</span><span class="p">);</span><span class="w">           </span><span class="c1">// null</span>
+</code></pre></div>
+<p><strong><code>closest(selector)</code></strong> empieza en el propio elemento y <strong>sube</strong> por los padres hasta el primero que cumpla el selector. Es la pieza clave de la delegación de eventos (sección 10).</p>
+<hr />
+<h2 id="3-seleccionar-elementos">3. Seleccionar elementos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span></h2>
+<p>Se usan <strong>los mismos selectores que en CSS</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Devuelve</th>
+<th>Si no hay ninguno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document.querySelector(sel)</code></td>
+<td>El <strong>primero</strong> que cumple</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>document.querySelectorAll(sel)</code></td>
+<td>Una <strong>NodeList</strong> con todos (estática)</td>
+<td>NodeList vacía</td>
+</tr>
+<tr>
+<td><code>document.getElementById(id)</code></td>
+<td>El elemento con ese id (<strong>sin <code>#</code></strong>)</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>elemento.querySelector(sel)</code></td>
+<td>Busca solo <strong>dentro</strong> de ese elemento</td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#lista&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.hecha&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;ul &gt; li:last-child&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;[data-id=&#39;3&#39;]&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=email]&quot;</span><span class="p">);</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;li.hecha&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// solo dentro de la lista</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Buenas costumbres</p>
+<ul>
+<li>Guarda los elementos en <code>const</code> <strong>al arrancar</strong>; no los busques en cada clic.</li>
+<li>Selecciona por <strong>id, clase o <code>data-*</code> propios</strong>, no por la estructura (<code>div &gt; div &gt; span</code> se rompe con cualquier cambio del HTML).</li>
+<li>Si un elemento puede no estar, compruébalo: <code>boton?.classList.add("activo")</code>.</li>
+</ul>
+</div>
+<h3 id="31-nodelist-estatica-frente-a-htmlcollection-viva">3.1. NodeList estática frente a HTMLCollection viva</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>querySelectorAll</code> → <strong>NodeList estática</strong></th>
+<th><code>children</code>, <code>getElementsByClassName</code> → <strong>HTMLCollection viva</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Si cambia el DOM</td>
+<td>No se entera (es una foto)</td>
+<td>Se actualiza sola</td>
+</tr>
+<tr>
+<td><code>forEach</code></td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><code>map</code>, <code>filter</code></td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fija</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;#lista li&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">viva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">));</span>
+<span class="nx">fija</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">   </span><span class="c1">// 2</span>
+<span class="nx">viva</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">   </span><span class="c1">// 3</span>
+
+<span class="c1">// ¿map o filter? Conviértela en array</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">textos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">)].</span><span class="nx">map</span><span class="p">((</span><span class="nx">li</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">li</span><span class="p">.</span><span class="nx">textContent</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">hechas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">lista</span><span class="p">.</span><span class="nx">children</span><span class="p">).</span><span class="nx">filter</span><span class="p">((</span><span class="nx">li</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">li</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s2">&quot;hecha&quot;</span><span class="p">));</span>
+</code></pre></div>
+<hr />
+<h2 id="4-leer-contenido-atributos-y-datos">4. Leer contenido, atributos y datos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 12c2.5 0 4.5 2 4.5 4.5 0 .88-.25 1.71-.69 2.4l3.08 3.1L21 23.39l-3.12-3.07c-.69.43-1.51.68-2.38.68-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5M5 3h14c1.11 0 2 .89 2 2v8.03c-.5-.8-1.19-1.49-2-2.03V5H5v14h4.5c.31.75.76 1.42 1.31 2H5c-1.11 0-2-.89-2-2V5c0-1.11.89-2 2-2m2 4h10v2H7zm0 4h5.03c-.8.5-1.49 1.19-2.03 2H7zm0 4h2.17c-.11.5-.17 1-.17 1.5v.5H7z"/></svg></span></h2>
+<h3 id="41-textcontent-innertext-e-innerhtml">4.1. <code>textContent</code>, <code>innerText</code> e <code>innerHTML</code></h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">&gt;</span>Hola <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span>Ana<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">hidden</span><span class="p">&gt;</span>oculto<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Devuelve</th>
+<th>Con <code>#p</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>textContent</code></td>
+<td>Todo el texto, tal cual (también lo oculto)</td>
+<td><code>"Hola Ana\n  oculto"</code></td>
+</tr>
+<tr>
+<td><code>innerText</code></td>
+<td>El texto <strong>como se ve</strong> (respeta el CSS; más lento)</td>
+<td><code>"Hola Ana"</code></td>
+</tr>
+<tr>
+<td><code>innerHTML</code></td>
+<td>El HTML de dentro, como texto</td>
+<td><code>'Hola &lt;b&gt;Ana&lt;/b&gt;\n  &lt;span hidden=""&gt;oculto&lt;/span&gt;'</code></td>
+</tr>
+</tbody>
+</table>
+<p>Para leer y escribir texto, <strong><code>textContent</code></strong>: es rápido, no interpreta HTML y es seguro (sección 7).</p>
+<div class="admonition note">
+<p class="admonition-title">Los campos de formulario van aparte</p>
+<p>Un <code>&lt;input&gt;</code> no tiene texto dentro: lo escrito está en <strong><code>.value</code></strong>, y siempre es un <strong>string</strong>.</p>
+</div>
+<h3 id="42-atributos-frente-a-propiedades">4.2. Atributos frente a propiedades</h3>
+<p>El <strong>atributo</strong> es lo escrito en el HTML: cómo <strong>empezó</strong>. La <strong>propiedad</strong> es el valor vivo del objeto: cómo <strong>está ahora</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;cant&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// el usuario borra el 1 y escribe 5</span>
+<span class="nx">cant</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;1&quot;  (el HTML original)</span>
+<span class="nx">cant</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span><span class="w">                   </span><span class="c1">// &quot;5&quot;  (lo que hay ahora)</span>
+<span class="nx">check</span><span class="p">.</span><span class="nx">checked</span><span class="p">;</span><span class="w">                </span><span class="c1">// true / false</span>
+<span class="nx">enlace</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;/ayuda&quot;</span>
+<span class="nx">enlace</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span><span class="w">                  </span><span class="c1">// &quot;http://localhost:5173/ayuda&quot; (URL completa)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Para…</th>
+<th>Usa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El estado actual de un control</td>
+<td><code>.value</code>, <code>.checked</code>, <code>.disabled</code>, <code>.selected</code></td>
+</tr>
+<tr>
+<td>Atributos propios o de accesibilidad</td>
+<td><code>setAttribute("aria-expanded", "true")</code></td>
+</tr>
+<tr>
+<td>Quitar o comprobar un atributo</td>
+<td><code>removeAttribute("hidden")</code>, <code>hasAttribute("required")</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Atributos booleanos</p>
+<p><code>hidden</code>, <code>disabled</code>, <code>required</code> o <code>checked</code> valen <strong>por existir</strong>, digan lo que digan. <code>boton.setAttribute("disabled", "false")</code> <strong>desactiva</strong> el botón. Para activarlo: <code>boton.disabled = false</code>.</p>
+</div>
+<h3 id="43-dataset-une-el-elemento-con-su-dato">4.3. <code>dataset</code>: une el elemento con su dato</h3>
+<p>Los atributos <strong><code>data-*</code></strong> son tuyos para guardar información en un elemento. Se leen con <strong><code>dataset</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-id</span><span class="o">=</span><span class="s">&quot;42&quot;</span> <span class="na">data-prioridad</span><span class="o">=</span><span class="s">&quot;alta&quot;</span> <span class="na">data-fecha-limite</span><span class="o">=</span><span class="s">&quot;2026-11-06&quot;</span><span class="p">&gt;</span>Entregar<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span><span class="w">            </span><span class="c1">// &quot;42&quot;   ← siempre string</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">fechaLimite</span><span class="p">;</span><span class="w">   </span><span class="c1">// &quot;2026-11-06&quot;  ← guiones → camelCase</span>
+<span class="nb">Number</span><span class="p">(</span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span><span class="w">    </span><span class="c1">// 42</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">hecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;si&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">// añade data-hecha=&quot;si&quot;</span>
+<span class="ow">delete</span><span class="w"> </span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">hecha</span><span class="p">;</span><span class="w">  </span><span class="c1">// lo quita</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">El patrón de toda la unidad</p>
+<p>Al <strong>pintar</strong>, guarda el <strong>id del objeto</strong> del modelo en <code>data-id</code>. Al <strong>hacer clic</strong>, lee <code>dataset.id</code> (convertido a número) y busca el objeto en el modelo. Nunca guardes el objeto entero en el HTML: el modelo es la única fuente de verdad.</p>
+</div>
+<h3 id="44-matches-y-closest">4.4. <code>matches</code> y <code>closest</code></h3>
+<ul>
+<li><code>el.matches(sel)</code>: ¿este elemento cumple el selector?</li>
+<li><code>el.closest(sel)</code>: el propio elemento o el antecesor más cercano que lo cumple (o <code>null</code>).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// el usuario pulsa el ICONO que hay dentro de &lt;button class=&quot;borrar&quot;&gt; dentro de &lt;li data-id=&quot;7&quot;&gt;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span><span class="w">                  </span><span class="c1">// el &lt;svg&gt;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="s2">&quot;.borrar&quot;</span><span class="p">);</span><span class="w">                </span><span class="c1">// false</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;.borrar&quot;</span><span class="p">);</span><span class="w">                </span><span class="c1">// &lt;button class=&quot;borrar&quot;&gt;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;[data-id]&quot;</span><span class="p">).</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span><span class="w">   </span><span class="c1">// &quot;7&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="5-modificar-clases-y-estilos">5. Modificar: clases y estilos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22A10 10 0 0 1 2 12 10 10 0 0 1 12 2c5.5 0 10 4 10 9a6 6 0 0 1-6 6h-1.8c-.3 0-.5.2-.5.5 0 .1.1.2.1.3.4.5.6 1.1.6 1.7.1 1.4-1 2.5-2.4 2.5m0-18a8 8 0 0 0-8 8 8 8 0 0 0 8 8c.3 0 .5-.2.5-.5 0-.2-.1-.3-.1-.4-.4-.5-.6-1-.6-1.6 0-1.4 1.1-2.5 2.5-2.5H16a4 4 0 0 0 4-4c0-3.9-3.6-7-8-7m-5.5 6c.8 0 1.5.7 1.5 1.5S7.3 13 6.5 13 5 12.3 5 11.5 5.7 10 6.5 10m3-4c.8 0 1.5.7 1.5 1.5S10.3 9 9.5 9 8 8.3 8 7.5 8.7 6 9.5 6m5 0c.8 0 1.5.7 1.5 1.5S15.3 9 14.5 9 13 8.3 13 7.5 13.7 6 14.5 6m3 4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5"/></svg></span></h2>
+<h3 id="51-classlist-el-css-decide-el-aspecto">5.1. <code>classList</code>: el CSS decide el aspecto</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add("a", "b")</code></td>
+<td>Añade una o varias clases</td>
+</tr>
+<tr>
+<td><code>remove("a")</code></td>
+<td>Quita</td>
+</tr>
+<tr>
+<td><code>toggle("a")</code></td>
+<td>Pone o quita y devuelve el estado</td>
+</tr>
+<tr>
+<td><code>toggle("a", condicion)</code></td>
+<td>La pone si la condición es verdadera y la quita si es falsa</td>
+</tr>
+<tr>
+<td><code>contains("a")</code></td>
+<td>¿La tiene?</td>
+</tr>
+<tr>
+<td><code>replace("a", "b")</code></td>
+<td>Cambia una por otra</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">tarea</span><span class="p">.</span><span class="nc">hecha</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">line-through</span><span class="p">;</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">.</span><span class="nc">tarea</span><span class="p">.</span><span class="nc">vencida</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">border-left</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--rojo</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">li</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">titulo</span><span class="p">;</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;hecha&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">hecha</span><span class="p">);</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;vencida&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">estaVencida</span><span class="p">());</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Separar responsabilidades</p>
+<p>El CSS sabe <strong>cómo</strong> se ve una tarea hecha; el JavaScript solo sabe <strong>cuándo</strong> lo está. Y no uses <code>className = "…"</code>: borra todas las clases que había.</p>
+</div>
+<h3 id="52-style-y-variables-css">5.2. <code>style</code> y variables CSS</h3>
+<p>Toca el estilo directamente solo cuando el valor <strong>se calcula</strong> (una posición, un porcentaje):</p>
+<div class="highlight"><pre><span></span><code><span class="nx">caja</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;gold&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// camelCase</span>
+<span class="nx">caja</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">porcentaje</span><span class="si">}</span><span class="sb">%`</span><span class="p">;</span><span class="w">   </span><span class="c1">// ¡con unidad!</span>
+<span class="nx">caja</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50</span><span class="p">;</span><span class="w">                 </span><span class="c1">// sin unidad: se IGNORA (sin error)</span>
+<span class="nx">caja</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">);</span>
+
+<span class="nx">barra</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="s2">&quot;--progreso&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;75%&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// y en el CSS: width: var(--progreso)</span>
+<span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">caja</span><span class="p">).</span><span class="nx">display</span><span class="p">;</span><span class="w">                </span><span class="c1">// el estilo final, venga de donde venga</span>
+</code></pre></div>
+<p><code>el.style</code> solo lee lo que se puso con <code>style</code>, no lo que viene de las hojas CSS: para eso, <code>getComputedStyle</code>.</p>
+<hr />
+<h2 id="6-crear-insertar-y-borrar-nodos">6. Crear, insertar y borrar nodos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19V5H5v14zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-8 4h2v4h4v2h-4v4h-2v-4H7v-2h4z"/></svg></span></h2>
+<h3 id="61-createelement-configurar-append">6.1. <code>createElement</code> → configurar → <code>append</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">crearItem</span><span class="p">(</span><span class="nx">tarea</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1 · existe en memoria, no en la página</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tarea&quot;</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 2 · configurar</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">texto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">texto</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">titulo</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">borrar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">borrar</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">;</span><span class="w">                    </span><span class="c1">// dentro de un form no lo enviará</span>
+<span class="w">  </span><span class="nx">borrar</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Borrar&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">borrar</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">accion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;borrar&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">texto</span><span class="p">,</span><span class="w"> </span><span class="nx">borrar</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">li</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">lista</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">crearItem</span><span class="p">(</span><span class="nx">tarea</span><span class="p">));</span><span class="w">              </span><span class="c1">// 3 · ahora sí se ve</span>
+</code></pre></div>
+<p>Una función que recibe un objeto del modelo y devuelve un nodo es, en la práctica, un <strong>componente</strong> (lo que en React se escribe con JSX).</p>
+<h3 id="62-donde-se-inserta">6.2. Dónde se inserta</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">lista</span><span class="p">.</span><span class="nx">prepend</span><span class="p">(</span><span class="nx">nuevo</span><span class="p">);</span><span class="w">          </span><span class="c1">// primer hijo</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">nuevo</span><span class="p">);</span><span class="w">           </span><span class="c1">// último hijo (admite varios nodos y strings)</span>
+<span class="nx">item</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">nuevo</span><span class="p">);</span><span class="w">            </span><span class="c1">// hermano anterior</span>
+<span class="nx">item</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">nuevo</span><span class="p">);</span><span class="w">             </span><span class="c1">// hermano siguiente</span>
+<span class="nx">item</span><span class="p">.</span><span class="nx">replaceWith</span><span class="p">(</span><span class="nx">nuevo</span><span class="p">);</span><span class="w">       </span><span class="c1">// lo sustituye</span>
+<span class="nx">item</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span><span class="w">                 </span><span class="c1">// lo quita del árbol</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">replaceChildren</span><span class="p">();</span><span class="w">       </span><span class="c1">// vacía la lista</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">replaceChildren</span><span class="p">(...</span><span class="nx">nodos</span><span class="p">);</span><span class="w"> </span><span class="c1">// la vacía y pone estos</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Un nodo solo está en un sitio</p>
+<p>Hacer <code>append</code> de un nodo que <strong>ya está</strong> en la página lo <strong>mueve</strong>, no lo copia. Para duplicarlo: <code>nodo.cloneNode(true)</code> (con sus hijos; los listeners <strong>no</strong> se copian). Mover una tarea de una columna a otra es literalmente <code>otraColumna.append(li)</code>.</p>
+</div>
+<h3 id="63-template-el-html-en-el-html">6.3. <code>&lt;template&gt;</code>: el HTML en el HTML</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tpl-tarea&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tarea&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tarea__titulo&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">time</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tarea__limite&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">time</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">data-accion</span><span class="o">=</span><span class="s">&quot;borrar&quot;</span><span class="p">&gt;</span>Borrar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">tpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#tpl-tarea&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">crearItem</span><span class="p">(</span><span class="nx">tarea</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tpl</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.tarea__titulo&quot;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tarea</span><span class="p">.</span><span class="nx">titulo</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">li</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El contenido de un <code>&lt;template&gt;</code> es <strong>inerte</strong>: no se muestra, no ejecuta scripts ni carga imágenes. Se clona y se rellena con <code>textContent</code>. Así el HTML de la tarjeta se puede cambiar sin tocar el JavaScript.</p>
+<hr />
+<h2 id="7-seguridad-innerhtml-y-xss">7. Seguridad: <code>innerHTML</code> y XSS <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21M11 7h2v6h-2zm0 8h2v2h-2z"/></svg></span></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span><span class="w">                   </span><span class="c1">// lo escribe el usuario</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`&lt;span&gt;</span><span class="si">${</span><span class="nx">titulo</span><span class="si">}</span><span class="sb">&lt;/span&gt;`</span><span class="p">;</span><span class="w">      </span><span class="c1">// ✗ el navegador INTERPRETA lo que haya escrito</span>
+</code></pre></div>
+<p>Si el usuario escribe <code>&lt;img src=x onerror="alert(document.cookie)"&gt;</code>, la imagen falla, salta el <code>onerror</code> y <strong>su código se ejecuta en tu página</strong>, en la de todas las personas que vean ese dato. Es un ataque <strong>XSS</strong> (<em>Cross-Site Scripting</em>): puede leer cookies, cambiar la página o enviar datos a otro sitio.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">span</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;span&quot;</span><span class="p">);</span>
+<span class="nx">span</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">titulo</span><span class="p">;</span><span class="w">                    </span><span class="c1">// ✓ se muestra como texto, con sus &lt; y &gt;</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>¿Con datos del usuario?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>textContent</code>, <code>createElement</code>, <code>&lt;template&gt;</code> rellenado con <code>textContent</code></td>
+<td>✓ Siempre seguro</td>
+</tr>
+<tr>
+<td><code>innerHTML</code> con texto <strong>fijo</strong> escrito por ti</td>
+<td>✓ Aceptable</td>
+</tr>
+<tr>
+<td><code>innerHTML</code> con <code>${datos}</code> que vienen de fuera (formulario, API, base de datos)</td>
+<td>✗ XSS</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">OWASP Top 10</p>
+<p>El XSS aparece en <strong>todas</strong> las ediciones del OWASP Top 10, la lista de los riesgos de seguridad web más graves (desde 2021, dentro de la categoría <em>Injection</em>). Un <code>&lt;script&gt;</code> metido con <code>innerHTML</code> no se ejecuta, pero los atributos <code>on…</code> (<code>onerror</code>, <code>onload</code>) sí: por eso el ataque usa una imagen.</p>
+</div>
+<hr />
+<h2 id="8-pintar-desde-el-modelo">8. Pintar desde el modelo <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18a6 6 0 0 1-6-6c0-1 .25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12a8 8 0 0 0 8 8v3l4-4-4-4m0-11V1L8 5l4 4V6a6 6 0 0 1 6 6c0 1-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12a8 8 0 0 0-8-8"/></svg></span></h2>
+<p>La arquitectura que vas a usar siempre (y la que usa React):</p>
+<pre class="mermaid"><code>flowchart LR
+    E["Evento&lt;br/&gt;clic, input, submit"] --&gt; M["Modelo&lt;br/&gt;tablero.mover(id, …)"] --&gt; R["render()&lt;br/&gt;vacía y repinta"]
+    R -.-&gt;|el DOM nuevo espera| E</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">lista</span><span class="p">.</span><span class="nx">replaceChildren</span><span class="p">(...</span><span class="nx">tablero</span><span class="p">.</span><span class="nx">tareas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">crearItem</span><span class="p">));</span>
+<span class="w">  </span><span class="nx">contador</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">tablero</span><span class="p">.</span><span class="nx">pendientes</span><span class="si">}</span><span class="sb"> pendientes`</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">La regla</p>
+<p><strong>No cambies el DOM «a mano» en los manejadores.</strong> Cambia el <strong>modelo</strong> y llama a <code>render()</code>. Si borras con <code>li.remove()</code> pero el modelo sigue teniendo la tarea, el siguiente render, un contador o un filtro la vuelven a mostrar. Los datos van en <strong>una sola dirección</strong>: del modelo a la vista.</p>
+</div>
+<h3 id="81-rendimiento">8.1. Rendimiento</h3>
+<p>Cada cambio en el DOM puede obligar al navegador a <strong>recalcular tamaños</strong> (<em>reflow</em>) y <strong>volver a pintar</strong> (<em>repaint</em>). Agrupa los cambios:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ✗ 1000 inserciones</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">tareas</span><span class="p">)</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">crearItem</span><span class="p">(</span><span class="nx">t</span><span class="p">));</span>
+
+<span class="c1">// ✓ un fragmento en memoria y UNA inserción (replaceChildren hace lo mismo)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">frag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createDocumentFragment</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">tareas</span><span class="p">)</span><span class="w"> </span><span class="nx">frag</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">crearItem</span><span class="p">(</span><span class="nx">t</span><span class="p">));</span>
+<span class="nx">lista</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">frag</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>No leas medidas (<code>offsetHeight</code>, <code>getBoundingClientRect</code>) dentro de un bucle que escribe en el DOM: fuerzas un reflow en cada vuelta (<em>layout thrashing</em>).</li>
+<li>Para animar, clases con <code>transition</code>/<code>transform</code> en el CSS.</li>
+<li>Con decenas de elementos no lo notarás; con miles, sí.</li>
+</ul>
+<hr />
+<h2 id="9-eventos">9. Eventos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 9a1 1 0 0 1 1-1 1 1 0 0 1 1 1v4.47l1.21.13 4.94 2.19c.53.24.85.77.85 1.35v4.36c-.03.82-.68 1.47-1.5 1.5H11c-.38 0-.74-.15-1-.43l-4.9-4.2.74-.77c.19-.21.46-.32.74-.32h.22L10 19zm1-4a4 4 0 0 1 4 4c0 1.5-.8 2.77-2 3.46v-1.22c.61-.55 1-1.35 1-2.24a3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .89.39 1.69 1 2.24v1.22C7.8 11.77 7 10.5 7 9a4 4 0 0 1 4-4"/></svg></span></h2>
+<h3 id="91-addeventlistener">9.1. <code>addEventListener</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#nueva&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">alPulsar</span><span class="p">(</span><span class="nx">evento</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;pulsado&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">evento</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">alPulsar</span><span class="p">);</span><span class="w">     </span><span class="c1">// ✓ se pasa la FUNCIÓN</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">alPulsar</span><span class="p">());</span><span class="w">   </span><span class="c1">// ✗ la ejecuta YA y registra undefined (sin error)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th style="text-align: center;">¿Varios a la vez?</th>
+<th>¿Se usa?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;button onclick="…"&gt;</code></td>
+<td style="text-align: center;">✗</td>
+<td>No: mezcla HTML y JavaScript</td>
+</tr>
+<tr>
+<td><code>boton.onclick = f</code></td>
+<td style="text-align: center;">✗ (el segundo pisa al primero)</td>
+<td>Poco</td>
+</tr>
+<tr>
+<td><code>boton.addEventListener("click", f)</code></td>
+<td style="text-align: center;">✓</td>
+<td>Sí, siempre</td>
+</tr>
+</tbody>
+</table>
+<p>Es un <strong>callback</strong>, como los de <code>map</code> o <code>forEach</code>: el navegador decide cuándo llamarlo y le pasa el <strong>objeto evento</strong>.</p>
+<h3 id="92-el-objeto-evento">9.2. El objeto evento</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span><span class="w">          </span><span class="c1">// dónde OCURRIÓ: lo más profundo (el icono, un span…)</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">;</span><span class="w">   </span><span class="c1">// quién ESCUCHA: siempre el botón</span>
+<span class="p">});</span>
+
+<span class="nx">campo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;keydown&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span><span class="w">       </span><span class="c1">// &quot;Enter&quot;, &quot;a&quot;, &quot;Escape&quot;, &quot;ArrowUp&quot;</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">;</span><span class="w">   </span><span class="c1">// ¿con Control?</span>
+<span class="p">});</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">target ≠ currentTarget</p>
+<p>Si el botón tiene un icono o un <code>&lt;span&gt;</code> dentro, el clic puede caer en ellos. Si lees <code>e.target.dataset</code> y sale <code>undefined</code>, usa <code>e.currentTarget</code> o <code>e.target.closest(...)</code>.</p>
+</div>
+<h3 id="93-los-eventos-mas-usados">9.3. Los eventos más usados</h3>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Cuándo salta</th>
+<th>Típico para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>click</code></td>
+<td>Pulsar (ratón, dedo, o Enter/espacio sobre un botón)</td>
+<td>Botones, enlaces</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>Cada cambio en un campo, al momento</td>
+<td>Buscar mientras se escribe</td>
+</tr>
+<tr>
+<td><code>change</code></td>
+<td>Al confirmar (soltar el select, marcar, salir del campo)</td>
+<td><code>select</code>, casillas, radios</td>
+</tr>
+<tr>
+<td><code>submit</code></td>
+<td>Enviar el formulario</td>
+<td>Guardar datos</td>
+</tr>
+<tr>
+<td><code>keydown</code></td>
+<td>Pulsar una tecla</td>
+<td>Atajos, Escape</td>
+</tr>
+<tr>
+<td><code>focusin</code> / <code>focusout</code></td>
+<td>Entrar o salir de un campo (suben por el árbol)</td>
+<td>Validar al salir</td>
+</tr>
+<tr>
+<td><code>pointerenter</code> / <code>pointerleave</code></td>
+<td>El puntero entra o sale (no suben)</td>
+<td>Tooltips</td>
+</tr>
+<tr>
+<td><code>DOMContentLoaded</code></td>
+<td>El árbol está listo</td>
+<td>Arrancar la app</td>
+</tr>
+<tr>
+<td><code>scroll</code> / <code>resize</code></td>
+<td>Desplazar / cambiar el tamaño (cientos por segundo)</td>
+<td>Con cuidado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-propagacion-y-delegacion">10. Propagación y delegación <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 20.41 18.41 19 15 15.59 13.59 17M7.5 8H11v5.59L5.59 19 7 20.41l6-6V8h3.5L12 3.5"/></svg></span></h2>
+<h3 id="101-captura-objetivo-y-burbuja">10.1. Captura, objetivo y burbuja</h3>
+<p>Un clic <strong>viaja</strong> por el árbol: <strong>baja</strong> desde <code>window</code> hasta el elemento (<strong>captura</strong>), <strong>llega</strong> (<strong>objetivo</strong>) y <strong>sube</strong> otra vez (<strong>burbuja</strong>).</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Captura
+    direction TB
+    w1[window] --&gt; d1[document] --&gt; b1[body] --&gt; u1[ul] --&gt; l1[li]
+    end
+    l1 --&gt; bt["button&lt;br/&gt;(objetivo)"]
+    subgraph Burbuja
+    direction BT
+    l2[li] --&gt; u2[ul] --&gt; b2[body] --&gt; d2[document] --&gt; w2[window]
+    end
+    bt --&gt; l2</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">ul</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;ul&quot;</span><span class="p">));</span>
+<span class="nx">li</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">));</span>
+<span class="c1">// clic en un botón dentro del li → &quot;li&quot;, luego &quot;ul&quot;</span>
+</code></pre></div>
+<p>Por defecto los listeners escuchan en la <strong>burbuja</strong>; con <code>{ capture: true }</code> escuchan al bajar. No todos los eventos suben: <code>focus</code>, <code>blur</code>, <code>pointerenter</code> y <code>pointerleave</code>, por ejemplo, no.</p>
+<h3 id="102-preventdefault-frente-a-stoppropagation">10.2. <code>preventDefault</code> frente a <code>stopPropagation</code></h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Qué hace</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>e.preventDefault()</code></td>
+<td>Cancela la <strong>acción por defecto del navegador</strong> (enviar el formulario y recargar, seguir el enlace, marcar la casilla). El evento sigue subiendo.</td>
+<td><code>submit</code> de un formulario</td>
+</tr>
+<tr>
+<td><code>e.stopPropagation()</code></td>
+<td>Detiene <strong>el viaje</strong>: los padres no se enteran. El navegador sí hace su acción.</td>
+<td>Úsalo poco: rompe la delegación y la analítica</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nx">form</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w">          </span><span class="c1">// ¡que no recargue!</span>
+<span class="w">  </span><span class="nx">guardar</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">(</span><span class="nx">form</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">El fallo n.º 1 de los formularios</p>
+<p>Olvidar <code>preventDefault</code> en el <code>submit</code>: la página se recarga, la consola se borra y parece que «no hace nada».</p>
+</div>
+<h3 id="103-delegacion-de-eventos">10.3. Delegación de eventos</h3>
+<p>En vez de un listener en cada botón de cada elemento, <strong>uno solo en el padre</strong>. Gracias a la burbuja, el padre se entera de los clics en todos sus hijos, <strong>también en los que se añadan después</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">lista</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;[data-accion]&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">boton</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w">                                  </span><span class="c1">// clic en otro sitio</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">boton</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">).</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span><span class="w">   </span><span class="c1">// ¿qué objeto?</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">accion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">boton</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">accion</span><span class="p">;</span><span class="w">                 </span><span class="c1">// ¿qué hacer?</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">accion</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;borrar&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">tablero</span><span class="p">.</span><span class="nx">borrar</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">accion</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;hecha&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">tablero</span><span class="p">.</span><span class="nx">completar</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Ventajas: <strong>un</strong> listener en vez de cientos, sirve para los elementos que pintes después y no se duplica al repintar.</p>
+<h3 id="104-listeners-duplicados">10.4. Listeners duplicados</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">lista</span><span class="p">.</span><span class="nx">replaceChildren</span><span class="p">(...</span><span class="nx">items</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">nuevaBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">crear</span><span class="p">());</span><span class="w">   </span><span class="c1">// ✗ una flecha NUEVA en cada render</span>
+<span class="p">}</span>
+<span class="c1">// 3 renders → 1 clic crea 3 tareas</span>
+</code></pre></div>
+<ul>
+<li>Añadir <strong>la misma función</strong> dos veces al mismo evento se ignora; cada <strong>flecha nueva</strong> es otra función, y esas sí se acumulan.</li>
+<li>Los listeners se ponen <strong>una vez, al arrancar</strong>, fuera de <code>render()</code>. Para los hijos que se repintan, delegación.</li>
+<li><code>removeEventListener</code> necesita <strong>la misma referencia</strong> (con una flecha nueva no quita nada). <code>{ once: true }</code> lo quita tras la primera vez, y con un <code>AbortController</code> (<code>{ signal }</code>) puedes quitar varios de golpe.</li>
+</ul>
+<hr />
+<h2 id="11-this-teclado-accesibilidad-y-eventos-propios">11. <code>this</code>, teclado, accesibilidad y eventos propios <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 2h16v10H4zm1 1v2h2V8zm3 0v2h2V8zm3 0v2h2V8zm3 0v2h2V8zm3 0v2h2V8zM5 11v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2zm-9 3v2h8v-2z"/></svg></span></h2>
+<h3 id="111-this-en-los-manejadores">11.1. <code>this</code> en los manejadores</h3>
+<table>
+<thead>
+<tr>
+<th>Manejador</th>
+<th><code>this</code> dentro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>function () { … }</code></td>
+<td>El elemento (<code>currentTarget</code>)</td>
+</tr>
+<tr>
+<td><code>() =&gt; { … }</code></td>
+<td>El <code>this</code> de fuera</td>
+</tr>
+<tr>
+<td><code>obj.metodo</code> (pasado sin llamar)</td>
+<td>El elemento: <strong>se pierde <code>obj</code></strong></td>
+</tr>
+<tr>
+<td><code>() =&gt; obj.metodo()</code> o <code>obj.metodo.bind(obj)</code></td>
+<td><code>obj</code> ✓</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Contador</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">#valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">boton</span><span class="p">,</span><span class="w"> </span><span class="nx">salida</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">salida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">salida</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// ✗ boton.addEventListener(&quot;click&quot;, this.sumar);  → this sería el botón</span>
+<span class="w">    </span><span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">sumar</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">sumar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">#valor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">salida</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#valor</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si te sale <code>TypeError: Cannot read private member #valor from an object whose class did not declare it</code>, significa que <code>this</code> no es un <code>Contador</code>: es el <code>this</code> perdido de la UD4.</p>
+<h3 id="112-si-se-puede-pulsar-que-sea-un-button">11.2. Si se puede pulsar, que sea un <code>&lt;button&gt;</code></h3>
+<p>Un <code>&lt;div class="btn"&gt;</code> con <code>click</code> <strong>no</strong> recibe el foco con Tab, <strong>no</strong> reacciona a Enter ni a espacio y el lector de pantalla no dice «botón». Un <strong><code>&lt;button type="button"&gt;</code></strong> trae todo eso de serie (<code>type="button"</code> para que dentro de un formulario no lo envíe).</p>
+<div class="highlight"><pre><span></span><code><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;keydown&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Escape&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">cerrarModal</span><span class="p">();</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;n&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">nuevaTarea</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Prueba de fuego: <strong>desenchufa el ratón</strong>. ¿Puedes usar toda la aplicación con Tab, Enter y Escape? ¿Se ve dónde está el foco (<code>:focus-visible</code>)? Al abrir algo, mueve el foco con <code>elemento.focus()</code>.</p>
+<h3 id="113-eventos-personalizados">11.3. Eventos personalizados</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// quien avisa</span>
+<span class="nx">item</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">CustomEvent</span><span class="p">(</span><span class="s2">&quot;tarea-completada&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">detail</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">7</span><span class="p">,</span><span class="w"> </span><span class="nx">titulo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Entregar&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">bubbles</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">             </span><span class="c1">// sin esto no subiría hasta document</span>
+<span class="p">}));</span>
+
+<span class="c1">// quien escucha, sin conocer a quien avisa</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;tarea-completada&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">mostrarAviso</span><span class="p">(</span><span class="sb">`¡Hecho: </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">titulo</span><span class="si">}</span><span class="sb">!`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Sirven para <strong>desacoplar</strong> partes de la aplicación; los Web Components se comunican así.</p>
+<hr />
+<h2 id="12-formularios">12. Formularios <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 5h3l-1.5 2zM5 2h14a2 2 0 0 1 2 2v16c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2m0 2v4h14V4zm0 16h14V10H5zm2-8h10v2H7zm0 4h10v2H7z"/></svg></span></h2>
+<h3 id="121-leer-un-formulario">12.1. Leer un formulario</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;alta&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;titulo&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;prioridad&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span><span class="p">&gt;</span>baja<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">selected</span><span class="p">&gt;</span>media<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;horas&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Añadir<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">form</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">fromEntries</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">(</span><span class="nx">form</span><span class="p">));</span>
+<span class="w">  </span><span class="c1">// { titulo: &quot;…&quot;, prioridad: &quot;media&quot;, horas: &quot;3&quot; }</span>
+<span class="w">  </span><span class="nx">datos</span><span class="p">.</span><span class="nx">horas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">datos</span><span class="p">.</span><span class="nx">horas</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">tablero</span><span class="p">.</span><span class="nx">crearTarea</span><span class="p">(</span><span class="nx">datos</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">form</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><strong><code>FormData</code></strong> usa el atributo <strong><code>name</code></strong>: un campo sin <code>name</code> no sale.</li>
+<li><strong>Todo llega como string</strong>. Las casillas sin marcar <strong>no aparecen</strong>.</li>
+<li>Escucha <strong><code>submit</code> en el formulario</strong>, no <code>click</code> en el botón: así funciona también al pulsar <strong>Enter</strong> en un campo (si el formulario tiene botón de envío o un solo campo).</li>
+<li><code>form.elements.titulo</code> da el campo por su <code>name</code>; <code>form.reset()</code> lo deja como al cargar.</li>
+</ul>
+<h3 id="122-input-change-y-submit">12.2. <code>input</code>, <code>change</code> y <code>submit</code></h3>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Salta…</th>
+<th>Úsalo para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input</code></td>
+<td>A cada cambio</td>
+<td>Filtros en vivo, contadores de caracteres</td>
+</tr>
+<tr>
+<td><code>change</code></td>
+<td>Al confirmar (en casillas y radios, al marcar)</td>
+<td><code>select</code>, casillas, validar al salir</td>
+</tr>
+<tr>
+<td><code>submit</code></td>
+<td>Al enviar</td>
+<td>Guardar, siempre con <code>preventDefault</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nx">buscador</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">filtro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">buscador</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>En casillas y radios, el estado está en <strong><code>.checked</code></strong>, no en <code>.value</code>.</p>
+<h3 id="123-validacion-nativa">12.3. Validación nativa</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Comprueba</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>required</code></td>
+<td>Que no esté vacío</td>
+</tr>
+<tr>
+<td><code>type="email"</code>, <code>type="url"</code></td>
+<td>El formato</td>
+</tr>
+<tr>
+<td><code>minlength</code>, <code>maxlength</code></td>
+<td>La longitud</td>
+</tr>
+<tr>
+<td><code>min</code>, <code>max</code>, <code>step</code></td>
+<td>Rango de números o fechas</td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td>Una expresión regular que cumpla <strong>todo</strong> el valor</td>
+</tr>
+</tbody>
+</table>
+<p>Sin JavaScript, el navegador no deja enviar el formulario si algo falla. Con <strong><code>novalidate</code></strong> en el <code>&lt;form&gt;</code> quitas sus globos para mostrar tus mensajes, pero los atributos siguen funcionando. En el CSS, <strong><code>:user-invalid</code></strong> marca el campo solo cuando el usuario ya lo ha tocado (mejor que <code>:invalid</code>, que lo marca desde que carga).</p>
+<h3 id="124-constraint-validation-api">12.4. Constraint Validation API</h3>
+<table>
+<thead>
+<tr>
+<th><code>campo.validity.</code></th>
+<th><code>true</code> si…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>valueMissing</code></td>
+<td>Es <code>required</code> y está vacío</td>
+</tr>
+<tr>
+<td><code>typeMismatch</code></td>
+<td>No parece un email / URL</td>
+</tr>
+<tr>
+<td><code>tooShort</code> / <code>tooLong</code></td>
+<td>No cumple <code>minlength</code> / <code>maxlength</code> (<strong>solo con lo que escribe el usuario</strong>)</td>
+</tr>
+<tr>
+<td><code>rangeUnderflow</code> / <code>rangeOverflow</code></td>
+<td>Fuera de <code>min</code> / <code>max</code></td>
+</tr>
+<tr>
+<td><code>patternMismatch</code></td>
+<td>No cumple <code>pattern</code></td>
+</tr>
+<tr>
+<td><code>customError</code></td>
+<td>Hay un mensaje de <code>setCustomValidity</code></td>
+</tr>
+<tr>
+<td><code>valid</code></td>
+<td>Todo bien</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">validarTitulo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">titulo</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">t</span><span class="p">.</span><span class="nx">setCustomValidity</span><span class="p">(</span><span class="s2">&quot;Escribe un título&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">tablero</span><span class="p">.</span><span class="nx">existe</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">t</span><span class="p">.</span><span class="nx">setCustomValidity</span><span class="p">(</span><span class="s2">&quot;Ya hay una tarea así&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// esto el HTML no lo puede saber</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">t</span><span class="p">.</span><span class="nx">setCustomValidity</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w">                        </span><span class="c1">// ← imprescindible: quita el error</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">checkValidity</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">titulo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">validarTitulo</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title"><code>setCustomValidity("")</code></p>
+<p>Si no la llamas, el campo se queda inválido para siempre.</p>
+</div>
+<h3 id="125-mostrar-los-errores-bien">12.5. Mostrar los errores bien</h3>
+<ul>
+<li>Junto al campo, con <strong>borde + icono + texto</strong>: el color solo no basta.</li>
+<li>Une el campo con su mensaje y haz que se anuncie:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;titulo&quot;</span><span class="p">&gt;</span>Título<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;titulo&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;titulo&quot;</span> <span class="na">required</span> <span class="na">minlength</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="na">aria-describedby</span><span class="o">=</span><span class="s">&quot;err-titulo&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;err-titulo&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;error&quot;</span> <span class="na">aria-live</span><span class="o">=</span><span class="s">&quot;polite&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">mostrarError</span><span class="p">(</span><span class="nx">campo</span><span class="p">,</span><span class="w"> </span><span class="nx">mensaje</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">campo</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;aria-invalid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">mensaje</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="sb">`#err-</span><span class="si">${</span><span class="nx">campo</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mensaje</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Al enviar con errores, pon el <strong>foco en el primer campo con error</strong>.</li>
+</ul>
+<h3 id="126-validar-en-el-cliente-no-es-seguridad">12.6. Validar en el cliente no es seguridad</h3>
+<p>La validación del navegador es <strong>comodidad</strong> para el usuario. Cualquiera puede quitar el <code>required</code> en DevTools o enviar la petición sin pasar por tu formulario. <strong>El servidor tiene que volver a validarlo todo</strong> (lo verás con <code>fetch</code> en la UD6). Nunca confíes en un precio, un rol o un id que venga del navegador, ni en <code>hidden</code> o <code>disabled</code>.</p>
+<hr />
+<h2 id="13-verificar-devtools">13. Verificar: DevTools <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elements</strong></td>
+<td>El árbol <strong>real</strong> (no el HTML original). Se puede editar a mano para probar</td>
+</tr>
+<tr>
+<td><code>$0</code> (consola)</td>
+<td>El último elemento seleccionado en Elements</td>
+</tr>
+<tr>
+<td><strong>Event Listeners</strong> (pestaña en Elements)</td>
+<td>Qué escucha cada nodo y en qué línea de tu código</td>
+</tr>
+<tr>
+<td><strong>Break on → subtree modifications</strong></td>
+<td>Pausa cuando algo cambia ese nodo: «¿quién me borra la lista?»</td>
+</tr>
+<tr>
+<td><code>getEventListeners($0)</code></td>
+<td>Los listeners del elemento (solo en la consola de Chrome)</td>
+</tr>
+<tr>
+<td><code>monitorEvents($0, "click")</code></td>
+<td>Imprime cada evento que recibe</td>
+</tr>
+<tr>
+<td><code>$$("a")</code></td>
+<td><code>querySelectorAll</code> como array (solo en la consola)</td>
+</tr>
+</tbody>
+</table>
+<p>Si en <strong>Event Listeners</strong> ves tres <code>click</code> en el mismo botón, tienes el problema de los listeners duplicados (10.4).</p>
+<hr />
+<h2 id="14-errores-comunes">14. Errores comunes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Síntoma</th>
+<th>Arreglo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>querySelector("lista")</code></td>
+<td><code>null</code></td>
+<td><code>querySelector("#lista")</code></td>
+</tr>
+<tr>
+<td>Script en <code>&lt;head&gt;</code> sin <code>defer</code></td>
+<td><code>null</code> al arrancar</td>
+<td><code>type="module"</code>, <code>defer</code> o al final del <code>body</code></td>
+</tr>
+<tr>
+<td><code>li.innerHTML = tarea.titulo</code></td>
+<td>XSS</td>
+<td><code>li.textContent = tarea.titulo</code></td>
+</tr>
+<tr>
+<td><code>querySelectorAll(…).map(…)</code></td>
+<td><code>map is not a function</code></td>
+<td><code>[...querySelectorAll(…)].map(…)</code></td>
+</tr>
+<tr>
+<td><code>dataset.id === 7</code></td>
+<td>Nunca coincide</td>
+<td><code>Number(dataset.id) === 7</code></td>
+</tr>
+<tr>
+<td><code>addEventListener("click", crear())</code></td>
+<td>No hace nada (sin error)</td>
+<td><code>addEventListener("click", crear)</code></td>
+</tr>
+<tr>
+<td>Sin <code>preventDefault</code> en <code>submit</code></td>
+<td>La página se recarga</td>
+<td><code>e.preventDefault()</code> lo primero</td>
+</tr>
+<tr>
+<td>Listener dentro de <code>render()</code></td>
+<td>Cada clic cuenta varias veces</td>
+<td>Una vez al arrancar, o delegación</td>
+</tr>
+<tr>
+<td><code>e.target.dataset.id</code> con un icono dentro</td>
+<td><code>undefined</code></td>
+<td><code>e.target.closest("[data-id]")</code></td>
+</tr>
+<tr>
+<td><code>setCustomValidity("Error")</code> sin limpiar</td>
+<td>El campo no vuelve a ser válido</td>
+<td><code>setCustomValidity(mal ? "Error" : "")</code></td>
+</tr>
+<tr>
+<td><code>setAttribute("disabled", "false")</code></td>
+<td>Se desactiva</td>
+<td><code>boton.disabled = false</code></td>
+</tr>
+<tr>
+<td><code>&lt;div&gt;</code> con <code>click</code> como botón</td>
+<td>No se usa con teclado</td>
+<td><code>&lt;button type="button"&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="15-ejercicio-practico-guiado-agenda-de-contactos">15. Ejercicio práctico guiado: agenda de contactos <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span></h2>
+<p>Proyecto Vite en Docker (como la UD4) con esta estructura:</p>
+<div class="highlight"><pre><span></span><code>index.html              form#alta · input#buscar · p#contador · ul#contactos · template#tpl-contacto
+src/modelo/Contacto.js  nombre y email validados en los setters · favorito · alternarFavorito() · coincide(texto)
+src/modelo/Agenda.js    #contactos · añadir(datos) · borrar(id) · alternarFavorito(id) · buscar(texto) · get total
+src/vista/render.js     crearItem(contacto) con el template · render(lista, contador, contactos, total)
+src/main.js             los listeners, UNA vez → agenda → render
+</code></pre></div>
+<ol>
+<li><strong>Modelo</strong> (<code>Contacto</code>, <code>Agenda</code>): el nombre con al menos 2 letras y el email con formato válido (si no, el constructor lanza). <code>Agenda.añadir</code> no admite dos contactos con el mismo email. <code>buscar(texto)</code> devuelve los que coinciden, <strong>favoritos primero</strong> y luego por nombre.</li>
+<li><strong>Pintar</strong> con el <code>&lt;template&gt;</code>: nombre, email (como enlace <code>mailto:</code>), un botón ★ con <code>aria-pressed</code> y otro de borrar. Contador «1 contacto» / «N contactos» / «2 de 9 contactos» cuando hay filtro.</li>
+<li><strong>Alta</strong>: formulario con <code>novalidate</code>, errores junto a cada campo (<code>validity</code> + <code>aria-invalid</code> + <code>aria-describedby</code>), foco en el primer error y el error del email repetido que viene del modelo.</li>
+<li><strong>Acciones</strong>: favorito y borrar con <strong>un único listener</strong> en la lista (delegación).</li>
+<li><strong>Filtro</strong>: <code>input</code> en el buscador; Escape lo vacía.</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Criterio de éxito</p>
+<p>Alta validada sin recargar; borrar y favorito con un único listener; filtro en vivo; ningún listener duplicado tras 10 altas (compruébalo en <strong>Event Listeners</strong>); y un contacto llamado <code>&lt;img src=x onerror=alert(1)&gt;</code> se muestra como texto.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Si terminas</p>
+<p>Un <code>&lt;select&gt;</code> para ordenar (favoritos primero / alfabético) con el evento <code>change</code>.</p>
+</div>
+<hr />
+<h2 id="16-comprueba-lo-aprendido">16. Comprueba lo aprendido <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3c3.88 0 7 3.14 7 7 0 2.8-1.63 5.19-4 6.31V21H9v-3H8c-1.11 0-2-.89-2-2v-3H4.5c-.42 0-.66-.5-.42-.81L6 9.66A7.003 7.003 0 0 1 13 3m-2.68 4.39h1.93c.01-.3.1-.53.28-.69a1 1 0 0 1 .66-.23c.31 0 .57.1.75.28.18.19.26.45.26.75 0 .32-.07.59-.23.82-.14.23-.35.43-.61.59-.51.34-.86.64-1.05.91-.2.26-.31.68-.31 1.18h2c0-.31.04-.56.13-.74.09-.19.26-.36.51-.52.45-.24.82-.53 1.11-.93s.44-.81.44-1.31c0-.76-.27-1.37-.81-1.82-.53-.45-1.26-.68-2.19-.68-.87 0-1.57.2-2.11.59-.52.41-.78.98-.77 1.77zM12 14h2v-2h-2zm1-13C8.41 1 4.61 4.42 4.06 8.9L2.5 11h-.03l-.02.03c-.55.76-.62 1.76-.19 2.59.36.69 1 1.17 1.74 1.32V16c0 1.85 1.28 3.42 3 3.87V23h11v-5.5c2.5-1.67 4-4.44 4-7.5 0-4.97-4.04-9-9-9"/></svg></span></h2>
+<details class="question">
+<summary>1. <code>ul.childNodes.length</code> da 5 si solo hay dos <code>&lt;li&gt;</code>. ¿Por qué? ¿Qué usarías?</summary>
+<p>Los saltos de línea y espacios entre etiquetas son <strong>nodos de texto</strong>: texto, <code>li</code>, texto, <code>li</code>, texto. Para contar solo elementos, <code>ul.children.length</code> (2).</p>
+</details>
+<details class="question">
+<summary>2. Un <code>&lt;input value="1"&gt;</code> en el que el usuario escribe 5: ¿qué dan <code>getAttribute("value")</code> y <code>.value</code>?</summary>
+<p><code>"1"</code> y <code>"5"</code>. El atributo es el HTML original; la propiedad, el valor actual. Los dos son strings.</p>
+</details>
+<details class="question">
+<summary>3. Clic en el <code>&lt;svg&gt;</code> de un botón que tiene un listener. ¿Qué son <code>e.target</code> y <code>e.currentTarget</code>?</summary>
+<p><code>e.target</code> es el <code>svg</code> (donde ocurrió el clic); <code>e.currentTarget</code> es el botón (quien escucha).</p>
+</details>
+<details class="question">
+<summary>4. ¿Por qué la delegación funciona con los <code>&lt;li&gt;</code> que se añaden después?</summary>
+<p>Porque el listener está en el <strong>padre</strong>, que no cambia, y el clic de cualquier hijo <strong>sube</strong> hasta él por la burbuja. En el manejador se averigua con <code>closest</code> qué hijo se pulsó.</p>
+</details>
+<details class="question">
+<summary>5. <code>li.innerHTML =</code><b>${titulo}</b>`` con el título que escribe el usuario: ¿qué riesgo hay y cómo lo arreglas?</summary>
+<p><strong>XSS</strong>: si escribe HTML con un atributo <code>onerror</code>, su código se ejecuta. Arreglo: <code>const b = document.createElement("b"); b.textContent = titulo; li.replaceChildren(b);</code>.</p>
+</details>
+<details class="question">
+<summary>6. ¿Qué diferencia hay entre <code>preventDefault</code> y <code>stopPropagation</code>?</summary>
+<p><code>preventDefault</code> cancela la acción por defecto del navegador (enviar y recargar, seguir el enlace…), pero el evento sigue subiendo. <code>stopPropagation</code> detiene el viaje del evento hacia los padres, pero el navegador sí hace su acción.</p>
+</details>
+<details class="question">
+<summary>7. ¿Qué imprime este código?</summary>
+<p><div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">n</span><span class="o">++</span><span class="p">;</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">);</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">);</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">n</span><span class="o">++</span><span class="p">);</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+</code></pre></div>
+<code>2</code>. La misma función añadida dos veces cuenta como una; la flecha es otra función.</p>
+</details>
+<details class="question">
+<summary>8. ¿Qué devuelve <code>Object.fromEntries(new FormData(form)).horas</code> si el campo tiene <code>value="3"</code>? ¿Y <code>"urgente" in datos</code> con una casilla <code>urgente</code> sin marcar?</summary>
+<p><code>"3"</code> (string: hay que convertirlo con <code>Number</code>) y <code>false</code>: las casillas sin marcar no se envían.</p>
+</details>
+<details class="question">
+<summary>9. ¿Por qué hay que llamar a <code>setCustomValidity("")</code>?</summary>
+<p>Porque un mensaje puesto con <code>setCustomValidity</code> deja el campo inválido hasta que se quita con la cadena vacía.</p>
+</details>
+<details class="question">
+<summary>10. ¿Por qué no basta con validar en el navegador?</summary>
+<p>Porque el usuario controla todo lo que pasa en el navegador: puede quitar los atributos en DevTools o enviar la petición directamente. La validación del cliente es para ayudar; la que protege es la del servidor.</p>
+</details>
+<hr />
+<h2 id="17-glosario">17. Glosario <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.81 2C4.83 2.09 4 3 4 4v16c0 1.05.95 2 2 2h12c1.05 0 2-.95 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H5.81M12 13h1a1 1 0 0 1 1 1v4h-1v-2h-1v2h-1v-4a1 1 0 0 1 1-1m0 1v1h1v-1zm3 1h3v1l-2 3h2v1h-3v-1l2-3h-2z"/></svg></span></h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DOM</strong></td>
+<td>Representación del documento como árbol de objetos que se puede leer y modificar con código</td>
+</tr>
+<tr>
+<td><strong>Nodo</strong></td>
+<td>Cada pieza del árbol: elemento, texto, comentario o el documento</td>
+</tr>
+<tr>
+<td><strong>Elemento</strong></td>
+<td>Nodo que corresponde a una etiqueta HTML</td>
+</tr>
+<tr>
+<td><strong><code>window</code> / BOM</strong></td>
+<td>El navegador y lo que ofrece además de la página (<code>location</code>, <code>history</code>, <code>localStorage</code>…)</td>
+</tr>
+<tr>
+<td><strong><code>DOMContentLoaded</code></strong></td>
+<td>Evento que indica que el árbol está construido</td>
+</tr>
+<tr>
+<td><strong>NodeList</strong></td>
+<td>Lista de nodos; la de <code>querySelectorAll</code> es estática</td>
+</tr>
+<tr>
+<td><strong>HTMLCollection</strong></td>
+<td>Lista de elementos que se actualiza sola (<code>children</code>)</td>
+</tr>
+<tr>
+<td><strong>Atributo / propiedad</strong></td>
+<td>Lo escrito en el HTML / el valor vivo del objeto DOM</td>
+</tr>
+<tr>
+<td><strong><code>dataset</code></strong></td>
+<td>Acceso a los atributos <code>data-*</code> (camelCase, siempre string)</td>
+</tr>
+<tr>
+<td><strong><code>textContent</code></strong></td>
+<td>Texto de un nodo; asignarlo no interpreta HTML</td>
+</tr>
+<tr>
+<td><strong>XSS</strong></td>
+<td>Inyección de código que se ejecuta en la página de otros a través de datos sin escapar</td>
+</tr>
+<tr>
+<td><strong><code>&lt;template&gt;</code></strong></td>
+<td>HTML inerte que se clona y se rellena desde JavaScript</td>
+</tr>
+<tr>
+<td><strong>Render</strong></td>
+<td>Generar el DOM a partir del modelo</td>
+</tr>
+<tr>
+<td><strong>Reflow / repaint</strong></td>
+<td>Recalcular la geometría / volver a pintar la página</td>
+</tr>
+<tr>
+<td><strong>Evento</strong></td>
+<td>Algo que ocurre: un clic, una tecla, el envío de un formulario…</td>
+</tr>
+<tr>
+<td><strong>Listener (manejador)</strong></td>
+<td>Función que se ejecuta cuando ocurre un evento</td>
+</tr>
+<tr>
+<td><strong><code>target</code> / <code>currentTarget</code></strong></td>
+<td>Elemento donde ocurrió el evento / elemento cuyo listener se ejecuta</td>
+</tr>
+<tr>
+<td><strong>Propagación</strong></td>
+<td>Recorrido del evento: captura → objetivo → burbuja</td>
+</tr>
+<tr>
+<td><strong>Delegación</strong></td>
+<td>Un listener en el padre para gestionar los eventos de todos sus hijos</td>
+</tr>
+<tr>
+<td><strong><code>preventDefault</code></strong></td>
+<td>Cancela la acción por defecto del navegador</td>
+</tr>
+<tr>
+<td><strong><code>stopPropagation</code></strong></td>
+<td>Detiene la propagación del evento</td>
+</tr>
+<tr>
+<td><strong><code>FormData</code></strong></td>
+<td>Los campos de un formulario por su <code>name</code></td>
+</tr>
+<tr>
+<td><strong>Constraint Validation API</strong></td>
+<td><code>validity</code>, <code>checkValidity</code>, <code>setCustomValidity</code>…</td>
+</tr>
+<tr>
+<td><strong><code>aria-live</code></strong></td>
+<td>Región cuyos cambios anuncia el lector de pantalla</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="18-resumen-y-conexion-con-la-siguiente-unidad">18. Resumen y conexión con la siguiente unidad <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></h2>
+<ul>
+<li>La página es un <strong>árbol de objetos</strong>: el DOM. <code>document</code> es su raíz; <code>window</code>, el navegador.</li>
+<li><strong><code>querySelector</code></strong>, <strong><code>closest</code></strong> y <strong><code>dataset</code></strong> encuentran elementos y los conectan con el modelo.</li>
+<li><strong><code>textContent</code></strong>, <strong><code>createElement</code></strong> y <strong><code>&lt;template&gt;</code></strong> pintan sin riesgo; <strong><code>innerHTML</code> nunca con datos del usuario</strong>.</li>
+<li><strong>Evento → modelo → <code>render()</code></strong>, con los listeners puestos <strong>una sola vez</strong> y <strong>delegación</strong> en el padre.</li>
+<li>Formularios: <strong><code>submit</code> + <code>preventDefault</code> + <code>FormData</code></strong>, validación nativa, <code>validity</code> y errores accesibles. Y el servidor vuelve a validar.</li>
+</ul>
+<p><strong>Siguiente: UD6 · Asincronía y almacenamiento.</strong> El modelo ya se ve y responde, pero se pierde al recargar y no habla con ningún servidor. En la UD6: el <em>event loop</em>, promesas y <code>async/await</code>, <code>fetch</code> contra una API, y <code>localStorage</code> para que los datos se recuerden.</p>
+<hr />
+<h2 id="19-referencias-y-fuentes">19. Referencias y fuentes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg></span></h2>
+<ul>
+<li>MDN Web Docs — <a href="https://developer.mozilla.org/es/docs/Web/API/Document_Object_Model/Introduction">Introducción al DOM</a>, <a href="https://developer.mozilla.org/es/docs/Web/API/Element"><code>Element</code></a>, <a href="https://developer.mozilla.org/es/docs/Learn_web_development/Core/Scripting/Events">Introducción a los eventos</a>, <a href="https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener"><code>EventTarget.addEventListener</code></a>.</li>
+<li>MDN — <a href="https://developer.mozilla.org/es/docs/Learn_web_development/Extensions/Forms/Form_validation">Validación de formularios en el cliente</a> y <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">Constraint Validation API</a>.</li>
+<li>WHATWG — <a href="https://dom.spec.whatwg.org/">DOM Standard</a> y <a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element">HTML Standard: el elemento <code>template</code></a>.</li>
+<li>OWASP — <a href="https://owasp.org/www-community/attacks/xss/">Cross Site Scripting (XSS)</a> y <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">XSS Prevention Cheat Sheet</a>.</li>
+<li>W3C WAI — <a href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/">ARIA Authoring Practices: patrón de pestañas</a>.</li>
+<li>web.dev — <a href="https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing">Evita diseños grandes y complejos, y el <em>layout thrashing</em></a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

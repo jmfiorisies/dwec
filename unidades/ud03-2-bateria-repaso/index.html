@@ -896,6 +896,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1476,11 +1532,11 @@ pasa lo mismo:</p>
 </table>
 <p>El comprobador <strong>no te da la solución</strong>: te dice qué caso falla y qué ha salido. Por ejemplo:</p>
 <div class="highlight"><pre><span></span><code>  ✘ 1.1   formatearEuros
-         formatearEuros(5) debería dar '5,00 €' y da '5.00 €'
+         formatearEuros(5) debería dar &#39;5,00 €&#39; y da &#39;5.00 €&#39;
 </code></pre></div>
 <p>Con las predicciones, cuando compruebas <strong>un solo bloque</strong> (<code>./refuerzo.sh comprobar 1</code>), te explica
 el <strong>porqué</strong> de las que aciertas y te da una <strong>pista</strong> (no la respuesta) de las que fallas:</p>
-<div class="highlight"><pre><span></span><code>  ✔ p2 · "5" * 3  → 15: *, - y / no existen para textos, así que convierten a número
+<div class="highlight"><pre><span></span><code>  ✔ p2 · &quot;5&quot; * 3  → 15: *, - y / no existen para textos, así que convierten a número
   ✘ p5 · NaN ?? 1  → no es 1. Pista: ?? no mira si es falsy: solo si es null o undefined
 </code></pre></div>
 <div class="admonition tip">
@@ -1671,10 +1727,10 @@ cómo has trabajado. El ciclo es siempre el mismo: <strong>cambias → <code>git
 <code>git commit -m "qué has hecho"</code></strong>.</p>
 <p>👀 <strong>Ejemplo</strong> (hazlo tal cual, con tus datos):</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w">                                       </span><span class="c1"># convierte la carpeta en un repositorio</span>
-git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Tu Nombre Apellido"</span><span class="w">      </span><span class="c1"># quién firma los commits</span>
-git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"tu-correo@ejemplo.com"</span>
+git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Tu Nombre Apellido&quot;</span><span class="w">      </span><span class="c1"># quién firma los commits</span>
+git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;tu-correo@ejemplo.com&quot;</span>
 git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                                      </span><span class="c1"># prepara TODOS los ficheros</span>
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Kit inicial del refuerzo"</span><span class="w">       </span><span class="c1"># primera foto</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Kit inicial del refuerzo&quot;</span><span class="w">       </span><span class="c1"># primera foto</span>
 git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">                              </span><span class="c1"># ves tu commit</span>
 </code></pre></div>
 <p>✍️ <strong>Tu turno.</strong> A partir de ahora, <strong>al terminar cada bloque</strong> haz un commit con un mensaje que
@@ -1748,7 +1804,7 @@ usamos <code>import</code>/<code>export</code>, el fichero se carga como <strong
 <p>📖 <strong>Lo que tienes que saber.</strong> Cada fichero <code>.js</code> es un <strong>módulo</strong> con sus propias variables. Para
 usar una función de otro fichero, el que la tiene la <strong>exporta</strong> y el que la usa la <strong>importa</strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// fecha.js                                   // main.js</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span><span class="w">            </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"./bloque0/fecha.js"</span><span class="p">;</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span><span class="w">            </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fechaDeHoy</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./bloque0/fecha.js&quot;</span><span class="p">;</span>
 </code></pre></div>
 <p>Los errores que vimos en la práctica 1 (todos hacen que la página se quede sin JavaScript):</p>
 <table>
@@ -2120,7 +2176,7 @@ espacios, cambia la coma por punto y conviértelo con <code>Number</code>. Si sa
 <p>Ficheros: <code>src/bloque2/predicciones.js</code> y <code>src/bloque2/funciones.js</code>.</p>
 <p>📖 <strong>Lo que tienes que saber.</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 1 · Declarada: se puede llamar ANTES de la línea donde está (hoisting)</span>
-<span class="kd">function</span><span class="w"> </span><span class="nx">precioConEstado</span><span class="p">(</span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"usado-como-nuevo"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">precioConEstado</span><span class="p">(</span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;usado-como-nuevo&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
 
 <span class="c1">// 2 · Expresión de función: es una variable; no existe hasta que se ejecuta esta línea</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">precioFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">base</span><span class="p">,</span><span class="w"> </span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">unidades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">};</span>
