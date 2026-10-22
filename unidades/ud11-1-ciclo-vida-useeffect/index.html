@@ -1,0 +1,1725 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>12.1: Ciclo de Vida y Efectos Secundarios (useEffect) - Apuntes DWEC - Desarrollo Web en Entorno Cliente</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#121-ciclo-de-vida-y-efectos-secundarios-useeffect" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-header__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes DWEC - Desarrollo Web en Entorno Cliente
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12.1: Ciclo de Vida y Efectos Secundarios (useEffect)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Apuntes DWEC - Desarrollo Web en Entorno Cliente" class="md-nav__button md-logo" aria-label="Apuntes DWEC - Desarrollo Web en Entorno Cliente" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apuntes DWEC - Desarrollo Web en Entorno Cliente
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🟢 1.ª Evaluación (Vanilla JS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 2: Sintaxis, Tipos y Funciones (RA2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UD 3: Control de Flujo, Bucles y Arrays (RA2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-1-ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 Batería de Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-2-bateria-repaso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Batería de repaso con comprobador (UD1–UD3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-examen-parcial-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📝 Examen Parcial 1 · Parte B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 4: Objetos y Programación Orientada a Objetos (RA3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 5: DOM Nativo y Gestión de Eventos (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia Tecnológica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia Tecnológica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árbol tecnológico completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/tech/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jmfiorisies.github.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Portal docente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-naturaleza-de-los-efectos-secundarios-y-modelo-mental-de-sincronizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Naturaleza de los Efectos Secundarios y Modelo Mental de Sincronización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Naturaleza de los Efectos Secundarios y Modelo Mental de Sincronización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-matriz-de-dependencias-undefined-vs-vs-dep1-dep2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Matriz de Dependencias: undefined vs [] vs [dep1, dep2]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Matriz de Dependencias: undefined vs [] vs [dep1, dep2]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecanismo-interno-de-comparacion-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mecanismo Interno de Comparación de Dependencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-anatomia-de-la-funcion-de-limpieza-cleanup-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Anatomía de la Función de Limpieza (Cleanup Function)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Anatomía de la Función de Limpieza (Cleanup Function)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-momento-exacto-de-ejecucion-de-la-limpieza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Momento Exacto de Ejecución de la Limpieza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cancelacion-de-peticiones-asincronas-con-abortcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Cancelación de Peticiones Asíncronas con AbortController
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-integracion-con-el-browser-object-model-bom-y-web-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Integración con el Browser Object Model (BOM) y Web Storage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Integración con el Browser Object Model (BOM) y Web Storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gestion-de-eventos-globales-de-la-ventana-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Gestión de Eventos Globales de la Ventana (window)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-sincronizacion-declarativa-con-localstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Sincronización Declarativa con localStorage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-encapsulacion-en-hooks-personalizados-custom-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Encapsulación en Hooks Personalizados (Custom Hooks)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Encapsulación en Hooks Personalizados (Custom Hooks)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-custom-hook-1-usewindowsize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Custom Hook 1: useWindowSize
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-custom-hook-2-uselocalstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Custom Hook 2: useLocalStorage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-custom-hook-3-usefetch-con-soporte-para-cancelacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Custom Hook 3: useFetch con Soporte para Cancelación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-anti-patrones-errores-comunes-y-react-1819-strict-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Anti-patrones, Errores Comunes y React 18/19 Strict Mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Anti-patrones, Errores Comunes y React 18/19 Strict Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-anti-patron-1-usar-useeffect-para-transformar-datos-del-render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Anti-patrón 1: Usar useEffect para Transformar Datos del Render
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-anti-patron-2-bucle-infinito-de-renderizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Anti-patrón 2: Bucle Infinito de Renderizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-react-strict-mode-y-la-doble-ejecucion-de-efectos-double-invocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. React Strict Mode y la Doble Ejecución de Efectos (Double Invocation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cuadro-comparativo-ciclo-de-vida-en-clases-vs-useeffect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cuadro Comparativo: Ciclo de Vida en Clases vs useEffect
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-demostracion-practica-completa-buscador-con-debounce-abortcontroller-y-persistencia-bom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Demostración Práctica Completa: Buscador con Debounce, AbortController y Persistencia BOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="121-ciclo-de-vida-y-efectos-secundarios-useeffect">12.1: Ciclo de Vida y Efectos Secundarios (<code>useEffect</code>)</h1>
+<hr />
+<h2 id="1-naturaleza-de-los-efectos-secundarios-y-modelo-mental-de-sincronizacion">1. Naturaleza de los Efectos Secundarios y Modelo Mental de Sincronización</h2>
+<p>En la arquitectura declarativa de React, las funciones de componente deben comportarse como <strong>funciones puras</strong> durante la fase de renderizado: dado un mismo conjunto de <code>props</code> y <code>state</code>, deben devolver exactamente el mismo marcado JSX sin alterar ningún estado fuera de su alcance (<em>scope</em>).</p>
+<p>Un <strong>efecto secundario (<em>side effect</em>)</strong> es cualquier operación que afecte al entorno externo fuera del alcance local del componente o que no forme parte del cálculo directo del JSX:</p>
+<ul>
+<li>Peticiones HTTP de red (APIs REST, GraphQL).</li>
+<li>Suscripciones a eventos nativos del navegador (<code>window.resize</code>, <code>window.scroll</code>, <code>online/offline</code>).</li>
+<li>Manipulación imperativa directa del DOM nativo (no gestionada por Virtual DOM).</li>
+<li>Temporizadores (<code>setInterval</code>, <code>setTimeout</code>).</li>
+<li>Lectura/escritura en almacenamiento local (<code>localStorage</code>, <code>sessionStorage</code>).</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    subgraph PureRender ["1. Fase de Render (Pura)"]
+        direction TB
+        Props["Props"] --&gt; RenderFn["Componente (Función)"]
+        State["State"] --&gt; RenderFn
+        RenderFn --&gt; VDOM["Devuelve Virtual DOM (JSX)"]
+    end
+
+    subgraph CommitPhase ["2. Fase de Commit (Síncrona)"]
+        VDOM --&gt; DOMReal["React actualiza el DOM Real"]
+    end
+
+    subgraph SideEffects ["3. Fase de Efectos (Asíncrona)"]
+        DOMReal ==&gt; UseEffect["useEffect()"]
+        UseEffect --&gt; Fetch["Fetch HTTP"]
+        UseEffect --&gt; BOM["Eventos BOM / Window"]
+        UseEffect --&gt; Storage["LocalStorage"]
+      end
+
+</code></pre>
+<hr />
+<h3 id="11-matriz-de-dependencias-undefined-vs-vs-dep1-dep2">1.1. Matriz de Dependencias: <code>undefined</code> vs <code>[]</code> vs <code>[dep1, dep2]</code></h3>
+<p>El hook <code>useEffect</code> recibe dos parámetros: la función del efecto y la <strong>matriz o array de dependencias</strong> (<code>dependencies array</code>). El comportamiento del efecto depende estrictamente de cómo se configure esta matriz:</p>
+<div class="arithmatex">\[\text{Frecuencia de Ejecución} = f(\text{Matriz de Dependencias})\]</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="c1">// Caso A: Sin matriz de dependencias (undefined)</span>
+<span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Se ejecuta tras el montaje inicial Y tras CADA re-renderizado del componente</span>
+<span class="p">});</span>
+
+<span class="c1">// Caso B: Matriz de dependencias vacía ([])</span>
+<span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Se ejecuta ÚNICAMENTE una vez tras el montaje inicial</span>
+<span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="c1">// Caso C: Matriz con valores específicos ([dep1, dep2])</span>
+<span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Se ejecuta al montar Y cada vez que 'dep1' o 'dep2' cambien de valor</span>
+<span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">dep1</span><span class="p">,</span><span class="w"> </span><span class="nx">dep2</span><span class="p">]);</span>
+</code></pre></div>
+<h4 id="mecanismo-interno-de-comparacion-de-dependencias">Mecanismo Interno de Comparación de Dependencias</h4>
+<p>En cada re-renderizado, React compara cada elemento del array de dependencias actual con su valor en el renderizado anterior utilizando el algoritmo <strong><code>Object.is</code></strong> (comparación superficial):</p>
+<pre class="mermaid"><code>flowchart LR
+    PrevDeps["Deps Render Previo: [a, b]"] --&gt; DiffEngine{"Object.is(prev, next)"}
+    NextDeps["Deps Render Actual: [a', b']"] --&gt; DiffEngine
+
+    DiffEngine --&gt;|Al menos un valor cambió (false)| RunEffect["Ejecuta Efecto Secundario"]
+    DiffEngine --&gt;|Todos los valores idénticos (true)| SkipEffect["Omite Ejecución del Efecto"]
+
+</code></pre>
+<blockquote>
+<p><strong>Regla de Oro de Linting (<code>react-hooks/exhaustive-deps</code>):</strong> Cualquier variable local, <code>prop</code> o función declarada dentro del cuerpo del componente que se utilice dentro del <code>useEffect</code> <strong>DEBE</strong> incluirse obligatoriamente en el array de dependencias. Omitirla genera <em>stale closures</em> (cierres con datos obsoletos).</p>
+</blockquote>
+<hr />
+<h2 id="2-anatomia-de-la-funcion-de-limpieza-cleanup-function">2. Anatomía de la Función de Limpieza (<em>Cleanup Function</em>)</h2>
+<p>Cuando un efecto crea una suscripción, inicia un temporizador o abre una conexión, estos recursos persisten en la memoria del navegador. Si el componente se re-renderiza o se desmonta sin liberar esos recursos, se produce una <strong>fuga de memoria (<em>memory leak</em>)</strong>.</p>
+<p>Para evitar esto, la función pasada a <code>useEffect</code> puede retornar una <strong>función de limpieza (<em>cleanup function</em>)</strong>.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant React as Motor de React
+    participant Comp as Componente
+    participant Effect as useEffect
+    participant Resource as Recurso / Listener
+
+    Note over React, Comp: === FASE 1: MONTAJE ===
+    React-&gt;&gt;Comp: Renderiza Componente (dep = 1)
+    Comp-&gt;&gt;Effect: Ejecuta Efecto Secundario
+    Effect-&gt;&gt;Resource: Registra listener / Timer (id=1)
+
+    Note over React, Comp: === FASE 2: ACTUALIZACIÓN (dep cambia a 2) ===
+    React-&gt;&gt;Comp: Re-renderiza Componente (dep = 2)
+    Comp-&gt;&gt;Effect: Detecta cambio en dependencias
+    Effect-&gt;&gt;Resource: 🧹 EJECUTA CLEANUP de Render 1 (Limpia id=1)
+    Effect-&gt;&gt;Resource: Ejecuta nuevo Efecto de Render 2 (Crea id=2)
+
+    Note over React, Comp: === FASE 3: DESMONTAJE ===
+    React-&gt;&gt;Comp: Elimina componente del DOM
+    Comp-&gt;&gt;Effect: 🧹 EJECUTA CLEANUP de Render 2 (Limpia id=2)
+</code></pre>
+<hr />
+<h3 id="21-momento-exacto-de-ejecucion-de-la-limpieza">2.1. Momento Exacto de Ejecución de la Limpieza</h3>
+<p>La función de limpieza devuelta por <code>useEffect</code> se ejecuta en dos situaciones:</p>
+<ol>
+<li><strong>Antes de volver a ejecutar el efecto</strong> cuando una dependencia ha cambiado (limpia el efecto anterior antes de aplicar el nuevo).</li>
+<li><strong>Cuando el componente se desmonta</strong> de la interfaz (se elimina del DOM Real).</li>
+</ol>
+<hr />
+<h3 id="22-cancelacion-de-peticiones-asincronas-con-abortcontroller">2.2. Cancelación de Peticiones Asíncronas con <code>AbortController</code></h3>
+<p>Un problema clásico en aplicaciones web es la <strong>condición de carrera (<em>race condition</em>)</strong>: si un usuario cambia rápidamente de pestaña o de filtro, se envían múltiples peticiones HTTP. Si la primera petición (obsoleta) responde <em>después</em> de la última petición (válida), la interfaz mostrará datos incorrectos.</p>
+<p>La solución estándar en JavaScript moderno es la API <strong><code>AbortController</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">PerfilUsuarioCancellable</span><span class="p">({</span><span class="w"> </span><span class="nx">usuarioId</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">usuarioId</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">usuario</span><span class="p">,</span><span class="w"> </span><span class="nx">setUsuario</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Usuario</span><span class="w"> </span><span class="na">null</span><span class="w"> </span><span class="err">|</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">cargando</span><span class="p">,</span><span class="w"> </span><span class="nx">setCargando</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">setError</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">string</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Instanciar el AbortController para esta ejecución del efecto</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setCargando</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">respuesta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span>
+<span class="w">          </span><span class="sb">`[https://jsonplaceholder.typicode.com/users/$](https://jsonplaceholder.typicode.com/users/$){usuarioId}`</span><span class="p">,</span>
+<span class="w">          </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Vinculamos la señal de aborto a la petición fetch</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">respuesta</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Error en la petición: </span><span class="si">${</span><span class="nx">respuesta</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">Usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">respuesta</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">setUsuario</span><span class="p">(</span><span class="nx">datos</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Ignoramos el error si fue causado por la cancelación explícita</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'AbortError'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[ABORT] Petición cancelada para usuarioId: </span><span class="si">${</span><span class="nx">usuarioId</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">setError</span><span class="p">((</span><span class="nx">err</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="ne">Error</span><span class="p">).</span><span class="nx">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setCargando</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">cargarDatos</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 2. FUNCIÓN DE LIMPIEZA: Se ejecuta si usuarioId cambia o el componente se desmonta</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span><span class="w"> </span><span class="c1">// Cancela la petición HTTP en tránsito a nivel de red</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">usuarioId</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Se re-ejecuta cada vez que cambia usuarioId</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cargando</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Cargando</span><span class="w"> </span><span class="nx">perfil</span><span class="p">...&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'red'</span><span class="w"> </span><span class="p">}}&gt;</span><span class="ne">Error</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">error</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">usuario</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;{</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="p">}&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">email</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="3-integracion-con-el-browser-object-model-bom-y-web-storage">3. Integración con el Browser Object Model (BOM) y Web Storage</h2>
+<h3 id="31-gestion-de-eventos-globales-de-la-ventana-window">3.1. Gestión de Eventos Globales de la Ventana (<code>window</code>)</h3>
+<p>Para escuchar eventos del navegador como <code>resize</code>, <code>keydown</code>, <code>scroll</code> o cambios en el estado de la conexión (<code>online</code>/<code>offline</code>), se deben registrar los escuchadores dentro de un <code>useEffect</code> y eliminarlos en la función de limpieza:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">MonitorEstadoRed</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">estaOnline</span><span class="p">,</span><span class="w"> </span><span class="nx">setEstaOnline</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">onLine</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setEstaOnline</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOffline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setEstaOnline</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Suscripción a eventos del BOM</span>
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'online'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnline</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'offline'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOffline</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Limpieza obligatoria para evitar fugas de memoria</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'online'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnline</span><span class="p">);</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'offline'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOffline</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span><span class="w"> </span><span class="c1">// Solo al montar y desmontar</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">      </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">'10px'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kt">estaOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'#d4edda'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'#f8d7da'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kt">estaOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'#155724'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'#721c24'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">borderRadius</span><span class="o">:</span><span class="w"> </span><span class="s1">'4px'</span>
+<span class="w">    </span><span class="p">}}&gt;</span>
+<span class="w">      </span><span class="nx">Estado</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">Conexión</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;{</span><span class="nx">estaOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'ONLINE'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'OFFLINE'</span><span class="p">}&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="32-sincronizacion-declarativa-con-localstorage">3.2. Sincronización Declarativa con <code>localStorage</code></h3>
+<p><code>localStorage</code> es una API síncrona imperativa del BOM. Para integrarla correctamente con React, la lectura inicial debe realizarse mediante <strong>lazy initial state</strong> en <code>useState</code> para evitar lecturas de disco innecesarias en cada render, y la persistencia debe sincronizarse mediante <code>useEffect</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">ConfigUsuario</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Inicialización perezosa (Lazy Initial State): Solo lee de localStorage en el PRIMER RENDER</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">tema</span><span class="p">,</span><span class="w"> </span><span class="nx">setTema</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="s1">'claro'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'oscuro'</span><span class="o">&gt;</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">temaGuardado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'app_tema'</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">temaGuardado</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="s1">'claro'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'oscuro'</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">'claro'</span><span class="p">;</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="c1">// Efecto de sincronización con la API externa del BOM</span>
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'app_tema'</span><span class="p">,</span><span class="w"> </span><span class="nx">tema</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`theme-</span><span class="si">${</span><span class="nx">tema</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">tema</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Se ejecuta cada vez que cambia 'tema'</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Tema</span><span class="w"> </span><span class="nx">actual</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;{</span><span class="nx">tema</span><span class="p">}&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTema</span><span class="p">(</span><span class="nx">tema</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'claro'</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'oscuro'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'claro'</span><span class="p">)}&gt;</span>
+<span class="w">        </span><span class="nx">Alternar</span><span class="w"> </span><span class="nx">Tema</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="4-encapsulacion-en-hooks-personalizados-custom-hooks">4. Encapsulación en Hooks Personalizados (<em>Custom Hooks</em>)</h2>
+<p>Un <strong>Custom Hook</strong> es una función de JavaScript cuyo nombre comienza por <code>use</code> y que puede invocar otros Hooks de React (<code>useState</code>, <code>useEffect</code>, <code>useRef</code>, etc.). Permiten extraer y reutilizar la lógica con efectos secundarios manteniendo los componentes visuales limpios.</p>
+<h3 id="41-custom-hook-1-usewindowsize">4.1. Custom Hook 1: <code>useWindowSize</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">WindowSize</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ancho</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">alto</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useWindowSize</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">WindowSize</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">dimensiones</span><span class="p">,</span><span class="w"> </span><span class="nx">setDimensiones</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">WindowSize</span><span class="o">&gt;</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">ancho</span><span class="o">:</span><span class="w"> </span><span class="kt">window.innerWidth</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">alto</span><span class="o">:</span><span class="w"> </span><span class="kt">window.innerHeight</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleResize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setDimensiones</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">ancho</span><span class="o">:</span><span class="w"> </span><span class="kt">window.innerWidth</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">alto</span><span class="o">:</span><span class="w"> </span><span class="kt">window.innerHeight</span><span class="p">,</span>
+<span class="w">      </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'resize'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleResize</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'resize'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleResize</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">dimensiones</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="42-custom-hook-2-uselocalstorage">4.2. Custom Hook 2: <code>useLocalStorage</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useLocalStorage</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">clave</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">valorInicial</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">nuevoValor</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="nx">val</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">T</span><span class="p">))</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Lectura perezosa inicial</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">valor</span><span class="p">,</span><span class="w"> </span><span class="nx">setValor</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">clave</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">valorInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error leyendo clave de localStorage "</span><span class="si">${</span><span class="nx">clave</span><span class="si">}</span><span class="sb">":`</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">valorInicial</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="c1">// Sincronización</span>
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">clave</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">valor</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error guardando en localStorage "</span><span class="si">${</span><span class="nx">clave</span><span class="si">}</span><span class="sb">":`</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">clave</span><span class="p">,</span><span class="w"> </span><span class="nx">valor</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="nx">valor</span><span class="p">,</span><span class="w"> </span><span class="nx">setValor</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="43-custom-hook-3-usefetch-con-soporte-para-cancelacion">4.3. Custom Hook 3: <code>useFetch</code> con Soporte para Cancelación</h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">StateFetch</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">cargando</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useFetch</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">StateFetch</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">estado</span><span class="p">,</span><span class="w"> </span><span class="nx">setEstado</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">StateFetch</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cargando</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">setEstado</span><span class="p">({</span><span class="w"> </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">,</span><span class="w"> </span><span class="nx">cargando</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="kt">controller.signal</span><span class="w"> </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`HTTP Error Status: </span><span class="si">${</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setEstado</span><span class="p">({</span><span class="w"> </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">data</span><span class="p">,</span><span class="w"> </span><span class="nx">cargando</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'AbortError'</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">setEstado</span><span class="p">({</span><span class="w"> </span><span class="nx">datos</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">,</span><span class="w"> </span><span class="nx">cargando</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="ne">Error</span><span class="p">).</span><span class="nx">message</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">url</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">estado</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="5-anti-patrones-errores-comunes-y-react-1819-strict-mode">5. Anti-patrones, Errores Comunes y React 18/19 Strict Mode</h2>
+<h3 id="51-anti-patron-1-usar-useeffect-para-transformar-datos-del-render">5.1. Anti-patrón 1: Usar <code>useEffect</code> para Transformar Datos del Render</h3>
+<p><strong>❌ INCORRECTO:</strong> Usar <code>useEffect</code> para calcular un estado derivado basándose en otro estado. Esto provoca un re-renderizado extra e innecesario.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ INCORRECTO (Causa 2 renderizados consecutivos):</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">ListaNombres</span><span class="p">({</span><span class="w"> </span><span class="nx">personas</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personas</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}[]</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">setTotal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setTotal</span><span class="p">(</span><span class="nx">personas</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// 🔴 ERROR: Re-render innecesario</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">personas</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Total</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">total</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>✅ CORRECTO:</strong> Calcular el valor derivado directamente durante la fase de render (o con <code>useMemo</code> si es muy costoso):</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ✅ CORRECTO (0 renderizados extra):</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">ListaNombres</span><span class="p">({</span><span class="w"> </span><span class="nx">personas</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personas</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}[]</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">personas</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="c1">// Calcule directamente en render</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Total</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">total</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="52-anti-patron-2-bucle-infinito-de-renderizado">5.2. Anti-patrón 2: Bucle Infinito de Renderizado</h3>
+<p>Ocurre cuando un <code>useEffect</code> actualiza un estado que a su vez está incluido en su propio array de dependencias o cuando se pasa un objeto/array sin memorizar:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ BUCLE INFINITO DE RENDERS:</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">BucleInfinito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">,</span><span class="w"> </span><span class="nx">setContador</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setContador</span><span class="p">(</span><span class="nx">contador</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Mutación de estado</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">contador</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Depende del estado que acaba de mutar -&gt; BUCLE INFINITO</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">contador</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="53-react-strict-mode-y-la-doble-ejecucion-de-efectos-double-invocation">5.3. React Strict Mode y la Doble Ejecución de Efectos (<em>Double Invocation</em>)</h3>
+<p>En entorno de desarrollo (<code>development</code>), cuando la aplicación está envuelta en <code>&lt;React.StrictMode&gt;</code>, <strong>React monta, desmonta y vuelve a montar intencionadamente cada componente</strong>:</p>
+<div class="highlight"><pre><span></span><code>[Strict Mode en Desarrollo Execution Order]
+1. Monta Componente
+2. Ejecuta useEffect()
+3. 🧪 SIMULA DESMONTAJE: Ejecuta Cleanup Function () =&gt; {}
+4. Vuelve a Montar Componente
+5. Vuelve a ejecutar useEffect()
+</code></pre></div>
+<p><strong>¿Por qué sucede esto?</strong>
+Para forzar al desarrollador a detectar efectos que no implementaron la función de limpieza (<em>cleanup function</em>) adecuada. Si tu código se rompe cuando el efecto se ejecuta dos veces en desarrollo, <strong>tu efecto carece de función de limpieza o esta está mal diseñada</strong>.</p>
+<hr />
+<h2 id="6-cuadro-comparativo-ciclo-de-vida-en-clases-vs-useeffect">6. Cuadro Comparativo: Ciclo de Vida en Clases vs <code>useEffect</code></h2>
+<table>
+<thead>
+<tr>
+<th>Fase del Ciclo de Vida</th>
+<th>Componentes de Clase (Legacy)</th>
+<th>Equivalente en Hooks (<code>useEffect</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Montaje Inicial</strong></td>
+<td><code>componentDidMount()</code></td>
+<td><code>useEffect(() =&gt; { ... }, [])</code></td>
+</tr>
+<tr>
+<td><strong>Actualización por Props/Estado</strong></td>
+<td><code>componentDidUpdate(prevProps, prevState)</code></td>
+<td><code>useEffect(() =&gt; { ... }, [dep1, dep2])</code></td>
+</tr>
+<tr>
+<td><strong>Desmontaje</strong></td>
+<td><code>componentWillUnmount()</code></td>
+<td><code>useEffect(() =&gt; { return () =&gt; { /* Cleanup */ } }, [])</code></td>
+</tr>
+<tr>
+<td><strong>Renderizado (Todas las Fases)</strong></td>
+<td><code>render()</code></td>
+<td>Cuerpo principal de la función componente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-demostracion-practica-completa-buscador-con-debounce-abortcontroller-y-persistencia-bom">7. Demostración Práctica Completa: Buscador con Debounce, AbortController y Persistencia BOM</h2>
+<p>Esta aplicación completa integra los conceptos trabajados en la Subunidad 12.1:</p>
+<ul>
+<li>Implementación de un buscador interactivo contra la API de GitHub.</li>
+<li><strong>Debounce de 500ms</strong> utilizando <code>setTimeout</code> y su correspondiente función de limpieza para evitar spam de peticiones por cada pulsación de tecla.</li>
+<li>**Cancelación de peticiones en tránsito con <code>AbortController**</code>.</li>
+<li><strong>Persistencia del historial de búsquedas</strong> en <code>localStorage</code> usando el custom hook <code>useLocalStorage</code>.</li>
+<li><strong>Detección de estado de red</strong> mediante un hook personalizado.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+
+<span class="c1">// --- 1. TYPES &amp; INTERFACES ---</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">Repository</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">html_url</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">stargazers_count</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">GitHubSearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="kt">Repository</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 2. CUSTOM HOOKS ---</span>
+
+<span class="c1">// Custom Hook para persistencia en localStorage</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">useLocalStorage</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">initialValue</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">Dispatch</span><span class="p">&lt;</span><span class="nt">React</span><span class="p">.</span><span class="na">SetStateAction</span><span class="err">&lt;</span><span class="na">T</span><span class="p">&gt;</span><span class="o">&gt;</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">storedValue</span><span class="p">,</span><span class="w"> </span><span class="nx">setStoredValue</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">initialValue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error reading key "</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">" from localStorage`</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">initialValue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">storedValue</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error setting key "</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">" to localStorage`</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">storedValue</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="nx">storedValue</span><span class="p">,</span><span class="w"> </span><span class="nx">setStoredValue</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Custom Hook para escuchar estado online/offline del BOM</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">useNetworkStatus</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">isOnline</span><span class="p">,</span><span class="w"> </span><span class="nx">setIsOnline</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">onLine</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setIsOnline</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOffline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setIsOnline</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'online'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnline</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'offline'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOffline</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'online'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnline</span><span class="p">);</span>
+<span class="w">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'offline'</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOffline</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">isOnline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// --- 3. COMPONENTE PRINCIPAL ---</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">BuscadorRepositoriosGitHub</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="nx">setQuery</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;(</span><span class="s1">''</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">debouncedQuery</span><span class="p">,</span><span class="w"> </span><span class="nx">setDebouncedQuery</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;(</span><span class="s1">''</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">repos</span><span class="p">,</span><span class="w"> </span><span class="nx">setRepos</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Repository</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">loading</span><span class="p">,</span><span class="w"> </span><span class="nx">setLoading</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">setError</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">string</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Historial en localStorage mediante Custom Hook</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">historial</span><span class="p">,</span><span class="w"> </span><span class="nx">setHistorial</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useLocalStorage</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">[]</span><span class="p">&gt;(</span><span class="s1">'github_search_history'</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">isOnline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useNetworkStatus</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// EFECTO 1: Debounce para retrasar la actualización de 'debouncedQuery' 500ms</span>
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">timerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setDebouncedQuery</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mf">500</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// CLEANUP 1: Limpia el temporizador anterior si el usuario vuelve a escribir antes de 500ms</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timerId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">query</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="c1">// EFECTO 2: Fetch asíncrono con AbortController dependiente de 'debouncedQuery'</span>
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Si la búsqueda filtrada está vacía, reseteamos resultados</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">debouncedQuery</span><span class="p">.</span><span class="nx">trim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setRepos</span><span class="p">([]);</span>
+<span class="w">      </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchRepos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span>
+<span class="w">          </span><span class="sb">`[https://api.github.com/search/repositories?q=$](https://api.github.com/search/repositories?q=$){encodeURIComponent(debouncedQuery)}&amp;per_page=5`</span><span class="p">,</span>
+<span class="w">          </span><span class="p">{</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Error HTTP: </span><span class="si">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">GitHubSearchResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">setRepos</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">items</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">        </span><span class="c1">// Guardar en el historial de localStorage sin duplicados</span>
+<span class="w">        </span><span class="nx">setHistorial</span><span class="p">((</span><span class="nx">prev</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Set</span><span class="p">([</span><span class="nx">debouncedQuery</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">prev</span><span class="p">])).</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">));</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'AbortError'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[ABORT] Petición cancelada para término: "</span><span class="si">${</span><span class="nx">debouncedQuery</span><span class="si">}</span><span class="sb">"`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">setError</span><span class="p">((</span><span class="nx">err</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="ne">Error</span><span class="p">).</span><span class="nx">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">fetchRepos</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// CLEANUP 2: Cancela la petición HTTP si el usuario cambia el texto o se desmonta</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">debouncedQuery</span><span class="p">,</span><span class="w"> </span><span class="nx">setHistorial</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">'650px'</span><span class="p">,</span><span class="w"> </span><span class="nx">margin</span><span class="o">:</span><span class="w"> </span><span class="s1">'20px auto'</span><span class="p">,</span><span class="w"> </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">'sans-serif'</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="nx">Buscador</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Repositorios</span><span class="w"> </span><span class="p">(</span><span class="nx">GitHub</span><span class="w"> </span><span class="nx">API</span><span class="p">)&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Indicador de Red del BOM */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">'8px'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">marginBottom</span><span class="o">:</span><span class="w"> </span><span class="s1">'15px'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">borderRadius</span><span class="o">:</span><span class="w"> </span><span class="s1">'4px'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kt">isOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'#e8f5e9'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'#ffebee'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kt">isOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'#2e7d32'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'#c62828'</span>
+<span class="w">      </span><span class="p">}}&gt;</span>
+<span class="w">        </span><span class="nx">Red</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;{</span><span class="nx">isOnline</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'🟢 Conectado'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'🔴 Sin Conexión'</span><span class="p">}&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Input de Búsqueda */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">input</span>
+<span class="w">        </span><span class="na">type</span><span class="o">=</span><span class="s">"text"</span>
+<span class="w">        </span><span class="na">placeholder</span><span class="o">=</span><span class="s">"Escriba para buscar (ej. react, typescript)..."</span>
+<span class="w">        </span><span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">query</span><span class="p">}</span>
+<span class="w">        </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setQuery</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
+<span class="w">        </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="s1">'100%'</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">'10px'</span><span class="p">,</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">'16px'</span><span class="p">,</span><span class="w"> </span><span class="nx">boxSizing</span><span class="o">:</span><span class="w"> </span><span class="s1">'border-box'</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">      </span><span class="p">/&gt;</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Historial almacenado en LocalStorage */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">historial</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginTop</span><span class="o">:</span><span class="w"> </span><span class="s1">'10px'</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span><span class="nx">Búsquedas</span><span class="w"> </span><span class="nx">recientes</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">{</span><span class="nx">historial</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">idx</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span>
+<span class="w">              </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">idx</span><span class="p">}</span>
+<span class="w">              </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setQuery</span><span class="p">(</span><span class="nx">item</span><span class="p">)}</span>
+<span class="w">              </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginRight</span><span class="o">:</span><span class="w"> </span><span class="s1">'5px'</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">'2px 8px'</span><span class="p">,</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">'12px'</span><span class="p">,</span><span class="w"> </span><span class="nx">cursor</span><span class="o">:</span><span class="w"> </span><span class="s1">'pointer'</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">            </span><span class="p">&gt;</span>
+<span class="w">              </span><span class="p">{</span><span class="nx">item</span><span class="p">}</span>
+<span class="w">            </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">))}</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">)}</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Estado de Carga */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">loading</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#0288d1'</span><span class="w"> </span><span class="p">}}&gt;</span><span class="err">🔎</span><span class="w"> </span><span class="nx">Buscando</span><span class="w"> </span><span class="nx">repositorios</span><span class="w"> </span><span class="p">(</span><span class="nx">Debounced</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">Cancelable</span><span class="p">)...&lt;/</span><span class="nt">p</span><span class="p">&gt;}</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#d32f2f'</span><span class="w"> </span><span class="p">}}&gt;</span><span class="err">❌</span><span class="w"> </span><span class="ne">Error</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">error</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;}</span>
+
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Resultados de la Búsqueda */</span><span class="p">}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">ul</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">listStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">'none'</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span><span class="w"> </span><span class="nx">marginTop</span><span class="o">:</span><span class="w"> </span><span class="s1">'20px'</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">repos</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">repo</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">li</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">repo</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">border</span><span class="o">:</span><span class="w"> </span><span class="s1">'1px solid #ddd'</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">'12px'</span><span class="p">,</span><span class="w"> </span><span class="nx">marginBottom</span><span class="o">:</span><span class="w"> </span><span class="s1">'8px'</span><span class="p">,</span><span class="w"> </span><span class="nx">borderRadius</span><span class="o">:</span><span class="w"> </span><span class="s1">'4px'</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">a</span><span class="w"> </span><span class="na">href</span><span class="o">=</span><span class="p">{</span><span class="nx">repo</span><span class="p">.</span><span class="nx">html_url</span><span class="p">}</span><span class="w"> </span><span class="na">target</span><span class="o">=</span><span class="s">"_blank"</span><span class="w"> </span><span class="na">rel</span><span class="o">=</span><span class="s">"noreferrer"</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fontWeight</span><span class="o">:</span><span class="w"> </span><span class="s1">'bold'</span><span class="p">,</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">'18px'</span><span class="w"> </span><span class="p">}}&gt;</span>
+<span class="w">              </span><span class="p">{</span><span class="nx">repo</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span>
+<span class="w">            </span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginLeft</span><span class="o">:</span><span class="w"> </span><span class="s1">'10px'</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#f57c00'</span><span class="w"> </span><span class="p">}}&gt;</span><span class="err">⭐</span><span class="w"> </span><span class="p">{</span><span class="nx">repo</span><span class="p">.</span><span class="nx">stargazers_count</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">p</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">margin</span><span class="o">:</span><span class="w"> </span><span class="s1">'5px 0 0 0'</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#555'</span><span class="w"> </span><span class="p">}}&gt;{</span><span class="nx">repo</span><span class="p">.</span><span class="nx">description</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">'Sin descripción'</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

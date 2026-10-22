@@ -781,6 +781,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ud03-examen-parcial-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📝 Examen Parcial 1 · Parte B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1331,9 +1359,9 @@ que motivaron la creación de <code>let</code> y <code>const</code>. Un ejemplo 
 <span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// Imprime: 3, 3, 3  &lt;- ¡todas imprimen el mismo valor final, no 0, 1, 2!</span>
-<span class="c1">// Esto ocurre porque las 3 funciones comparten la MISMA variable &quot;i&quot; (scope de función)</span>
+<span class="c1">// Esto ocurre porque las 3 funciones comparten la MISMA variable "i" (scope de función)</span>
 
-<span class="c1">// Con let: el scope es de BLOQUE — cada vuelta del bucle tiene su propia &quot;i&quot;</span>
+<span class="c1">// Con let: el scope es de BLOQUE — cada vuelta del bucle tiene su propia "i"</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1378,13 +1406,13 @@ moderno, <strong><code>var</code> prácticamente no se usa nunca</strong>.</p>
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code><span class="c1">// Uso recomendado en desarrollo moderno</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">API_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://api.ejemplo.com/v1&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Valor inmutable</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">API_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://api.ejemplo.com/v1"</span><span class="p">;</span><span class="w"> </span><span class="c1">// Valor inmutable</span>
 <span class="kd">let</span><span class="w"> </span><span class="nx">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">                             </span><span class="c1">// Variable reasignable</span>
 <span class="nx">contador</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 
 <span class="c1">// const evita reasignación de referencia, pero permite mutar objetos/arrays</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">rol</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Admin&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Ana María&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// VÁLIDO: Mutación de propiedad</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="nx">rol</span><span class="o">:</span><span class="w"> </span><span class="s2">"Admin"</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Ana María"</span><span class="p">;</span><span class="w"> </span><span class="c1">// VÁLIDO: Mutación de propiedad</span>
 <span class="c1">// usuario = {};              // ERROR: TypeError (Reasignación de referencia)</span>
 </code></pre></div>
 <p><strong>Regla práctica para decidir:</strong> empieza siempre por <code>const</code>. Si más adelante descubres que
@@ -1444,8 +1472,8 @@ siguiente apartado).</p>
 </table>
 <p>Dos casos especiales de <code>Number</code> que sorprenden a quien empieza:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">        </span><span class="c1">// Infinity (no es un error, es un valor válido)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hola&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// NaN (&quot;Not a Number&quot; — resultado de una operación numérica imposible)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="kc">NaN</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;number&quot;  &lt;- NaN ES de tipo number, aunque su nombre confunda</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"hola"</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// NaN ("Not a Number" — resultado de una operación numérica imposible)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="kc">NaN</span><span class="p">);</span><span class="w">   </span><span class="c1">// "number"  &lt;- NaN ES de tipo number, aunque su nombre confunda</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">NaN</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">NaN</span><span class="p">);</span><span class="w">  </span><span class="c1">// false  &lt;- NaN nunca es igual a sí mismo; para comprobarlo usa Number.isNaN(valor)</span>
 </code></pre></div>
 <p><strong>Undefined vs. Null — la diferencia que confunde a todo el mundo al principio:</strong></p>
@@ -1483,10 +1511,10 @@ argumento a una función.</p>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">edad</span><span class="p">,</span><span class="w"> </span><span class="nx">copiaEdad</span><span class="p">);</span><span class="w"> </span><span class="c1">// 25 30 — no se afectan entre sí</span>
 
 <span class="c1">// Objetos: copia por REFERENCIA</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Ana"</span><span class="w"> </span><span class="p">};</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">otraVariable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">usuario</span><span class="p">;</span><span class="w"> </span><span class="c1">// copia la REFERENCIA, no el objeto</span>
-<span class="nx">otraVariable</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Laura&quot;</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;Laura&quot; -- el &quot;original&quot; tambien cambio</span>
+<span class="nx">otraVariable</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Laura"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">usuario</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="c1">// "Laura" -- el "original" tambien cambio</span>
 </code></pre></div>
 <p>Esto explica por qué, más adelante, técnicas como el operador <em>spread</em> (<code>{ ...objeto }</code>) son
 necesarias para crear una copia real e independiente de un objeto — sin <em>spread</em>, solo
@@ -1502,31 +1530,31 @@ estarías creando una segunda referencia al mismo dato.</p>
 operadores. Para entender la coerción hace falta primero saber qué valores se consideran
 "falsos" cuando JavaScript necesita tratarlos como un booleano.</p>
 <p><strong>Los valores <em>falsy</em> (solo hay 8, apréndetelos de memoria):</strong></p>
-<div class="highlight"><pre><span></span><code><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">NaN</span>
+<div class="highlight"><pre><span></span><code><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">NaN</span>
 </code></pre></div>
 <p><strong>Todo lo demás es <em>truthy</em></strong> — incluido, y esto sorprende mucho a quien empieza:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- es un STRING no vacío, aunque contenga el texto &quot;0&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">"0"</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- es un STRING no vacío, aunque contenga el texto "0"</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">([]));</span><span class="w">       </span><span class="c1">// true  -- un array vacío es un objeto, y los objetos siempre son truthy</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">({}));</span><span class="w">       </span><span class="c1">// true  -- igual que arriba</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- un espacio en blanco NO es un string vacío</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">" "</span><span class="p">));</span><span class="w">      </span><span class="c1">// true  -- un espacio en blanco NO es un string vacío</span>
 </code></pre></div>
 <p>Con esta base, la coerción tiene más sentido:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Coerción Implícita (Evitar)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// &quot;55&quot; (Number se convierte a String)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">    </span><span class="c1">// 8   (String se convierte a Number)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"5"</span><span class="p">);</span><span class="w">     </span><span class="c1">// "55" (Number se convierte a String)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"10"</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">    </span><span class="c1">// 8   (String se convierte a Number)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// true (false se convierte a 0, y 0 == 0)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">     </span><span class="c1">// true (&quot;&quot; se convierte a 0)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">""</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">     </span><span class="c1">// true ("" se convierte a 0)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">);</span><span class="w"> </span><span class="c1">// true (caso especial: solo son == entre sí)</span>
 
 <span class="c1">// Comparación Estricta (Recomendado SIEMPRE)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// false (Compara valor Y tipo de dato, sin convertir nada)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"10"</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
 
 <span class="c1">// Coerción Explícita (cuando SÍ quieres convertir, hazlo tú mismo y que se note en el código)</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">numeroTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;42&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">numeroTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"42"</span><span class="p">;</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">numeroReal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">numeroTexto</span><span class="p">);</span><span class="w">   </span><span class="c1">// 42</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">comoTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span><span class="w">             </span><span class="c1">// &quot;100&quot;</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">comoBooleano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">&quot;cualquier cosa&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">comoTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span><span class="w">             </span><span class="c1">// "100"</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">comoBooleano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Boolean</span><span class="p">(</span><span class="s2">"cualquier cosa"</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
 </code></pre></div>
 <p><strong>Regla de oro de esta unidad:</strong> usa siempre <code>===</code> y <code>!==</code>. El operador <code>==</code> existe por
 compatibilidad histórica, pero sus reglas de conversión son tan irregulares que ni los
@@ -1564,7 +1592,7 @@ función tradicional:</p>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="c1">// 2. Quitamos &quot;function&quot; y ponemos la flecha después de los parámetros</span>
+<span class="c1">// 2. Quitamos "function" y ponemos la flecha después de los parámetros</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">precioConIva2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">precio</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">precio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.21</span><span class="p">;</span>
 <span class="p">};</span>
@@ -1612,12 +1640,12 @@ función tradicional:</p>
 
 <span class="c1">// ❌ 2. Devolver un objeto sin paréntesis → JS cree que las llaves son el cuerpo</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">crearCafe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="p">};</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">crearCafe</span><span class="p">(</span><span class="s2">&quot;Latte&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// undefined (&quot;nombre:&quot; se interpreta como una etiqueta)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">crearCafe</span><span class="p">(</span><span class="s2">"Latte"</span><span class="p">));</span><span class="w"> </span><span class="c1">// undefined ("nombre:" se interpreta como una etiqueta)</span>
 
 <span class="c1">// ✅ Correcto</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">dobleBien</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">crearCafeBien</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dobleBien</span><span class="p">(</span><span class="mf">4</span><span class="p">),</span><span class="w"> </span><span class="nx">crearCafeBien</span><span class="p">(</span><span class="s2">&quot;Latte&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// 8 { nombre: &#39;Latte&#39; }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dobleBien</span><span class="p">(</span><span class="mf">4</span><span class="p">),</span><span class="w"> </span><span class="nx">crearCafeBien</span><span class="p">(</span><span class="s2">"Latte"</span><span class="p">));</span><span class="w"> </span><span class="c1">// 8 { nombre: 'Latte' }</span>
 </code></pre></div>
 </div>
 <h3 id="las-limitaciones-de-las-arrow-functions-importante-se-te-puede-escapar">Las Limitaciones de las Arrow Functions (Importante — se te puede escapar)</h3>
@@ -1633,9 +1661,9 @@ que la contiene).</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">valor</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">incrementar</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Aquí &quot;this&quot; es &quot;contador&quot;, correctamente</span>
+<span class="w">    </span><span class="c1">// Aquí "this" es "contador", correctamente</span>
 <span class="w">    </span><span class="nx">setInterval</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// la arrow function HEREDA el &quot;this&quot; correcto de incrementar()</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// la arrow function HEREDA el "this" correcto de incrementar()</span>
 <span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">valor</span><span class="p">);</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
@@ -1646,20 +1674,20 @@ que la contiene).</p>
 con todos los argumentos pasados, aunque no estén declarados como parámetros. Las arrow
 functions no lo tienen:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sumaTodo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// [1, 2, 3] -- funciona, aunque no se declararon parámetros</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// [1, 2, 3] -- funciona, aunque no se declararon parámetros</span>
 <span class="p">}</span>
 <span class="nx">sumaTodo</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">sumaTodoFlecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// ReferenceError: arguments is not defined</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">arguments</span><span class="p">);</span><span class="w"> </span><span class="c1">// ReferenceError: arguments is not defined</span>
 <span class="p">};</span>
 </code></pre></div>
 <p>Además, aunque se imprima parecido, <code>arguments</code> <strong>no es un array</strong>: es un objeto «parecido a un
 array» (<em>array-like</em>), con <code>length</code> e índices pero <strong>sin <code>map</code>, <code>filter</code> ni <code>reduce</code></strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">totalAntiguo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">));</span><span class="w"> </span><span class="c1">// false</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nb">arguments</span><span class="p">));</span><span class="w"> </span><span class="c1">// false</span>
 <span class="w">  </span><span class="c1">// arguments.reduce(...)  ❌ TypeError: arguments.reduce is not a function</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// hay que convertirlo antes</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nb">arguments</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// hay que convertirlo antes</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalAntiguo</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">));</span><span class="w"> </span><span class="c1">// 6</span>
 </code></pre></div>
@@ -1670,19 +1698,19 @@ antiguo: <code>const sumaTodo = (...args) =&gt; { console.log(args); }</code>.</
 <p>Estos tres métodos sirven para ejecutar una función indicando manualmente cuál será su
 <code>this</code>. Como una arrow function ya tiene su <code>this</code> fijado (heredado) desde el momento en que
 se escribió, intentar cambiárselo con <code>call</code>/<code>apply</code>/<code>bind</code> simplemente no tiene efecto:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">objeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sala A&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">objeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Sala A"</span><span class="w"> </span><span class="p">};</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">normal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">flecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
 
-<span class="nx">normal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;Sala A&quot; -- call() SÍ puede fijar el &quot;this&quot;</span>
-<span class="nx">flecha</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// no funciona como esperas -- flecha ya tenía su &quot;this&quot; decidido de antes</span>
+<span class="nx">normal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// "Sala A" -- call() SÍ puede fijar el "this"</span>
+<span class="nx">flecha</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">objeto</span><span class="p">);</span><span class="w">  </span><span class="c1">// no funciona como esperas -- flecha ya tenía su "this" decidido de antes</span>
 </code></pre></div>
 <p><strong>4. No se pueden usar como constructor (con <code>new</code>)</strong></p>
 <p>Un constructor necesita crear su propio <code>this</code> (la nueva instancia). Como una arrow function
 no puede tener su propio <code>this</code>, JavaScript directamente prohíbe usarlas con <code>new</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">Persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nombre</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// TypeError: Persona is not a constructor</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Persona</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">);</span><span class="w"> </span><span class="c1">// TypeError: Persona is not a constructor</span>
 </code></pre></div>
 <p><strong>5. No pueden usar <code>yield</code> (no pueden ser funciones generadoras)</strong></p>
 <p>Esto es más avanzado y lo verás si trabajas con <em>generadores</em> — por ahora basta con saber que
@@ -1692,12 +1720,12 @@ heredar el <code>this</code> de fuera — pero cuando necesites un método de un
 constructor, o acceso a <code>arguments</code>, usa una función tradicional (declarada o expresión).</p>
 <h3 id="parametros-por-defecto-y-parametros-rest">Parámetros por Defecto y Parámetros Rest</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// Parámetros por defecto: se usan SOLO si el argumento llega como undefined</span>
-<span class="kd">function</span><span class="w"> </span><span class="nx">saludar</span><span class="p">(</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Invitado&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">rol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Usuario&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">saludar</span><span class="p">(</span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Invitado"</span><span class="p">,</span><span class="w"> </span><span class="nx">rol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Usuario"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hola </span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">, tu rol es </span><span class="si">${</span><span class="nx">rol</span><span class="si">}</span><span class="sb">.`</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nx">saludar</span><span class="p">();</span><span class="w">              </span><span class="c1">// &quot;Hola Invitado, tu rol es Usuario.&quot;</span>
-<span class="nx">saludar</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">);</span><span class="w">          </span><span class="c1">// &quot;Hola Ana, tu rol es Usuario.&quot;</span>
-<span class="nx">saludar</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w">    </span><span class="c1">// &quot;Hola Ana, tu rol es null&quot; -- ¡null NO activa el valor por defecto, solo undefined lo hace!</span>
+<span class="nx">saludar</span><span class="p">();</span><span class="w">              </span><span class="c1">// "Hola Invitado, tu rol es Usuario."</span>
+<span class="nx">saludar</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">);</span><span class="w">          </span><span class="c1">// "Hola Ana, tu rol es Usuario."</span>
+<span class="nx">saludar</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w">    </span><span class="c1">// "Hola Ana, tu rol es null" -- ¡null NO activa el valor por defecto, solo undefined lo hace!</span>
 
 <span class="c1">// Parámetros Rest (...args): Agrupa argumentos restantes en un Array</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">calcularSumaTotal</span><span class="p">(</span><span class="nx">factor</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">numeros</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1710,11 +1738,11 @@ constructor, o acceso a <code>arguments</code>, usa una función tradicional (de
 <p>El parámetro <em>rest</em> siempre debe ser el <strong>último</strong> de la lista de parámetros — agrupa "todo lo
 que sobre", así que no tendría sentido que hubiera más parámetros después de él
 (<code>(...productos, mesa) =&gt; {}</code> es un <strong>SyntaxError</strong>).</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Parámetros normales + rest: el rest recoge &quot;lo que sobra&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// Parámetros normales + rest: el rest recoge "lo que sobra"</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">mesa</span><span class="p">,</span><span class="w"> </span><span class="nx">camarero</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">productos</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
-<span class="w">  </span><span class="sb">`Mesa </span><span class="si">${</span><span class="nx">mesa</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">camarero</span><span class="si">}</span><span class="sb">): </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb"> productos → </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">  </span><span class="sb">`Mesa </span><span class="si">${</span><span class="nx">mesa</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">camarero</span><span class="si">}</span><span class="sb">): </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb"> productos → </span><span class="si">${</span><span class="nx">productos</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ticket</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Luis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Café&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Tostada&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Zumo&quot;</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ticket</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="s2">"Luis"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Café"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tostada"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Zumo"</span><span class="p">));</span>
 <span class="c1">// Mesa 4 (Luis): 3 productos → Café, Tostada, Zumo</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">totalCuenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">importes</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">importes</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
@@ -1757,8 +1785,8 @@ constantemente a partir de ahora (en la UD3 son la base para no mutar arrays):</
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">precios</span><span class="p">));</span><span class="w"> </span><span class="c1">// 3   (spread: pasa 1.2, 2.4, 3 sueltos)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">precios</span><span class="p">));</span><span class="w">    </span><span class="c1">// NaN (le llega UN array, no números)</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">latte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Latte&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="w"> </span><span class="p">};</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">latteMasCaro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">latte</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// spread: copia y lo de la derecha &quot;gana&quot;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">latte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Latte"</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.4</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">latteMasCaro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">latte</span><span class="p">,</span><span class="w"> </span><span class="nx">precio</span><span class="o">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// spread: copia y lo de la derecha "gana"</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">latte</span><span class="p">.</span><span class="nx">precio</span><span class="p">,</span><span class="w"> </span><span class="nx">latteMasCaro</span><span class="p">.</span><span class="nx">precio</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2.4 2.6</span>
 </code></pre></div>
 <p>Recuerda lo visto en <a href="#valor-vs-referencia-como-se-guardan-los-datos">Valor vs. Referencia</a>:
@@ -1783,11 +1811,11 @@ sin tocar el original. En la UD3 verás cómo usarlo para actualizar un elemento
 </ol>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">evaluarAmbito</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">variableVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Soy VAR&quot;</span><span class="p">;</span><span class="w">     </span><span class="c1">// Ámbito de función</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">variableLet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Soy LET&quot;</span><span class="p">;</span><span class="w">     </span><span class="c1">// Ámbito de bloque</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">variableConst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Soy CONST&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Ámbito de bloque</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">variableVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Soy VAR"</span><span class="p">;</span><span class="w">     </span><span class="c1">// Ámbito de función</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">variableLet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Soy LET"</span><span class="p">;</span><span class="w">     </span><span class="c1">// Ámbito de bloque</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">variableConst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Soy CONST"</span><span class="p">;</span><span class="w"> </span><span class="c1">// Ámbito de bloque</span>
 <span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">variableVar</span><span class="p">);</span><span class="w">   </span><span class="c1">// Imprime: &quot;Soy VAR&quot;</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">variableVar</span><span class="p">);</span><span class="w">   </span><span class="c1">// Imprime: "Soy VAR"</span>
 <span class="w">  </span><span class="c1">// console.log(variableLet);  // ReferenceError: variableLet is not defined</span>
 <span class="w">  </span><span class="c1">// console.log(variableConst);// ReferenceError: variableConst is not defined</span>
 <span class="p">}</span>
@@ -1805,16 +1833,16 @@ ninguna línea de código.</p>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// Comportamiento de HOISTING con var</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">textoVar</span><span class="p">);</span><span class="w"> </span><span class="c1">// Imprime: undefined (no lanza error)</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">textoVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hola&quot;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">textoVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hola"</span><span class="p">;</span>
 
 <span class="c1">// Comportamiento de TDZ con let</span>
-<span class="c1">// console.log(textoLet); // ReferenceError: Cannot access &#39;textoLet&#39; before initialization</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">textoLet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Mundo&quot;</span><span class="p">;</span>
+<span class="c1">// console.log(textoLet); // ReferenceError: Cannot access 'textoLet' before initialization</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">textoLet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Mundo"</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>Las funciones declaradas también sufren hoisting completo</strong> (se elevan CON su contenido, no
 solo su nombre) — por eso puedes llamarlas antes de donde aparecen escritas en el archivo:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">saluda</span><span class="p">();</span><span class="w"> </span><span class="c1">// funciona, aunque saluda() está definida más abajo</span>
-<span class="kd">function</span><span class="w"> </span><span class="nx">saluda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">saluda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <p>Esto <strong>no</strong> ocurre con las expresiones de función ni las arrow functions, porque para ellas
 solo se eleva la declaración de la variable (<code>const miFuncion</code>), no su contenido — y esa
@@ -1834,7 +1862,7 @@ se define (excepto en las arrow functions, que son la excepción a esta regla).<
    contexto <code>this</code> del ámbito léxico donde fueron creadas (ver limitaciones en la sección 2).</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">nombre</span><span class="o">:</span><span class="w"> </span><span class="s2">"Carlos"</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">saludarTradicional</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Hola, soy </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="w">  </span><span class="p">},</span>
@@ -1843,26 +1871,26 @@ se define (excepto en las arrow functions, que son la excepción a esta regla).<
 <span class="w">  </span><span class="p">}</span>
 <span class="p">};</span>
 
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarTradicional</span><span class="p">();</span><span class="w"> </span><span class="c1">// Imprime: &quot;Hola, soy Carlos&quot;</span>
-<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarFlecha</span><span class="p">();</span><span class="w">      </span><span class="c1">// Imprime: &quot;Hola, soy undefined&quot; (hereda &#39;this&#39; global, no el de usuario)</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarTradicional</span><span class="p">();</span><span class="w"> </span><span class="c1">// Imprime: "Hola, soy Carlos"</span>
+<span class="nx">usuario</span><span class="p">.</span><span class="nx">saludarFlecha</span><span class="p">();</span><span class="w">      </span><span class="c1">// Imprime: "Hola, soy undefined" (hereda 'this' global, no el de usuario)</span>
 </code></pre></div>
 <p><strong>Un bug clásico de principiante</strong> relacionado con esto — perder el <code>this</code> al pasar un método
 como callback:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">etiqueta</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Enviar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">etiqueta</span><span class="o">:</span><span class="w"> </span><span class="s2">"Enviar"</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">manejarClic</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Botón pulsado: </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">etiqueta</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">};</span>
 
 <span class="c1">// Si lo llamas directamente, funciona:</span>
-<span class="nx">boton</span><span class="p">.</span><span class="nx">manejarClic</span><span class="p">();</span><span class="w"> </span><span class="c1">// &quot;Botón pulsado: Enviar&quot;</span>
+<span class="nx">boton</span><span class="p">.</span><span class="nx">manejarClic</span><span class="p">();</span><span class="w"> </span><span class="c1">// "Botón pulsado: Enviar"</span>
 
-<span class="c1">// Pero si lo pasas como referencia (por ejemplo a un event listener), pierdes el &quot;this&quot;:</span>
-<span class="c1">// elemento.addEventListener(&quot;click&quot;, boton.manejarClic); // this ya NO sería &quot;boton&quot;</span>
+<span class="c1">// Pero si lo pasas como referencia (por ejemplo a un event listener), pierdes el "this":</span>
+<span class="c1">// elemento.addEventListener("click", boton.manejarClic); // this ya NO sería "boton"</span>
 
-<span class="c1">// Solución típica: envolverlo en una arrow function para preservar el &quot;this&quot; correcto</span>
-<span class="c1">// elemento.addEventListener(&quot;click&quot;, () =&gt; boton.manejarClic());</span>
+<span class="c1">// Solución típica: envolverlo en una arrow function para preservar el "this" correcto</span>
+<span class="c1">// elemento.addEventListener("click", () =&gt; boton.manejarClic());</span>
 </code></pre></div>
 <hr />
 <h2 id="5-closures-clausuras">5. <em>Closures</em> (Clausuras)</h2>
@@ -1916,7 +1944,7 @@ registro de pedidos, un historial de ventas…). Vamos a desmontarlo línea a l�
 <span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">pedidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w"> </span><span class="c1">// (1) variable PRIVADA: solo la ven las funciones de abajo</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// (2) cada propiedad del objeto es una función que &quot;recuerda&quot; pedidos</span>
+<span class="w">    </span><span class="c1">// (2) cada propiedad del objeto es una función que "recuerda" pedidos</span>
 <span class="w">    </span><span class="nx">registrar</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">pedido</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nx">pedidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">pedidos</span><span class="p">,</span><span class="w"> </span><span class="nx">pedido</span><span class="p">];</span><span class="w"> </span><span class="c1">// (3) array NUEVO, sin push</span>
 <span class="w">    </span><span class="p">},</span>
@@ -1977,7 +2005,7 @@ referencia:</p>
 <span class="kd">const</span><span class="w"> </span><span class="nx">insegura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCajaInsegura</span><span class="p">();</span>
 <span class="nx">insegura</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">3.6</span><span class="w"> </span><span class="p">});</span>
 <span class="nx">insegura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">99</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1000</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// ¡fraude desde fuera!</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insegura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2 ← el &quot;privado&quot; ha sido modificado</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insegura</span><span class="p">.</span><span class="nx">obtenerPedidos</span><span class="p">().</span><span class="nx">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2 ← el "privado" ha sido modificado</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">segura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crearCaja</span><span class="p">();</span>
 <span class="nx">segura</span><span class="p">.</span><span class="nx">registrar</span><span class="p">({</span><span class="w"> </span><span class="nx">mesa</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">importe</span><span class="o">:</span><span class="w"> </span><span class="mf">3.6</span><span class="w"> </span><span class="p">});</span>
@@ -2007,16 +2035,16 @@ posteriormente, normalmente dentro del cuerpo de la función que la recibió.</p
 <span class="p">}</span>
 
 <span class="c1">// Invocación pasando una función flecha como callback</span>
-<span class="nx">procesarEntradaUsuario</span><span class="p">(</span><span class="s2">&quot;  juan pérez  &quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">procesarEntradaUsuario</span><span class="p">(</span><span class="s2">"  juan pérez  "</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Usuario registrado: </span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-<span class="p">});</span><span class="w"> </span><span class="c1">// Imprime: &quot;Usuario registrado: JUAN PÉREZ&quot;</span>
+<span class="p">});</span><span class="w"> </span><span class="c1">// Imprime: "Usuario registrado: JUAN PÉREZ"</span>
 </code></pre></div>
 <p><strong>El otro tipo de HOF: una función que devuelve otra función.</strong> Esto es extremadamente común
 en JavaScript moderno y se apoya directamente en los closures que acabas de ver:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// HOF que DEVUELVE una función, &quot;recordando&quot; el argumento con el que se creó</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// HOF que DEVUELVE una función, "recordando" el argumento con el que se creó</span>
 <span class="kd">function</span><span class="w"> </span><span class="nx">crearMultiplicador</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">numero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">numero</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">factor</span><span class="p">;</span><span class="w"> </span><span class="c1">// &quot;factor&quot; se recuerda gracias al closure</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">numero</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">factor</span><span class="p">;</span><span class="w"> </span><span class="c1">// "factor" se recuerda gracias al closure</span>
 <span class="w">  </span><span class="p">};</span>
 <span class="p">}</span>
 
@@ -2038,7 +2066,7 @@ en JavaScript moderno y se apoya directamente en los closures que acabas de ver:
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">descuentoSocio</span><span class="p">(</span><span class="mf">2.0</span><span class="p">));</span><span class="w">     </span><span class="c1">// 1.8</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">descuentoHappyHour</span><span class="p">(</span><span class="mf">2.0</span><span class="p">));</span><span class="w"> </span><span class="c1">// 1</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">descuentoSocio</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;function&quot; ← lo que devolvió es una función</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">descuentoSocio</span><span class="p">);</span><span class="w">   </span><span class="c1">// "function" ← lo que devolvió es una función</span>
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Dos llamadas, dos momentos</p>
@@ -2097,7 +2125,7 @@ ejecutar cada ejemplo, <strong>escribe en un comentario qué crees que va a sali
    donde <code>productos</code> son objetos <code>{ nombre, precio }</code> y <code>total</code> su suma.</li>
 <li>Reescribe con <em>rest</em> y como <em>arrow function</em>:
    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">nombresEnMayusculas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nb">arguments</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">lista</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
 <span class="p">}</span>
 </code></pre></div></li>
