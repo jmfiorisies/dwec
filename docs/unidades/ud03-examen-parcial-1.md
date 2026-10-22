@@ -8,8 +8,8 @@ No tiene por qué coincidir con el modelo de tu test.
 
 | | Script del examen | Enunciado (PDF) |
 |---|---|---|
-| **Modelo A** | [⬇️ crear-examen-A.sh](../assets/examen-parcial-1/crear-examen-A.sh){ download } | [📄 Modelo A](../assets/examen-parcial-1/Examen-P1_DWEC_Modelo-A_imprimir.pdf){ target="_blank" } |
-| **Modelo B** | [⬇️ crear-examen-B.sh](../assets/examen-parcial-1/crear-examen-B.sh){ download } | [📄 Modelo B](../assets/examen-parcial-1/Examen-P1_DWEC_Modelo-B_imprimir.pdf){ target="_blank" } |
+| **Modelo A** | [⬇️ crear-examen-A.sh](../assets/examen-parcial-1/crear-examen-A.sh){ download="crear-examen-A.sh" } | [📄 Modelo A](../assets/examen-parcial-1/Examen-P1_DWEC_Modelo-A_imprimir.pdf){ target="_blank" } |
+| **Modelo B** | [⬇️ crear-examen-B.sh](../assets/examen-parcial-1/crear-examen-B.sh){ download="crear-examen-B.sh" } | [📄 Modelo B](../assets/examen-parcial-1/Examen-P1_DWEC_Modelo-B_imprimir.pdf){ target="_blank" } |
 
 ## 1 · Abrir
 
