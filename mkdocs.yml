@@ -66,6 +66,7 @@ nav:
           - "Visión General": unidades/ud03.md
           - "3.1 Batería de Ejercicios": unidades/ud03-1-ejercicios.md
           - "3.2 Batería de repaso con comprobador (UD1–UD3)": unidades/ud03-2-bateria-repaso.md
+          - "📝 Examen Parcial 1 · Parte B": unidades/ud03-examen-parcial-1.md
       - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
       - "UD 5: DOM Nativo y Gestión de Eventos (RA4)": unidades/ud05.md
       - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)": unidades/ud06.md
