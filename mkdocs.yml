@@ -62,13 +62,21 @@ nav:
   - 🟢 1.ª Evaluación (Vanilla JS):
       - "UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)": unidades/ud01.md
       - "UD 2: Sintaxis, Tipos y Funciones (RA2)": unidades/ud02.md
-      - "UD 3: Control de Flujo, Bucles y Arrays (RA2)":
-          - "Visión General": unidades/ud03.md
-          - "3.1 Batería de Ejercicios": unidades/ud03-1-ejercicios.md
-          - "3.2 Batería de repaso con comprobador (UD1–UD3)": unidades/ud03-2-bateria-repaso.md
+      - "UD 3: Control de Flujo, Bucles y Arrays (RA2)": unidades/ud03.md
       - "UD 4: Objetos y Programación Orientada a Objetos (RA3)": unidades/ud04.md
       - "UD 5: DOM Nativo y Gestión de Eventos (RA4)": unidades/ud05.md
       - "UD 6: Asincronía y Almacenamiento (Storage/Vite) (RA4)": unidades/ud06.md
+  # Baterías y prácticas: CIFRADAS con la contraseña del curso (los originales están en Organización,
+  # web-protegida/dwec). Se regeneran con Organizacion/web-protegida/publicar.sh DWEC
+  - 🏋️ Practicar (con contraseña):
+      - Baterías de ejercicios:
+          - "UD1–UD3 · Ejercicios de control de flujo, bucles y arrays": unidades/ud03-1-ejercicios/
+          - "UD1–UD3 · Repaso con comprobador": unidades/ud03-2-bateria-repaso/
+          - "UD4 · Objetos y clases": unidades/ud04-1-bateria/
+          - "UD5 · DOM y eventos": unidades/ud05-1-bateria/
+          - "UD6 · Asincronía y almacenamiento": unidades/ud06-1-bateria/
+      - Prácticas:
+          - "P2 · Tablero de tareas (kanban)": practicas/p2-tablero/
   # - 🟡 2.ª Evaluación (React):
   #     - "UD 7: React Core, JSX y Arquitectura Frontend (RA5)":
   #         - "Visión General": unidades/ud07.md
