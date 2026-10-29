@@ -919,6 +919,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#105-map-y-set-colecciones-con-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5. Map y Set: colecciones con clave
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2034,6 +2045,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#105-map-y-set-colecciones-con-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5. Map y Set: colecciones con clave
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3027,6 +3049,11 @@
 <td>Errores</td>
 <td><code>throw new Error(…)</code></td>
 </tr>
+<tr>
+<td><code>Map</code> / <code>Set</code></td>
+<td>Diccionarios / valores sin repetir</td>
+<td><code>new Map()</code>, <code>get</code>, <code>set</code>, <code>has</code></td>
+</tr>
 </tbody>
 </table>
 <p><code>Math</code>, <code>JSON</code> e <code>Intl</code> no se instancian con <code>new</code>: son objetos con métodos estáticos. <code>Date</code>, <code>Error</code> o <code>Map</code> son clases.</p>
@@ -3197,6 +3224,103 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>Herencia bien usada: un <code>ValidacionError</code> <strong>es un</strong> <code>Error</code>. Lanza siempre <code>new Error(…)</code> o una subclase, nunca <code>throw "texto"</code> (sin <code>stack</code> ni <code>instanceof</code>). Lo usarás en formularios (UD5) y con <code>fetch</code> (UD6).</p>
+<h3 id="105-map-y-set-colecciones-con-clave">10.5. <code>Map</code> y <code>Set</code>: colecciones con clave</h3>
+<p>Un objeto literal sirve para describir <strong>una cosa</strong> con campos fijos (<code>{ nombre, precio }</code>). Cuando lo que quieres es un <strong>diccionario</strong> al que añades, buscas y quitas entradas mientras el programa funciona (nombre → columna, ISBN → libro, id → tarea), mejor un <code>Map</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">([</span><span class="w">          </span><span class="c1">// se puede crear vacío o con pares [clave, valor]</span>
+<span class="w">  </span><span class="p">[</span><span class="s2">&quot;teclado&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">],</span>
+<span class="w">  </span><span class="p">[</span><span class="s2">&quot;ratón&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span>
+<span class="p">]);</span>
+
+<span class="nx">stock</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;monitor&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">         </span><span class="c1">// añadir (o cambiar, si ya estaba)</span>
+<span class="nx">stock</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;teclado&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// 5</span>
+<span class="nx">stock</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;altavoz&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// undefined: no está</span>
+<span class="nx">stock</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="s2">&quot;ratón&quot;</span><span class="p">);</span><span class="w">              </span><span class="c1">// true   ← ¿existe esa clave?</span>
+<span class="nx">stock</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s2">&quot;monitor&quot;</span><span class="p">);</span><span class="w">         </span><span class="c1">// true si estaba (false si no)</span>
+<span class="nx">stock</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span><span class="w">                      </span><span class="c1">// 2      (propiedad, sin paréntesis)</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">producto</span><span class="p">,</span><span class="w"> </span><span class="nx">uds</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">stock</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">producto</span><span class="p">,</span><span class="w"> </span><span class="nx">uds</span><span class="p">);</span><span class="w">   </span><span class="c1">// en orden de inserción</span>
+<span class="p">[...</span><span class="nx">stock</span><span class="p">.</span><span class="nx">keys</span><span class="p">()];</span><span class="w">               </span><span class="c1">// [&quot;teclado&quot;, &quot;ratón&quot;]</span>
+<span class="p">[...</span><span class="nx">stock</span><span class="p">.</span><span class="nx">values</span><span class="p">()];</span><span class="w">             </span><span class="c1">// [5, 0]</span>
+<span class="p">[...</span><span class="nx">stock</span><span class="p">];</span><span class="w">                      </span><span class="c1">// [[&quot;teclado&quot;, 5], [&quot;ratón&quot;, 0]] → ya puedes usar filter, map…</span>
+</code></pre></div>
+<p><strong><code>has</code> antes de usar.</strong> Lo normal es comprobar que la clave existe y, si no, lanzar un error con el nombre que ha fallado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">Almacen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">#estanterias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span><span class="w">            </span><span class="c1">// nombre → array de productos</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">nombres</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">nombres</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#estanterias</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">estanteria</span><span class="p">(</span><span class="nx">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="n">#estanterias</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">nombre</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`No existe la estantería «</span><span class="si">${</span><span class="nx">nombre</span><span class="si">}</span><span class="sb">»`</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">#estanterias</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">nombre</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Almacen</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">]);</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">estanteria</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// []</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">estanteria</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Error: No existe la estantería «Z»</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">¿Por qué <code>has</code> y no <code>if (!stock.get(clave))</code>?</p>
+<p>Porque un valor guardado puede ser <strong>falsy</strong>: <code>stock.get("ratón")</code> vale <code>0</code>, y <code>!0</code> es <code>true</code>. El <code>if</code> diría «no existe» y el ratón sí está, con 0 unidades. <code>has</code> solo responde a una pregunta: si <strong>la clave</strong> está, valga lo que valga.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Objeto <code>{}</code></th>
+<th><code>Map</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Para qué</td>
+<td>Una cosa con campos fijos</td>
+<td>Diccionario que crece y cambia</td>
+</tr>
+<tr>
+<td>Claves</td>
+<td>Solo texto (<code>o[1]</code> y <code>o["1"]</code> son la misma)</td>
+<td>Cualquier valor (números, objetos…)</td>
+</tr>
+<tr>
+<td>¿Existe la clave?</td>
+<td><code>Object.hasOwn(o, "k")</code> (<code>"toString" in o</code> da <code>true</code>: es heredada)</td>
+<td><code>m.has(k)</code>: solo lo que tú has metido</td>
+</tr>
+<tr>
+<td>Cuántas</td>
+<td><code>Object.keys(o).length</code></td>
+<td><code>m.size</code></td>
+</tr>
+<tr>
+<td>Recorrer</td>
+<td><code>Object.entries(o)</code></td>
+<td><code>for…of</code> directo, en orden de inserción</td>
+</tr>
+<tr>
+<td>A JSON (UD6)</td>
+<td>Directo</td>
+<td><code>JSON.stringify(m)</code> da <code>"{}"</code>: pásalo antes a array (<code>[...m]</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Para pasar de un objeto a un <code>Map</code> y al revés: <code>new Map(Object.entries(obj))</code> y <code>Object.fromEntries(mapa)</code> (apartado 5.1).</p>
+<div class="admonition danger">
+<p class="admonition-title"><code>m.clave = valor</code> no mete nada en el <code>Map</code></p>
+<p>Crea una propiedad normal en el objeto, pero <code>m.has("clave")</code> sigue siendo <code>false</code> y <code>size</code> no cambia. Con un <code>Map</code>, siempre <code>set</code> y <code>get</code>.</p>
+</div>
+<p><strong><code>Set</code>: valores sin repetir.</strong> Es como un <code>Map</code> que solo tiene claves: guarda cada valor <strong>una sola vez</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">ciclos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Set</span><span class="p">([</span><span class="s2">&quot;DAW&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ASIR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DAW&quot;</span><span class="p">]);</span>
+<span class="nx">ciclos</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span><span class="w">          </span><span class="c1">// 2: el segundo &quot;DAW&quot; no entra</span>
+<span class="nx">ciclos</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;SMR&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// añadir</span>
+<span class="nx">ciclos</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="s2">&quot;DAW&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<span class="nx">ciclos</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s2">&quot;ASIR&quot;</span><span class="p">);</span>
+
+<span class="p">[...</span><span class="ow">new</span><span class="w"> </span><span class="nb">Set</span><span class="p">([</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">])];</span><span class="w">   </span><span class="c1">// [3, 1, 2]: quitar duplicados de un array en una línea</span>
+</code></pre></div>
+<p>Úsalo cuando solo importa <strong>si algo está o no</strong>: favoritos, etiquetas, ids ya vistos. En la UD6 guardarás favoritos en un <code>Set</code>.</p>
 <hr />
 <h2 id="11-verificar-devtools">11. Verificar: DevTools <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span></h2>
 <table>
@@ -3308,6 +3432,11 @@
 <td><code>total.toFixed(2) + envio</code></td>
 <td><code>(total + envio).toFixed(2)</code></td>
 </tr>
+<tr>
+<td>Mirar si existe con <code>get</code></td>
+<td><code>if (!stock.get("ratón"))  // 0 → «no está»</code></td>
+<td><code>if (!stock.has("ratón"))</code></td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -3410,6 +3539,10 @@
 <details class="question">
 <summary>8. ¿Cuándo usarías un método <code>static</code>?</summary>
 <p>Cuando no necesita los datos de una instancia concreta (<code>this</code>): constantes, contadores, utilidades o métodos fábrica como <code>Pedido.desdeJSON(texto)</code>.</p>
+</details>
+<details class="question">
+<summary>9. Un <code>Map</code> guarda <code>stock.set("ratón", 0)</code>. ¿Qué hace <code>if (!stock.get("ratón")) throw new Error("No existe")</code>? ¿Cómo se arregla?</summary>
+<p>Lanza el error aunque el ratón <strong>sí</strong> está: <code>get</code> devuelve <code>0</code>, que es <em>falsy</em>. Para saber si una clave existe se usa <code>stock.has("ratón")</code>, que mira la clave y no el valor.</p>
 </details>
 <hr />
 <h2 id="15-glosario">15. Glosario <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.81 2C4.83 2.09 4 3 4 4v16c0 1.05.95 2 2 2h12c1.05 0 2-.95 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H5.81M12 13h1a1 1 0 0 1 1 1v4h-1v-2h-1v2h-1v-4a1 1 0 0 1 1-1m0 1v1h1v-1zm3 1h3v1l-2 3h2v1h-3v-1l2-3h-2z"/></svg></span></h2>
@@ -3514,6 +3647,10 @@
 <td>Objeto de métodos que se copian en otros (<code>Object.assign</code>).</td>
 </tr>
 <tr>
+<td><strong><code>Map</code> / <code>Set</code></strong></td>
+<td>Diccionario clave → valor con <code>get</code>, <code>set</code>, <code>has</code>, <code>delete</code> y <code>size</code> / colección de valores sin repetir.</td>
+</tr>
+<tr>
 <td><strong>Objetos predefinidos</strong></td>
 <td>Objetos que trae el lenguaje: <code>Math</code>, <code>Date</code>, <code>String</code>, <code>Intl</code>, <code>Error</code>…</td>
 </tr>
@@ -3531,7 +3668,7 @@
 <li>En una subclase, <strong><code>super()</code> antes de <code>this</code></strong>.</li>
 <li><strong><code>#privado</code></strong> lo hace cumplir el lenguaje; <code>_privado</code> es solo un aviso.</li>
 <li><strong>Composición o herencia</strong>: decisión consciente, «tiene un» frente a «es un».</li>
-<li><strong><code>Math</code>, <code>Date</code>, <code>String</code> e <code>Intl</code></strong> antes que reinventar.</li>
+<li><strong><code>Math</code>, <code>Date</code>, <code>String</code> e <code>Intl</code></strong> antes que reinventar; <strong><code>Map</code></strong> para diccionarios (con <code>has</code> para saber si una clave existe) y <strong><code>Set</code></strong> para valores sin repetir.</li>
 <li>La POO es una herramienta, no un dogma: a veces un objeto literal o una función son mejor opción.</li>
 </ul>
 <p><strong>Siguiente — UD5: DOM nativo y gestión de eventos.</strong> Pintarás este modelo en la página con <code>createElement</code>, <code>classList</code> o <code>dataset</code>, responderás a la interacción con <code>addEventListener</code> y te reencontrarás con el <strong><code>this</code> perdido</strong> de la sección 7.7. Todo junto es la <strong>Práctica 2</strong>.</p>
