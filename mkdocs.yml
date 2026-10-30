@@ -59,7 +59,8 @@ plugins:
 
 nav:
   - Inicio: index.md
-  - 🟢 1.ª Evaluación (Vanilla JS):
+  - Planificación Docente: planificacion.md
+  - "1.ª Evaluación":
       - "UD 1: Arquitecturas Web y Herramientas de Desarrollo (RA1)": unidades/ud01.md
       - "UD 2: Sintaxis, Tipos y Funciones (RA2)": unidades/ud02.md
       - "UD 3: Control de Flujo, Bucles y Arrays (RA2)": unidades/ud03.md
