@@ -71,6 +71,7 @@ nav:
   # web-protegida/dwec). Se regeneran con Organizacion/web-protegida/publicar.sh DWEC
   - 🏋️ Practicar (con contraseña):
       - Baterías de ejercicios:
+          - "🌱 UD0 · Programar desde cero": unidades/ud00-1-bateria/
           - "UD1–UD3 · Ejercicios de control de flujo, bucles y arrays": unidades/ud03-1-ejercicios/
           - "UD1–UD3 · Repaso con comprobador": unidades/ud03-2-bateria-repaso/
           - "UD4 · Objetos y clases": unidades/ud04-1-bateria/
