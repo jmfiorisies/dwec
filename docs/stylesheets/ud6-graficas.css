@@ -1,0 +1,89 @@
+/* Dibujos de la UD6 en línea (SVG sencillos, sobre animado, gráfica, maqueta). Sacado del boceto de Organización (docs/dwec/bocetos/). */
+
+/* Fichas de color de los dibujos: claro y oscuro */
+:root {
+  --g-tinta: #202124; --g-tinta2: #5f6368; --g-linea: #dadce0; --g-papel: #ffffff; --g-suave: #f8f9fa;
+  --g-rojo: #c5221f; --g-rojo-f: #fdecea;
+  --g-verde: #188038; --g-verde-f: #e6f4ea;
+  --g-ambar: #b06000; --g-ambar-f: #fef7e0;
+  --g-azul: #1a73e8; --g-azul-f: #e8f0fe;
+  --g-serie: #c5221f; --g-par: #1a73e8;
+}
+[data-md-color-scheme="slate"] {
+  --g-tinta: #e8eaed; --g-tinta2: #a8adb3; --g-linea: #4a4e57; --g-papel: #1f2129; --g-suave: #272a31;
+  --g-rojo: #f28b82; --g-rojo-f: #3a2324;
+  --g-verde: #81c995; --g-verde-f: #1d2c23;
+  --g-ambar: #fdb863; --g-ambar-f: #2f2a1d;
+  --g-azul: #8ab4f8; --g-azul-f: #1f2738;
+  --g-serie: #e94235; --g-par: #4285f4;
+}
+
+/* Lienzo de cada ejemplo */
+.md-typeset .lienzo { margin: .4em 0 1em; padding: 1em; border: 1px solid var(--g-linea); border-radius: 10px; background: var(--g-papel); }
+.md-typeset .lienzo svg { display: block; width: 100%; height: auto; }
+.md-typeset .lienzo .pie { margin: .5em 0 0; font-size: .68rem; color: var(--g-tinta2); text-align: center; }
+
+/* Dibujos SVG en línea: todo con las fichas de color */
+.gsvg text { font-family: var(--md-text-font-family, Roboto), "Segoe UI", sans-serif; fill: var(--g-tinta); }
+.gsvg .t2 { fill: var(--g-tinta2); }
+.gsvg .mono { font-family: var(--md-code-font-family, "Roboto Mono"), monospace; }
+.gsvg .linea { stroke: var(--g-linea); fill: none; }
+.gsvg .flecha { stroke: var(--g-tinta2); stroke-width: 2; fill: none; }
+.gsvg .punta { fill: var(--g-tinta2); }
+.gsvg .c-ambar { fill: var(--g-ambar-f); stroke: var(--g-ambar); stroke-width: 2; }
+.gsvg .c-verde { fill: var(--g-verde-f); stroke: var(--g-verde); stroke-width: 2; }
+.gsvg .c-rojo  { fill: var(--g-rojo-f); stroke: var(--g-rojo); stroke-width: 2; }
+.gsvg .c-azul  { fill: var(--g-azul-f); stroke: var(--g-azul); stroke-width: 2; }
+.gsvg .c-gris  { fill: var(--g-suave); stroke: var(--g-linea); stroke-width: 2; }
+.gsvg .tx-ambar { fill: var(--g-ambar); } .gsvg .tx-verde { fill: var(--g-verde); }
+.gsvg .tx-rojo { fill: var(--g-rojo); } .gsvg .tx-azul { fill: var(--g-azul); }
+.gsvg .s-verde { stroke: var(--g-verde); } .gsvg .s-rojo { stroke: var(--g-rojo); } .gsvg .s-azul { stroke: var(--g-azul); }
+.gsvg .f-verde { fill: var(--g-verde); } .gsvg .f-rojo { fill: var(--g-rojo); } .gsvg .f-azul { fill: var(--g-azul); }
+
+/* 3 · El sobre de fetch, solo con CSS (6 s por vuelta) */
+.sobre-ida, .sobre-vuelta { animation: 6s ease-in-out infinite; }
+.sobre-ida { animation-name: ida; }
+.sobre-vuelta { animation-name: vuelta; opacity: 0; }
+.servidor-piensa { animation: piensa 6s infinite; opacity: 0; }
+.cargando { animation: cargando 6s infinite; }
+.pintado { animation: pintado 6s infinite; opacity: 0; }
+@keyframes ida     { 0%, 5% { transform: translateX(0); opacity: 1; } 40% { transform: translateX(150px); opacity: 1; } 41%, 100% { transform: translateX(150px); opacity: 0; } }
+@keyframes piensa  { 0%, 40% { opacity: 0; } 42%, 55% { opacity: 1; } 57%, 100% { opacity: 0; } }
+@keyframes vuelta  { 0%, 55% { transform: translateX(150px); opacity: 0; } 56% { transform: translateX(150px); opacity: 1; } 90% { transform: translateX(0); opacity: 1; } 91%, 100% { transform: translateX(0); opacity: 0; } }
+@keyframes cargando { 0%, 89% { opacity: 1; } 90%, 100% { opacity: 0; } }
+@keyframes pintado  { 0%, 89% { opacity: 0; } 90%, 100% { opacity: 1; } }
+/* Sin movimiento (preferencia del sistema) y al imprimir: el final, quieto */
+@media (prefers-reduced-motion: reduce), print {
+  .sobre-ida, .servidor-piensa, .cargando { animation: none; opacity: 0; }
+  .sobre-vuelta { animation: none; opacity: 1; transform: translateX(75px); }
+  .pintado { animation: none; opacity: 1; }
+}
+
+/* 6 · Gráfica de datos */
+.grafica .eje { stroke: var(--g-linea); }
+.grafica .rejilla { stroke: var(--g-linea); stroke-dasharray: 3 4; opacity: .7; }
+.grafica .serie { stroke: var(--g-serie); } .grafica .par { stroke: var(--g-par); }
+.grafica .p-serie { fill: var(--g-serie); stroke: var(--g-papel); stroke-width: 2; }
+.grafica .p-par { fill: var(--g-par); stroke: var(--g-papel); stroke-width: 2; }
+.grafica .punto { cursor: help; }
+.grafica .punto:hover circle { r: 8; }
+.md-typeset .leyenda { display: flex; flex-wrap: wrap; gap: 1.2em; margin: 0 0 .4em; font-size: .7rem; color: var(--g-tinta2); }
+.md-typeset .leyenda span::before { content: ""; display: inline-block; width: 1.4em; height: 3px; margin-right: .4em; vertical-align: middle; border-radius: 2px; background: var(--c); }
+
+/* 8b · Maqueta de los cuatro estados */
+.md-typeset .estados { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8em; margin: .4em 0 1em; }
+@media (max-width: 900px) { .md-typeset .estados { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.md-typeset .movil { border: 2px solid var(--g-linea); border-radius: 14px; overflow: hidden; background: var(--g-papel); font-size: .66rem; display: flex; flex-direction: column; min-height: 13em; }
+.md-typeset .movil .barra { padding: .45em .7em; font-weight: 700; color: #fff; background: #ea4335; }
+[data-md-color-scheme="slate"] .md-typeset .movil .barra { background: #c5221f; }
+.md-typeset .movil .zona { flex: 1; padding: .7em; display: flex; flex-direction: column; gap: .45em; }
+.md-typeset .movil .centro { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4em; text-align: center; color: var(--g-tinta2); }
+.md-typeset .movil .nombre { padding: .35em; text-align: center; font-weight: 700; border-top: 1px solid var(--g-linea); color: var(--g-tinta2); background: var(--g-suave); }
+.md-typeset .esqueleto { height: 1.6em; border-radius: 6px; background: linear-gradient(90deg, var(--g-suave) 25%, var(--g-linea) 50%, var(--g-suave) 75%); background-size: 200% 100%; animation: brillo 1.4s infinite linear; }
+@keyframes brillo { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce), print { .md-typeset .esqueleto { animation: none; } }
+.md-typeset .fila-tarea { padding: .4em .5em; border: 1px solid var(--g-linea); border-radius: 6px; color: var(--g-tinta); }
+.md-typeset .fila-tarea::before { content: "☐ "; color: var(--g-tinta2); }
+.md-typeset .mini-boton { padding: .25em .8em; border: 0; border-radius: 4px; font: inherit; font-weight: 700; color: #fff; background: #c5221f; }
+.md-typeset .aviso-error { padding: .5em; border-radius: 6px; color: var(--g-rojo); background: var(--g-rojo-f); }
+@media (max-width: 600px) { .md-typeset .lienzo { padding: .5em .3em; } }
