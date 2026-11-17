@@ -3027,6 +3027,48 @@ navegador con <code>addEventListener</code> y él la llama cada vez que ocurre, 
 </div>
 <h3 id="103-delegacion-de-eventos">10.3. Delegación de eventos</h3>
 <p>En vez de un listener en cada botón de cada elemento, <strong>uno solo en el padre</strong>. Gracias a la burbuja, el padre se entera de los clics en todos sus hijos, <strong>también en los que se añadan después</strong>.</p>
+<p><strong>El problema.</strong> Si pintas la lista desde el modelo (sección 8), cada <code>render()</code> <strong>borra los botones y crea otros nuevos</strong>. Un listener puesto en cada botón se va con el botón viejo, y los nuevos no tienen ninguno: pulsas y no pasa nada.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">boton</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">boton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;¡pulsado!&quot;</span><span class="p">));</span><span class="w">   </span><span class="c1">// ✗ solo hasta el primer render()</span>
+<span class="p">});</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">🏠 Como en un edificio</p>
+<p>Le das tu teléfono a cada vecino. Si se muda uno y llega otro, el nuevo no lo tiene. ¿La solución? No se lo das a nadie: <strong>pones un portero en la entrada</strong>, que no se muda nunca. El portero es el listener en el <strong>padre que no se repinta</strong>.</p>
+</div>
+<div class="highlight"><pre><span></span><code>&lt;ul id=&quot;lista&quot;&gt;                ③ …y llega aquí  ← 👮 el listener escucha AQUÍ (no se repinta)
+  &lt;li data-id=&quot;7&quot;&gt;             ↑  el clic va subiendo…
+    &lt;button data-accion=&quot;…&quot;&gt;   ② el botón que buscas
+      &lt;span&gt;Borrar&lt;/span&gt;      ① lo que has pulsado de verdad: e.target
+</code></pre></div>
+<p><strong>El portero pregunta «¿quién ha llamado?».</strong> Oye <strong>todos</strong> los clics de dentro: en un botón, en el texto, en un hueco vacío. Para saber si viene de un botón que le interesa:</p>
+<table>
+<thead>
+<tr>
+<th>Desde dónde se pulsa</th>
+<th><code>e.target</code></th>
+<th><code>e.target.closest("[data-accion]")</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El <code>&lt;span&gt;</code> de dentro del botón</td>
+<td>el <code>&lt;span&gt;</code> ✗</td>
+<td>el <code>&lt;button&gt;</code> ✔</td>
+</tr>
+<tr>
+<td>El propio botón</td>
+<td>el <code>&lt;button&gt;</code></td>
+<td>él mismo ✔ (<code>closest</code> empieza por él)</td>
+</tr>
+<tr>
+<td>El texto del <code>&lt;li&gt;</code>, fuera del botón</td>
+<td>el <code>&lt;li&gt;</code></td>
+<td><code>null</code>: no era un botón, no se hace nada</td>
+</tr>
+</tbody>
+</table>
+<p>Con el botón en la mano, las dos preguntas: <strong>¿qué hacer?</strong> (su <code>data-accion</code>) y <strong>¿a qué objeto?</strong> (sube con <code>closest</code> hasta su <code>&lt;li&gt;</code> y lee el <code>data-id</code>, que es <strong>texto</strong>: <code>Number(…)</code>).</p>
 <div class="highlight"><pre><span></span><code><span class="nx">lista</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">boton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s2">&quot;[data-accion]&quot;</span><span class="p">);</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">boton</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w">                                  </span><span class="c1">// clic en otro sitio</span>
@@ -3040,6 +3082,36 @@ navegador con <code>addEventListener</code> y él la llama cada vez que ocurre, 
 <span class="p">});</span>
 </code></pre></div>
 <p>Ventajas: <strong>un</strong> listener en vez de cientos, sirve para los elementos que pintes después y no se duplica al repintar.</p>
+<table>
+<thead>
+<tr>
+<th>Error típico</th>
+<th>Qué pasa</th>
+<th>Arreglo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El listener <strong>dentro de <code>render()</code></strong></td>
+<td>Cada repintado añade otro: un clic se ejecuta 2, 3, 4 veces</td>
+<td>Una vez, al arrancar (10.4)</td>
+</tr>
+<tr>
+<td>Leer <strong><code>e.target.dataset</code></strong> directamente</td>
+<td>Si pulsan en el <code>&lt;span&gt;</code>, sale <code>undefined</code></td>
+<td><code>e.target.closest(…)</code></td>
+</tr>
+<tr>
+<td>Escuchar en algo <strong>que se repinta</strong></td>
+<td>El listener desaparece con el elemento viejo</td>
+<td>En el padre fijo: el contenedor de la lista</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">En una frase</p>
+<p>No le pongas un oído a cada botón: pon <strong>uno solo en el padre que nunca se borra</strong> y, cuando llegue un clic, sube con <code>closest</code> para saber qué botón fue y de qué elemento.</p>
+</div>
 <h3 id="104-listeners-duplicados">10.4. Listeners duplicados</h3>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">lista</span><span class="p">.</span><span class="nx">replaceChildren</span><span class="p">(...</span><span class="nx">items</span><span class="p">);</span>
