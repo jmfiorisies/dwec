@@ -1,0 +1,2279 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UD6 · Asincronía en vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;600&display=swap">
+<script>
+  // Mismo tema que los apuntes: Material guarda la elección en «<raíz de la web>.__palette»
+  const CLAVE_TEMA = new URL("../", location.href).pathname + ".__palette";
+  function temaGuardado() {
+    try { return JSON.parse(localStorage.getItem(CLAVE_TEMA))?.color?.scheme; } catch { return null; }
+  }
+  const esquema = temaGuardado() ?? (matchMedia("(prefers-color-scheme: dark)").matches ? "slate" : "default");
+  document.documentElement.dataset.tema = esquema === "slate" ? "oscuro" : "claro";
+</script>
+<style>
+  :root {
+    --asig: #ea4335; --asig-osc: #c5221f;
+    --franja: linear-gradient(90deg, #4285f4 0 25%, #ea4335 25% 50%, #fbbc04 50% 75%, #34a853 75% 100%);
+    --rojo: #ea4335; --azul: #1a73e8; --verde: #188038; --ambar: #f9ab00; --morado: #8430ce;
+    --rojo-t: #a50e0e; --azul-t: #1a73e8; --verde-t: #188038; --morado-t: #8430ce; --ambar-t: #7a5200;
+    --texto: #202124; --suave: #5f6368; --borde: #dadce0; --fondo: #fff; --superficie: #fff; --gris: #f1f3f4;
+    --azul-claro: #e8f0fe; --verde-claro: #e6f4ea; --rojo-claro: #fce8e6; --ambar-claro: #fef7e0; --morado-claro: #f3e8fd;
+    --sombra: var(--sombra);
+    color-scheme: light;
+  }
+  :root[data-tema="oscuro"] {
+    --rojo-t: #f28b82; --azul-t: #8ab4f8; --verde-t: #81c995; --morado-t: #d7aefb; --ambar-t: #fdd663;
+    --texto: #e3e5ea; --suave: #a0a6b4; --borde: #3d4252; --fondo: #1e2129; --superficie: #262a35; --gris: #2e3240;
+    --azul-claro: rgb(138 180 248 / .16); --verde-claro: rgb(129 201 149 / .16); --rojo-claro: rgb(242 139 130 / .16);
+    --ambar-claro: rgb(253 214 99 / .14); --morado-claro: rgb(215 174 251 / .16);
+    --sombra: rgb(0 0 0 / .4);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.5 Roboto, system-ui, "Segoe UI", sans-serif; transition: background .2s, color .2s; color: var(--texto); background: var(--fondo); }
+  header { background: var(--asig); color: #fff; box-shadow: 0 1px 4px rgb(0 0 0 / .15); border-bottom: 4px solid transparent; border-image: var(--franja) 1; padding: 8px 20px; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; position: sticky; top: 0; z-index: 15; }
+  header h1 { font-size: 19px; font-weight: 500; margin: 0; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px; }
+  nav button { font: inherit; font-size: 15px; border: 0; border-radius: 16px; padding: 4px 12px; background: rgb(255 255 255 / .2); color: #fff; cursor: pointer; }
+  nav button[aria-current="true"] { background: var(--superficie); color: var(--rojo-t); font-weight: 700; }
+  header label { font-size: 15px; margin-left: auto; }
+  header select { font-size: 15px; border-radius: 6px; border: 0; padding: 2px 6px; background: #fff; color: #202124; }
+  header .volver, header .tema { color: #fff; text-decoration: none; font-size: 15px; display: inline-flex; align-items: center; gap: 4px; border-radius: 16px; padding: 4px 10px; }
+  header .volver:hover, header .tema:hover { background: rgb(255 255 255 / .2); }
+  header .tema { border: 0; background: none; cursor: pointer; font-size: 20px; padding: 2px 8px; }
+  input, select, textarea { background: var(--superficie); color: var(--texto); }
+  a { color: var(--azul-t); }
+  .intro { background: color-mix(in srgb, var(--asig) 10%, transparent); border: 1px solid color-mix(in srgb, var(--asig) 55%, transparent); border-radius: 8px; padding: 8px 14px; margin: 0 0 12px; font-size: 16px; }
+  .intro[hidden] { display: none; }
+  .intro button { float: right; border: 0; background: none; color: var(--suave); font-size: 18px; cursor: pointer; }
+  .diapo a, .apuntes a { color: inherit; text-decoration: underline; text-decoration-color: var(--borde); }
+  .diapo a:hover, .apuntes a:hover { color: var(--azul-t); }
+  main { max-width: 1280px; margin: 0 auto; padding: 14px 20px 40px; }
+  section[hidden] { display: none; }
+  h2 { margin: 4px 0 2px; font-size: 26px; }
+  h3 { margin: 0 0 8px; font-size: 16px; color: var(--suave); text-transform: uppercase; letter-spacing: .03em; }
+  .diapo { color: var(--suave); font-size: 15px; margin: 0 0 8px; }
+  .idea { background: var(--gris); border-left: 6px solid var(--rojo); padding: 8px 14px; margin: 8px 0 14px; border-radius: 4px; }
+  .dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+  .dos.ancho-izq { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .dos.ancho-der { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  @media (max-width: 600px) { header { position: static; padding: 8px 12px; } main { padding: 12px 16px 40px; } header label { margin-left: 0; } .carril { grid-template-columns: 1fr; } .regla { margin-left: 0; } .obra, .filtro, .escena-red { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .dos, .dos.ancho-izq, .dos.ancho-der { grid-template-columns: 1fr; } }
+  .panel { border: 1px solid var(--borde); border-radius: 8px; padding: 12px 14px; }
+  .registro { font: 15px/1.5 ui-monospace, Consolas, monospace; min-height: 80px; max-height: 340px; overflow: auto; margin: 0; padding: 0; list-style: none; }
+  .registro li { padding: 2px 6px; border-radius: 4px; }
+  .registro li + li { margin-top: 2px; }
+  .registro .bien { background: var(--verde-claro); } .registro .mal { background: var(--rojo-claro); color: var(--rojo-t); }
+  .registro .info { background: var(--azul-claro); } .registro .ojo { background: var(--ambar-claro); }
+  .opciones { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0; font-size: 16px; align-items: center; }
+  .opciones label { cursor: pointer; }
+  button, input, select, textarea { font: inherit; }
+  .boton { border: 1px solid var(--borde); background: var(--superficie); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+  .boton:hover { background: var(--gris); }
+  .boton.primario { background: var(--azul); border-color: var(--azul); color: #fff; }
+  .boton.primario:hover { background: #1765cc; }
+  .boton.peligro { border-color: var(--rojo); color: var(--rojo-t); }
+  .boton:disabled { opacity: .45; cursor: default; }
+  code, .mono { font-family: "Roboto Mono", ui-monospace, Consolas, monospace; font-size: .92em; }
+  pre { background: #202124; color: #e8eaed; padding: 10px 14px; border-radius: 6px; overflow: auto; font-size: 14px; margin: 6px 0; white-space: pre-wrap; word-break: break-word; }
+  .codigo { counter-reset: linea; padding-left: 0; }
+  .codigo .l { display: block; padding: 0 10px 0 3.2em; text-indent: -3.2em; border-left: 4px solid transparent; transition: background .2s; }
+  .codigo .l::before { counter-increment: linea; content: counter(linea); display: inline-block; width: 2.4em; padding-right: .8em; text-align: right; color: #80868b; text-indent: 0; }
+  .codigo .l.activa { background: #5c4a12; border-left-color: var(--ambar); }
+  .codigo .l.pasa { background: #2d3a2f; border-left-color: #81c995; }
+  .codigo .l.falla { background: #4a2a28; border-left-color: #f28b82; }
+  .codigo .l.salta { opacity: .35; }
+  .chip { display: inline-block; font: 600 13px ui-monospace, monospace; padding: 2px 9px; border-radius: 10px; color: #fff; background: var(--suave); }
+  .chip.pendiente { background: var(--ambar); color: #3c2a00; }
+  .chip.cumplida { background: var(--verde); } .chip.rechazada { background: var(--rojo); }
+  .nota { font-size: 15px; color: var(--suave); margin: 6px 0 0; }
+  .aparece { animation: aparece .35s ease-out; }
+  @keyframes aparece { from { transform: translateY(-6px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes tiembla { 0%, 100% { transform: none; } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+  .tiembla { animation: tiembla .45s; }
+
+  /* Ficha que vuela de un sitio a otro */
+  .ficha-vuela { position: fixed; z-index: 30; pointer-events: none; font: 600 14px ui-monospace, Consolas, monospace; padding: 4px 9px; border-radius: 6px; background: var(--azul); color: #fff; box-shadow: 0 6px 18px rgb(0 0 0 / .3); white-space: nowrap; }
+  .ficha-vuela.z-pila { background: var(--rojo); } .ficha-vuela.z-web { background: var(--azul); }
+  .ficha-vuela.z-micro { background: var(--morado); } .ficha-vuela.z-tareas { background: var(--verde); }
+  .ficha-vuela.z-consola { background: #202124; color: #fdd663; font-size: 22px; }
+  .ficha-vuela.papel { background: #fffbe6; color: #3c2a00; border: 1px solid #e0c870; }
+  .ficha-vuela.fichero { background: var(--superficie); color: var(--texto); border: 2px solid var(--borde); }
+
+  #no-capturado { position: fixed; right: 16px; bottom: 16px; max-width: 520px; background: #a50e0e; color: #fff; padding: 10px 14px; border-radius: 8px; font: 15px ui-monospace, monospace; box-shadow: 0 4px 16px rgb(0 0 0 / .25); z-index: 40; cursor: pointer; }
+  #no-capturado[hidden] { display: none; }
+
+  /* ---------- 1 · Un hilo ---------- */
+  .pista { position: relative; height: 70px; border: 2px solid var(--borde); border-radius: 35px; background: var(--gris); overflow: hidden; }
+  #h-bola { position: absolute; top: 9px; left: 0; width: 48px; height: 48px; border-radius: 50%; background: var(--rojo); }
+  #h-linea { width: 100%; height: 100px; display: block; border-radius: 8px; background: var(--superficie); border: 1px solid var(--borde); }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; color: var(--suave); margin: 6px 0; }
+  .leyenda span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; background: var(--c); }
+  #h-estado { font-weight: 700; }
+  #h-estado.mal { color: var(--rojo-t); } #h-estado.bien { color: var(--verde-t); }
+
+  /* ---------- 2 · Event loop ---------- */
+  .bucle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; }
+  .zona { border: 3px solid var(--borde); border-radius: 10px; padding: 8px 10px; min-height: 150px; transition: box-shadow .3s, background .3s; }
+  .zona h4 { margin: 0 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; display: flex; justify-content: space-between; gap: 6px; }
+  .zona h4 small { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--suave); }
+  .zona ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .zona li { font: 600 14px ui-monospace, monospace; padding: 6px 9px; border-radius: 6px; color: #fff; }
+  #z-pila { border-color: var(--rojo); } #z-pila h4 { color: var(--rojo-t); } #z-pila ul { flex-direction: column-reverse; } #z-pila li { background: var(--rojo); }
+  #z-web { border-color: var(--azul); } #z-web h4 { color: var(--azul-t); } #z-web li { background: var(--azul); }
+  #z-micro { border-color: var(--morado); } #z-micro h4 { color: var(--morado-t); } #z-micro li { background: var(--morado); }
+  #z-tareas { border-color: var(--verde); } #z-tareas h4 { color: var(--verde-t); } #z-tareas li { background: var(--verde); }
+  #s2 .zona li.vacio { background: none; color: var(--suave); font: italic 14px system-ui, sans-serif; padding: 4px 0; }
+  .zona.atiende { box-shadow: 0 0 0 6px rgb(249 171 0 / .45); }
+  #z-micro.atiende { background: var(--morado-claro); } #z-tareas.atiende { background: var(--verde-claro); }
+  #z-web li:not(.vacio)::before { content: "⏱ "; }
+  #z-loop { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; border: 3px dashed var(--texto); border-radius: 10px; padding: 8px 14px; min-height: 0; }
+  #z-loop .rueda { font-size: 40px; display: inline-block; line-height: 1; }
+  #z-loop.gira .rueda { animation: gira 1.2s linear infinite; }
+  @keyframes gira { to { transform: rotate(360deg); } }
+  .regla-loop { display: flex; gap: 6px; flex-wrap: wrap; font-size: 14px; margin-top: 4px; }
+  .regla-loop span { padding: 1px 8px; border-radius: 10px; background: var(--gris); }
+  .regla-loop span.on { background: var(--ambar); font-weight: 700; }
+  #e-explica { min-height: 3.2em; background: var(--ambar-claro); border-left: 6px solid var(--ambar); padding: 8px 12px; border-radius: 4px; margin: 10px 0; font-size: 19px; }
+  #e-consola { font: 26px ui-monospace, monospace; min-height: 54px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; background: #202124; color: #e8eaed; border-radius: 8px; padding: 8px 16px; }
+  #e-consola::before { content: "›"; color: #9aa0a6; }
+  #e-consola.oculta span { visibility: hidden; }
+  #e-consola.oculta::after { content: "¿Qué sale? Piénsalo antes de verlo…"; font: italic 17px system-ui, sans-serif; color: #9aa0a6; }
+  #e-consola .nuevo { color: #fdd663; }
+
+  /* ---------- 3 · Promesas ---------- */
+  .tiques { display: flex; flex-wrap: wrap; gap: 12px; min-height: 120px; align-items: flex-start; }
+  .tique { width: 150px; border-radius: 10px; padding: 10px 8px 8px; text-align: center; background: var(--superficie); border: 2px solid var(--borde); box-shadow: 0 2px 6px var(--sombra); position: relative; }
+  .tique::before, .tique::after { content: ""; position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--fondo); border: 2px solid var(--borde); }
+  .tique::before { left: -9px; } .tique::after { right: -9px; }
+  .tique .num { font: 700 13px ui-monospace, monospace; color: var(--suave); }
+  .tique .luz { width: 34px; height: 34px; border-radius: 50%; margin: 6px auto; background: var(--ambar); box-shadow: 0 0 12px var(--ambar); animation: parpadea .8s infinite alternate; display: grid; place-items: center; font-size: 18px; color: #fff; }
+  @keyframes parpadea { to { opacity: .35; } }
+  .tique.cumplida { border-color: var(--verde); } .tique.cumplida .luz { background: var(--verde); box-shadow: 0 0 12px var(--verde); animation: none; }
+  .tique.rechazada { border-color: var(--rojo); } .tique.rechazada .luz { background: var(--rojo); box-shadow: 0 0 12px var(--rojo); animation: none; }
+  .tique .dentro { font-size: 15px; min-height: 1.4em; }
+  .tique .barra { height: 5px; background: var(--ambar); border-radius: 3px; margin-top: 6px; transform-origin: left; }
+  .tique.suena { animation: tiembla .45s; }
+
+  #c-escena { position: relative; height: 420px; margin: 6px 0 10px; }
+  .via-tren { position: absolute; height: 8px; border-radius: 4px; }
+  .via-tren.arriba { background: repeating-linear-gradient(90deg, var(--verde) 0 18px, #4caf68 18px 22px); }
+  .via-tren.abajo { background: repeating-linear-gradient(90deg, var(--rojo) 0 18px, #f28b82 18px 22px); }
+  .via-nombre { position: absolute; font: 700 13px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .05em; }
+  .desvio { position: absolute; width: 0; border-left: 3px dashed #f28b82; }
+  .desvio.sube { border-left-color: #81c995; }
+  .estacion { position: absolute; transform: translateX(-50%); width: 19%; border: 2px solid var(--borde); border-radius: 8px; background: var(--superficie); padding: 5px 7px; font-size: 14px; transition: background .25s, border-color .25s, opacity .25s; }
+  .estacion .q { font: 600 13px ui-monospace, monospace; display: block; word-break: break-word; }
+  .estacion .io { font: 13px ui-monospace, monospace; color: var(--suave); display: block; }
+  .estacion .io b { color: var(--texto); }
+  .estacion.activa { border-color: var(--ambar); background: var(--ambar-claro); box-shadow: 0 0 0 4px rgb(249 171 0 / .35); }
+  .estacion.ok { border-color: var(--verde); background: var(--verde-claro); }
+  .estacion.lanza { border-color: var(--rojo); background: var(--rojo-claro); }
+  .estacion.saltado { opacity: .35; border-style: dashed; }
+  .estacion.saltado .io::after { content: "saltado"; font-style: italic; }
+  #c-bola { position: absolute; transform: translate(-50%, -50%); min-width: 58px; height: 58px; padding: 0 10px; border-radius: 29px; display: grid; place-items: center; font: 800 20px ui-monospace, monospace; color: #fff; background: var(--verde); box-shadow: 0 4px 14px rgb(0 0 0 / .3); z-index: 3; transition: background .25s; }
+  #c-bola.error { background: var(--rojo); }
+  #c-bola.rara { background: #80868b; font-size: 15px; }
+  #c-bola.espera { background: var(--ambar); color: #3c2a00; font-size: 16px; }
+  #c-resultado { position: absolute; right: 0; bottom: 0; font: 700 18px ui-monospace, monospace; background: #202124; color: #fdd663; padding: 6px 12px; border-radius: 6px; }
+  #c-resultado:empty { display: none; }
+
+  /* ---------- 4 · Varias a la vez ---------- */
+  .carriles { display: grid; gap: 10px; }
+  .carril { display: grid; grid-template-columns: 250px 1fr; gap: 12px; align-items: center; }
+  .carril .ajustes { font-size: 15px; }
+  .carril .ajustes b { display: block; font-size: 17px; }
+  .carril input[type="range"] { width: 120px; vertical-align: middle; }
+  .via { position: relative; height: 44px; background: repeating-linear-gradient(90deg, var(--gris) 0 40px, var(--borde) 40px 42px); border-radius: 8px; }
+  .via .barra { position: absolute; top: 5px; height: 34px; border-radius: 6px; background: rgb(249 171 0 / .35); border: 2px solid var(--ambar); color: #3c2a00; font: 600 14px ui-monospace, monospace; display: flex; align-items: center; justify-content: flex-end; padding: 0 4px; white-space: nowrap; }
+  .via .barra .moto { font-size: 26px; transform: scaleX(-1); display: inline-block; margin-right: -22px; }
+  .via .barra.cumplida { background: var(--verde); border-color: var(--verde); color: #fff; justify-content: flex-start; padding: 0 8px; }
+  .via .barra.rechazada { background: var(--rojo); border-color: var(--rojo); color: #fff; justify-content: flex-start; padding: 0 8px; }
+  .via .barra.ignorada { opacity: .45; }
+  .via .sin-lanzar { position: absolute; left: 8px; top: 10px; font: italic 14px system-ui, sans-serif; color: var(--suave); }
+  .via .relevo { position: absolute; top: -12px; height: 18px; border-left: 3px dashed var(--texto); }
+  .via .relevo::after { content: "🔁"; position: absolute; left: -10px; top: -16px; font-size: 14px; }
+  .regla { position: relative; height: 20px; margin-left: 262px; font: 12px ui-monospace, monospace; color: var(--suave); }
+  .regla span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  .marca-fin { position: absolute; top: -6px; bottom: -6px; width: 0; border-left: 4px solid var(--texto); z-index: 2; }
+  .marca-fin[data-txt]::after { content: attr(data-txt); position: absolute; top: -24px; left: 4px; background: var(--texto); color: var(--fondo); font: 13px ui-monospace, monospace; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+  .modos { display: flex; flex-wrap: wrap; gap: 6px; }
+  .modos .boton[aria-pressed="true"] { background: var(--azul); color: #fff; border-color: var(--azul); }
+  #v-resultado { font: 17px ui-monospace, monospace; padding: 10px 12px; border-radius: 6px; background: var(--gris); min-height: 48px; white-space: pre-wrap; word-break: break-word; }
+  #v-resultado.bien { background: var(--verde-claro); } #v-resultado.mal { background: var(--rojo-claro); color: var(--rojo-t); }
+  .compara { display: grid; grid-template-columns: 150px 1fr; gap: 4px 10px; align-items: center; font: 14px ui-monospace, monospace; }
+  .compara .b { height: 22px; border-radius: 4px; background: var(--azul); color: #fff; font-size: 13px; padding: 2px 6px; white-space: nowrap; transition: width .4s; }
+  .compara .b.mal { background: var(--rojo); }
+
+  /* ---------- 5 · fetch ---------- */
+  .escenarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; }
+  .escenarios label { border: 1px solid var(--borde); border-radius: 6px; padding: 5px 8px; font-size: 15px; cursor: pointer; }
+  .escenarios label:has(input:checked) { border-color: var(--azul); background: var(--azul-claro); font-weight: 600; }
+  .escena-red { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, .9fr); align-items: stretch; margin: 12px 0; }
+  .maquina { border: 3px solid var(--texto); border-radius: 12px; overflow: hidden; background: var(--superficie); }
+  .maquina .titulo-maq { background: var(--texto); color: var(--fondo); padding: 6px 12px; font-weight: 700; display: flex; gap: 8px; justify-content: space-between; align-items: center; }
+  .maquina .titulo-maq .boton { color: var(--texto); font-weight: 400; font-size: 14px; padding: 1px 9px; }
+  .maquina.servidor .titulo-maq { background: var(--suave); }
+  #f-cuerpo { margin: 8px; max-height: 190px; font-size: 12.5px; }
+  .reloj { display: inline-block; width: 80px; height: 10px; border-radius: 5px; background: #5f6368; overflow: hidden; vertical-align: middle; }
+  .reloj span { display: block; height: 100%; background: var(--ambar); transform-origin: left; }
+  .reloj[hidden] { display: none; }
+  .cable { position: relative; align-self: center; height: 120px; }
+  .cable .hilo { position: absolute; left: 0; right: 0; top: 58px; border-top: 4px dashed var(--suave); }
+  .cable .tijeras { position: absolute; left: 50%; top: 36px; transform: translateX(-50%); font-size: 34px; }
+  .cable .tijeras[hidden] { display: none; }
+  .sobre { position: absolute; top: 40px; left: 0; width: 140px; padding: 6px 8px; border-radius: 6px; background: var(--superficie); border: 2px solid var(--texto); font: 700 13px ui-monospace, monospace; text-align: center; box-shadow: 0 4px 12px rgb(0 0 0 / .2); }
+  .sobre[hidden] { display: none; }
+  .sobre.s2 { border-color: var(--verde); background: var(--verde-claro); color: var(--verde-t); }
+  .sobre.s4, .sobre.s5 { border-color: var(--rojo); background: var(--rojo-claro); color: var(--rojo-t); }
+  .sobre.roto { border-color: var(--rojo); background: var(--rojo); color: #fff; }
+  .sobre.cancelado { opacity: .55; border-style: dashed; }
+  #f-zona { padding: 10px; min-height: 210px; }
+  .estados { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .estados span { font: 13px ui-monospace, monospace; padding: 2px 8px; border-radius: 10px; background: var(--gris); color: var(--suave); }
+  .estados span.on { color: #fff; }
+  .estados span.on[data-e="cargando"] { background: var(--ambar); color: #3c2a00; }
+  .estados span.on[data-e="error"] { background: var(--rojo); }
+  .estados span.on[data-e="vacio"] { background: var(--suave); }
+  .estados span.on[data-e="datos"] { background: var(--verde); }
+  .esqueleto { height: 40px; border-radius: 6px; margin-bottom: 8px; background: linear-gradient(90deg, var(--gris) 25%, var(--superficie) 50%, var(--gris) 75%); background-size: 200% 100%; animation: brilla 1.2s infinite; }
+  @keyframes brilla { to { background-position: -200% 0; } }
+  .peli { display: flex; gap: 10px; align-items: center; padding: 6px; border-bottom: 1px solid var(--borde); }
+  .peli .cartel { width: 32px; height: 42px; border-radius: 4px; display: grid; place-items: center; font-size: 20px; background: var(--gris); }
+  .mensaje { padding: 14px; text-align: center; border-radius: 8px; font-size: 16px; }
+  .mensaje.error { background: var(--rojo-claro); color: var(--rojo-t); }
+  .mensaje.vacio { background: var(--gris); color: var(--suave); }
+  .puertas { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; margin-bottom: 12px; }
+  .puerta { flex: 1 1 150px; border: 3px solid var(--borde); border-radius: 10px; padding: 6px 10px; background: var(--superficie); transition: background .25s, border-color .25s; }
+  .puerta b { display: block; font-size: 15px; }
+  .puerta small { color: var(--suave); font-size: 13px; }
+  .puerta .que { display: block; font: 600 13px ui-monospace, monospace; min-height: 1.3em; word-break: break-word; }
+  .puerta.pasa { border-color: var(--verde); background: var(--verde-claro); }
+  .puerta.pasa b::before { content: "✓ "; color: var(--verde-t); }
+  .puerta.falla { border-color: var(--rojo); background: var(--rojo-claro); }
+  .puerta.falla b::before { content: "✗ "; color: var(--rojo-t); }
+  .puerta.apagada { opacity: .4; border-style: dashed; }
+  .puerta.apagada .que::after { content: "no se comprueba"; font-style: italic; }
+  .entre { align-self: center; color: var(--suave); font-size: 20px; }
+
+  /* ---------- 6 · JSON ---------- */
+  .viaje { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .viaje th, .viaje td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+  .viaje th { color: var(--suave); font-size: 14px; text-transform: uppercase; }
+  .viaje td.mono { font-family: ui-monospace, Consolas, monospace; font-size: 14px; word-break: break-word; }
+  .viaje td .papel { color: #3c2a00; display: inline-block; background: #fffbe6; border: 1px solid #e0c870; border-radius: 4px; padding: 2px 8px; }
+  .viaje td .objeto { display: inline-block; background: var(--azul-claro); border: 1px solid #aecbfa; border-radius: 4px; padding: 2px 8px; }
+  .viaje td .objeto.roto { background: var(--rojo-claro); border-color: #f28b82; }
+  .viaje .icono { font-size: 22px; width: 36px; text-align: center; }
+  .viaje td.oculta > * { visibility: hidden; }
+  .viaje .sí { color: var(--verde-t); font-weight: 700; } .viaje .no { color: var(--rojo-t); font-weight: 700; }
+  #j-texto { width: 100%; min-height: 110px; font: 16px ui-monospace, monospace; padding: 8px; border: 2px solid var(--borde); border-radius: 6px; }
+  #j-salida { font: 15px ui-monospace, monospace; padding: 8px 10px; border-radius: 6px; margin-top: 8px; white-space: pre-wrap; }
+  #j-salida.bien { background: var(--verde-claro); } #j-salida.mal { background: var(--rojo-claro); color: var(--rojo-t); }
+
+  /* ---------- 7 · localStorage ---------- */
+  .tarjetas { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .tarjeta { border: 1px solid var(--borde); border-radius: 8px; padding: 10px 12px; }
+  .tarjeta h4 { margin: 0 0 2px; font-size: 18px; }
+  .tarjeta .botones { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .lineas { font: 15px/1.5 ui-monospace, Consolas, monospace; background: #202124; color: #e8eaed; border-radius: 6px; padding: 8px 12px; margin: 6px 0 0; list-style: none; }
+  .lineas li { white-space: pre-wrap; word-break: break-word; border-radius: 4px; }
+  .lineas li.activa { background: #5c4a12; }
+  .lineas .res, .lineas .err { display: block; padding-left: 2ch; }
+  .lineas .res { color: #81c995; } .lineas .err { color: #f28b82; } .lineas .com { color: #9aa0a6; }
+  .libreta { color: #202124; position: sticky; top: 96px; border-radius: 6px 12px 12px 6px; border: 2px solid #c9b46b; background: #fffdf0; box-shadow: 4px 4px 0 #e8dca8; padding: 10px 14px 12px 34px; }
+  .libreta .boton { background: #fff; color: #202124; border-color: #c9b46b; }
+  .libreta .boton:hover { background: #fef7e0; }
+  :root[data-tema="oscuro"] pre, :root[data-tema="oscuro"] .lineas, :root[data-tema="oscuro"] #e-consola { background: #14161c; border: 1px solid var(--borde); }
+  .libreta::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; border-left: 2px solid #f28b82; }
+  .libreta h3 { color: #6b5a10; }
+  .hojas { min-height: 120px; }
+  .apunte { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr) auto; gap: 6px; align-items: center; border-bottom: 1px solid #b9d3f5; padding: 4px 0; font: 15px ui-monospace, monospace; }
+  .apunte .clave { font-weight: 700; color: #3c2a00; word-break: break-all; }
+  .apunte input { width: 100%; font: 15px ui-monospace, monospace; border: 1px dashed transparent; background: transparent; padding: 2px 4px; color: #1a4fa0; border-radius: 4px; }
+  .apunte input:hover, .apunte input:focus { border-color: #c9b46b; background: var(--superficie); }
+  .apunte button { border: 0; background: none; cursor: pointer; font-size: 16px; }
+  .apunte.cambia { animation: cambia 1.2s; }
+  @keyframes cambia { from { background: #fdd663; } to { background: transparent; } }
+  .vacio-libreta { color: #8a7a3a; font-style: italic; padding: 8px 0; }
+
+  /* ---------- 8 · Vite ---------- */
+  .obra { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 14px; align-items: start; margin: 10px 0; }
+  .caja { border: 3px solid var(--borde); border-radius: 10px; padding: 8px 10px; min-height: 230px; background: var(--superficie); transition: background .3s; }
+  .caja > b { display: block; margin-bottom: 6px; }
+  .caja.vite { border-color: var(--morado); }
+  .caja.vite.trabaja { background: var(--morado-claro); }
+  .caja.nav { border-color: var(--texto); }
+  .ficheros { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .ficheros li { font: 13.5px ui-monospace, monospace; padding: 3px 8px; border: 2px solid var(--borde); border-radius: 6px; background: var(--superficie); word-break: break-all; }
+  .ficheros li::before { content: "📄 "; }
+  .ficheros li.css::before { content: "🎨 "; }
+  .ficheros li.html::before { content: "🌐 "; }
+  .ficheros li.dinamico { border-style: dashed; }
+  .ficheros li.junto { border-color: var(--morado); background: var(--morado-claro); }
+  .contador { font: 700 15px ui-monospace, monospace; margin-top: 8px; color: var(--suave); }
+  .burbuja { display: inline-block; background: var(--verde-claro); border: 2px solid var(--verde); border-radius: 12px; padding: 4px 10px; font-size: 14px; margin-top: 6px; }
+  .env textarea { width: 100%; min-height: 76px; font: 15px ui-monospace, monospace; padding: 6px 8px; border: 2px solid var(--borde); border-radius: 6px; }
+  .env label.f { font: 600 14px ui-monospace, monospace; color: var(--suave); }
+  .filtro { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin: 10px 0; }
+  .filtro .puerta-vite { border: 3px solid var(--morado); border-radius: 10px; padding: 8px; text-align: center; font: 700 14px ui-monospace, monospace; color: var(--morado-t); background: var(--morado-claro); }
+  .chips { display: flex; flex-direction: column; gap: 4px; min-height: 30px; }
+  .chips span { color: #3c2a00; font: 13px ui-monospace, monospace; padding: 3px 8px; border-radius: 6px; background: #fffbe6; border: 1px solid #e0c870; word-break: break-all; transition: opacity .3s; }
+  .destinos { display: grid; gap: 8px; }
+  .destino { border: 2px solid var(--borde); border-radius: 8px; padding: 6px 8px; min-height: 54px; }
+  .destino b { font-size: 14px; display: block; }
+  .destino.pasa { border-color: var(--verde); } .destino.no { border-color: var(--rojo); }
+  .destino .chips span { background: var(--superficie); color: var(--texto); border-color: var(--borde); }
+  .destino.no .chips span { text-decoration: line-through; color: var(--rojo-t); }
+  .secreto { background: #fdd663; color: #202124; padding: 0 3px; border-radius: 3px; }
+  /* Explicación para el alumnado */
+  .guia { border: 2px solid var(--azul); border-radius: 10px; margin: 6px 0 14px; background: var(--superficie); }
+  .guia > summary { cursor: pointer; padding: 8px 14px; font-weight: 700; color: var(--azul-t); background: var(--azul-claro); border-radius: 8px; list-style-position: inside; }
+  .guia > summary small { font-weight: 400; color: var(--suave); }
+  .guia[open] > summary { border-radius: 8px 8px 0 0; }
+  .guia-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 26px; padding: 6px 18px 14px; font-size: 17px; }
+  @media (max-width: 860px) { .guia-cuerpo { grid-template-columns: 1fr; } }
+  .guia h4 { margin: 12px 0 4px; font-size: 16px; color: var(--texto); }
+  .guia p { margin: 4px 0 8px; }
+  .guia ul { margin: 4px 0 8px; padding-left: 22px; }
+  .guia .dibujos { list-style: none; padding: 0; }
+  .guia .dibujos li { display: grid; grid-template-columns: 30px 1fr; gap: 6px; align-items: start; margin: 3px 0; }
+  .guia .muestra { text-align: center; }
+  .guia .muestra i { display: inline-block; width: 18px; height: 14px; border-radius: 3px; vertical-align: -1px; }
+  .guia .pruebas { padding-left: 22px; margin: 4px 0; }
+  .guia .pruebas > li { margin-bottom: 8px; }
+  .guia .pruebas p { margin: 0 0 2px; }
+  .respuesta > summary { cursor: pointer; color: var(--azul-t); font-size: 15px; }
+  .respuesta[open] { background: var(--verde-claro); border-radius: 6px; padding: 2px 10px 4px; }
+  .respuesta[open] > summary { color: var(--verde-t); }
+  .llevas { grid-column: 1 / -1; background: var(--ambar-claro); border-left: 6px solid var(--ambar); border-radius: 4px; padding: 8px 12px; }
+  .llevas .apuntes { display: block; margin-top: 4px; color: var(--suave); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="volver" href="../unidades/ud06/" title="Volver a los apuntes de la UD6">← Apuntes</a>
+  <h1>UD6 · Laboratorio de asincronía y almacenamiento</h1>
+  <nav aria-label="Demos">
+    <button data-ir="1">1 · Un hilo</button>
+    <button data-ir="2">2 · Event loop</button>
+    <button data-ir="3">3 · Promesas</button>
+    <button data-ir="4">4 · Varias a la vez</button>
+    <button data-ir="5">5 · fetch</button>
+    <button data-ir="6">6 · JSON</button>
+    <button data-ir="7">7 · localStorage</button>
+    <button data-ir="8">8 · Módulos y Vite</button>
+  </nav>
+  <label>Animaciones <select id="vel"><option value="1.7">lentas</option><option value="1" selected>normales</option><option value="0.5">rápidas</option></select></label>
+  <button class="tema" id="tema" type="button"></button>
+</header>
+
+<div id="no-capturado" role="alert" hidden></div>
+
+<main>
+<p class="intro" id="intro"><button type="button" title="Cerrar" aria-label="Cerrar">✕</button>
+  <b>Cómo usar el laboratorio.</b> Es lo mismo que vemos en clase, para que lo repitas a tu ritmo. Elige un bloque arriba (o pulsa 1–8),
+  abre <b>📖 Qué estás viendo</b> y haz las pruebas: <b>piensa la respuesta antes de abrirla</b>. Todo se ejecuta de verdad en tu navegador;
+  si quieres, abre DevTools (F12) a la vez y míralo también allí.</p>
+
+<!-- ============ 1 · UN HILO ============ -->
+<section id="s1">
+  <h2>Un solo hilo: lo lento no se espera, se pide</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=6" target="_blank">Presentación</a> · Bloque 1 · diapositiva 6</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p>JavaScript ejecuta tu código en <b>un solo hilo</b>, y es el mismo hilo que <b>pinta la página</b> y <b>atiende los clics</b>. Mientras tu código lo ocupa, no pasa nada más: ni se pinta ni se responde.</p><p>Por eso lo que tarda (un temporizador, una petición a un servidor) <b>no se espera: se pide</b>. El navegador lo espera por ti, fuera del hilo, y cuando termina te avisa con un <i>callback</i> o una promesa.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">🔴</span><span>La bola: se mueve con JavaScript, un poquito en cada fotograma.</span></li><li><span class="muestra"><i style="background:#34a853"></i></span><span>Rayita verde: un fotograma pintado. Si no hay rayitas, la página está congelada.</span></li><li><span class="muestra"><i style="background:#ea4335"></i></span><span>Bloque rojo: tu código ocupando el hilo (el <code>while</code>).</span></li><li><span class="muestra"><i style="background:#f9ab00"></i></span><span>Flecha ámbar: desde que pulsas el botón hasta que tu clic se atiende.</span></li><li><span class="muestra"><i style="background:#1a73e8"></i></span><span>Línea azul: los 3 s del <code>setTimeout</code>, que cuenta el navegador, no tu código.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Pulsa <b>🧱 Esperar 3 s con un while</b> y enseguida <b>👆 Púlsame</b>. ¿Se sigue moviendo la bola? ¿Cuándo aparece tu clic?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>La bola se para 3 s: no hay rayitas verdes. Tu clic no se pierde: espera en una <b>cola</b> y se atiende cuando acaba el <code>while</code>. La flecha ámbar dice cuánto ha esperado.</p></details></li><li><p>Pulsa <b>⏱ Pedir con setTimeout</b> y luego <b>👆 Púlsame</b>. ¿Se congela algo?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>No. Los 3 s los cuenta el navegador y el hilo queda libre: la bola sigue y el clic se atiende al momento.</p></details></li><li><p>Pulsa <b>⏱ setTimeout</b> y, justo después, <b>🧱 while</b>. Los 3 s del temporizador se cumplen mientras dura el <code>while</code>. ¿Cuándo sale «ya»?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Cuando termina el <code>while</code>, no antes. El aviso del temporizador llega a tiempo, pero tiene que esperar en la cola a que el hilo quede libre.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> Nunca hagas esperas con bucles: congelan la página. Lo lento se <b>pide</b> (<code>setTimeout</code>, <code>fetch</code>…) y el resultado se recoge <b>después</b>.<span class="apuntes">📚 Apuntes de la UD6: apartado <a href="../unidades/ud06/#21-un-solo-hilo">2.1</a> «Un solo hilo».</span></div>
+    </div>
+  </details>
+  <p class="idea">JavaScript tiene <b>un solo hilo</b>, el mismo que pinta la página. Abajo lo ves en directo, como en la pestaña Performance: cada rayita verde es un fotograma pintado. Si tu código <b>ocupa</b> el hilo, no se pinta nada y los clics <b>esperan</b>.</p>
+
+  <div class="dos ancho-izq">
+    <div>
+      <div class="pista"><div id="h-bola"></div></div>
+      <h3 style="margin-top: 14px;">El hilo principal · últimos 8 segundos</h3>
+      <canvas id="h-linea"></canvas>
+      <div class="leyenda">
+        <span style="--c: #34a853">fotograma pintado</span>
+        <span style="--c: #ea4335">tu código ocupa el hilo</span>
+        <span style="--c: #f9ab00">clic: cuándo lo pulsas → cuándo se atiende</span>
+        <span style="--c: #1a73e8">setTimeout: pedido → llega</span>
+      </div>
+      <p>Estado: <span id="h-estado" class="bien">el hilo está libre</span></p>
+      <div class="opciones">
+        <button class="boton peligro" type="button" id="h-while">🧱 Esperar 3 s con un <code>while</code></button>
+        <button class="boton primario" type="button" id="h-timeout">⏱ Pedir con <code>setTimeout</code> de 3 s</button>
+        <button class="boton" type="button" id="h-clic">👆 Púlsame (también durante el while)</button>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <h3>Qué pasa</h3>
+        <ol class="registro" id="h-log"></ol>
+      </div>
+<pre>// 🧱 Esperar: el hilo no hace NADA más en 3 s
+const fin = Date.now() + 3000;
+while (Date.now() &lt; fin) {}
+
+// ⏱ Pedir y seguir: los 3 s los cuenta el navegador
+setTimeout(() =&gt; console.log("ya"), 3000);</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · EVENT LOOP ============ -->
+<section id="s2" hidden>
+  <h2>El event loop, paso a paso</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=7" target="_blank">Presentación</a> · Bloque 1 · diapositivas 7, 8 y 9 · bloque 3 · diapositiva 19</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p>Hay cuatro sitios. En la <b>pila</b> está lo que se ejecuta ahora mismo. En las <b>Web APIs</b> está lo que espera el navegador (temporizadores, peticiones). Cuando una de esas esperas acaba, su función va a una <b>cola</b>:</p><ul><li><b>microtareas</b>: los <code>then</code> de las promesas y lo que va después de un <code>await</code>;</li><li><b>tareas</b>: los <code>setTimeout</code>, los clics y los demás eventos.</li></ul><p>El <b>event loop</b> solo actúa cuando la pila está vacía: ① ¿pila vacía? ② ejecuta <b>todas</b> las microtareas ③ ejecuta <b>una</b> tarea, y vuelta a empezar.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra"><i style="background:#ea4335"></i></span><span>Ficha roja: está en la pila, ejecutándose.</span></li><li><span class="muestra"><i style="background:#1a73e8"></i></span><span>Ficha azul: el navegador la está esperando (⏱).</span></li><li><span class="muestra"><i style="background:#8430ce"></i></span><span>Ficha morada: microtarea esperando turno.</span></li><li><span class="muestra"><i style="background:#188038"></i></span><span>Ficha verde: tarea esperando turno.</span></li><li><span class="muestra">✨</span><span>La cola que brilla es la que atiende el event loop en ese paso; abajo se enciende la regla ①, ② o ③.</span></li><li><span class="muestra">▮</span><span>Línea amarilla del código: la que se está ejecutando. La consola negra enseña lo que va saliendo.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Programa <b>A</b>. Antes de avanzar (→), ¿qué saldrá: A B C o A C B?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>A C B</b>. Un <code>setTimeout</code> de 0 ms no es «ahora»: es «en cuanto la pila esté vacía», y la pila no se vacía hasta que acaba todo el script.</p></details></li><li><p>Programa <b>B</b>: hay un <code>setTimeout</code> y un <code>then</code>. ¿Cuál sale antes?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>1 4 3 2</b>. Primero lo síncrono (1 y 4). Después <b>todas</b> las microtareas (el 3 del <code>then</code>) y por último las tareas (el 2 del temporizador).</p></details></li><li><p>Programa <b>C</b> (difícil). ¿En qué orden salen los seis números?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>1 6 3 5 2 4</b>. El temporizador del 4 se crea <i>dentro</i> de una microtarea, cuando el del 2 ya llevaba un rato en la cola: por eso el 4 sale el último.</p></details></li><li><p>Programa <b>D</b>, con <code>async</code>/<code>await</code>. ¿Qué sale?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>a c b</b>. Hasta el primer <code>await</code>, la función se ejecuta como cualquier otra (sale «a»). En el <code>await</code> se pausa y sale de la pila; lo que queda vuelve más tarde como microtarea.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> El orden es siempre: <b>código síncrono → todas las microtareas → una tarea</b>. Teclas: → o AvPág avanza, ← reinicia; la casilla «¿qué sale?» esconde la consola hasta el final.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#22-el-event-loop">2.2</a> a <a href="../unidades/ud06/#24-microtareas-frente-a-tareas">2.4</a> y <a href="../unidades/ud06/#41-promesas-leidas-de-arriba-abajo">4.1</a>.</span></div>
+    </div>
+  </details>
+
+  <div class="opciones" style="margin-top: 0;">
+    <label>Programa:
+      <select id="e-programa">
+        <option value="a">A · setTimeout de 0 ms (diap. 8)</option>
+        <option value="b" selected>B · promesa frente a temporizador (diap. 9)</option>
+        <option value="c">C · un temporizador dentro de un then</option>
+        <option value="d">D · async / await (diap. 19)</option>
+      </select>
+    </label>
+    <button class="boton" type="button" id="e-reiniciar">⏮ Reiniciar</button>
+    <button class="boton primario" type="button" id="e-paso">Siguiente paso ▶ <small>(→)</small></button>
+    <button class="boton" type="button" id="e-auto">⏯ Automático</button>
+    <label><input type="checkbox" id="e-adivinar" checked> «¿qué sale?»: la consola, al final</label>
+  </div>
+
+  <div class="dos">
+    <div>
+      <pre class="codigo" id="e-codigo" style="font-size: 17px;"></pre>
+      <div id="e-explica"></div>
+      <div id="e-consola"></div>
+      <p class="nota" id="e-contador"></p>
+    </div>
+    <div class="bucle">
+      <div class="zona" id="z-pila"><h4>Pila de llamadas <small>lo que se ejecuta YA</small></h4><ul></ul></div>
+      <div class="zona" id="z-web"><h4>Web APIs <small>el navegador espera</small></h4><ul></ul></div>
+      <div class="zona" id="z-micro"><h4>Microtareas <small>then · await</small></h4><ul></ul></div>
+      <div class="zona" id="z-tareas"><h4>Tareas <small>timers · clics</small></h4><ul></ul></div>
+      <div class="zona" id="z-loop"><span class="rueda">🔄</span>
+        <div><b>Event loop:</b> <span id="z-loop-txt">esperando…</span>
+          <div class="regla-loop"><span data-r="pila">① ¿pila vacía?</span><span data-r="micro">② TODAS las microtareas</span><span data-r="tareas">③ UNA tarea</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · PROMESAS ============ -->
+<section id="s3" hidden>
+  <h2>Promesas: el tique y las dos vías</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=12" target="_blank">Presentación</a> · Bloque 2 · diapositivas 12–15 y 17</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p>Una <b>promesa</b> es como el tique de una cafetería: no es el café, es la promesa de que llegará. Nace <b>pendiente</b> y acaba <b>una sola vez</b>: <b>cumplida</b> (con un valor) o <b>rechazada</b> (con un error). Con <code>then</code> recoges el valor y con <code>catch</code>, el error.</p><p>Al <b>encadenar</b>, lo que <b>devuelve</b> un <code>then</code> es lo que <b>recibe</b> el siguiente. Si devuelve una promesa, la cadena espera a que acabe. Si algo lanza un error, se saltan todos los <code>then</code> hasta el primer <code>catch</code>.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra"><i style="background:#f9ab00"></i></span><span>Luz ámbar que parpadea: promesa pendiente.</span></li><li><span class="muestra"><i style="background:#188038"></i></span><span>Luz verde ✓: cumplida. Luz roja ✗: rechazada.</span></li><li><span class="muestra">🚆</span><span>Vía verde de arriba: todo va bien. Vía roja de abajo: ha habido un error.</span></li><li><span class="muestra">🟢</span><span>La bolita: el valor que viaja de un paso al siguiente. Gris si es <code>undefined</code> o <code>NaN</code>; ⌛ si está esperando otra promesa.</span></li><li><span class="muestra">🏷️</span><span>Cada estación es un <code>then</code> o un <code>catch</code>: dice lo que <b>recibe</b> y lo que <b>devuelve</b>. Si queda en gris punteado, se ha saltado.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Pide tres cafés seguidos. ¿Tienes que esperar a que salga el primero para pedir el segundo?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>No. Pedir no bloquea: el código sigue («sigo con otras cosas») y cada tique acaba cuando le toca.</p></details></li><li><p>Cadena con <code>n =&gt; n * 3</code>. ¿Qué llega a <code>mostrar</code>? ¿Se ejecuta el <code>catch</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>7</b> (2 × 3 = 6, y 6 + 1 = 7). El <code>catch</code> se salta porque no ha habido ningún error.</p></details></li><li><p>Marca <b>llaves y sin return</b>. ¿Qué llega ahora?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>NaN</b>. Con llaves y sin <code>return</code>, la función devuelve <code>undefined</code>; el siguiente hace <code>undefined + 1</code>, que es <code>NaN</code>. No sale ningún error, pero el dato se ha perdido.</p></details></li><li><p>Marca <b>devuelve una promesa</b>. ¿Qué recibe el paso siguiente: la promesa o el número?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>El número (6). La cadena <b>espera</b> a la promesa de dentro y pasa su valor: se «aplana».</p></details></li><li><p>Marca <b>lanza un error</b>. ¿Por dónde va la bolita y qué llega al final?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Cae a la vía roja, se salta el <code>+ 1</code> y el <code>catch</code> devuelve 0, que vuelve a la vía verde: <b>mostrar(0)</b>.</p></details></li><li><p>Pulsa <b>💥 Rechazo sin catch</b>. ¿Qué pasa?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Sale <code>Uncaught (in promise) Error</code>, igual que en la consola de DevTools. Toda cadena necesita un <code>catch</code> al final.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> En un <code>then</code> con llaves, <b>pon <code>return</code></b>. Termina siempre la cadena con un <b><code>catch</code></b>.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#31-que-es-una-promesa">3.1</a> a <a href="../unidades/ud06/#34-encadenar-lo-que-devuelves-es-lo-que-recibe-el-siguiente">3.4</a> y <a href="../unidades/ud06/#36-errores-en-las-promesas">3.6</a>.</span></div>
+    </div>
+  </details>
+
+  <div class="dos ancho-der">
+    <div class="panel">
+      <h3>① El tique de la cafetería</h3>
+      <p class="nota" style="margin-top: 0;">Una promesa nace <span class="chip pendiente">pendiente</span> y acaba <b>una sola vez</b>: <span class="chip cumplida">cumplida</span> o <span class="chip rechazada">rechazada</span>. Mientras, sigues a lo tuyo.</p>
+      <div class="opciones">
+        <label>Tarda <input type="range" id="p-ms" min="500" max="5000" step="250" value="2500"> <b id="p-ms-txt">2,5 s</b></label>
+        <label>Acaba <select id="p-final"><option value="bien">bien</option><option value="mal">mal (sin leche)</option><option value="azar">al azar</option></select></label>
+      </div>
+      <div class="opciones">
+        <button class="boton primario" type="button" id="p-pedir">☕ Pedir</button>
+        <button class="boton peligro" type="button" id="p-nadie">💥 Rechazo sin catch</button>
+      </div>
+      <div class="tiques" id="p-tiques"></div>
+      <ol class="registro" id="p-log" style="min-height: 60px; max-height: 150px; margin-top: 10px;"></ol>
+    </div>
+
+    <div class="panel">
+      <h3>② Encadenar: la bolita lleva el valor</h3>
+      <div class="opciones" style="margin-top: 0;">
+        <span>El paso ①:</span>
+        <label><input type="radio" name="c-paso" value="normal" checked> <code>n =&gt; n * 3</code></label>
+        <label><input type="radio" name="c-paso" value="sinreturn">llaves y <b>sin</b> <code>return</code></label>
+        <label><input type="radio" name="c-paso" value="promesa">devuelve una promesa</label>
+        <label><input type="radio" name="c-paso" value="lanza">lanza un error</label>
+        <button class="boton primario" type="button" id="c-lanzar">▶ Ejecutar</button>
+      </div>
+      <div id="c-escena"></div>
+      <pre class="codigo" id="c-codigo"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · VARIAS A LA VEZ ============ -->
+<section id="s4" hidden>
+  <h2>Varias peticiones: ¿en fila o a la vez?</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=16" target="_blank">Presentación</a> · Bloque 2 · diapositiva 16 · bloque 3 · diapositivas 21 y 22</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p>Si tienes que pedir varias cosas <b>independientes</b>, no hace falta esperar a que llegue una para pedir la siguiente.</p><ul><li><b>En serie</b> (un <code>await</code> detrás de otro): tarda la <b>suma</b> de todas.</li><li><b><code>Promise.all</code></b>: salen todas a la vez; tarda lo que <b>la más lenta</b>. Si falla una, falla todo.</li><li><b><code>allSettled</code></b>: espera a todas y te dice cómo ha acabado cada una. Nunca falla.</li><li><b><code>race</code></b>: la primera que acabe, bien o mal.</li><li><b><code>any</code></b>: la primera que salga bien. Si fallan todas, <code>AggregateError</code>.</li></ul>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">🛵</span><span>Cada carril es una petición. La barra ámbar con la moto: va de camino.</span></li><li><span class="muestra"><i style="background:#188038"></i></span><span>📦 ✓ verde: ha llegado bien. 💥 ✗ roja: ha fallado.</span></li><li><span class="muestra">🔁</span><span>Relevo (solo en serie): esta petición no sale hasta que llega la anterior.</span></li><li><span class="muestra">🏁</span><span>Línea negra: el momento en que <b>sigue tu código</b> (o salta al <code>catch</code>).</span></li><li><span class="muestra">◻️</span><span>Barra translúcida «nadie la espera»: sigue corriendo, pero su resultado ya no le importa a nadie.</span></li><li><span class="muestra">📊</span><span>Comparativa de abajo: cuánto ha tardado cada modo que has probado.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Pulsa <b>🔁 await en serie</b> y luego <b>Promise.all</b>. Mira la comparativa: ¿cuánto tarda cada uno?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>En serie ≈ 3,9 s (1,2 + 2 + 0,7). Con <code>all</code> ≈ 2 s, lo que tarda la más lenta.</p></details></li><li><p>Marca <b>💥 falla</b> en «avisos» y pulsa <b>Promise.all</b>. ¿Cuándo salta al <code>catch</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>A los 0,7 s, en cuanto falla «avisos». Las otras dos siguen su camino, pero sus resultados se pierden.</p></details></li><li><p>Con «avisos» fallando, prueba <b>allSettled</b>, <b>race</b> y <b>any</b>. ¿Qué da cada uno?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><code>allSettled</code>: las tres, cada una con <code>fulfilled</code> o <code>rejected</code>. <code>race</code>: el error de «avisos», porque es la que acaba primero. <code>any</code>: «usuario», la primera que sale <b>bien</b>.</p></details></li><li><p>Marca las tres como fallidas y pulsa <b>any</b>.</p><details class="respuesta"><summary>Ver la respuesta</summary><p><code>AggregateError: All promises were rejected</code>, con los tres errores dentro.</p></details></li><li><p>Pulsa <b>⚠ forEach(async …)</b>. ¿Cuándo sale «terminado»?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>A los 0 s, antes que nadie: <code>forEach</code> <b>no espera</b> a funciones <code>async</code>. Usa <code>for…of</code> con <code>await</code> (en serie) o <code>Promise.all</code> con <code>map</code> (a la vez).</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> Las peticiones independientes se lanzan juntas con <b><code>Promise.all</code></b>. Solo van en serie si una <b>necesita</b> el resultado de la anterior. Nunca <code>forEach</code> con <code>async</code>.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#35-varias-promesas-a-la-vez">3.5</a>, <a href="../unidades/ud06/#43-en-serie-o-en-paralelo">4.3</a> y <a href="../unidades/ud06/#44-trampas">4.4</a>.</span></div>
+    </div>
+  </details>
+  <p class="idea">Tres repartidores van a buscar datos. En <b>serie</b> es una carrera de relevos: uno no sale hasta que llega el anterior. Con <code>Promise.all</code> salen <b>todos a la vez</b>. La línea negra 🏁 marca cuándo <b>sigue tu código</b>.</p>
+
+  <div class="carriles" id="v-carriles"></div>
+  <div class="regla" id="v-regla"></div>
+
+  <div class="modos" style="margin: 12px 0 10px;" id="v-modos">
+    <button class="boton" type="button" data-modo="serie">🔁 await en serie</button>
+    <button class="boton" type="button" data-modo="all">Promise.all</button>
+    <button class="boton" type="button" data-modo="allSettled">Promise.allSettled</button>
+    <button class="boton" type="button" data-modo="race">Promise.race</button>
+    <button class="boton" type="button" data-modo="any">Promise.any</button>
+    <button class="boton" type="button" data-modo="forEach">⚠ forEach(async …)</button>
+  </div>
+
+  <div class="dos">
+    <div>
+      <pre id="v-codigo">Elige un modo de arriba.</pre>
+      <h3 style="margin-top: 12px;">Comparativa: cuándo sigue tu código</h3>
+      <div class="compara" id="v-compara"><span class="nota" style="grid-column: 1 / -1;">Prueba «en serie» y luego «Promise.all».</span></div>
+    </div>
+    <div>
+      <h3>Resultado</h3>
+      <div id="v-resultado">—</div>
+      <p class="nota" id="v-nota"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · FETCH ============ -->
+<section id="s5" hidden>
+  <h2><code>fetch</code>: el viaje de una petición</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=26" target="_blank">Presentación</a> · Bloque 4 · diapositivas 26, 27, 29 y 30</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p><code>fetch(url)</code> envía una petición y devuelve una promesa de la <b>respuesta</b>. Ojo: <code>fetch</code> solo <b>rechaza</b> si no hay respuesta (sin red, CORS, cancelada). Un <b>404 o un 500 sí son respuestas</b>, así que hay que mirar <code>r.ok</code>. Y antes de <code>r.json()</code> conviene comprobar que de verdad llega JSON.</p><p>Mientras, la página tiene que enseñar uno de <b>cuatro estados</b>: cargando, error, vacío o datos.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">🖥️</span><span>Izquierda: tu página (la cartelera) con sus cuatro estados arriba.</span></li><li><span class="muestra">✉️</span><span>El sobre: la petición. Vuelve <b>sellado</b> con el código de estado (verde 2xx, rojo 4xx/5xx).</span></li><li><span class="muestra">✂️</span><span>Tijeras: no hay red, el sobre no llega.</span></li><li><span class="muestra">🗄️</span><span>Derecha: lo que contesta el servidor (cabeceras y cuerpo).</span></li><li><span class="muestra">⏱</span><span>Barrita del navegador: el tiempo límite que queda.</span></li><li><span class="muestra">🚪</span><span>Las cinco puertas: cada comprobación de <code>getJSON</code>. Verde, pasa; roja, se para ahí; apagada, no se comprueba.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Escenario <b>✅ 200</b> y <b>↻ Cargar</b>. ¿Por qué estados pasa la página?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>cargando</b> (los rectángulos grises) y luego <b>datos</b>. Las cinco puertas se ponen verdes.</p></details></li><li><p><b>🔍 404</b> con la casilla marcada. ¿En qué puerta se para y qué error sale?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>En la ② <code>r.ok</code>: «HTTP 404 en /datos/peliculas.json». Un mensaje claro.</p></details></li><li><p>Ahora <b>desmarca la casilla</b> y repite el 404. ¿Dónde falla?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>En la ④ <code>r.json()</code>: «Unexpected token '&lt;'…». Intenta leer como JSON la página HTML del error. El mensaje despista: por eso se mira <code>r.ok</code>.</p></details></li><li><p><b>⚡ Vite dev</b>: el fichero no existe, pero el código es 200. ¿Qué lo detecta?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Solo la puerta ③ (Content-Type): Vite, en desarrollo, devuelve <code>index.html</code> con un 200 cuando no encuentra algo.</p></details></li><li><p><b>📵 sin red</b>. ¿Qué puerta falla?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>La ①: <code>TypeError: Failed to fetch</code>. Es el caso en que <code>fetch</code> rechaza de verdad.</p></details></li><li><p><b>🐢 servidor lento</b> con tiempo límite de 2 s. Y luego: Red Slow 4G y pulsa ✕ a mitad.</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Primero <code>TimeoutError</code> (se acaba el tiempo). Después <code>AbortError</code> (has cancelado tú). Los dos llegan al <code>catch</code>.</p></details></li><li><p><b>📭 lista vacía</b>. ¿Es un error?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>No. La petición ha ido bien, pero no hay películas: estado <b>vacío</b>, con su propio mensaje.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> Cada <code>fetch</code>: <b>comprueba <code>r.ok</code></b>, comprueba que es JSON, usa <code>try/catch</code> y pinta siempre uno de los <b>cuatro estados</b>.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#61-pedir-datos">6.1</a>, <a href="../unidades/ud06/#62-fetch-no-falla-con-un-404">6.2</a>, <a href="../unidades/ud06/#64-los-cuatro-estados-de-la-interfaz">6.4</a> y <a href="../unidades/ud06/#65-cancelar-y-poner-un-tiempo-limite">6.5</a>.</span></div>
+    </div>
+  </details>
+
+  <div class="escenarios" id="f-escenarios"></div>
+  <div class="opciones">
+    <label><input type="checkbox" id="f-comprobar" checked> <code>getJSON</code> mira <code>r.ok</code> y el <code>Content-Type</code></label>
+    <label>Tiempo límite <select id="f-limite"><option value="0">sin límite</option><option value="2000" selected>2 s</option><option value="5000">5 s</option></select></label>
+    <label>Red <select id="f-latencia"><option value="800">rápida</option><option value="1600" selected>normal</option><option value="3000">Slow 4G</option></select></label>
+  </div>
+
+  <div class="escena-red">
+    <div class="maquina">
+      <div class="titulo-maq"><span>🖥️ Navegador · cartelera</span>
+        <span><span class="reloj" id="f-reloj" hidden title="tiempo límite"><span></span></span>
+        <button class="boton" type="button" id="f-cargar">↻ Cargar</button> <button class="boton" type="button" id="f-cancelar" disabled title="Cancelar">✕</button></span>
+      </div>
+      <div id="f-zona" aria-live="polite"></div>
+    </div>
+    <div class="cable"><div class="hilo"></div><div class="tijeras" id="f-tijeras" hidden>✂️</div><div class="sobre" id="f-sobre" hidden></div></div>
+    <div class="maquina servidor">
+      <div class="titulo-maq">🗄️ Servidor</div>
+      <pre id="f-cuerpo">(esperando peticiones)</pre>
+    </div>
+  </div>
+
+  <div class="puertas">
+    <div class="puerta" data-g="resp"><b>① ¿Hay respuesta?</b><small>si no: fetch rechaza</small><span class="que"></span></div>
+    <span class="entre">→</span>
+    <div class="puerta" data-g="ok"><b>② r.ok</b><small>¿2xx?</small><span class="que"></span></div>
+    <span class="entre">→</span>
+    <div class="puerta" data-g="tipo"><b>③ ¿Es JSON?</b><small>Content-Type</small><span class="que"></span></div>
+    <span class="entre">→</span>
+    <div class="puerta" data-g="json"><b>④ r.json()</b><small>texto → datos</small><span class="que"></span></div>
+    <span class="entre">→</span>
+    <div class="puerta" data-g="datos"><b>⑤ Pintar</b><small>uno de los 4 estados</small><span class="que"></span></div>
+  </div>
+
+  <div class="dos ancho-izq">
+    <pre class="codigo" id="f-codigo" style="font-size: 13.5px;"></pre>
+    <div>
+      <h3>Lo que ha llegado al <code>catch</code></h3>
+      <ol class="registro" id="f-log" style="min-height: 60px;"></ol>
+      <p class="nota"><code>fetch</code> solo <b>rechaza</b> si no hay respuesta (sin red, CORS, cancelado). Un 404 o un 500 <b>son respuestas</b>: si no miras <code>r.ok</code>, el error sale más tarde y despista. El servidor es de mentira, pero las <code>Response</code> son reales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · JSON ============ -->
+<section id="s6" hidden>
+  <h2>JSON: ¿qué sobrevive al viaje de ida y vuelta?</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=25" target="_blank">Presentación</a> · Bloque 4 · diapositiva 25 · bloque 5 · diapositiva 36</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p><b>JSON es texto.</b> <code>JSON.stringify</code> convierte tus datos en texto (para enviarlos o guardarlos) y <code>JSON.parse</code> vuelve a crear datos a partir de ese texto. Solo sobreviven textos, números, <code>true</code>/<code>false</code>, <code>null</code>, arrays y objetos planos. Todo lo demás cambia o se pierde por el camino.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">📄</span><span>Columna amarilla (papel): el texto que produce <code>stringify</code>.</span></li><li><span class="muestra"><i style="background:#e8f0fe;border:1px solid #aecbfa"></i></span><span>Columna azul: lo que vuelve con <code>parse</code>.</span></li><li><span class="muestra"><i style="background:#fce8e6;border:1px solid #f28b82"></i></span><span>En rojo: no ha vuelto igual que se fue.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Pulsa <b>▶ Hacer el viaje</b>. ¿Cómo vuelve la fecha?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Como <b>texto</b> (y en hora UTC), no como <code>Date</code>. Si la necesitas como fecha, tienes que volver a crearla.</p></details></li><li><p>¿Y el <code>Set</code>, el <code>Map</code> y la función?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><code>Set</code> y <code>Map</code> vuelven como <code>{}</code>: se pierde todo. La función ni se escribe.</p></details></li><li><p>¿Y la <code>Tarea</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Solo quedan sus propiedades públicas: ni <code>#hecha</code> ni los métodos. Ya no es una <code>Tarea</code>.</p></details></li><li><p>Validador: pulsa «comillas simples», «coma final» y «clave sin comillas». ¿Es JSON válido?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Ninguno. En JSON, las claves y los textos van <b>siempre entre comillas dobles</b>, y no se permiten comas finales ni comentarios.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> JSON solo guarda <b>datos planos</b>. Fechas, <code>Set</code>, <code>Map</code> y clases hay que convertirlos tú, al guardar y al leer.<span class="apuntes">📚 Apuntes de la UD6: apartado <a href="../unidades/ud06/#52-json">5.2</a> «JSON».</span></div>
+    </div>
+  </details>
+  <p class="idea"><code>JSON.stringify</code> lo convierte todo en <span style="background: #fffbe6; color: #3c2a00; border: 1px solid #e0c870; padding: 0 6px; border-radius: 4px;">papel (texto)</span>; <code>JSON.parse</code> vuelve a crear <span style="background: var(--azul-claro); border: 1px solid #aecbfa; padding: 0 6px; border-radius: 4px;">datos</span>. Lo que no es texto, número, booleano, <code>null</code>, array u objeto plano <b>se pierde por el camino</b>.</p>
+
+  <button class="boton primario" type="button" id="j-viaje">▶ Hacer el viaje</button>
+  <table class="viaje" style="margin-top: 10px;">
+    <thead><tr><th></th><th>Antes</th><th>JSON.stringify → papel</th><th>JSON.parse → de vuelta</th><th>¿Igual?</th></tr></thead>
+    <tbody id="j-filas"></tbody>
+  </table>
+
+  <div class="dos" style="margin-top: 20px;">
+    <div>
+      <h3>¿Es JSON válido? Escribe o elige</h3>
+      <div class="opciones" id="j-ejemplos"></div>
+      <textarea id="j-texto" spellcheck="false"></textarea>
+    </div>
+    <div>
+      <h3>JSON.parse(texto)</h3>
+      <div id="j-salida"></div>
+      <p class="nota">Reglas: claves <b>siempre</b> entre comillas dobles, nada de comillas simples, ni comas finales, ni comentarios.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · LOCALSTORAGE ============ -->
+<section id="s7" hidden>
+  <h2><code>localStorage</code>: una libreta que solo admite texto</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=34" target="_blank">Presentación</a> · Bloque 5 · diapositivas 34–38</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p><code>localStorage</code> guarda pares <b>clave → valor</b> en el navegador, separados por web (origen), y siguen ahí aunque cierres la pestaña. <b>Solo guarda texto.</b></p><ul><li><code>setItem(clave, valor)</code> guarda; <code>getItem(clave)</code> lee (<code>null</code> si no está); <code>removeItem</code> borra.</li><li>Para objetos: <code>JSON.stringify</code> al guardar y <code>JSON.parse</code> al leer, <b>dentro de un <code>try/catch</code></b>, porque lo leído puede estar roto.</li><li>Para clases: un método <code>toJSON</code> y un <code>static desde(datos)</code>.</li><li>Unos 5 MB por web. Cualquier JavaScript de la página lo lee: <b>nada de contraseñas ni secretos</b>.</li></ul>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">📒</span><span>La libreta: lo mismo que DevTools → Application → Local Storage. Puedes cambiar un valor a mano.</span></li><li><span class="muestra">📄</span><span>Papel que vuela <b>hacia</b> la libreta: <code>setItem</code>. Papel que vuela <b>desde</b> la libreta: <code>getItem</code>.</span></li><li><span class="muestra"><i style="background:#81c995"></i></span><span>→ en verde: lo que devuelve la línea.</span></li><li><span class="muestra"><i style="background:#f28b82"></i></span><span>✗ en rojo: el error que lanza.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Tarjeta 🔤: guardas un 3. ¿Qué devuelve <code>getItem(…) + 1</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>"31"</b>: lo leído es el texto "3", y texto + 1 pega un 1 al final. Hay que convertir con <code>Number(…)</code>.</p></details></li><li><p>Tarjeta 📦: guardas un objeto sin <code>stringify</code>. ¿Qué queda en la libreta?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>"[object Object]"</b>: los datos se han perdido.</p></details></li><li><p>Tarjeta 🔨: pulsa <b>Romper ud6:prefs</b> y ejecuta. ¿Qué hace <code>cargar</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><code>JSON.parse</code> lanza <code>SyntaxError</code>, pero <code>cargar</code> lo captura y devuelve el valor por defecto: la página no se rompe.</p></details></li><li><p>Tarjeta 🧱: ¿se puede llamar a <code>copia.completar()</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>No: <code>TypeError</code>. Lo leído es un objeto plano, ya no es una <code>Tarea</code>. La tarjeta ✅ lo arregla con <code>toJSON</code> y <code>Tarea.desde</code>.</p></details></li><li><p>Tarjeta 📅: el 17/11 a las 00:00. ¿Qué día dice <code>toISOString().slice(0, 10)</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><b>El 16</b>: <code>toISOString</code> pasa la hora a UTC (una hora menos en España en invierno). Para fechas de calendario usa <code>fechaISO</code>, que trabaja en hora local.</p></details></li><li><p>Pulsa <b>🪟 Abrir otra pestaña</b>, cambia allí un valor y vuelve. ¿Qué aparece?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Un evento <code>storage</code> con el valor antiguo y el nuevo. Solo llega a las <b>otras</b> pestañas, no a la que hace el cambio.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> Al guardar, <code>JSON.stringify</code>; al leer, <code>JSON.parse</code> dentro de <code>try/catch</code> y con un valor por defecto. Las clases necesitan <code>toJSON</code> y <code>desde</code>.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#72-la-api-de-localstorage">7.2</a> a <a href="../unidades/ud06/#76-el-evento-storage-sincronizar-pestanas">7.6</a>.</span></div>
+    </div>
+  </details>
+  <p class="idea">Pulsa ▶ en cada tarjeta: cada línea se ejecuta de verdad y verás lo que <b>entra</b> en la libreta y lo que <b>sale</b> de ella. La libreta es lo mismo que <b>DevTools → Application → Local Storage</b>; se puede editar a mano.</p>
+
+  <div class="dos ancho-izq">
+    <div class="tarjetas" id="l-tarjetas"></div>
+    <div>
+      <div class="libreta" id="l-libreta">
+        <h3>📒 Local Storage · <span id="l-origen"></span></h3>
+        <div class="hojas" id="l-hojas"></div>
+        <div class="opciones">
+          <button class="boton" type="button" id="l-vaciar">🧹 Borrar las ud6:</button>
+          <button class="boton" type="button" id="l-ventana">🪟 Abrir otra pestaña</button>
+        </div>
+        <h3 style="margin-top: 8px;">Eventos <code>storage</code> que llegan aquí</h3>
+        <ol class="registro" id="l-eventos" style="min-height: 40px; max-height: 130px;"></ol>
+        <p class="nota">La pestaña que cambia algo <b>no</b> recibe su propio evento: solo las <b>otras</b> del mismo origen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · MÓDULOS Y VITE ============ -->
+<section id="s8" hidden>
+  <h2>Módulos y Vite: de <code>src/</code> al navegador</h2>
+  <p class="diapo">🎞️ <a href="../assets/presentaciones/DWEC-UD6.pdf#page=40" target="_blank">Presentación</a> · Bloque 6 · diapositivas 40–44</p>
+  <details class="guia">
+    <summary>📖 Qué estás viendo <small>· explicación para el alumnado (tecla E)</small></summary>
+    <div class="guia-cuerpo">
+      <div>
+        <h4>💡 La idea</h4>
+        <p>Con los <b>módulos ES</b> (<code>import</code>/<code>export</code>) repartes el código en ficheros pequeños. <b>Vite</b> los sirve de dos maneras:</p><ul><li><b>Desarrollo</b> (<code>docker compose up</code>): cada módulo viaja por separado y la página se recarga al guardar.</li><li><b>Producción</b> (<code>npm run build</code>): lo junta todo en <code>dist/</code>, lo comprime y pone una <b>huella</b> en el nombre de cada fichero.</li></ul><p><code>import()</code> (con paréntesis) carga un módulo <b>solo cuando hace falta</b>. Y de las variables de entorno solo llegan al navegador las que empiezan por <code>VITE_</code>, que quedan <b>escritas</b> dentro del JavaScript.</p>
+        <h4>🎨 Qué significa cada dibujo</h4>
+        <ul class="dibujos"><li><span class="muestra">📁</span><span>Izquierda: tus ficheros en <code>src/</code>. Borde punteado: el módulo que se carga con <code>import()</code>.</span></li><li><span class="muestra">⚡</span><span>Centro: Vite. En producción, lo que sale en <code>dist/</code>.</span></li><li><span class="muestra">🖥️</span><span>Derecha: lo que pide el navegador, como en la pestaña Network de DevTools.</span></li><li><span class="muestra">🚪</span><span>Puerta «¿empieza por VITE_?»: decide qué variables llegan a <code>import.meta.env</code>.</span></li></ul>
+      </div>
+      <div>
+        <h4>🧪 Prueba esto (piensa la respuesta antes de abrirla)</h4>
+        <ol class="pruebas"><li><p>Pulsa <b>▶ docker compose up</b>. ¿Cuántas peticiones hace el navegador? ¿Viaja <code>graficas.js</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>7: <code>@vite/client</code> y los seis ficheros, uno a uno. <code>graficas.js</code> no viaja, porque nadie lo ha pedido todavía.</p></details></li><li><p>Ahora <b>▶ npm run build + preview</b>. ¿Cuántas peticiones? ¿Para qué sirve el código raro del nombre?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>3. Es la <b>huella</b>: cambia cuando cambia el fichero, y así el navegador nunca usa una copia vieja guardada en la caché.</p></details></li><li><p>Pulsa <b>📊 Ver estadísticas</b> dos veces. ¿Cuántas veces se descarga <code>graficas.js</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p>Una. La segunda vez, <code>import()</code> devuelve el módulo que ya está en memoria.</p></details></li><li><p>Variables: <b>▶ Pasar por Vite</b>. ¿Llega <code>SECRETO</code>? Marca <b>npm run build</b> y repite: ¿dónde acaban las <code>VITE_</code>?</p><details class="respuesta"><summary>Ver la respuesta</summary><p><code>SECRETO</code> no llega (sería <code>undefined</code>). Las <code>VITE_</code> quedan escritas tal cual dentro del JavaScript publicado: cualquiera puede leerlas.</p></details></li></ol>
+      </div>
+      <div class="llevas"><b>🎒 Lo que te tienes que llevar.</b> En desarrollo, un fichero por módulo; en producción, <code>dist/</code> con huellas. <code>import()</code> carga cuando hace falta. <b>En el frontend no hay secretos</b>: <code>VITE_</code> es público.<span class="apuntes">📚 Apuntes de la UD6: apartados <a href="../unidades/ud06/#81-modulos-es">8.1</a> a <a href="../unidades/ud06/#83-variables-de-entorno">8.3</a> y <a href="../unidades/ud06/#85-import-dinamico">8.5</a>.</span></div>
+    </div>
+  </details>
+
+  <div class="opciones" style="margin-top: 0;">
+    <button class="boton primario" type="button" id="m-dev">▶ docker compose up (desarrollo)</button>
+    <button class="boton primario" type="button" id="m-prod">▶ npm run build + preview (producción)</button>
+    <button class="boton" type="button" id="m-stats" disabled>📊 Ver estadísticas → <code>import()</code></button>
+  </div>
+  <div class="obra">
+    <div class="caja"><b>📁 Tu proyecto · src/</b><ul class="ficheros" id="m-src"></ul></div>
+    <div class="caja vite" id="m-vite"><b>⚡ Vite</b><div id="m-vite-txt" class="nota" style="margin: 0 0 6px;">Pulsa uno de los dos botones.</div><ul class="ficheros" id="m-dist"></ul></div>
+    <div class="caja nav"><b>🖥️ Navegador · Network</b><ul class="ficheros" id="m-nav"></ul><div class="contador" id="m-cuenta">0 peticiones</div><div id="m-burbuja"></div></div>
+  </div>
+
+  <div class="dos">
+    <div>
+<pre>// main.js · import dinámico (diap. 44)
+botonEstadisticas.addEventListener("click", async () =&gt; {
+  // la 1.ª vez se descarga; las siguientes, no
+  const { pintarGrafica } = await import("./graficas.js");
+  pintarGrafica(resumen());
+});</pre>
+      <p class="nota" id="m-nota"></p>
+    </div>
+    <div class="panel env">
+      <h3>Variables de entorno: ¿qué llega al navegador?</h3>
+      <label class="f" for="m-envdev">.env.development</label>
+      <textarea id="m-envdev" spellcheck="false">VITE_API_URL=http://localhost:3000/api
+VITE_TITULO=Cartelera (pruebas)
+SECRETO=clave-de-pago-1234</textarea>
+      <label class="f" for="m-envprod">.env.production</label>
+      <textarea id="m-envprod" spellcheck="false">VITE_API_URL=https://api.miweb.es
+VITE_TITULO=Cartelera
+SECRETO=clave-de-pago-1234</textarea>
+      <div class="opciones">
+        <label><input type="radio" name="m-modo" value="development" checked> <code>docker compose up</code></label>
+        <label><input type="radio" name="m-modo" value="production"> <code>npm run build</code></label>
+        <button class="boton primario" type="button" id="m-filtrar">▶ Pasar por Vite</button>
+      </div>
+      <div class="filtro">
+        <div class="chips" id="m-chips"></div>
+        <div class="puerta-vite">¿empieza<br>por VITE_?</div>
+        <div class="destinos">
+          <div class="destino pasa"><b>✓ import.meta.env</b><div class="chips" id="m-pasan"></div></div>
+          <div class="destino no"><b>✗ no llega (undefined)</b><div class="chips" id="m-no"></div></div>
+        </div>
+      </div>
+      <div id="m-distcod"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ---------- Utilidades comunes ----------
+const $ = (s, raiz = document) => raiz.querySelector(s);
+const esperar = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+let VEL = 1;
+$("#vel").addEventListener("change", (e) => { VEL = Number(e.target.value); });
+const pausa = (ms) => esperar(ms * VEL);
+
+function apuntar(lista, texto, clase = "") {
+  const li = document.createElement("li");
+  li.textContent = texto;
+  li.className = (clase ? clase + " " : "") + "aparece";
+  lista.append(li);
+  lista.scrollTop = lista.scrollHeight;
+  return li;
+}
+
+// Cómo lo enseñaría la consola
+function ver(v) {
+  if (typeof v === "string") return v.includes('"') && !v.includes("'") ? `'${v}'` : JSON.stringify(v);
+  if (v === undefined) return "undefined";
+  if (typeof v === "number" || typeof v === "boolean" || v === null) return String(v);
+  if (typeof v === "function") return "ƒ " + (v.name || "anónima");
+  if (v instanceof Error) return `${v.name}: ${v.message}`;
+  if (v instanceof Date) return `Date ${v.toString().slice(0, 24)}`;
+  if (v instanceof Set) return `Set(${v.size}) {${[...v].map(ver).join(", ")}}`;
+  if (v instanceof Map) return `Map(${v.size}) {${[...v].map(([k, x]) => ver(k) + " => " + ver(x)).join(", ")}}`;
+  if (Array.isArray(v)) return "[" + v.map(ver).join(", ") + "]";
+  const nombre = v.constructor && v.constructor !== Object ? v.constructor.name + " " : "";
+  return nombre + "{" + Object.entries(v).map(([k, x]) => `${k}: ${ver(x)}`).join(", ") + "}";
+}
+
+function pintarCodigo(pre, lineas) {
+  pre.replaceChildren(...lineas.map((texto) => {
+    const span = document.createElement("span");
+    span.className = "l";
+    span.textContent = texto || " ";
+    return span;
+  }));
+}
+
+// Una ficha vuela de un sitio a otro (elementos o rectángulos)
+function volar(desde, hacia, texto, clase = "", ms = 750) {
+  const a = desde instanceof Element ? desde.getBoundingClientRect() : desde;
+  const b = hacia instanceof Element ? hacia.getBoundingClientRect() : hacia;
+  const ficha = document.createElement("div");
+  ficha.className = "ficha-vuela " + clase;
+  ficha.textContent = texto;
+  ficha.style.left = a.left + "px";
+  ficha.style.top = a.top + "px";
+  document.body.append(ficha);
+  const dx = b.left - a.left;
+  const dy = b.top - a.top;
+  const vuelo = ficha.animate([
+    { transform: "translate(0, 0) scale(1)" },
+    { transform: `translate(${dx / 2}px, ${dy / 2 - 50}px) scale(1.15)`, offset: 0.5 },
+    { transform: `translate(${dx}px, ${dy}px) scale(1)` },
+  ], { duration: ms * VEL, easing: "ease-in-out" });
+  return vuelo.finished.then(() => ficha.remove(), () => ficha.remove());
+}
+
+// Rechazos que nadie captura: se ven aquí y en la consola de DevTools
+const avisoGlobal = $("#no-capturado");
+let temporizadorAviso;
+window.addEventListener("unhandledrejection", (e) => {
+  avisoGlobal.textContent = "Uncaught (in promise) " + ver(e.reason);
+  avisoGlobal.hidden = false;
+  avisoGlobal.classList.remove("tiembla"); void avisoGlobal.offsetWidth; avisoGlobal.classList.add("tiembla");
+  clearTimeout(temporizadorAviso);
+  temporizadorAviso = setTimeout(() => { avisoGlobal.hidden = true; }, 6000);
+});
+avisoGlobal.addEventListener("click", () => { avisoGlobal.hidden = true; });
+
+// ---------- Tema claro / oscuro, compartido con los apuntes ----------
+function color(nombre) { return getComputedStyle(document.documentElement).getPropertyValue(nombre).trim(); }
+{
+  const boton = $("#tema");
+  const pintar = () => {
+    const oscuro = document.documentElement.dataset.tema === "oscuro";
+    boton.textContent = oscuro ? "☀️" : "🌙";
+    boton.title = oscuro ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
+  };
+  boton.addEventListener("click", () => {
+    const oscuro = document.documentElement.dataset.tema !== "oscuro";
+    document.documentElement.dataset.tema = oscuro ? "oscuro" : "claro";
+    const scheme = oscuro ? "slate" : "default";
+    try { localStorage.setItem(CLAVE_TEMA, JSON.stringify({ index: oscuro ? 1 : 0, color: { media: "", scheme, primary: "custom", accent: "custom" } })); } catch {}
+    pintar();
+  });
+  pintar();
+}
+{
+  const intro = $("#intro");
+  try { if (localStorage.getItem("ud6-lab:intro-vista")) intro.hidden = true; } catch {}
+  intro.querySelector("button").addEventListener("click", () => {
+    intro.hidden = true;
+    try { localStorage.setItem("ud6-lab:intro-vista", "1"); } catch {}
+  });
+}
+
+// ---------- Navegación entre demos (teclas 1–8) ----------
+const secciones = document.querySelectorAll("main > section");
+const pestanas = document.querySelectorAll("nav button");
+const alEntrar = {};
+let actual = "1";
+function ir(n) {
+  actual = String(n);
+  secciones.forEach((s) => { s.hidden = s.id !== "s" + n; });
+  pestanas.forEach((b) => b.setAttribute("aria-current", b.dataset.ir === actual));
+  history.replaceState(null, "", "#" + n);
+  alEntrar[actual]?.();
+}
+pestanas.forEach((b) => b.addEventListener("click", () => ir(b.dataset.ir)));
+document.addEventListener("keydown", (e) => {
+  if (e.target.matches("input, select, textarea")) return;
+  if (e.key >= "1" && e.key <= "8") ir(e.key);
+});
+
+// =====================================================================
+// 1 · Un hilo
+// =====================================================================
+{
+  const bola = $("#h-bola");
+  const pista = bola.parentElement;
+  const lienzo = $("#h-linea");
+  const ctx = lienzo.getContext("2d");
+  const estado = $("#h-estado");
+  const log = $("#h-log");
+  const VENTANA = 8000;
+  const fotos = [];
+  const marcas = [];
+  const coma = (ms) => (ms / 1000).toFixed(1).replace(".", ",");
+  let x = 0, sentido = 1, ultimo = performance.now();
+
+  function dibujarHilo(ahora) {
+    const w = lienzo.clientWidth, h = lienzo.clientHeight, dpr = devicePixelRatio || 1;
+    if (lienzo.width !== Math.round(w * dpr)) { lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    const px = (t) => w - (ahora - t) / VENTANA * w;
+    ctx.fillStyle = color("--gris");
+    ctx.fillRect(0, 28, w, 40);
+    while (fotos.length && ahora - fotos[0] > VENTANA) fotos.shift();
+    ctx.fillStyle = "#34a853";
+    for (const t of fotos) ctx.fillRect(px(t), 32, 2, 32);
+    ctx.font = "600 13px system-ui, sans-serif";
+    for (const m of marcas) {
+      if (m.tipo === "bloque") {
+        const x0 = px(m.t), x1 = px(m.t + m.dur);
+        if (x1 < 0) continue;
+        ctx.fillStyle = "#ea4335";
+        ctx.fillRect(x0, 28, x1 - x0, 40);
+        ctx.fillStyle = "#fff";
+        ctx.fillText(`while · ${coma(m.dur)} s: no se pinta nada`, Math.max(x0 + 6, 4), 53);
+      } else if (m.tipo === "clic") {
+        const x0 = px(m.t), x1 = px(m.fin);
+        if (x1 < 0) continue;
+        ctx.strokeStyle = "#f9ab00"; ctx.fillStyle = "#f9ab00"; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(x0, 16); ctx.lineTo(x1, 16); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x0, 16, 4, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(x1, 10); ctx.lineTo(x1 + 8, 16); ctx.lineTo(x1, 22); ctx.fill();
+        if (m.fin - m.t > 300) { ctx.fillStyle = color("--ambar-t"); ctx.fillText(`esperó ${coma(m.fin - m.t)} s`, x0 + 6, 11); }
+      } else if (m.tipo === "timer") {
+        const x0 = px(m.t), x1 = px(m.t + 3000);
+        if (x1 < 0) continue;
+        ctx.strokeStyle = "#1a73e8"; ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
+        ctx.beginPath(); ctx.moveTo(x0, 80); ctx.lineTo(Math.min(x1, w), 80); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = "#1a73e8";
+        ctx.fillText("⏱ pedido", x0 - 4, 96);
+        if (ahora >= m.t + 3000) ctx.fillText("«ya»", x1 - 14, 96);
+      }
+    }
+  }
+
+  function mover(ahora) {
+    const ancho = pista.clientWidth - bola.offsetWidth;
+    x += sentido * (ahora - ultimo) * 0.35;
+    if (x > ancho) { x = ancho; sentido = -1; }
+    if (x < 0) { x = 0; sentido = 1; }
+    bola.style.transform = `translateX(${x}px)`;
+    ultimo = ahora;
+    fotos.push(ahora);
+    if (actual === "1") dibujarHilo(ahora);
+    requestAnimationFrame(mover);
+  }
+  requestAnimationFrame(mover);
+
+  let clics = 0;
+  $("#h-clic").addEventListener("click", (e) => {
+    clics++;
+    const ahora = performance.now();
+    const espera = ahora - e.timeStamp;
+    marcas.push({ tipo: "clic", t: e.timeStamp, fin: ahora });
+    apuntar(log, espera > 300 ? `👆 clic ${clics}: ha esperado ${coma(espera)} s en la cola` : `👆 clic ${clics}: atendido al momento`, espera > 300 ? "ojo" : "info");
+  });
+
+  $("#h-while").addEventListener("click", () => {
+    apuntar(log, "🧱 empieza el while: la pila está ocupada 3 s", "mal");
+    estado.textContent = "CONGELADO: el while ocupa el hilo";
+    estado.className = "mal";
+    setTimeout(() => {   // dejo que se pinte el aviso y bloqueo de verdad
+      const t0 = performance.now();
+      const fin = Date.now() + 3000;
+      while (Date.now() < fin) {}
+      marcas.push({ tipo: "bloque", t: t0, dur: performance.now() - t0 });
+      apuntar(log, "🧱 termina el while: ahora se atiende lo que esperaba", "mal");
+      estado.textContent = "el hilo está libre";
+      estado.className = "bien";
+    }, 80);
+  });
+
+  $("#h-timeout").addEventListener("click", () => {
+    marcas.push({ tipo: "timer", t: performance.now() });
+    apuntar(log, "⏱ setTimeout pedido: el navegador cuenta, el hilo sigue libre", "bien");
+    setTimeout(() => apuntar(log, "⏱ «ya»: llega el callback (a la cola, y luego a la pila)", "bien"), 3000);
+  });
+}
+
+// =====================================================================
+// 2 · Event loop
+// Cada elemento es "id|texto": con el id, la ficha vuela de una zona a otra
+// =====================================================================
+const PROGRAMAS = {
+  a: {
+    codigo: ['console.log("A");', 'setTimeout(() => console.log("B"), 0);', 'console.log("C");'],
+    pasos: [
+      { l: 0, pila: ["s|script"], mira: "pila", t: "El navegador empieza a ejecutar el fichero: el script entra en la pila." },
+      { l: 1, pila: ["s|script", 'a|console.log("A")'], out: "A", t: "Código síncrono: se ejecuta ya." },
+      { l: 2, pila: ["s|script", "st|setTimeout(…, 0)"], web: ['B|0 ms → log("B")'], t: "setTimeout NO espera: le pasa el temporizador al navegador y vuelve enseguida." },
+      { l: 3, pila: ["s|script", 'c|console.log("C")'], web: [], tareas: ['B|() => log("B")'], out: "C", t: "El temporizador de 0 ms ya ha acabado y su callback espera en la COLA DE TAREAS. Pero la pila está ocupada: el script sigue con C." },
+      { l: 0, pila: [], mira: "tareas", loop: "pila vacía · microtareas: ninguna · saco UNA tarea", t: "El script termina. Ahora, y solo ahora, el event loop mira las colas." },
+      { l: 2, pila: ['B|() => log("B")'], tareas: [], out: "B", mira: "tareas", loop: "ejecutando una tarea", t: "El callback sube a la pila y se ejecuta." },
+      { l: 0, pila: [], loop: "todo vacío: espero", fin: true, t: "A C B. Cero milisegundos no es «ya»: es «en cuanto la pila esté vacía»." },
+    ],
+  },
+  b: {
+    codigo: ["console.log(1);", "setTimeout(() => console.log(2), 0);", "Promise.resolve().then(() => console.log(3));", "console.log(4);"],
+    pasos: [
+      { l: 0, pila: ["s|script"], mira: "pila", t: "El script entra en la pila." },
+      { l: 1, pila: ["s|script", "1|console.log(1)"], out: "1", t: "Síncrono: sale ya." },
+      { l: 2, pila: ["s|script", "st|setTimeout(…, 0)"], web: ["t2|0 ms → log(2)"], t: "El temporizador se lo queda el navegador." },
+      { l: 3, pila: ["s|script", "pr|Promise.resolve().then(…)"], web: [], tareas: ["t2|() => log(2)"], micro: ["p3|() => log(3)"], t: "La promesa ya está cumplida: su then va a MICROtareas. El temporizador ya ha acabado: su callback, a tareas." },
+      { l: 4, pila: ["s|script", "4|console.log(4)"], out: "4", t: "Síncrono: sale ya. Las dos colas esperan." },
+      { l: 0, pila: [], mira: "micro", loop: "pila vacía · vacío TODAS las microtareas", t: "Se acaba el script. Primero, las microtareas: todas." },
+      { l: 3, pila: ["p3|() => log(3)"], micro: [], out: "3", mira: "micro", loop: "ejecutando microtareas", t: "El then se cuela antes que el temporizador." },
+      { l: 0, pila: [], mira: "tareas", loop: "microtareas vacías · saco UNA tarea", t: "No quedan microtareas: ahora una tarea." },
+      { l: 2, pila: ["t2|() => log(2)"], tareas: [], out: "2", mira: "tareas", loop: "ejecutando una tarea", t: "Por fin, el temporizador." },
+      { l: 0, pila: [], loop: "todo vacío: espero", fin: true, t: "1 4 3 2: síncrono → microtareas → tareas." },
+    ],
+  },
+  c: {
+    codigo: ["console.log(1);", "setTimeout(() => console.log(2), 0);", "Promise.resolve().then(() => {", "  console.log(3);", "  setTimeout(() => console.log(4), 0);", "});", "Promise.resolve().then(() => console.log(5));", "console.log(6);"],
+    pasos: [
+      { l: 0, pila: ["s|script"], mira: "pila", t: "El script entra en la pila." },
+      { l: 1, pila: ["s|script", "1|console.log(1)"], out: "1", t: "Síncrono." },
+      { l: 2, pila: ["s|script", "st|setTimeout(…, 0)"], web: ["t2|0 ms → log(2)"], t: "Temporizador al navegador." },
+      { l: 3, pila: ["s|script", "pr1|then ①"], web: [], tareas: ["t2|() => log(2)"], micro: ["th1|then ① (3 y timer 4)"], t: "then ① a microtareas; el 2 ya espera en tareas." },
+      { l: 7, pila: ["s|script", "pr2|then ②"], micro: ["th1|then ① (3 y timer 4)", "th2|then ② → log(5)"], t: "then ② también a microtareas, detrás del ①." },
+      { l: 8, pila: ["s|script", "6|console.log(6)"], out: "6", t: "Síncrono." },
+      { l: 0, pila: [], mira: "micro", loop: "pila vacía · vacío TODAS las microtareas", t: "Termina el script: turno de las microtareas." },
+      { l: 4, pila: ["th1|then ①"], micro: ["th2|then ② → log(5)"], out: "3", mira: "micro", loop: "ejecutando microtareas", t: "Dentro del then ①: sale el 3…" },
+      { l: 5, pila: ["th1|then ①", "st4|setTimeout(…, 0)"], web: ["t4|0 ms → log(4)"], mira: "micro", t: "…y se programa un temporizador NUEVO, ahora." },
+      { l: 0, pila: [], web: [], tareas: ["t2|() => log(2)", "t4|() => log(4)"], mira: "micro", loop: "aún quedan microtareas", t: "El 4 entra en la cola de tareas DETRÁS del 2, que llevaba ahí desde el principio." },
+      { l: 7, pila: ["th2|then ②"], micro: [], out: "5", mira: "micro", loop: "ejecutando microtareas", t: "TODAS las microtareas antes de cualquier tarea." },
+      { l: 0, pila: [], mira: "tareas", loop: "microtareas vacías · saco UNA tarea", t: "Ahora sí, tareas, de una en una." },
+      { l: 2, pila: ["t2|() => log(2)"], tareas: ["t4|() => log(4)"], out: "2", mira: "tareas", loop: "ejecutando una tarea", t: "El primero de la cola." },
+      { l: 0, pila: [], mira: "tareas", loop: "¿microtareas? ninguna · siguiente tarea", t: "Entre tarea y tarea, el event loop vuelve a mirar las microtareas." },
+      { l: 5, pila: ["t4|() => log(4)"], tareas: [], out: "4", mira: "tareas", loop: "ejecutando una tarea", t: "El último." },
+      { l: 0, pila: [], loop: "todo vacío: espero", fin: true, t: "1 6 3 5 2 4. El 4 sale el último: su temporizador se programó dentro de una microtarea." },
+    ],
+  },
+  d: {
+    codigo: ["async function f() {", '  console.log("a");', "  await null;", '  console.log("b");', "}", "f();", 'console.log("c");'],
+    pasos: [
+      { l: 1, pila: ["s|script"], mira: "pila", t: "Se define la función f: todavía no se ejecuta." },
+      { l: 6, pila: ["s|script", "f|f()"], t: "Se llama a f: entra en la pila." },
+      { l: 2, pila: ["s|script", "f|f()", 'a|console.log("a")'], out: "a", t: "Hasta el primer await, una función async es normal y corriente: síncrona." },
+      { l: 3, pila: ["s|script"], micro: ["f|resto de f (después del await)"], t: "await: f se PAUSA y sale de la pila. Lo que queda de f volverá como microtarea." },
+      { l: 7, pila: ["s|script", 'c|console.log("c")'], out: "c", t: "El script sigue: await no congela la página, solo pausa f." },
+      { l: 0, pila: [], mira: "micro", loop: "pila vacía · vacío TODAS las microtareas", t: "Termina el script: turno de las microtareas." },
+      { l: 4, pila: ["f|f (continúa)", 'b|console.log("b")'], micro: [], out: "b", mira: "micro", loop: "ejecutando microtareas", t: "f vuelve a la pila justo donde se quedó." },
+      { l: 0, pila: [], loop: "todo vacío: espero", fin: true, t: "a c b: lo de después del await vuelve como microtarea." },
+    ],
+  },
+};
+
+{
+  const ZONAS = ["pila", "web", "micro", "tareas"];
+  const selector = $("#e-programa");
+  const codigo = $("#e-codigo");
+  const explica = $("#e-explica");
+  const consola = $("#e-consola");
+  const contador = $("#e-contador");
+  const adivinar = $("#e-adivinar");
+  const zonas = Object.fromEntries(ZONAS.map((z) => [z, $(`#z-${z} ul`)]));
+  const cajas = Object.fromEntries(ZONAS.map((z) => [z, $(`#z-${z}`)]));
+  const loop = $("#z-loop");
+  const loopTxt = $("#z-loop-txt");
+  const botonAuto = $("#e-auto");
+  let programa, i, estado, automatico = null;
+
+  function reiniciar() {
+    pararAuto();
+    programa = PROGRAMAS[selector.value];
+    pintarCodigo(codigo, programa.codigo);
+    i = -1;
+    estado = { pila: [], web: [], micro: [], tareas: [], salida: [] };
+    aplicar(null);
+    explica.textContent = "Antes de empezar: ¿qué saldrá por la consola? Piénsalo. Luego, «Siguiente paso» (o →).";
+  }
+
+  function posicionesAntes() {
+    const m = new Map();
+    for (const z of ZONAS) for (const li of zonas[z].children) if (li.dataset.id) m.set(li.dataset.id, { zona: z, rect: li.getBoundingClientRect() });
+    return m;
+  }
+
+  function aplicar(p) {
+    const antes = posicionesAntes();
+    const linea = p?.l ? codigo.children[p.l - 1] : null;
+    const origen = (linea ?? cajas.pila).getBoundingClientRect();
+    if (p) {
+      for (const z of ZONAS) if (p[z]) estado[z] = p[z];
+      if (p.out) estado.salida.push(p.out);
+    }
+    const vuelos = [];
+    for (const z of ZONAS) {
+      if (estado[z].length === 0) { zonas[z].innerHTML = '<li class="vacio">(vacía)</li>'; continue; }
+      zonas[z].replaceChildren(...estado[z].map((item) => {
+        const [id, texto] = item.split("|");
+        const li = document.createElement("li");
+        li.dataset.id = id;
+        li.textContent = texto;
+        const previo = antes.get(id);
+        if (p && !(previo && previo.zona === z)) {
+          li.style.visibility = "hidden";
+          vuelos.push(() => volar(previo ? previo.rect : origen, li, texto, "z-" + z).then(() => { li.style.visibility = ""; }));
+        }
+        return li;
+      }));
+    }
+    vuelos.forEach((v) => v());
+
+    [...codigo.children].forEach((l, n) => l.classList.toggle("activa", p?.l === n + 1));
+    for (const z of ZONAS) cajas[z].classList.toggle("atiende", p?.mira === z && z !== "pila");
+    document.querySelectorAll(".regla-loop span").forEach((s) => s.classList.toggle("on", p?.mira === s.dataset.r));
+    loopTxt.textContent = p?.loop ?? (estado.pila.length ? "la pila está ocupada: espero" : "esperando…");
+    loop.classList.toggle("gira", Boolean(p?.loop) && !p.fin);
+
+    const fin = p?.fin ?? false;
+    const oculta = adivinar.checked && !fin;
+    consola.classList.toggle("oculta", oculta);
+    consola.replaceChildren(...estado.salida.map((s, n) => {
+      const span = document.createElement("span");
+      span.textContent = s;
+      if (p?.out && n === estado.salida.length - 1) {
+        span.className = "nuevo";
+        if (!oculta) {
+          span.style.visibility = "hidden";
+          volar(origen, span, s, "z-consola").then(() => { span.style.visibility = ""; });
+        }
+      }
+      return span;
+    }));
+    if (p) explica.textContent = p.t;
+    contador.textContent = `Paso ${Math.max(i + 1, 0)} de ${programa.pasos.length}`;
+    $("#e-paso").disabled = i >= programa.pasos.length - 1;
+  }
+
+  function siguiente() {
+    if (i >= programa.pasos.length - 1) { pararAuto(); return; }
+    i++;
+    aplicar(programa.pasos[i]);
+  }
+  function pararAuto() {
+    clearTimeout(automatico);
+    automatico = null;
+    botonAuto.textContent = "⏯ Automático";
+  }
+  function auto() {
+    siguiente();
+    if (i < programa.pasos.length - 1) automatico = setTimeout(auto, 2600 * VEL);
+    else pararAuto();
+  }
+
+  selector.addEventListener("change", () => { reiniciar(); selector.blur(); });
+  $("#e-reiniciar").addEventListener("click", reiniciar);
+  $("#e-paso").addEventListener("click", siguiente);
+  adivinar.addEventListener("change", () => consola.classList.toggle("oculta", adivinar.checked && !programa.pasos[i]?.fin));
+  botonAuto.addEventListener("click", () => {
+    if (automatico) return pararAuto();
+    if (i >= programa.pasos.length - 1) reiniciar();
+    botonAuto.textContent = "⏸ Parar";
+    auto();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (actual !== "2" || e.target.matches("input, select, textarea")) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); siguiente(); }
+    if (e.key === "ArrowLeft" || e.key === "Home" || e.key === "PageUp") { e.preventDefault(); reiniciar(); }
+  });
+  reiniciar();
+}
+
+// =====================================================================
+// 3 · Promesas
+// =====================================================================
+{
+  const ms = $("#p-ms");
+  const msTxt = $("#p-ms-txt");
+  const tiques = $("#p-tiques");
+  const log = $("#p-log");
+  let numero = 0;
+  ms.addEventListener("input", () => { msTxt.textContent = (Number(ms.value) / 1000).toLocaleString("es-ES") + " s"; });
+
+  const pedirCafe = (espera, bien) => new Promise((resolve, reject) => {
+    setTimeout(() => (bien ? resolve("☕ café") : reject(new Error("sin leche"))), espera);
+  });
+
+  $("#p-pedir").addEventListener("click", () => {
+    const n = ++numero;
+    const espera = Number(ms.value);
+    const final = $("#p-final").value;
+    const bien = final === "azar" ? Math.random() < 0.5 : final === "bien";
+    const tique = document.createElement("div");
+    tique.className = "tique aparece";
+    tique.innerHTML = `<div class="num">Tique nº ${n}</div><div class="luz"></div><span class="chip pendiente">pendiente</span><div class="dentro">…</div><div class="barra"></div>`;
+    tiques.prepend(tique);
+    while (tiques.children.length > 6) tiques.lastChild.remove();
+    tique.querySelector(".barra").animate([{ transform: "scaleX(1)" }, { transform: "scaleX(0)" }], { duration: espera, fill: "forwards" });
+    const chip = tique.querySelector(".chip");
+    const dentro = tique.querySelector(".dentro");
+    const luz = tique.querySelector(".luz");
+    const sonar = () => { tique.classList.remove("suena", "aparece"); void tique.offsetWidth; tique.classList.add("suena"); };
+
+    pedirCafe(espera, bien)
+      .then((cafe) => {
+        tique.classList.add("cumplida"); sonar();
+        chip.className = "chip cumplida"; chip.textContent = "cumplida";
+        luz.textContent = "✓"; dentro.textContent = cafe;
+        apuntar(log, `then · tique ${n}: ${cafe}`, "bien");
+      })
+      .catch((e) => {
+        tique.classList.add("rechazada"); sonar();
+        chip.className = "chip rechazada"; chip.textContent = "rechazada";
+        luz.textContent = "✗"; dentro.textContent = "Error: " + e.message;
+        apuntar(log, `catch · tique ${n}: ${e.message}`, "mal");
+      });
+    apuntar(log, `Pedido ${n} hecho: sigo con otras cosas`, "info");
+  });
+
+  $("#p-nadie").addEventListener("click", () => {
+    apuntar(log, 'Promise.reject(new Error("nadie me mira")) → abajo a la derecha', "ojo");
+    Promise.reject(new Error("nadie me mira"));
+  });
+
+  // ② Las dos vías
+  const escena = $("#c-escena");
+  const codigo = $("#c-codigo");
+  const botonLanzar = $("#c-lanzar");
+  const PASO1 = {
+    normal: { q: ".then((n) => n * 3)", fn: (n) => n * 3 },
+    sinreturn: { q: ".then((n) => { n * 3; })", fn: (n) => { n * 3; } },
+    promesa: { q: ".then((n) => esperar(1000).then(() => n * 3))", fn: (n) => esperar(1000 * VEL).then(() => n * 3) },
+    lanza: { q: '.then((n) => { throw new Error("falla en " + n); })', fn: (n) => { throw new Error("falla en " + n); } },
+  };
+  const XS = [0.1, 0.3, 0.5, 0.7, 0.9];
+  const YA = 175, YB = 280;
+  let estaciones, bola, resultado, pos;
+  const X = (n) => escena.clientWidth * XS[n];
+
+  function lista() {
+    const p1 = PASO1[document.querySelector('input[name="c-paso"]:checked').value];
+    return [
+      { q: "Promise.resolve(2)", via: "arriba" },
+      { q: p1.q, fn: p1.fn, via: "arriba" },
+      { q: ".then((x) => x + 1)", fn: (x) => x + 1, via: "arriba" },
+      { q: ".catch((e) => 0)", fn: () => 0, via: "abajo" },
+      { q: ".then((v) => mostrar(v))", fn: (v) => v, via: "arriba" },
+    ];
+  }
+
+  function montar() {
+    const pasos = lista();
+    escena.innerHTML = `
+      <div class="via-tren arriba" style="left: ${X(0)}px; width: ${X(4) - X(0)}px; top: ${YA - 4}px;"></div>
+      <div class="via-tren abajo" style="left: ${X(1)}px; width: ${X(3) - X(1)}px; top: ${YB - 4}px;"></div>
+      <span class="via-nombre" style="left: 0; top: ${YA + 10}px; color: var(--verde);">✓ vía cumplida</span>
+      <span class="via-nombre" style="left: 0; top: ${YB - 8}px; color: var(--rojo-t);">✗ vía rechazada</span>
+      <div class="desvio" style="left: ${X(1)}px; top: ${YA}px; height: ${YB - YA}px;"></div>
+      <div class="desvio" style="left: ${X(2)}px; top: ${YA}px; height: ${YB - YA}px;"></div>
+      <div class="desvio sube" style="left: ${X(3)}px; top: ${YA}px; height: ${YB - YA}px;"></div>
+      <div id="c-resultado"></div>`;
+    estaciones = pasos.map((p, n) => {
+      const div = document.createElement("div");
+      div.className = "estacion";
+      div.style.left = X(n) + "px";
+      if (p.via === "arriba") div.style.bottom = (escena.clientHeight - YA + 34) + "px";
+      else div.style.top = (YB + 34) + "px";
+      div.innerHTML = `<span class="q"></span><span class="io"></span>`;
+      div.querySelector(".q").textContent = p.q;
+      escena.append(div);
+      return div;
+    });
+    bola = document.createElement("div");
+    bola.id = "c-bola";
+    escena.append(bola);
+    resultado = $("#c-resultado");
+    pos = { x: X(0), y: YA };
+    ponerBola(2);
+    bola.style.left = pos.x + "px";
+    bola.style.top = pos.y + "px";
+    pintarCodigo(codigo, pasos.map((p, n) => (n === 0 ? p.q : "  " + p.q)));
+    return pasos;
+  }
+
+  function ponerBola(valor, clase = "") {
+    bola.textContent = clase === "espera" || clase === "error" ? valor : ver(valor);
+    bola.className = clase || (valor === undefined || Number.isNaN(valor) ? "rara" : "");
+  }
+  async function moverA(x, y, ms = 800) {
+    if (x === pos.x && y === pos.y) return;
+    const anim = bola.animate([{ left: pos.x + "px", top: pos.y + "px" }, { left: x + "px", top: y + "px" }], { duration: ms * VEL, easing: "ease-in-out", fill: "forwards" });
+    await anim.finished;
+    bola.style.left = x + "px";
+    bola.style.top = y + "px";
+    anim.cancel();
+    pos = { x, y };
+  }
+  function io(n, texto, valor) {
+    const s = estaciones[n].querySelector(".io");
+    const linea = document.createElement("span");
+    linea.style.display = "block";
+    linea.innerHTML = `${texto} <b></b>`;
+    linea.querySelector("b").textContent = ver(valor);
+    s.append(linea);
+  }
+
+  alEntrar["3"] = () => { if (!botonLanzar.disabled) requestAnimationFrame(montar); };
+  window.addEventListener("resize", () => { if (actual === "3" && !botonLanzar.disabled) montar(); });
+  document.querySelectorAll('input[name="c-paso"]').forEach((r) => r.addEventListener("change", () => { if (!botonLanzar.disabled) montar(); }));
+
+  botonLanzar.addEventListener("click", async () => {
+    botonLanzar.disabled = true;
+    const pasos = montar();
+    const lineas = codigo.children;
+    const visitadas = new Set([0]);
+    estaciones[0].className = "estacion ok";
+    io(0, "cumplida con", 2);
+    lineas[0].classList.add("pasa");
+    await pausa(500);
+
+    // Cada manejador se envuelve para verlo: la bolita llega, se espera un poco y se ejecuta de verdad
+    const envolver = (n, fn) => async (entrada) => {
+      visitadas.add(n);
+      await moverA(X(n), pasos[n].via === "arriba" ? YA : YB);
+      estaciones[n].className = "estacion activa";
+      lineas[n].classList.add("activa");
+      io(n, "recibe", entrada);
+      await pausa(700);
+      try {
+        let salida = fn(entrada);
+        if (salida instanceof Promise) {
+          ponerBola("⌛ espera", "espera");
+          salida = await salida;
+          io(n, "espera y pasa", salida);
+        } else {
+          io(n, "devuelve", salida);
+        }
+        ponerBola(salida);
+        estaciones[n].className = "estacion ok";
+        lineas[n].classList.replace("activa", "pasa");
+        if (n === 3) await moverA(X(3), YA);   // el catch devuelve la bolita a la vía buena
+        return salida;
+      } catch (e) {
+        ponerBola("Error", "error");
+        estaciones[n].className = "estacion lanza";
+        lineas[n].classList.replace("activa", "falla");
+        io(n, "lanza", e);
+        await moverA(X(n), YB);
+        throw e;
+      }
+    };
+
+    await Promise.resolve(2)
+      .then(envolver(1, pasos[1].fn))
+      .then(envolver(2, pasos[2].fn))
+      .catch(envolver(3, pasos[3].fn))
+      .then(envolver(4, pasos[4].fn))
+      .then((v) => { resultado.textContent = `mostrar(${ver(v)})`; })
+      .catch(() => {});
+
+    estaciones.forEach((c, n) => {
+      if (!visitadas.has(n)) { c.className = "estacion saltado"; lineas[n].classList.add("salta"); }
+    });
+    botonLanzar.disabled = false;
+  });
+}
+
+// =====================================================================
+// 4 · Varias a la vez
+// =====================================================================
+{
+  const carriles = [
+    { nombre: "usuario", icono: "👤", ms: 1200, mal: false },
+    { nombre: "tareas", icono: "📋", ms: 2000, mal: false },
+    { nombre: "avisos", icono: "🔔", ms: 700, mal: false },
+  ];
+  const contenedor = $("#v-carriles");
+  const regla = $("#v-regla");
+  const resultado = $("#v-resultado");
+  const nota = $("#v-nota");
+  const codigo = $("#v-codigo");
+  const compara = $("#v-compara");
+  const ESCALA_MS = 6000;
+  const tiempos = {};
+  const NOMBRES = { serie: "🔁 en serie", all: "Promise.all", allSettled: "allSettled", race: "race", any: "any", forEach: "forEach(async)" };
+  const fmt = (ms) => (ms / 1000).toLocaleString("es-ES", { maximumFractionDigits: 1 }) + " s";
+
+  carriles.forEach((c) => {
+    const fila = document.createElement("div");
+    fila.className = "carril";
+    fila.innerHTML = `
+      <div class="ajustes"><b>${c.icono} pedir("${c.nombre}")</b>
+        <input type="range" min="300" max="2000" step="100" value="${c.ms}" aria-label="tiempo de ${c.nombre}"> <span class="ms"></span>
+        <label><input type="checkbox"> 💥 falla</label></div>
+      <div class="via"></div>`;
+    const rango = fila.querySelector('input[type="range"]');
+    const etiqueta = fila.querySelector(".ms");
+    etiqueta.textContent = fmt(c.ms);
+    rango.addEventListener("input", () => { c.ms = Number(rango.value); etiqueta.textContent = fmt(c.ms); });
+    fila.querySelector('input[type="checkbox"]').addEventListener("change", (e) => { c.mal = e.target.checked; });
+    c.via = fila.querySelector(".via");
+    c.via.innerHTML = '<span class="sin-lanzar">🛵 en la salida</span>';
+    contenedor.append(fila);
+  });
+  for (let s = 0; s <= ESCALA_MS / 1000; s++) regla.insertAdjacentHTML("beforeend", `<span style="left: ${(s * 1000 / ESCALA_MS) * 100}%">${s} s</span>`);
+
+  const CODIGOS = {
+    serie: `try {
+  const u = await pedir("usuario");   // espera…
+  const t = await pedir("tareas");    // …y solo entonces sale este
+  const a = await pedir("avisos");
+} catch (e) { mostrar(e.message); }
+// Tarda la SUMA. Solo si la 2.ª NECESITA a la 1.ª.`,
+    all: `const [u, t, a] = await Promise.all([
+  pedir("usuario"), pedir("tareas"), pedir("avisos"),
+]);
+// Salen a la vez; all solo ESPERA.
+// Tarda lo que la más lenta. Si una falla, falla todo.`,
+    allSettled: `const r = await Promise.allSettled([
+  pedir("usuario"), pedir("tareas"), pedir("avisos"),
+]);
+// Espera a TODAS, fallen o no. Nunca rechaza.`,
+    race: `const primera = await Promise.race([
+  pedir("usuario"), pedir("tareas"), pedir("avisos"),
+]);
+// La primera que ACABE, bien o mal.`,
+    any: `const primera = await Promise.any([
+  pedir("usuario"), pedir("tareas"), pedir("avisos"),
+]);
+// La primera que salga BIEN. Si fallan todas: AggregateError.`,
+    forEach: `["usuario", "tareas", "avisos"].forEach(async (n) => {
+  await pedir(n);
+});
+mostrar("terminado");
+// forEach NO espera a funciones async: «terminado» sale ya.`,
+  };
+
+  function pintarCompara() {
+    const max = Math.max(...Object.values(tiempos).map((t) => t.ms), 1000);
+    compara.replaceChildren();
+    for (const [modo, t] of Object.entries(tiempos)) {
+      compara.insertAdjacentHTML("beforeend", `<span>${NOMBRES[modo]}</span><div><div class="b${t.bien ? "" : " mal"}" style="width: ${Math.max(t.ms / max * 100, 12)}%">${fmt(t.ms)}</div></div>`);
+    }
+  }
+
+  let ronda = 0;
+  function lanzar(modo) {
+    const estaRonda = ++ronda;
+    document.querySelectorAll("#v-modos .boton").forEach((b) => b.setAttribute("aria-pressed", b.dataset.modo === modo));
+    codigo.textContent = CODIGOS[modo];
+    resultado.className = "";
+    resultado.textContent = "Esperando…";
+    nota.textContent = "";
+    const t0 = performance.now();
+    const pct = (ms) => Math.min(ms / ESCALA_MS * 100, 100) + "%";
+    for (const c of carriles) {
+      c.inicio = null; c.fin = null; c.estado = null; c.ignorada = false;
+      c.via.innerHTML = '<span class="sin-lanzar">🛵 en la salida, sin lanzar</span>';
+    }
+
+    function pedir(nombre) {
+      const c = carriles.find((x) => x.nombre === nombre);
+      c.inicio = performance.now() - t0;
+      c.via.innerHTML = '<div class="barra"></div>';
+      if (modo === "serie" && c !== carriles[0]) c.via.insertAdjacentHTML("beforeend", `<div class="relevo" style="left: ${pct(c.inicio)}"></div>`);
+      c.barra = c.via.querySelector(".barra");
+      c.barra.style.left = pct(c.inicio);
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (estaRonda !== ronda) return;
+          c.fin = performance.now() - t0;
+          c.estado = c.mal ? "rechazada" : "cumplida";
+          if (c.mal) reject(new Error(`${nombre} ha fallado`));
+          else resolve(`${c.icono} ${nombre}`);
+        }, c.ms);
+      });
+    }
+
+    function dibujar() {
+      const ahora = performance.now() - t0;
+      for (const c of carriles) {
+        if (c.inicio === null) continue;
+        c.barra.style.width = pct((c.fin ?? ahora) - c.inicio);
+        c.barra.className = "barra" + (c.estado ? " " + c.estado : "") + (c.ignorada ? " ignorada" : "");
+        if (!c.estado) { if (!c.barra.firstChild) c.barra.innerHTML = '<span class="moto">🛵</span>'; }
+        else c.barra.textContent = `${c.estado === "cumplida" ? "📦 ✓" : "💥 ✗"} ${fmt(c.fin - c.inicio)}${c.ignorada ? " · nadie la espera" : ""}`;
+      }
+      if (estaRonda === ronda && carriles.some((c) => c.inicio !== null && c.fin === null)) requestAnimationFrame(dibujar);
+    }
+
+    function terminar(texto, bien, notaTxt) {
+      if (estaRonda !== ronda) return;
+      const ms = performance.now() - t0;
+      for (const c of carriles) {
+        const marca = document.createElement("div");
+        marca.className = "marca-fin";
+        marca.style.left = pct(ms);
+        if (c === carriles[0]) marca.dataset.txt = `🏁 ${bien ? "sigue tu código" : "salta al catch"} · ${fmt(ms)}`;
+        c.via.append(marca);
+        if (c.inicio !== null && c.fin === null) c.ignorada = true;
+      }
+      resultado.className = bien ? "bien" : "mal";
+      resultado.textContent = texto;
+      nota.textContent = notaTxt;
+      tiempos[modo] = { ms, bien };
+      pintarCompara();
+      dibujar();
+    }
+
+    requestAnimationFrame(dibujar);
+    const nombres = carriles.map((c) => c.nombre);
+
+    if (modo === "serie") {
+      (async () => {
+        const valores = [];
+        try {
+          for (const n of nombres) { valores.push(await pedir(n)); requestAnimationFrame(dibujar); }
+          terminar(ver(valores), true, "Carrera de relevos: tarda la suma de las tres.");
+        } catch (e) {
+          terminar(ver(e), false, "Las que iban detrás ni siquiera han salido.");
+        }
+      })();
+    } else if (modo === "forEach") {
+      nombres.forEach(async (n) => { await pedir(n); });
+      terminar('"terminado"', true, "«terminado» ha salido sin esperar a nadie. Si una falla: «Uncaught (in promise)».");
+    } else {
+      Promise[modo](nombres.map(pedir)).then(
+        (v) => {
+          const notas = { all: "Tarda lo que la más lenta; el array sale en el orden en que se pidieron.", allSettled: "Nunca rechaza: cada una dice cómo ha acabado.", race: "Gana la más rápida. Las otras siguen corriendo, pero nadie las espera.", any: "La primera que sale bien. Las otras siguen, pero nadie las espera." };
+          if (modo === "allSettled") v = v.map((r) => (r.status === "fulfilled" ? { status: r.status, value: r.value } : { status: r.status, reason: r.reason.message }));
+          terminar(ver(v), true, notas[modo]);
+        },
+        (e) => {
+          const notas = { all: "Falla en cuanto falla UNA. Las demás siguen, pero su resultado se pierde.", race: "La primera en acabar ha sido un fallo.", any: "Han fallado todas: AggregateError." };
+          terminar(ver(e) + (e instanceof AggregateError ? "\n" + e.errors.map((x) => "· " + x.message).join("\n") : ""), false, notas[modo]);
+        },
+      );
+    }
+  }
+  document.querySelectorAll("#v-modos .boton").forEach((b) => b.addEventListener("click", () => lanzar(b.dataset.modo)));
+}
+
+// =====================================================================
+// 5 · fetch
+// =====================================================================
+{
+  const PELICULAS = [
+    { titulo: "Dune: Parte tres", genero: "Ciencia ficción", icono: "🏜️" },
+    { titulo: "Del revés 3", genero: "Animación", icono: "🧠" },
+    { titulo: "La sociedad de la nieve", genero: "Drama", icono: "🏔️" },
+  ];
+  const ESCENARIOS = {
+    ok: { txt: "✅ 200 · tres películas", status: 200, tipo: "application/json", cuerpo: JSON.stringify(PELICULAS, null, 1) },
+    vacio: { txt: "📭 200 · lista vacía", status: 200, tipo: "application/json", cuerpo: "[]" },
+    e404: { txt: "🔍 404 · no existe", status: 404, tipo: "text/html", cuerpo: "<!doctype html>\n<h1>404 Not Found</h1>" },
+    e500: { txt: "🔥 500 · servidor roto", status: 500, tipo: "text/html", cuerpo: "<!doctype html>\n<h1>500 Internal Server Error</h1>" },
+    roto: { txt: "🧩 200 · JSON mal escrito", status: 200, tipo: "application/json", cuerpo: '[{ "titulo": "Dune", }]' },
+    vite: { txt: "⚡ Vite dev: no existe → 200", status: 200, tipo: "text/html", cuerpo: '<!doctype html>\n<html lang="es">\n<head><script type="module" src="/@vite/client"><\/script>…' },
+    lento: { txt: "🐢 servidor lento (4 s)", status: 200, tipo: "application/json", cuerpo: JSON.stringify(PELICULAS, null, 1), ms: 4000 },
+    offline: { txt: "📵 sin red (Offline)", red: false },
+  };
+  const TEXTOS = { 200: "OK", 404: "Not Found", 500: "Server Error" };
+  const URL_DATOS = "/datos/peliculas.json";
+
+  const caja = $("#f-escenarios");
+  for (const [clave, e] of Object.entries(ESCENARIOS)) {
+    caja.insertAdjacentHTML("beforeend", `<label><input type="radio" name="f-esc" value="${clave}" ${clave === "ok" ? "checked" : ""}> ${e.txt}</label>`);
+  }
+  const escenario = () => ESCENARIOS[document.querySelector('input[name="f-esc"]:checked').value];
+
+  const codigo = $("#f-codigo");
+  const comprobar = $("#f-comprobar");
+  const zona = $("#f-zona");
+  const cuerpo = $("#f-cuerpo");
+  const log = $("#f-log");
+  const sobre = $("#f-sobre");
+  const tijeras = $("#f-tijeras");
+  const reloj = $("#f-reloj");
+  const botonCancelar = $("#f-cancelar");
+  const puerta = (g, clase, que = "") => {
+    const p = $(`.puerta[data-g="${g}"]`);
+    p.className = "puerta " + clase;
+    p.querySelector(".que").textContent = que;
+  };
+
+  const CON = [
+    ["async function getJSON(url, { signal } = {}) {", ""],
+    ["  const r = await fetch(url, { signal });", "fetch"],
+    ["  if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);", "ok"],
+    ['  const tipo = r.headers.get("Content-Type") ?? "";', "tipo0"],
+    ['  if (!tipo.includes("json")) throw new Error(`${url} no es JSON`);', "tipo"],
+    ["  return r.json();", "json"],
+    ["}", ""],
+  ];
+  const SIN = [
+    ["async function getJSON(url, { signal } = {}) {", ""],
+    ["  const r = await fetch(url, { signal });", "fetch"],
+    ["  return r.json();   // ← sin mirar r.ok", "json"],
+    ["}", ""],
+  ];
+  const lineasCodigo = () => (comprobar.checked ? CON : SIN);
+  function pintarFuncion() {
+    const limite = Number($("#f-limite").value);
+    const senal = limite ? `AbortSignal.any([controlador.signal, AbortSignal.timeout(${limite})])` : "controlador.signal";
+    pintarCodigo(codigo, [
+      ...lineasCodigo().map(([t]) => t), "",
+      "async function cargar() {",
+      "  controlador = new AbortController();   // para ✕ Cancelar",
+      `  const signal = ${senal};`,
+      "  pintarEstado({ cargando: true });",
+      "  try {",
+      `    pintarEstado({ pelis: await getJSON("${URL_DATOS}", { signal }) });`,
+      "  } catch (e) {",
+      "    pintarEstado({ error: e.message });",
+      "  }",
+      "}",
+    ]);
+  }
+  const resaltar = (clave, clase) => {
+    const n = lineasCodigo().findIndex(([, k]) => k === clave);
+    if (n >= 0) { codigo.children[n].classList.remove("activa"); codigo.children[n].classList.add(clase); }
+  };
+  comprobar.addEventListener("change", pintarFuncion);
+  $("#f-limite").addEventListener("change", pintarFuncion);
+  pintarFuncion();
+
+  const IDA = [{ left: "0%" }, { left: "calc(100% - 140px)" }];
+  const VUELTA = [{ left: "calc(100% - 140px)" }, { left: "0%" }];
+
+  // El servidor de mentira: el sobre viaja y vuelve una Response de verdad
+  function fetchFalso(url, { signal } = {}) {
+    const e = escenario();
+    const ms = e.ms ?? Number($("#f-latencia").value);
+    sobre.hidden = false;
+    sobre.className = "sobre";
+    sobre.textContent = "✉️ GET " + url.split("/").pop();
+    tijeras.hidden = e.red !== false;
+    cuerpo.textContent = "(esperando peticiones)";
+    let viaje = sobre.animate(e.red === false ? [{ left: "0%" }, { left: "calc(50% - 70px)" }] : IDA, { duration: ms / 2, easing: "ease-in-out", fill: "forwards" });
+    return new Promise((resolve, reject) => {
+      if (signal?.aborted) return reject(signal.reason);
+      const ida = setTimeout(() => {
+        if (e.red === false) {
+          sobre.className = "sobre roto";
+          sobre.textContent = "✗ no llega";
+          viaje = sobre.animate([{ left: "calc(50% - 70px)" }, { left: "0%" }], { duration: ms / 2, fill: "forwards" });
+          return;
+        }
+        cuerpo.textContent = `HTTP ${e.status} ${TEXTOS[e.status]}\nContent-Type: ${e.tipo}\n\n${e.cuerpo}`;
+        sobre.className = "sobre s" + String(e.status)[0];
+        sobre.textContent = `📨 ${e.status} ${TEXTOS[e.status]}`;
+        viaje = sobre.animate(VUELTA, { duration: ms / 2, easing: "ease-in-out", fill: "forwards" });
+      }, ms / 2);
+      const vuelta = setTimeout(() => {
+        if (e.red === false) return reject(new TypeError("Failed to fetch"));
+        resolve(new Response(e.cuerpo, { status: e.status, statusText: TEXTOS[e.status], headers: { "Content-Type": e.tipo } }));
+      }, ms);
+      signal?.addEventListener("abort", () => {
+        clearTimeout(ida); clearTimeout(vuelta);
+        viaje.pause();
+        sobre.className = "sobre cancelado";
+        sobre.textContent = signal.reason?.name === "TimeoutError" ? "⏱ tiempo agotado" : "✕ cancelado";
+        reject(signal.reason);
+      }, { once: true });
+    });
+  }
+
+  async function getJSON(url, { signal } = {}) {
+    resaltar("fetch", "activa");
+    let r;
+    try {
+      r = await fetchFalso(url, { signal });
+    } catch (e) {
+      resaltar("fetch", "falla");
+      puerta("resp", "falla", `${e.name}: fetch rechaza`);
+      throw e;
+    }
+    resaltar("fetch", "pasa");
+    puerta("resp", "pasa", `sí: ${r.status} ${r.statusText}`);
+    await pausa(450);
+    if (comprobar.checked) {
+      if (!r.ok) { resaltar("ok", "falla"); puerta("ok", "falla", "ok: false → throw"); throw new Error(`HTTP ${r.status} en ${url}`); }
+      resaltar("ok", "pasa"); puerta("ok", "pasa", "ok: true");
+      await pausa(450);
+      const tipo = r.headers.get("Content-Type") ?? "";
+      resaltar("tipo0", "pasa");
+      if (!tipo.includes("json")) { resaltar("tipo", "falla"); puerta("tipo", "falla", tipo + " → throw"); throw new Error(`${url} no es JSON`); }
+      resaltar("tipo", "pasa"); puerta("tipo", "pasa", tipo);
+      await pausa(450);
+    }
+    try {
+      const datos = await r.json();
+      resaltar("json", "pasa");
+      puerta("json", "pasa", Array.isArray(datos) ? `array de ${datos.length}` : "datos");
+      return datos;
+    } catch (e) {
+      resaltar("json", "falla");
+      puerta("json", "falla", "SyntaxError");
+      throw e;
+    }
+  }
+
+  function pintarEstado({ cargando = false, error = null, pelis = [] } = {}) {
+    zona.setAttribute("aria-busy", String(cargando));
+    const e = cargando ? "cargando" : error ? "error" : pelis.length === 0 ? "vacio" : "datos";
+    zona.innerHTML = `<div class="estados">${["cargando", "error", "vacio", "datos"].map((x) => `<span data-e="${x}" class="${x === e ? "on" : ""}">${x === "vacio" ? "vacío" : x}</span>`).join("")}</div>`;
+    if (cargando) {
+      zona.insertAdjacentHTML("beforeend", '<div class="esqueleto"></div><div class="esqueleto"></div><div class="esqueleto"></div>');
+    } else if (error) {
+      zona.insertAdjacentHTML("beforeend", '<div class="mensaje error"><p style="margin: 0 0 8px;"></p><button class="boton" type="button">↻ Reintentar</button></div>');
+      zona.querySelector(".mensaje p").textContent = "No se ha podido cargar la cartelera. " + error;
+      zona.querySelector(".mensaje button").addEventListener("click", cargar);
+    } else if (pelis.length === 0) {
+      zona.insertAdjacentHTML("beforeend", '<div class="mensaje vacio">Hoy no hay películas en cartelera.</div>');
+    } else {
+      for (const p of pelis) {
+        const fila = document.createElement("div");
+        fila.className = "peli aparece";
+        fila.innerHTML = `<span class="cartel"></span><span><b></b><br><small></small></span>`;
+        fila.querySelector(".cartel").textContent = p.icono ?? "🎞️";
+        fila.querySelector("b").textContent = p.titulo;
+        fila.querySelector("small").textContent = p.genero ?? "";
+        zona.append(fila);
+      }
+    }
+  }
+
+  let controlador = null;
+  let cuentaAtras = null;
+  async function cargar() {
+    controlador?.abort();
+    controlador = new AbortController();
+    const propio = controlador;
+    pintarFuncion();
+    ["resp", "ok", "tipo", "json", "datos"].forEach((g) => puerta(g, comprobar.checked || (g !== "ok" && g !== "tipo") ? "" : "apagada"));
+    const limite = Number($("#f-limite").value);
+    const signal = limite ? AbortSignal.any([controlador.signal, AbortSignal.timeout(limite)]) : controlador.signal;
+    cuentaAtras?.cancel();
+    reloj.hidden = !limite;
+    if (limite) cuentaAtras = reloj.firstElementChild.animate([{ transform: "scaleX(1)" }, { transform: "scaleX(0)" }], { duration: limite, fill: "forwards" });
+    botonCancelar.disabled = false;
+    pintarEstado({ cargando: true });
+    try {
+      const pelis = await getJSON(URL_DATOS, { signal });
+      if (propio !== controlador) return;
+      await pausa(300);
+      puerta("datos", "pasa", pelis.length ? `${pelis.length} películas` : "vacío");
+      pintarEstado({ pelis });
+      apuntar(log, `(nada: ha ido bien, ${pelis.length} películas)`, "bien");
+    } catch (e) {
+      if (propio !== controlador && e.name === "AbortError") return;
+      puerta("datos", "falla", "estado de error");
+      pintarEstado({ error: e.message });
+      apuntar(log, `${e.name}: ${e.message}`, "mal");
+    } finally {
+      if (propio === controlador) { botonCancelar.disabled = true; cuentaAtras?.pause(); }
+      while (log.children.length > 5) log.firstChild.remove();
+    }
+  }
+  $("#f-cargar").addEventListener("click", cargar);
+  botonCancelar.addEventListener("click", () => controlador?.abort());
+  zona.innerHTML = '<div class="mensaje vacio">Elige qué va a contestar el servidor y pulsa «↻ Cargar».</div>';
+}
+
+// =====================================================================
+// 6 · JSON
+// =====================================================================
+{
+  class Tarea {
+    #hecha = false;
+    constructor(titulo) { this.titulo = titulo; }
+    completar() { this.#hecha = true; }
+  }
+  const VALORES = [
+    ["🔤", '"hola"', () => "hola", "sí", ""],
+    ["🔢", "42", () => 42, "sí", ""],
+    ["☑️", "true", () => true, "sí", ""],
+    ["⭕", "null", () => null, "sí", ""],
+    ["📦", "{ a: 1, b: [1, 2] }", () => ({ a: 1, b: [1, 2] }), "sí", "objetos y arrays planos: perfecto"],
+    ["🕳️", "[1, undefined]", () => [1, undefined], "no", "en un array, undefined → null"],
+    ["🕳️", "{ u: undefined }", () => ({ u: undefined }), "no", "la propiedad desaparece"],
+    ["❓", "NaN", () => NaN, "no", "NaN e Infinity → null"],
+    ["📅", "new Date(2026, 10, 17)", () => new Date(2026, 10, 17), "no", "vuelve como STRING (y en UTC)"],
+    ["🧺", "new Set([1, 2])", () => new Set([1, 2]), "no", "→ {}: se pierde todo"],
+    ["🗺️", 'new Map([["a", 1]])', () => new Map([["a", 1]]), "no", "→ {}: se pierde todo"],
+    ["⚙️", "() => 1", () => () => 1, "no", "las funciones no se guardan"],
+    ["🧱", 'new Tarea("Estudiar")', () => { const t = new Tarea("Estudiar"); t.completar(); return t; }, "no", "solo lo público: sin #hecha ni métodos"],
+  ];
+  const filas = $("#j-filas");
+
+  function preparar(oculto) {
+    filas.replaceChildren();
+    for (const [icono, texto, crear, igual, nota] of VALORES) {
+      const json = JSON.stringify(crear());
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td class="icono"></td><td class="mono"><span class="objeto"></span></td><td class="mono"><span class="papel"></span></td><td class="mono"><span class="objeto"></span></td><td><span class="${igual}"></span> <small></small></td>`;
+      tr.children[0].textContent = icono;
+      tr.children[1].firstChild.textContent = texto;
+      tr.children[2].firstChild.textContent = json === undefined ? "undefined (nada que escribir)" : json;
+      const vuelta = tr.children[3].firstChild;
+      vuelta.textContent = json === undefined ? "—" : ver(JSON.parse(json));
+      if (igual === "no") vuelta.classList.add("roto");
+      tr.children[4].firstChild.textContent = igual === "sí" ? "✓" : "✗";
+      tr.querySelector("small").textContent = nota;
+      if (oculto) [...tr.children].slice(2).forEach((td) => td.classList.add("oculta"));
+      filas.append(tr);
+    }
+  }
+  preparar(false);
+
+  $("#j-viaje").addEventListener("click", async (ev) => {
+    const boton = ev.currentTarget;
+    boton.disabled = true;
+    preparar(true);
+    for (const tr of filas.children) {
+      tr.scrollIntoView({ block: "nearest" });
+      const [, antes, papel, vuelta, veredicto] = tr.children;
+      papel.classList.remove("oculta"); papel.firstChild.style.visibility = "hidden";
+      await volar(antes.firstChild, papel.firstChild, antes.firstChild.textContent, "papel", 500);
+      papel.firstChild.style.visibility = "";
+      vuelta.classList.remove("oculta"); vuelta.firstChild.style.visibility = "hidden";
+      await volar(papel.firstChild, vuelta.firstChild, papel.firstChild.textContent, "papel", 500);
+      vuelta.firstChild.style.visibility = "";
+      veredicto.classList.remove("oculta");
+      await pausa(150);
+    }
+    boton.disabled = false;
+  });
+
+  const EJEMPLOS = {
+    "✅ válido": '{\n  "titulo": "Dune",\n  "año": 2026,\n  "vista": false,\n  "notas": [8, 9]\n}',
+    "comillas simples": "{ 'titulo': 'Dune' }",
+    "coma final": '{ "titulo": "Dune", }',
+    "clave sin comillas": '{ titulo: "Dune" }',
+    "comentario": '{ "titulo": "Dune" // la mejor\n}',
+    "solo un número": "42",
+  };
+  const texto = $("#j-texto");
+  const salida = $("#j-salida");
+  for (const [nombre, valor] of Object.entries(EJEMPLOS)) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "boton";
+    b.textContent = nombre;
+    b.addEventListener("click", () => { texto.value = valor; analizar(); });
+    $("#j-ejemplos").append(b);
+  }
+  function analizar() {
+    try { salida.textContent = "✓ " + ver(JSON.parse(texto.value)); salida.className = "bien"; }
+    catch (e) { salida.textContent = `✗ ${e.name}: ${e.message}`; salida.className = "mal"; }
+  }
+  texto.addEventListener("input", analizar);
+  texto.value = EJEMPLOS["✅ válido"];
+  analizar();
+}
+
+// =====================================================================
+// 7 · localStorage
+// =====================================================================
+{
+  const PREFIJO = "ud6:";
+  const hojas = $("#l-hojas");
+  const libreta = $("#l-libreta");
+  const eventos = $("#l-eventos");
+  $("#l-origen").textContent = location.origin === "null" ? "fichero local" : location.host;
+
+  function pintarLibreta(cambiada = null) {
+    let claves;
+    try { claves = Object.keys(localStorage).filter((k) => k.startsWith(PREFIJO)).sort(); }
+    catch { hojas.innerHTML = '<div class="vacio-libreta">Este navegador no deja usar localStorage aquí.</div>'; return; }
+    if (claves.length === 0) { hojas.innerHTML = '<div class="vacio-libreta">(hoja en blanco: no hay claves ud6:…)</div>'; return; }
+    hojas.replaceChildren(...claves.map((k) => {
+      const v = localStorage.getItem(k);
+      const fila = document.createElement("div");
+      fila.className = "apunte" + (k === cambiada ? " cambia" : "");
+      fila.dataset.clave = k;
+      fila.innerHTML = `<span class="clave"></span><input spellcheck="false"><button type="button" title="removeItem">🗑</button>`;
+      fila.querySelector(".clave").textContent = k;
+      const input = fila.querySelector("input");
+      input.value = v.length > 200 ? v.slice(0, 200) + "…" : v;
+      input.setAttribute("aria-label", "valor de " + k);
+      input.addEventListener("change", () => { localStorage.setItem(k, input.value); pintarLibreta(k); });
+      fila.querySelector("button").addEventListener("click", () => { localStorage.removeItem(k); pintarLibreta(); });
+      return fila;
+    }));
+  }
+  alEntrar["7"] = () => pintarLibreta();
+  const filaDe = (k) => hojas.querySelector(`.apunte[data-clave="${CSS.escape(k)}"]`);
+
+  window.addEventListener("storage", (e) => {
+    if (e.key !== null && !e.key.startsWith(PREFIJO)) return;
+    apuntar(eventos, e.key === null ? "clear()" : `${e.key}: ${ver(e.oldValue)} → ${ver(e.newValue)}`, "info");
+    pintarLibreta(e.key);
+  });
+  $("#l-vaciar").addEventListener("click", () => {
+    Object.keys(localStorage).filter((k) => k.startsWith(PREFIJO)).forEach((k) => localStorage.removeItem(k));
+    pintarLibreta();
+  });
+  $("#l-ventana").addEventListener("click", () => window.open(location.pathname + "#7", "_blank"));
+
+  const fechaISO = (d) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  function cargarSeguro(clave, porDefecto) {
+    try { return JSON.parse(localStorage.getItem(clave)) ?? porDefecto; }
+    catch { return porDefecto; }
+  }
+  class TareaSin {
+    #hecha = false;
+    constructor(titulo) { this.titulo = titulo; this.creada = new Date(2026, 10, 17, 9, 0); }
+    completar() { this.#hecha = true; }
+  }
+  class TareaCon {
+    #titulo; #hecha = false;
+    constructor(titulo) { this.#titulo = titulo; }
+    get titulo() { return this.#titulo; }
+    get hecha() { return this.#hecha; }
+    completar() { this.#hecha = true; }
+    toJSON() { return { titulo: this.#titulo, hecha: this.#hecha }; }
+    static desde(d) { const t = new TareaCon(d.titulo); if (d.hecha) t.completar(); return t; }
+  }
+  Object.defineProperty(TareaSin, "name", { value: "Tarea" });
+  Object.defineProperty(TareaCon, "name", { value: "Tarea" });
+
+  // [código, función, { escribe | lee: clave, ficha: lo que vuela hacia la libreta }]
+  const TARJETAS = [
+    {
+      titulo: "🔤 Todo se guarda como texto", diapo: "diap. 34",
+      lineas: [
+        ['localStorage.setItem("ud6:visitas", 3);', () => localStorage.setItem("ud6:visitas", 3), { escribe: "ud6:visitas", ficha: "3 (número)" }],
+        ['localStorage.getItem("ud6:visitas");', () => localStorage.getItem("ud6:visitas"), { lee: "ud6:visitas" }],
+        ['localStorage.getItem("ud6:visitas") + 1;', () => localStorage.getItem("ud6:visitas") + 1, { lee: "ud6:visitas" }],
+        ['Number(localStorage.getItem("ud6:visitas")) + 1;', () => Number(localStorage.getItem("ud6:visitas")) + 1, { lee: "ud6:visitas" }],
+        ['localStorage.getItem("ud6:no-existe");', () => localStorage.getItem("ud6:no-existe"), { lee: "ud6:no-existe" }],
+      ],
+    },
+    {
+      titulo: "📦 Guardar objetos: JSON.stringify", diapo: "diap. 35",
+      lineas: [
+        ['localStorage.setItem("ud6:prefs", { tema: "oscuro" });', () => localStorage.setItem("ud6:prefs", { tema: "oscuro" }), { escribe: "ud6:prefs", ficha: '📦 { tema: "oscuro" }' }],
+        ['localStorage.getItem("ud6:prefs");', () => localStorage.getItem("ud6:prefs"), { lee: "ud6:prefs" }],
+        ["// con stringify al guardar y parse al leer:", null],
+        ['localStorage.setItem("ud6:prefs", JSON.stringify({ tema: "oscuro" }));', () => localStorage.setItem("ud6:prefs", JSON.stringify({ tema: "oscuro" })), { escribe: "ud6:prefs", ficha: '{"tema":"oscuro"}' }],
+        ['JSON.parse(localStorage.getItem("ud6:prefs")).tema;', () => JSON.parse(localStorage.getItem("ud6:prefs")).tema, { lee: "ud6:prefs" }],
+      ],
+    },
+    {
+      titulo: "🔨 Lo que se lee puede ser cualquier cosa", diapo: "diap. 35 · la del susto",
+      extra: [["🔨 Romper ud6:prefs («{roto»)", () => localStorage.setItem("ud6:prefs", "{roto")]],
+      lineas: [
+        ['JSON.parse(localStorage.getItem("ud6:prefs"));', () => JSON.parse(localStorage.getItem("ud6:prefs")), { lee: "ud6:prefs" }],
+        ['JSON.parse(localStorage.getItem("ud6:nada")).tema;', () => JSON.parse(localStorage.getItem("ud6:nada")).tema, { lee: "ud6:nada" }],
+        ["function cargar(clave, porDefecto) {", null],
+        ["  try { return JSON.parse(localStorage.getItem(clave)) ?? porDefecto; }", null],
+        ["  catch { return porDefecto; }", null],
+        ["}", null],
+        ['cargar("ud6:prefs", { tema: "claro" });', () => cargarSeguro("ud6:prefs", { tema: "claro" }), { lee: "ud6:prefs" }],
+        ['cargar("ud6:nada", { tema: "claro" });', () => cargarSeguro("ud6:nada", { tema: "claro" }), { lee: "ud6:nada" }],
+      ],
+    },
+    {
+      titulo: "🧱 Clases sin toJSON ni desde: se rompen", diapo: "diap. 36",
+      lineas: [
+        ['const t = new Tarea("Estudiar"); t.completar();', (m) => { m.t = new TareaSin("Estudiar"); m.t.completar(); }],
+        ["JSON.stringify(t);", (m) => JSON.stringify(m.t)],
+        ['localStorage.setItem("ud6:tarea", JSON.stringify(t));', (m) => localStorage.setItem("ud6:tarea", JSON.stringify(m.t)), { escribe: "ud6:tarea", ficha: "🧱 Tarea (#hecha, completar())" }],
+        ['const copia = JSON.parse(localStorage.getItem("ud6:tarea"));', (m) => { m.copia = JSON.parse(localStorage.getItem("ud6:tarea")); }, { lee: "ud6:tarea" }],
+        ["copia.creada;", (m) => m.copia.creada],
+        ["copia instanceof Tarea;", (m) => m.copia instanceof TareaSin],
+        ["copia.completar();", (m) => { const copia = m.copia; return copia.completar(); }],
+      ],
+    },
+    {
+      titulo: "✅ Clases con toJSON y static desde", diapo: "diap. 36 · bloque C de la Práctica 2",
+      lineas: [
+        ["// toJSON() { return { titulo: this.#titulo, hecha: this.#hecha }; }", null],
+        ["// static desde(d) { const t = new Tarea(d.titulo); if (d.hecha) t.completar(); return t; }", null],
+        ['const t = new Tarea("Estudiar"); t.completar();', (m) => { m.t = new TareaCon("Estudiar"); m.t.completar(); }],
+        ["JSON.stringify(t);", (m) => JSON.stringify(m.t)],
+        ['localStorage.setItem("ud6:tarea", JSON.stringify(t));', (m) => localStorage.setItem("ud6:tarea", JSON.stringify(m.t)), { escribe: "ud6:tarea", ficha: "🧱 Tarea → toJSON()" }],
+        ['const copia = Tarea.desde(JSON.parse(localStorage.getItem("ud6:tarea")));', (m) => { m.copia = TareaCon.desde(JSON.parse(localStorage.getItem("ud6:tarea"))); }, { lee: "ud6:tarea" }],
+        ["copia instanceof Tarea;", (m) => m.copia instanceof TareaCon],
+        ["[copia.titulo, copia.hecha];", (m) => [m.copia.titulo, m.copia.hecha]],
+      ],
+    },
+    {
+      titulo: "📅 Fechas de calendario: cuidado con toISOString", diapo: "diap. 36",
+      lineas: [
+        ["const d = new Date(2026, 10, 17);   // 17/11 a las 00:00 en España", (m) => { m.d = new Date(2026, 10, 17); }],
+        ["d.toISOString();", (m) => m.d.toISOString()],
+        ["d.toISOString().slice(0, 10);   // ¿qué día es?", (m) => m.d.toISOString().slice(0, 10)],
+        ["fechaISO(d);   // en hora local", (m) => fechaISO(m.d)],
+      ],
+    },
+    {
+      titulo: "📏 Hay un límite (unos 5 MB por origen)", diapo: "diap. 37",
+      lineas: [
+        ['localStorage.setItem("ud6:grande", "x".repeat(6 * 1024 * 1024));', () => { try { localStorage.setItem("ud6:grande", "x".repeat(6 * 1024 * 1024)); } finally { localStorage.removeItem("ud6:grande"); } }, { escribe: "ud6:grande", ficha: "6 MB de «x»" }],
+      ],
+    },
+  ];
+
+  const contenedor = $("#l-tarjetas");
+  for (const tarjeta of TARJETAS) {
+    const div = document.createElement("div");
+    div.className = "tarjeta";
+    div.innerHTML = `<h4></h4><p class="diapo"></p><ol class="lineas"></ol><div class="botones"><button class="boton primario" type="button">▶ Ejecutar</button></div>`;
+    div.querySelector("h4").textContent = tarjeta.titulo;
+    div.querySelector(".diapo").textContent = tarjeta.diapo;
+    const ol = div.querySelector(".lineas");
+    const items = tarjeta.lineas.map(([codigo, fn]) => {
+      const li = document.createElement("li");
+      li.textContent = codigo;
+      if (!fn) li.className = "com";
+      ol.append(li);
+      return li;
+    });
+    for (const [texto, accion] of tarjeta.extra ?? []) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "boton peligro";
+      b.textContent = texto;
+      b.addEventListener("click", () => { accion(); pintarLibreta("ud6:prefs"); });
+      div.querySelector(".botones").append(b);
+    }
+    div.querySelector(".boton.primario").addEventListener("click", async (ev) => {
+      const boton = ev.currentTarget;
+      boton.disabled = true;
+      items.forEach((li, n) => { li.textContent = tarjeta.lineas[n][0]; li.className = tarjeta.lineas[n][1] ? "" : "com"; });
+      const memoria = {};
+      for (const [n, [, fn, mov]] of tarjeta.lineas.entries()) {
+        if (!fn) continue;
+        const li = items[n];
+        li.classList.add("activa");
+        await pausa(350);
+        let fallo = null;
+        let v;
+        try { v = fn(memoria); } catch (e) { fallo = e; }
+        if (mov?.escribe) {
+          pintarLibreta();
+          await volar(li, filaDe(mov.escribe) ?? hojas, mov.ficha, "papel", 800);
+          if (fallo) { libreta.classList.remove("tiembla"); void libreta.offsetWidth; libreta.classList.add("tiembla"); }
+          pintarLibreta(mov.escribe);
+        } else if (mov?.lee) {
+          const guardado = localStorage.getItem(mov.lee);
+          await volar(filaDe(mov.lee) ?? hojas, li, guardado === null ? "null (no está)" : ver(guardado), "papel", 700);
+        }
+        const res = document.createElement("span");
+        if (fallo) { res.className = "err"; res.textContent = `✗ ${fallo.name}: ${fallo.message}`; }
+        else { res.className = "res"; res.textContent = "→ " + ver(v); }
+        li.append(res);
+        li.classList.remove("activa");
+      }
+      boton.disabled = false;
+    });
+    contenedor.append(div);
+  }
+  pintarLibreta();
+}
+
+// =====================================================================
+// 8 · Módulos y Vite
+// =====================================================================
+{
+  const SRC = [
+    ["index.html", "html"], ["main.js", ""], ["api.js", ""], ["modelo.js", ""],
+    ["vista.js", ""], ["estilos.css", "css"], ["graficas.js", "dinamico"],
+  ];
+  const listaSrc = $("#m-src");
+  const listaDist = $("#m-dist");
+  const listaNav = $("#m-nav");
+  const vite = $("#m-vite");
+  const viteTxt = $("#m-vite-txt");
+  const cuenta = $("#m-cuenta");
+  const burbuja = $("#m-burbuja");
+  const nota = $("#m-nota");
+  const botonStats = $("#m-stats");
+  let modo = null, graficas = false, ronda = 0, peticiones = 0;
+
+  for (const [f, clase] of SRC) {
+    const li = document.createElement("li");
+    li.textContent = f + (clase === "dinamico" ? "  (import dinámico)" : "");
+    li.dataset.f = f;
+    if (clase) li.className = clase;
+    listaSrc.append(li);
+  }
+  const fich = (lista, f) => lista.querySelector(`[data-f="${f}"]`);
+
+  async function llegar(lista, f, desde, clase = "") {
+    const li = document.createElement("li");
+    li.textContent = f;
+    li.dataset.f = f;
+    if (clase) li.className = clase;
+    li.style.visibility = "hidden";
+    lista.append(li);
+    await volar(desde, li, f, "fichero", 650);
+    li.style.visibility = "";
+    if (lista === listaNav) { peticiones++; cuenta.textContent = `${peticiones} peticiones`; }
+  }
+
+  async function abrir(cual) {
+    const esta = ++ronda;
+    modo = cual; graficas = false; peticiones = 0;
+    listaNav.replaceChildren(); listaDist.replaceChildren(); burbuja.replaceChildren();
+    cuenta.textContent = "0 peticiones";
+    botonStats.disabled = true;
+    if (cual === "dev") {
+      viteTxt.textContent = "Servidor de desarrollo: sirve cada fichero por separado, tal cual, y recarga al guardar.";
+      nota.textContent = "Desarrollo: una petición por cada módulo que se importa. graficas.js no viaja todavía: nadie lo ha pedido.";
+      await llegar(listaNav, "@vite/client", vite);
+      for (const [f, clase] of SRC) {
+        if (esta !== ronda) return;
+        if (clase !== "dinamico") await llegar(listaNav, f, fich(listaSrc, f), clase);
+      }
+    } else {
+      viteTxt.textContent = "npm run build: junta, minifica y pone una huella en cada nombre.";
+      nota.textContent = "Producción: todo junto en dist/. La huella (4f2a9c1b) cambia si cambia el fichero: así el navegador no usa una versión vieja de la caché.";
+      vite.classList.add("trabaja");
+      await Promise.all(SRC.map(([f], n) => pausa(n * 120).then(() => volar(fich(listaSrc, f), vite, f, "fichero", 700))));
+      if (esta !== ronda) return;
+      vite.classList.remove("trabaja");
+      for (const [f, clase] of [["index.html", "html"], ["assets/index-4f2a9c1b.js", "junto"], ["assets/index-b1c37e05.css", "css junto"], ["assets/graficas-8d1e2f30.js", "dinamico"]]) {
+        const li = document.createElement("li");
+        li.textContent = f; li.dataset.f = f; li.className = clase + " aparece";
+        listaDist.append(li);
+        await pausa(250);
+      }
+      for (const f of ["index.html", "assets/index-4f2a9c1b.js", "assets/index-b1c37e05.css"]) {
+        if (esta !== ronda) return;
+        await llegar(listaNav, f, fich(listaDist, f), f.endsWith(".css") ? "css" : f.endsWith(".html") ? "html" : "");
+      }
+    }
+    botonStats.disabled = false;
+  }
+
+  $("#m-dev").addEventListener("click", () => abrir("dev"));
+  $("#m-prod").addEventListener("click", () => abrir("prod"));
+  botonStats.addEventListener("click", async () => {
+    burbuja.replaceChildren();
+    if (graficas) {
+      burbuja.innerHTML = '<span class="burbuja aparece">✓ Ya está cargado: ninguna petición nueva</span>';
+      nota.textContent = "Segunda vez: import() devuelve el mismo módulo, que ya está en memoria (un módulo se ejecuta una sola vez).";
+      return;
+    }
+    graficas = true;
+    const f = modo === "dev" ? "graficas.js" : "assets/graficas-8d1e2f30.js";
+    await llegar(listaNav, f, fich(modo === "dev" ? listaSrc : listaDist, f), "dinamico");
+    nota.textContent = "import() es una promesa: la gráfica se descarga SOLO ahora, al pulsar. Al abrir la página no hacía falta. Pulsa otra vez…";
+  });
+
+  // .env
+  const envDev = $("#m-envdev");
+  const envProd = $("#m-envprod");
+  const chips = $("#m-chips");
+  const pasan = $("#m-pasan");
+  const no = $("#m-no");
+  const distCod = $("#m-distcod");
+  const escapar = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const modoVite = () => document.querySelector('input[name="m-modo"]:checked').value;
+
+  function leerEnv(texto) {
+    const vars = [];
+    for (const linea of texto.split("\n")) {
+      const limpia = linea.trim();
+      if (!limpia || limpia.startsWith("#") || !limpia.includes("=")) continue;
+      const i = limpia.indexOf("=");
+      vars.push([limpia.slice(0, i).trim(), limpia.slice(i + 1).trim()]);
+    }
+    return vars;
+  }
+
+  function prepararChips() {
+    const vars = leerEnv(modoVite() === "development" ? envDev.value : envProd.value);
+    chips.replaceChildren(...vars.map(([k, v]) => {
+      const s = document.createElement("span");
+      s.textContent = `${k}=${v}`;
+      s.dataset.k = k;
+      return s;
+    }));
+    pasan.replaceChildren(); no.replaceChildren(); distCod.replaceChildren();
+    return vars;
+  }
+
+  let filtrando = false;
+  async function filtrar() {
+    if (filtrando) return;
+    filtrando = true;
+    const vars = prepararChips();
+    const publicas = {};
+    for (const [k, v] of vars) {
+      const chip = chips.querySelector(`[data-k="${CSS.escape(k)}"]`);
+      const pasa = k.startsWith("VITE_");
+      const nuevo = document.createElement("span");
+      nuevo.textContent = pasa ? `${k}: "${v}"` : k;
+      nuevo.style.visibility = "hidden";
+      (pasa ? pasan : no).append(nuevo);
+      chip.style.opacity = ".3";
+      await volar(chip, nuevo, chip.textContent, "papel", 700);
+      nuevo.style.visibility = "";
+      if (pasa) publicas[k] = v;
+    }
+    const m = modoVite();
+    pasan.insertAdjacentHTML("afterbegin", `<span>MODE: "${m}" · DEV: ${m === "development"} · PROD: ${m === "production"}</span>`);
+    if (m === "production") {
+      distCod.innerHTML = `<h3 style="margin-top: 8px;">dist/assets/index-4f2a9c1b.js (lo que se publica)</h3>
+<pre>document.title="<span class="secreto">${escapar(publicas.VITE_TITULO ?? "")}</span>";async function c(){const t=await fetch("<span class="secreto">${escapar(publicas.VITE_API_URL ?? "")}</span>/peliculas");if(!t.ok)throw new Error(\`HTTP \${t.status}\`);return t.json()}…</pre>
+<p class="nota">Los valores <code>VITE_</code> quedan <b>escritos dentro</b> del JavaScript: cualquiera los lee con «Ver código fuente». Nunca claves privadas en el frontend.</p>`;
+    } else {
+      distCod.innerHTML = '<p class="nota">En desarrollo no hay <code>dist/</code>. Marca <code>npm run build</code> y vuelve a pasar por Vite para ver qué se publica.</p>';
+    }
+    filtrando = false;
+  }
+  $("#m-filtrar").addEventListener("click", filtrar);
+  envDev.addEventListener("input", prepararChips);
+  envProd.addEventListener("input", prepararChips);
+  document.querySelectorAll('input[name="m-modo"]').forEach((r) => r.addEventListener("change", prepararChips));
+  prepararChips();
+}
+
+// ---------- Explicación para el alumnado: tecla E abre o cierra la de la pestaña ----------
+document.addEventListener("keydown", (e) => {
+  if (e.target.matches("input, select, textarea") || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === "e" || e.key === "E") {
+    const g = document.querySelector(`#s${actual} .guia`);
+    if (g) { g.open = !g.open; if (g.open) g.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+  }
+});
+
+// ---------- Arranque: la pestaña de la URL (#1…#8) ----------
+ir(/^#[1-8]$/.test(location.hash) ? location.hash.slice(1) : 1);
+</script>
+</body>
+</html>
