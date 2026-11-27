@@ -82,6 +82,10 @@ nav:
           - "UD4 · Objetos y clases": unidades/ud04-1-bateria/
           - "UD5 · DOM y eventos": unidades/ud05-1-bateria/
           - "UD6 · Asincronía y almacenamiento": unidades/ud06-1-bateria/
+      - "🎯 Repaso Parcial 2":
+          - "UD4 · Objetos y clases": unidades/ud04-2-repaso-examen/
+          - "UD5 · DOM y eventos": unidades/ud05-2-repaso-examen/
+          - "UD6 · Asincronía y almacenamiento": unidades/ud06-2-repaso-examen/
       - Prácticas:
           - "P2 · Tablero de tareas (kanban)": practicas/p2-tablero/
       - Defensa:
