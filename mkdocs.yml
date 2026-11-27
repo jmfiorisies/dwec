@@ -88,8 +88,6 @@ nav:
           - "UD6 · Asincronía y almacenamiento": unidades/ud06-2-repaso-examen/
       - Prácticas:
           - "P2 · Tablero de tareas (kanban)": practicas/p2-tablero/
-      - Defensa:
-          - "P2 · Defensa del tablero (26/11)": defensa/p2-tablero/
   # - 🟡 2.ª Evaluación (React):
   #     - "UD 7: React Core, JSX y Arquitectura Frontend (RA5)":
   #         - "Visión General": unidades/ud07.md
